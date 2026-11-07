@@ -4,60 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUARTO</title>
-
-    <link rel="stylesheet" href="/bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/css/bootstrap.min.css">
+    <meta name="theme-color" content="#f3f0e9">
+    <title>Quarto</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="/qurto.-simple.css">
 </head>
 
 <body>
-    <main class="container-fluid py-4">
-        <div class="game-set">
-            <section id="board-container" aria-label="Game board">
-                <div id="board">
-                    <div id="board-grid" role="grid" aria-label="Quarto board"></div>
-                    <h1 id="h1">Quarto <span class="quarto-mark" aria-hidden="true">■</span></h1>
-                </div>
-            </section>
-            <section id="pieces-panel" aria-label="Pieces and game status">
-                <h2 class="panel-title">Quarto</h2>
-                <label for="mode-select">Mode for the next game</label>
-                <select id="mode-select" class="form-select">
+    <main class="table">
+        <header class="table-header">
+            <h1>Quarto</h1>
+            <div class="game-controls">
+                <label for="mode-select">Mode</label>
+                <select id="mode-select">
                     <option value="classic">Classic</option>
                     <option value="self_selection">Self selection</option>
                 </select>
-                <small class="mode-help">Changing this choice takes effect only when you start a new game.</small>
-                <button id="new-game" class="btn btn-success" type="button">Start game</button>
-                <p id="game-status" role="status" aria-live="polite">Choose a mode and start a game.</p>
-                <p id="connection-error" class="connection-error" role="alert" hidden></p>
-                <button id="retry-state" class="btn btn-outline-secondary" type="button" hidden>
-                    Retry connection
-                </button>
-                <div id="selected-piece" aria-live="polite"></div>
-                <div id="pieces-container" aria-label="Available pieces"></div>
-                <button class="btn btn-link information-link" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#game-info">
-                    About Quarto
-                </button>
+                <button id="new-game" class="new-game-button" type="button">New game</button>
+            </div>
+        </header>
+
+        <section class="turn-panel" aria-label="Game status">
+            <p id="game-status" role="status" aria-live="polite">Connecting to the local game...</p>
+            <div id="turn-piece" class="turn-piece" hidden>
+                <span id="turn-piece-label" class="turn-piece-label">Piece to place</span>
+                <span id="turn-piece-preview" class="piece-preview"></span>
+            </div>
+            <div id="win-reason" class="win-reason" hidden></div>
+        </section>
+
+        <div class="connection-row">
+            <p id="connection-error" class="connection-error" role="alert" hidden></p>
+            <button id="retry-state" class="retry-button" type="button" hidden>Retry connection</button>
+        </div>
+
+        <div class="last-move">
+            <span class="last-move-label">Last move</span>
+            <span id="last-move-preview" class="last-move-preview" hidden></span>
+            <span id="last-action">No moves yet</span>
+        </div>
+
+        <div class="game-table">
+            <section class="board-area" aria-label="Game board">
+                <div id="board-grid" class="board-grid" role="grid" aria-label="Quarto board"></div>
             </section>
+
+            <aside class="pieces-area" aria-label="Available pieces">
+                <div class="pieces-heading">
+                    <h2>Pieces</h2>
+                    <span id="pieces-count">16</span>
+                </div>
+                <p id="pieces-help" class="pieces-help">Choose a piece to begin.</p>
+                <div id="pieces-container" class="pieces-grid"></div>
+                <details class="rules">
+                    <summary>How to play</summary>
+                    <p id="rules-text">Make a line of four pieces that share an attribute.</p>
+                </details>
+            </aside>
         </div>
     </main>
 
-    <div class="offcanvas offcanvas-start ms-1 w-75 fs-4" tabindex="-1" id="game-info"
-         aria-labelledby="game-info-title">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="game-info-title">About Quarto</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            Choose a piece for the other player to place in classic mode. In self-selection mode,
-            choose a piece and place it yourself. Make a line of four pieces that share at least
-            one attribute: shape, color, size, or top. Rows, columns, and both diagonals count.
-        </div>
-    </div>
-
-    <script src="/bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/js/bootstrap.bundle.min.js"></script>
     <script src="/quarto-ui.js"></script>
 </body>
 </html>

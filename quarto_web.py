@@ -236,8 +236,9 @@ class QuartoRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         self.send_header(
             "Content-Security-Policy",
-            "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; "
-            "script-src 'self'; connect-src 'self'; font-src 'self' data:; "
+            "default-src 'self'; img-src 'self' data:; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+            "script-src 'self'; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; "
             "object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
         )
         self.end_headers()

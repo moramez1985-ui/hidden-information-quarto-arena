@@ -3,12 +3,20 @@
 
     const board = document.getElementById("board-grid");
     const piecesContainer = document.getElementById("pieces-container");
-    const selectedPieceContainer = document.getElementById("selected-piece");
+    const piecesCount = document.getElementById("pieces-count");
+    const piecesHelp = document.getElementById("pieces-help");
     const modeSelect = document.getElementById("mode-select");
     const newGameButton = document.getElementById("new-game");
     const gameStatus = document.getElementById("game-status");
+    const turnPiece = document.getElementById("turn-piece");
+    const turnPieceLabel = document.getElementById("turn-piece-label");
+    const turnPiecePreview = document.getElementById("turn-piece-preview");
+    const winReason = document.getElementById("win-reason");
+    const lastActionValue = document.getElementById("last-action");
+    const lastMovePreview = document.getElementById("last-move-preview");
     const connectionError = document.getElementById("connection-error");
     const retryButton = document.getElementById("retry-state");
+    const rulesText = document.getElementById("rules-text");
 
     let pieces = [];
     let currentState = null;
@@ -32,12 +40,14 @@
                 ...(options.body ? { "Content-Type": "application/json" } : {}),
             },
         });
+
         let payload;
         try {
             payload = await response.json();
         } catch {
             throw new ApiError("The local service returned an unreadable response.", response.status);
         }
+
         if (!response.ok) {
             throw new ApiError(
                 payload?.error?.message || `The local service returned HTTP ${response.status}.`,
@@ -51,191 +61,396 @@
         return pieces.find((piece) => piece.id === pieceId);
     }
 
-    function pieceLabel(piece) {
-        return piece.attributes.join(", ");
+    function playerName(player) {
+        return player === "player_1" ? "Player 1" : "Player 2";
     }
 
-    function addPieceClasses(element, piece) {
-        element.classList.add("piece");
-        for (const attribute of piece.attributes) {
-            element.classList.add(attribute === "cylinder" ? "cyl" : attribute);
-        }
+    function otherPlayer(player) {
+        return player === "player_1" ? "player_2" : "player_1";
     }
 
-    function makePieceElement(piece, { selectable, selected, draggable }) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "piece-button";
-        button.dataset.pieceId = String(piece.id);
-        button.setAttribute("aria-label", `Piece ${piece.id + 1}: ${pieceLabel(piece)}`);
-        button.setAttribute("aria-pressed", String(selected));
+    function createPieceIcon(piece, frameSize) {
+        const svgNamespace = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(svgNamespace, "svg");
+        const attributes = new Set(piece.attributes);
+        const tall = attributes.has("big");
+        const hollow = attributes.has("hole");
+        const cylinder = attributes.has("cylinder");
+        const topY = tall ? 30 : 42;
+        const colors = attributes.has("light")
+            ? { body: "#bb6b37", top: "#d89263", shade: "#98532f" }
+            : { body: "#3f7652", top: "#75a17e", shade: "#315e41" };
 
-        const shape = document.createElement("span");
-        addPieceClasses(shape, piece);
-        shape.setAttribute("aria-hidden", "true");
-        button.append(shape);
-        button.disabled = (!selectable && !draggable) || busy || needsSync;
+        svg.setAttribute("class", "piece-icon");
+        svg.setAttribute("viewBox", "0 0 64 64");
+        svg.setAttribute("width", String(frameSize));
+        svg.setAttribute("height", String(frameSize));
+        svg.setAttribute("aria-hidden", "true");
+        svg.setAttribute("focusable", "false");
 
-        if (draggable) {
-            button.draggable = !busy && !needsSync;
-            button.classList.add("draggable-piece");
-            button.addEventListener("dragstart", (event) => {
-                if (busy || needsSync || !currentState || currentState.phase !== "place") {
-                    event.preventDefault();
-                    return;
-                }
-                event.dataTransfer.setData("text/plain", String(piece.id));
-                event.dataTransfer.effectAllowed = "move";
+        const addShape = (tagName, shapeAttributes) => {
+            const shape = document.createElementNS(svgNamespace, tagName);
+            for (const [name, value] of Object.entries(shapeAttributes)) {
+                shape.setAttribute(name, String(value));
+            }
+            svg.append(shape);
+        };
+
+        if (cylinder) {
+            addShape("ellipse", {
+                cx: 32,
+                cy: 55,
+                rx: 22,
+                ry: 8,
+                fill: colors.shade,
+            });
+            addShape("path", {
+                d: `M10 ${topY} V55 H54 V${topY} Z`,
+                fill: colors.body,
+            });
+            addShape("path", {
+                d: `M15 ${topY + 3} V52`,
+                fill: "none",
+                stroke: colors.top,
+                "stroke-linecap": "round",
+                "stroke-width": 2,
+                opacity: 0.15,
+            });
+            addShape("ellipse", {
+                cx: 32,
+                cy: topY,
+                rx: 22,
+                ry: 8,
+                fill: colors.top,
+                stroke: colors.shade,
+                "stroke-width": 1.5,
+            });
+        } else {
+            addShape("path", {
+                d: `M10 ${topY} L32 ${topY + 10} V58 L10 48 Z`,
+                fill: colors.shade,
+                stroke: colors.shade,
+                "stroke-linejoin": "round",
+                "stroke-width": 1,
+            });
+            addShape("path", {
+                d: `M32 ${topY + 10} L54 ${topY} V48 L32 58 Z`,
+                fill: colors.body,
+                stroke: colors.shade,
+                "stroke-linejoin": "round",
+                "stroke-width": 1,
+            });
+            addShape("path", {
+                d: `M10 ${topY} L32 ${topY - 10} L54 ${topY} L32 ${topY + 10} Z`,
+                fill: colors.top,
+                stroke: colors.shade,
+                "stroke-linejoin": "round",
+                "stroke-width": 1.5,
             });
         }
 
-        if (selectable) {
-            button.addEventListener("click", () => {
-                submitAction({
-                    kind: "select_piece",
-                    player: currentState.active_player,
-                    piece_id: piece.id,
-                    cell: null,
-                });
+        if (hollow) {
+            addShape("ellipse", {
+                cx: 32,
+                cy: cylinder ? topY : topY,
+                rx: cylinder ? 9 : 7,
+                ry: 4,
+                fill: "var(--piece-hole)",
+                stroke: colors.shade,
+                "stroke-width": 1.2,
             });
         }
-        return button;
+
+        return svg;
     }
 
-    function render() {
-        const isGameActive = Boolean(currentState);
-        const isSelecting = isGameActive && currentState.phase === "select";
-        const isPlacing = isGameActive && currentState.phase === "place";
-        const isTerminal = isGameActive && currentState.is_terminal;
-        const placeableCells = new Set(
-            isPlacing && legalActions?.type === "place_piece" ? legalActions.cells : [],
-        );
-        const winningCells = new Map();
+    function turnInstruction() {
+        if (!currentState) {
+            return "Choose a mode and start a game.";
+        }
+        if (currentState.is_terminal) {
+            return currentState.result.outcome === "win"
+                ? `${playerName(currentState.result.winner)} wins.`
+                : "Draw.";
+        }
 
-        if (isTerminal && currentState.result?.outcome === "win") {
-            for (const line of currentState.result.winning_lines) {
-                for (const cell of line.cells) {
-                    const attributes = winningCells.get(cell) || new Set();
-                    for (const attribute of line.shared_attributes) {
-                        attributes.add(attribute);
-                    }
-                    winningCells.set(cell, attributes);
-                }
+        const player = playerName(currentState.active_player);
+        if (currentState.phase === "select") {
+            if (currentState.mode === "classic") {
+                return `${player}: choose a piece for ${playerName(otherPlayer(currentState.active_player))}.`;
+            }
+            return `${player}: choose your piece.`;
+        }
+        if (currentState.mode === "classic") {
+            return `${player}: place this piece on an empty square.`;
+        }
+        return `${player}: place your piece on an empty square.`;
+    }
+
+    function winningLineLocation(cells) {
+        const rows = new Set(cells.map((cell) => Math.floor(cell / 4)));
+        if (rows.size === 1) {
+            const row = [...rows][0];
+            return row === 0 ? "top row" : row === 3 ? "bottom row" : `row ${row + 1}`;
+        }
+
+        const columns = new Set(cells.map((cell) => cell % 4));
+        if (columns.size === 1) {
+            const column = [...columns][0];
+            return column === 0
+                ? "left column"
+                : column === 3
+                    ? "right column"
+                    : `column ${column + 1}`;
+        }
+        return "diagonal";
+    }
+
+    function readableAttribute(attribute) {
+        const labels = {
+            cube: "square",
+            cylinder: "round",
+            light: "light",
+            dark: "dark",
+            big: "large",
+            small: "small",
+            solid: "solid",
+            hole: "hollow",
+        };
+        return labels[attribute] || null;
+    }
+
+    function winningReason() {
+        const lines = currentState?.result?.winning_lines || [];
+        return lines.map((line) => {
+            const location = `the ${winningLineLocation(line.cells)}`;
+            const attributes = line.shared_attributes
+                .map(readableAttribute)
+                .filter(Boolean);
+            if (!attributes.length) {
+                return `Four pieces in ${location} form a winning line.`;
+            }
+            const description = attributes.join(" and ");
+            const shared = attributes.length === 1 ? "share an attribute" : "share these attributes";
+            return `Four ${description} pieces in ${location} ${shared}.`;
+        }).join(" ");
+    }
+
+    function previousSelectionFor(actionIndex) {
+        for (let index = actionIndex; index >= 0; index -= 1) {
+            const action = currentState.history[index];
+            if (action.kind === "select_piece") {
+                return action;
             }
         }
+        return null;
+    }
+
+    function renderLastMove() {
+        const history = currentState?.history || [];
+        const actionIndex = history.length - 1;
+        const action = history[actionIndex];
+        lastMovePreview.replaceChildren();
+        lastMovePreview.hidden = true;
+
+        if (!action) {
+            lastActionValue.textContent = "No moves yet";
+            return;
+        }
+
+        const selection = action.kind === "select_piece"
+            ? action
+            : previousSelectionFor(actionIndex - 1);
+        const piece = selection ? pieceForId(selection.piece_id) : null;
+        if (piece) {
+            lastMovePreview.append(createPieceIcon(piece, 24));
+            lastMovePreview.hidden = false;
+        }
+
+        const actor = playerName(action.player);
+        if (action.kind === "select_piece") {
+            lastActionValue.textContent = currentState.mode === "classic"
+                ? `${actor} chose a piece for ${playerName(otherPlayer(action.player))}.`
+                : `${actor} chose a piece.`;
+            return;
+        }
+
+        const row = Math.floor(action.cell / 4) + 1;
+        const column = (action.cell % 4) + 1;
+        lastActionValue.textContent = `${actor} placed a piece at row ${row}, column ${column}.`;
+    }
+
+    function renderBoard() {
+        const placeableCells = new Set(
+            currentState?.phase === "place" && legalActions?.type === "place_piece"
+                ? legalActions.cells
+                : [],
+        );
+        const winningCells = new Set(
+            currentState?.result?.outcome === "win"
+                ? currentState.result.winning_lines.flatMap((line) => line.cells)
+                : [],
+        );
 
         board.replaceChildren();
         for (let cell = 0; cell < 16; cell += 1) {
             const cellButton = document.createElement("button");
-            cellButton.type = "button";
-            cellButton.className = "board-sections";
-            cellButton.setAttribute("role", "gridcell");
-            cellButton.dataset.cell = String(cell);
+            const pieceId = currentState ? currentState.board[cell] : null;
+            const canPlace = placeableCells.has(cell);
 
-            const pieceId = isGameActive ? currentState.board[cell] : null;
-            if (pieceId !== null) {
+            cellButton.type = "button";
+            cellButton.className = "board-cell";
+            cellButton.dataset.cell = String(cell);
+            cellButton.setAttribute("role", "gridcell");
+
+            if (pieceId === null) {
+                cellButton.classList.add("is-empty");
+            } else {
+                cellButton.classList.add("is-occupied");
                 const piece = pieceForId(pieceId);
                 if (piece) {
-                    const shape = document.createElement("span");
-                    addPieceClasses(shape, piece);
-                    shape.setAttribute("aria-hidden", "true");
-                    cellButton.append(shape);
+                    cellButton.append(createPieceIcon(piece, 42));
                 }
-            } else {
-                cellButton.textContent = "+";
             }
 
-            const winningAttributes = winningCells.get(cell);
-            if (winningAttributes) {
-                cellButton.classList.add("winning-cell");
-                cellButton.title = `Winning attributes: ${Array.from(winningAttributes).join(", ")}`;
-            }
-
-            const canPlace = placeableCells.has(cell);
-            cellButton.disabled = !canPlace || busy || needsSync;
-            cellButton.setAttribute("aria-label", pieceId === null
-                ? `Cell ${cell + 1}${canPlace ? ", legal placement" : ""}`
-                : `Cell ${cell + 1}, piece ${pieceId + 1}`);
             if (canPlace) {
+                cellButton.classList.add("is-legal");
                 cellButton.addEventListener("click", () => submitPlacement(cell));
-                cellButton.addEventListener("dragover", (event) => {
-                    if (currentState?.phase === "place" && !busy && !needsSync) {
-                        event.preventDefault();
-                        event.dataTransfer.dropEffect = "move";
-                    }
-                });
-                cellButton.addEventListener("drop", (event) => {
-                    event.preventDefault();
-                    if (
-                        !busy &&
-                        !needsSync &&
-                        currentState?.phase === "place" &&
-                        event.dataTransfer.getData("text/plain") === String(currentState.selected_piece)
-                    ) {
-                        submitPlacement(cell);
-                    }
-                });
             }
+            if (winningCells.has(cell)) {
+                cellButton.classList.add("is-winning");
+            }
+
+            cellButton.disabled = !canPlace || busy || needsSync;
+            cellButton.setAttribute(
+                "aria-label",
+                pieceId === null
+                    ? `Cell ${cell + 1}${canPlace ? ", legal placement" : ", empty"}`
+                    : `Cell ${cell + 1}, piece ${pieceId + 1}`,
+            );
             board.append(cellButton);
         }
+    }
+
+    function renderPieces() {
+        const remainingPieces = new Set(
+            currentState ? currentState.remaining_pieces : pieces.map((piece) => piece.id),
+        );
+        const selectablePieces = new Set(
+            currentState?.phase === "select" && legalActions?.type === "select_piece"
+                ? legalActions.piece_ids
+                : [],
+        );
+        const selectedId = currentState?.phase === "place"
+            ? currentState.selected_piece
+            : null;
 
         piecesContainer.replaceChildren();
-        const remaining = new Set(isGameActive ? currentState.remaining_pieces : []);
-        const selectablePieces = new Set(
-            isSelecting && legalActions?.type === "select_piece" ? legalActions.piece_ids : [],
-        );
         for (const piece of pieces) {
-            if (isGameActive && !remaining.has(piece.id)) {
+            if (!remainingPieces.has(piece.id)) {
                 continue;
             }
-            const isSelected = isPlacing && currentState.selected_piece === piece.id;
-            piecesContainer.append(makePieceElement(piece, {
-                selectable: selectablePieces.has(piece.id),
-                selected: isSelected,
-                draggable: isSelected,
-            }));
-        }
 
-        selectedPieceContainer.replaceChildren();
-        if (isPlacing) {
-            const selectedPiece = pieceForId(currentState.selected_piece);
-            if (selectedPiece) {
-                selectedPieceContainer.textContent =
-                    `Selected piece for placement: ${pieceLabel(selectedPiece)}`;
+            const selectable = selectablePieces.has(piece.id);
+            const selected = selectedId === piece.id;
+            const button = document.createElement("button");
+            const idLabel = document.createElement("span");
+
+            button.type = "button";
+            button.className = "piece-button";
+            button.setAttribute(
+                "aria-label",
+                `Piece ${piece.id + 1}: ${piece.attributes.join(", ")}`,
+            );
+            button.setAttribute("aria-pressed", String(selected));
+            button.disabled = !selectable || busy || needsSync;
+            if (selectable) {
+                button.addEventListener("click", () => {
+                    submitAction({
+                        kind: "select_piece",
+                        player: currentState.active_player,
+                        piece_id: piece.id,
+                        cell: null,
+                    });
+                });
             }
+
+            button.append(createPieceIcon(piece, 32));
+            idLabel.className = "piece-id";
+            idLabel.textContent = `ID ${piece.id + 1}`;
+            button.append(idLabel);
+            piecesContainer.append(button);
         }
 
+        piecesCount.textContent = String(remainingPieces.size);
+        piecesHelp.textContent = currentState?.phase === "place" && !currentState.is_terminal
+            ? "Choose an empty square on the board."
+            : "Remaining pieces";
+    }
+
+    function renderTurnPiece() {
+        turnPiecePreview.replaceChildren();
+        const shouldShow = currentState?.phase === "place" && !currentState.is_terminal;
+        const piece = shouldShow ? pieceForId(currentState.selected_piece) : null;
+        turnPiece.hidden = !piece;
+        if (!piece) {
+            return;
+        }
+
+        turnPieceLabel.textContent = currentState.mode === "classic"
+            ? `Piece for ${playerName(currentState.active_player)}`
+            : "Your piece";
+        turnPiecePreview.append(createPieceIcon(piece, 42));
+    }
+
+    function renderRules() {
+        if (currentState?.mode === "classic") {
+            rulesText.textContent =
+                "In Classic, choose a piece for the other player to place. Four pieces sharing an attribute in a row, column or diagonal win.";
+            return;
+        }
+        rulesText.textContent =
+            "In Self selection, choose a piece and place it yourself. Four pieces sharing an attribute in a row, column or diagonal win.";
+    }
+
+    function renderResult() {
+        winReason.hidden = true;
+        winReason.textContent = "";
+        gameStatus.classList.toggle("is-win", false);
+        gameStatus.classList.toggle("is-draw", false);
+
+        if (!currentState?.is_terminal) {
+            gameStatus.textContent = turnInstruction();
+            return;
+        }
+
+        if (currentState.result.outcome === "win") {
+            gameStatus.textContent = `${playerName(currentState.result.winner)} wins.`;
+            winReason.textContent = winningReason();
+            winReason.hidden = !winReason.textContent;
+            gameStatus.classList.add("is-win");
+            return;
+        }
+
+        gameStatus.textContent = "Draw.";
+        winReason.textContent = "The board is full.";
+        winReason.hidden = false;
+        gameStatus.classList.add("is-draw");
+    }
+
+    function render() {
         modeSelect.disabled = busy || needsSync;
         newGameButton.disabled = busy || needsSync;
-        newGameButton.textContent = isGameActive ? "New Game" : "Start game";
         retryButton.hidden = !needsSync;
         retryButton.disabled = busy;
         retryButton.textContent = busy ? "Checking connection..." : "Retry connection";
 
-        if (!isGameActive) {
-            gameStatus.textContent = "Choose a mode and start a game.";
-        } else if (isTerminal) {
-            const result = currentState.result;
-            if (result.outcome === "win") {
-                const lines = result.winning_lines.length;
-                const attributes = Array.from(new Set(
-                    result.winning_lines.flatMap((line) => line.shared_attributes),
-                )).join(", ");
-                gameStatus.textContent =
-                    `${result.winner} wins in ${currentState.mode}! ${lines} winning line(s); ` +
-                    `shared attributes: ${attributes}.`;
-            } else {
-                gameStatus.textContent = `Draw in ${currentState.mode}: the board is full.`;
-            }
-        } else if (currentState.phase === "select") {
-            gameStatus.textContent = currentState.mode === "classic"
-                ? `${currentState.mode}: ${currentState.active_player} chooses a piece for the other player.`
-                : `${currentState.mode}: ${currentState.active_player} chooses a piece and will place it.`;
-        } else {
-            gameStatus.textContent = currentState.mode === "classic"
-                ? `${currentState.mode}: ${currentState.active_player} places the piece chosen by ${currentState.selected_by}.`
-                : `${currentState.mode}: ${currentState.active_player} places their selected piece.`;
-        }
+        renderResult();
+        renderTurnPiece();
+        renderLastMove();
+        renderBoard();
+        renderPieces();
+        renderRules();
     }
 
     function showError(message) {
@@ -248,29 +463,24 @@
         connectionError.hidden = true;
     }
 
-    function acceptServerState(payload) {
+    function acceptServerState(payload, syncMode = false) {
         currentState = payload.state;
         legalActions = payload.legal_actions;
         needsSync = false;
-        if (currentState) {
+        if (syncMode && currentState) {
             modeSelect.value = currentState.mode;
         }
         render();
     }
 
-    async function refreshState() {
-        const payload = await requestJson("/api/state");
-        acceptServerState(payload);
-    }
-
-    async function recoverAfterRequestError(message) {
+    async function recoverAfterRequestError(message, syncMode = false) {
         busy = true;
         needsSync = true;
         render();
         showError(`${message} Checking the current game state; the action will not be resent.`);
         try {
             const payload = await requestJson("/api/state");
-            acceptServerState(payload);
+            acceptServerState(payload, syncMode);
             showError(`${message} The displayed board has been refreshed from the server.`);
         } catch {
             needsSync = true;
@@ -286,6 +496,7 @@
         if (busy || needsSync || !currentState) {
             return;
         }
+
         busy = true;
         clearError();
         render();
@@ -304,7 +515,11 @@
     }
 
     function submitPlacement(cell) {
-        if (!currentState || currentState.phase !== "place" || !legalActions?.cells.includes(cell)) {
+        if (
+            !currentState ||
+            currentState.phase !== "place" ||
+            !legalActions?.cells.includes(cell)
+        ) {
             return;
         }
         submitAction({
@@ -319,6 +534,7 @@
         if (busy || needsSync) {
             return;
         }
+
         busy = true;
         clearError();
         render();
@@ -327,9 +543,9 @@
                 method: "POST",
                 body: JSON.stringify({ mode: modeSelect.value }),
             });
-            acceptServerState(payload);
+            acceptServerState(payload, true);
         } catch (error) {
-            await recoverAfterRequestError(error.message);
+            await recoverAfterRequestError(error.message, true);
         } finally {
             busy = false;
             render();
@@ -340,6 +556,7 @@
         if (busy) {
             return;
         }
+
         busy = true;
         render();
         try {
@@ -348,7 +565,7 @@
                 requestJson("/api/pieces"),
             ]);
             pieces = piecesPayload.pieces;
-            acceptServerState(statePayload);
+            acceptServerState(statePayload, true);
             clearError();
         } catch {
             needsSync = true;
@@ -359,9 +576,6 @@
         }
     }
 
-    newGameButton.addEventListener("click", startNewGame);
-    retryButton.addEventListener("click", retryConnection);
-
     async function initialize() {
         busy = true;
         render();
@@ -371,16 +585,19 @@
                 requestJson("/api/state"),
             ]);
             pieces = piecesPayload.pieces;
-            acceptServerState(statePayload);
+            acceptServerState(statePayload, true);
             clearError();
         } catch {
             needsSync = true;
-            showError("Cannot connect to the local game service. Start it, then retry.");
+            showError("Cannot connect to the local service. Start it, then retry.");
         } finally {
             busy = false;
             render();
         }
     }
+
+    newGameButton.addEventListener("click", startNewGame);
+    retryButton.addEventListener("click", retryConnection);
 
     initialize();
 })();
