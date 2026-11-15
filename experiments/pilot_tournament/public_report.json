@@ -1,0 +1,71 @@
+{
+  "aggregate": {
+    "agent_failures": 1,
+    "all_completed_audits_valid": true,
+    "all_completed_replays_valid": true,
+    "completed_matches": 1,
+    "failed_matches": 1,
+    "match_count": 2,
+    "total_controller_actions": 14,
+    "validation_failures": 0
+  },
+  "connectivity_smoke_test": {
+    "models": [
+      {
+        "duration_seconds": 27.576,
+        "model": "qwen3.5:4b",
+        "status": "passed"
+      },
+      {
+        "duration_seconds": 1.127,
+        "model": "gemma4:31b-cloud",
+        "status": "passed"
+      }
+    ],
+    "status": "passed"
+  },
+  "external_data_boundary": "Player-private feature IDs sent to gemma4:31b-cloud are transmitted to the cloud provider.",
+  "knowledge_probe": {
+    "reason": "The public observation exposes entity IDs and labels but no SMILES or molecular structure.",
+    "status": "not_performed"
+  },
+  "matches": [
+    {
+      "action_count": 8,
+      "audit_valid": true,
+      "elapsed_seconds": 191.451,
+      "failure": null,
+      "match_id": "match:b526150f-f302-4c01-b58f-91e316348552",
+      "mode": "classic",
+      "model_by_player": {
+        "player_1": "qwen3.5:4b",
+        "player_2": "gemma4:31b-cloud"
+      },
+      "outcome": "win",
+      "replay_valid": true,
+      "status": "completed",
+      "winner": "player_1"
+    },
+    {
+      "action_count": 6,
+      "audit_valid": false,
+      "elapsed_seconds": 225.191,
+      "failure": "See restricted_match_log.json for details.",
+      "match_id": "match:9c4ea991-0731-4121-a79d-0869a86ec5e6",
+      "mode": "classic",
+      "model_by_player": {
+        "player_1": "gemma4:31b-cloud",
+        "player_2": "qwen3.5:4b"
+      },
+      "outcome": null,
+      "replay_valid": false,
+      "status": "agent_failure",
+      "winner": null
+    }
+  ],
+  "models": [
+    "qwen3.5:4b",
+    "gemma4:31b-cloud"
+  ],
+  "pilot": "Quarto QM9 two-model Classic pilot; not a leaderboard or scientific evaluation"
+}

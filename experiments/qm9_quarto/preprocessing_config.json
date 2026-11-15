@@ -1,0 +1,31 @@
+{
+  "archive": "dsgdb9nsd.xyz.tar.bz2",
+  "archive_url": "https://ndownloader.figshare.com/files/3195389",
+  "feature_registry_order": [
+    "contains_carbon",
+    "contains_hydrogen",
+    "contains_nitrogen",
+    "contains_oxygen",
+    "contains_fluorine",
+    "contains_heteroatom",
+    "contains_ring",
+    "contains_aromatic_ring",
+    "contains_double_bond",
+    "contains_triple_bond",
+    "contains_multiple_bond",
+    "contains_carbonyl",
+    "contains_hydroxyl",
+    "contains_nitrile",
+    "contains_amine",
+    "contains_amide",
+    "contains_ester",
+    "contains_carboxylic_acid",
+    "contains_saturated_ether_link",
+    "formal_charge_nonzero"
+  ],
+  "hydrogen_semantics": "Feature contains_hydrogen includes implicit and explicit hydrogens; manifest records explicit graph hydrogen nodes and implicit hydrogen count separately.",
+  "missing_value_policy": "Source parse or sanitization failures are explicitly excluded with a reason; no feature missingness is imputed as false.",
+  "public_sample_seed": 20261108,
+  "sample_count": 1024,
+  "sample_size": 16
+}

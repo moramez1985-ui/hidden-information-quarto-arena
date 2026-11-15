@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "check": "public_observation_excludes_internal_state",
+      "passed": true
+    },
+    {
+      "check": "player_1_prompt_excludes_player_2_private_features",
+      "passed": true
+    },
+    {
+      "check": "player_2_prompt_excludes_player_1_private_features",
+      "passed": true
+    },
+    {
+      "check": "private_observations_exclude_internal_state",
+      "passed": true
+    },
+    {
+      "check": "no_tools_or_external_url_channel_in_protocol",
+      "passed": true
+    },
+    {
+      "check": "unknown_private_observation_requester_rejected",
+      "passed": true
+    },
+    {
+      "check": "agent_action_cannot_supply_player_identity",
+      "passed": true
+    },
+    {
+      "check": "inactive_player_action_rejected",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "This is a trusted-host boundary, not cryptographic isolation.",
+    "Cloud model requests transmit the requesting player's private feature IDs to the cloud provider.",
+    "QM9 entity IDs may permit indirect inference; this pilot sends no SMILES or structure metadata.",
+    "The public Controller observation's full public_entities roster is omitted by the explicitly approved bounded prompt projection.",
+    "Prompt injection cannot be completely prevented; host-side action validation and tool non-exposure are enforced."
+  ],
+  "status": "passed"
+}

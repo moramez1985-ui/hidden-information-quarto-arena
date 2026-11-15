@@ -1,0 +1,1774 @@
+{
+  "draft_summary": {
+    "all_prefix_states": 0,
+    "samples_with_draft_states": 0,
+    "semantic_state_count_distribution": {},
+    "structural_state_count_distribution": {}
+  },
+  "feature_counts": {
+    "constant": 2,
+    "gameplay_eligible": 18,
+    "scientifically_valid": 20
+  },
+  "feature_relationships": {
+    "dataset_complements": [],
+    "dataset_exact_duplicates": [
+      {
+        "feature_a": "contains_carboxylic_acid",
+        "feature_b": "formal_charge_nonzero"
+      }
+    ],
+    "definition_guaranteed_implications": [
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_aromatic_ring",
+        "target": "contains_ring"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_nitrogen",
+        "target": "contains_heteroatom"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_oxygen",
+        "target": "contains_heteroatom"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_fluorine",
+        "target": "contains_heteroatom"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_carbonyl",
+        "target": "contains_oxygen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_carbonyl",
+        "target": "contains_double_bond"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_nitrile",
+        "target": "contains_nitrogen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_nitrile",
+        "target": "contains_triple_bond"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_amide",
+        "target": "contains_nitrogen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_amide",
+        "target": "contains_carbonyl"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_ester",
+        "target": "contains_carbonyl"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_carboxylic_acid",
+        "target": "contains_carbonyl"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_saturated_ether_link",
+        "target": "contains_oxygen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_hydroxyl",
+        "target": "contains_oxygen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_hydroxyl",
+        "target": "contains_hydrogen"
+      },
+      {
+        "equivalence": false,
+        "scope": "chemically_guaranteed_by_graph_predicate_definitions",
+        "source": "contains_amine",
+        "target": "contains_nitrogen"
+      }
+    ],
+    "exact_semantic_duplicates": [],
+    "full_dataset_implications": [
+      {
+        "correlation_phi": 0.0006065992984811328,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_fluorine",
+        "source_true_count": 2163,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.005233844354638494,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_double_bond",
+        "source_true_count": 73643,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0026763867846980095,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_triple_bond",
+        "source_true_count": 32431,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0071284232150314675,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_multiple_bond",
+        "source_true_count": 92912,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0036242120540091664,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_carbonyl",
+        "source_true_count": 49477,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0032008003359190393,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_hydroxyl",
+        "source_true_count": 42007,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0017840674414334517,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrile",
+        "source_true_count": 16652,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0016467909157102986,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.001119039781568455,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.0032407267434427798,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_saturated_ether_link",
+        "source_true_count": 42725,
+        "target": "contains_carbon",
+        "target_true_count": 133881
+      },
+      {
+        "correlation_phi": 0.013069506931596949,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_hydroxyl",
+        "source_true_count": 42007,
+        "target": "contains_hydrogen",
+        "target_true_count": 133834
+      },
+      {
+        "correlation_phi": 0.004569262886478127,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_hydrogen",
+        "target_true_count": 133834
+      },
+      {
+        "correlation_phi": 0.013232534426324204,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_saturated_ether_link",
+        "source_true_count": 42725,
+        "target": "contains_hydrogen",
+        "target_true_count": 133834
+      },
+      {
+        "correlation_phi": 0.248555486630086,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrogen",
+        "source_true_count": 82858,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.29575946587321733,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrile",
+        "source_true_count": 16652,
+        "target": "contains_nitrogen",
+        "target_true_count": 82858
+      },
+      {
+        "correlation_phi": 0.5141546423049362,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amine",
+        "source_true_count": 40211,
+        "target": "contains_nitrogen",
+        "target_true_count": 82858
+      },
+      {
+        "correlation_phi": 0.2730020123253051,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_nitrogen",
+        "target_true_count": 82858
+      },
+      {
+        "correlation_phi": 0.46617125404953724,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_oxygen",
+        "source_true_count": 113937,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.32034566447670737,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_carbonyl",
+        "source_true_count": 49477,
+        "target": "contains_oxygen",
+        "target_true_count": 113937
+      },
+      {
+        "correlation_phi": 0.28292012034256936,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_hydroxyl",
+        "source_true_count": 42007,
+        "target": "contains_oxygen",
+        "target_true_count": 113937
+      },
+      {
+        "correlation_phi": 0.14556055834643591,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_oxygen",
+        "target_true_count": 113937
+      },
+      {
+        "correlation_phi": 0.0989124082863375,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_oxygen",
+        "target_true_count": 113937
+      },
+      {
+        "correlation_phi": 0.2864492327007315,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_saturated_ether_link",
+        "source_true_count": 42725,
+        "target": "contains_oxygen",
+        "target_true_count": 113937
+      },
+      {
+        "correlation_phi": 0.024994971369235612,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_fluorine",
+        "source_true_count": 2163,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.14933594013843896,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_carbonyl",
+        "source_true_count": 49477,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.13188922729594138,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_hydroxyl",
+        "source_true_count": 42007,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.07351263796557153,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrile",
+        "source_true_count": 16652,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.1277959573212206,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amine",
+        "source_true_count": 40211,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.06785614802450872,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.04611012141190141,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.13353439802962774,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_saturated_ether_link",
+        "source_true_count": 42725,
+        "target": "contains_heteroatom",
+        "target_true_count": 128977
+      },
+      {
+        "correlation_phi": 0.15909321428958706,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_aromatic_ring",
+        "source_true_count": 23852,
+        "target": "contains_ring",
+        "target_true_count": 119886
+      },
+      {
+        "correlation_phi": 0.7342218884537766,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_double_bond",
+        "source_true_count": 73643,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.692456979695497,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_carbonyl",
+        "source_true_count": 49477,
+        "target": "contains_double_bond",
+        "target_true_count": 73643
+      },
+      {
+        "correlation_phi": 0.3146426993479467,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_double_bond",
+        "target_true_count": 73643
+      },
+      {
+        "correlation_phi": 0.21380837979577275,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_double_bond",
+        "target_true_count": 73643
+      },
+      {
+        "correlation_phi": 0.3754528461573749,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_triple_bond",
+        "source_true_count": 32431,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.6665955203611428,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrile",
+        "source_true_count": 16652,
+        "target": "contains_triple_bond",
+        "target_true_count": 32431
+      },
+      {
+        "correlation_phi": 0.5084170713050277,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_carbonyl",
+        "source_true_count": 49477,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.25027518535534665,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_nitrile",
+        "source_true_count": 16652,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.23101755690344433,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.15698279238089488,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_multiple_bond",
+        "target_true_count": 92912
+      },
+      {
+        "correlation_phi": 0.45438591648871707,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_amide",
+        "source_true_count": 14454,
+        "target": "contains_carbonyl",
+        "target_true_count": 49477
+      },
+      {
+        "correlation_phi": 0.30876774451720174,
+        "equivalence": false,
+        "scope": "empirically_observed_in_full_QM9",
+        "source": "contains_ester",
+        "source_true_count": 7086,
+        "target": "contains_carbonyl",
+        "target_true_count": 49477
+      }
+    ],
+    "pairwise_phi_associations": [
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_hydrogen",
+        "implication": false,
+        "phi": 0.08157432750240233
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_nitrogen",
+        "implication": false,
+        "phi": -0.0004657816809303382
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_oxygen",
+        "implication": false,
+        "phi": 0.0024507145075188387
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_fluorine",
+        "implication": true,
+        "phi": 0.0006065992984811328
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_heteroatom",
+        "implication": false,
+        "phi": -0.0009233217096154894
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": 0.008696341713204662
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": -0.001919734573320466
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_double_bond",
+        "implication": true,
+        "phi": 0.005233844354638494
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_triple_bond",
+        "implication": true,
+        "phi": 0.0026763867846980095
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_multiple_bond",
+        "implication": true,
+        "phi": 0.0071284232150314675
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_carbonyl",
+        "implication": true,
+        "phi": 0.0036242120540091664
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_hydroxyl",
+        "implication": true,
+        "phi": 0.0032008003359190393
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_nitrile",
+        "implication": true,
+        "phi": 0.0017840674414334517
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.00034068177503827836
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.0016467909157102986
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.001119039781568455
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbon",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": true,
+        "phi": 0.0032407267434427798
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_nitrogen",
+        "implication": false,
+        "phi": -0.013576126785970545
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_oxygen",
+        "implication": false,
+        "phi": 0.0016834510221075483
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_fluorine",
+        "implication": false,
+        "phi": -0.05578149723792079
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_heteroatom",
+        "implication": false,
+        "phi": -0.0037701069162281997
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": 0.00855622086405525
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": -0.029391140230717448
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": -0.0011636007633863442
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.00892223541044333
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": -0.005285809467686178
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": -0.007626366273236199
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_hydroxyl",
+        "implication": true,
+        "phi": 0.013069506931596949
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.018486033477031878
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": 0.010977291146879418
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": 0.005478486931538427
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.004569262886478127
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydrogen",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": true,
+        "phi": 0.013232534426324204
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_oxygen",
+        "implication": false,
+        "phi": -0.11217685183258926
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_fluorine",
+        "implication": false,
+        "phi": 0.05810981040710938
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_heteroatom",
+        "implication": true,
+        "phi": 0.248555486630086
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": 0.0004055549328969149
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": 0.3320091003987718
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": 0.12485791289467678
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": 0.12711460763212903
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": 0.1955520842073306
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": 0.06718837892251195
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.17066542741424015
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_nitrile",
+        "implication": true,
+        "phi": 0.29575946587321733
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_amine",
+        "implication": true,
+        "phi": 0.5141546423049362
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.2730020123253051
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.053949445851519555
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrogen",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.39399221396205475
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_fluorine",
+        "implication": false,
+        "phi": -0.08564268104158654
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_heteroatom",
+        "implication": true,
+        "phi": 0.46617125404953724
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": -0.05481141359218025
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": -0.11826541308403053
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": 0.2440837983280864
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.19472510440089294
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": 0.06320996504770579
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_carbonyl",
+        "implication": true,
+        "phi": 0.32034566447670737
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_hydroxyl",
+        "implication": true,
+        "phi": 0.28292012034256936
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.1870051358209969
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.20482140135038385
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.14556055834643591
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.0989124082863375
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_oxygen",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": true,
+        "phi": 0.2864492327007315
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_heteroatom",
+        "implication": true,
+        "phi": 0.024994971369235612
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": -0.0026819492782928474
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": 0.20989367820206958
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": -0.0037821579083793314
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.05198619873554942
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": -0.026619580651044812
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": -0.028394323738728654
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.03391781191569508
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.03734515142001577
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.004993782702675898
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.040570744281266065
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.02738242170171441
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_fluorine",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.07768817481284003
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_ring",
+        "implication": false,
+        "phi": -0.018452944779460637
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_aromatic_ring",
+        "implication": false,
+        "phi": 0.08842511642883558
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": 0.07016108354080275
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.019517755563886244
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": 0.041344669013403064
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_carbonyl",
+        "implication": true,
+        "phi": 0.14933594013843896
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_hydroxyl",
+        "implication": true,
+        "phi": 0.13188922729594138
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_nitrile",
+        "implication": true,
+        "phi": 0.07351263796557153
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_amine",
+        "implication": true,
+        "phi": 0.1277959573212206
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.06785614802450872
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.04611012141190141
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_heteroatom",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": true,
+        "phi": 0.13353439802962774
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_aromatic_ring",
+        "implication": true,
+        "phi": 0.15909321428958706
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": -0.10154107838915884
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.23755011282779775
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": -0.1713456790308701
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": -0.17897968756445143
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.05008407271439905
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.14542340160613582
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": 0.11338247091427507
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.13952834687661492
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.08233412648278252
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ring",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": 0.1002352721045628
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_double_bond",
+        "implication": false,
+        "phi": -0.10553992731314975
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.11530235782378238
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_multiple_bond",
+        "implication": false,
+        "phi": -0.14849017636211492
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": -0.10488375490930396
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.06662268936015678
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.08899764347025511
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": 0.051917828228569905
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.08869268815812567
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.08181602587948367
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_aromatic_ring",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.28499345308642127
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_triple_bond",
+        "implication": false,
+        "phi": -0.16388661664277213
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_multiple_bond",
+        "implication": true,
+        "phi": 0.7342218884537766
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_carbonyl",
+        "implication": true,
+        "phi": 0.692456979695497
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.16977053711795648
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.1392794803829605
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.09249453982991153
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.3146426993479467
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.21380837979577275
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_double_bond",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.2035255339882069
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_multiple_bond",
+        "implication": true,
+        "phi": 0.3754528461573749
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_carbonyl",
+        "implication": false,
+        "phi": -0.11546662454790382
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.06640446073049379
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_nitrile",
+        "implication": true,
+        "phi": 0.6665955203611428
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": 0.022118981102436062
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.06922364404414824
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.04418673212626202
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_triple_bond",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.0690172562505619
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_carbonyl",
+        "implication": true,
+        "phi": 0.5084170713050277
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.1785831409682326
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_nitrile",
+        "implication": true,
+        "phi": 0.25027518535534665
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.0489470039630196
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.23101755690344433
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.15698279238089488
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_multiple_bond",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.2098399276254291
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_hydroxyl",
+        "implication": false,
+        "phi": -0.1310500807951524
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.11229096896647145
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.08253563548176643
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_amide",
+        "implication": true,
+        "phi": 0.45438591648871707
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_ester",
+        "implication": true,
+        "phi": 0.30876774451720174
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_carbonyl",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.17342294216743293
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydroxyl",
+        "feature_b": "contains_nitrile",
+        "implication": false,
+        "phi": -0.05656462893726049
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydroxyl",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": -0.09851229322475188
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydroxyl",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.09440487576021565
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydroxyl",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.0652302348027541
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_hydroxyl",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.08402550695964613
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrile",
+        "feature_b": "contains_amine",
+        "implication": false,
+        "phi": 0.0931529063547736
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrile",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.06357792334491605
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrile",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.037437364350162254
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_nitrile",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.055108580044527476
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_amine",
+        "feature_b": "contains_amide",
+        "implication": false,
+        "phi": -0.1204533993148976
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_amine",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": -0.06282258076628774
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_amine",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.2146971142166341
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_amide",
+        "feature_b": "contains_ester",
+        "implication": false,
+        "phi": 0.043646449541977494
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_amide",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.14000880474674668
+      },
+      {
+        "complement": false,
+        "exact_duplicate": false,
+        "feature_a": "contains_ester",
+        "feature_b": "contains_saturated_ether_link",
+        "implication": false,
+        "phi": -0.07516862648877046
+      }
+    ],
+    "qm9_domain_identities": [
+      {
+        "equivalence_type": "domain-level identity, not feature identity collapse",
+        "expression": "contains_heteroatom = contains_nitrogen OR contains_oxygen OR contains_fluorine",
+        "scope": "guaranteed_only_under_QM9_C_H_N_O_F_domain_restriction"
+      }
+    ]
+  },
+  "sample_summary": {
+    "max_raw_valid_quartets": 0,
+    "raw_valid_quartet_count_distribution": {
+      "0": 1024
+    },
+    "sample_count": 1024,
+    "sample_fraction_with_valid_quartet": 0.0,
+    "samples_with_game_structural_class": 0,
+    "samples_with_valid_quartet": 0,
+    "sum_across_samples_by_quartet_accounting_stage": {
+      "game_structurally_distinct_valid_quartets": 0,
+      "invalid_rejected_by_exact_duplicate_or_complement_constraint": 0,
+      "invalid_rejected_by_full_dataset_logical_dependencies": 2629632,
+      "invalid_rejected_by_other_observed_signature_constraints": 70007,
+      "invalid_rejected_by_sample_observed_dependencies": 433801,
+      "raw_valid_semantic_quartets": 0,
+      "valid_after_complement_equivalence_handling": 0,
+      "valid_after_dataset_exact_duplicate_handling": 0,
+      "valid_after_exact_semantic_handling": 0
+    },
+    "valid_quartets_by_feature_family_combination": {}
+  }
+}

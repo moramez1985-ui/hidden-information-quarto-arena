@@ -54,6 +54,7 @@ class ActionRecord:
 @dataclass(frozen=True, slots=True)
 class GameState:
     mode: Mode
+    starting_player: Player
     board: tuple[int | None, ...]
     remaining_pieces: tuple[int, ...]
     active_player: Player
@@ -79,13 +80,18 @@ WINNING_LINES = (
 )
 
 
-def new_game(mode: Mode = "classic") -> GameState:
+def new_game(
+    mode: Mode = "classic",
+    starting_player: Player = "player_1",
+) -> GameState:
     parsed_mode = _parse_mode(mode)
+    parsed_starting_player = _parse_player(starting_player)
     state = GameState(
         mode=parsed_mode,
+        starting_player=parsed_starting_player,
         board=(None,) * PIECE_COUNT,
         remaining_pieces=tuple(range(PIECE_COUNT)),
-        active_player="player_1",
+        active_player=parsed_starting_player,
         phase="select",
         selected_piece=None,
         selected_by=None,
@@ -294,6 +300,7 @@ def state_to_dict(state: GameState) -> dict[str, object]:
     return {
         "schema_version": STATE_SCHEMA_VERSION,
         "mode": state.mode,
+        "starting_player": state.starting_player,
         "board": list(state.board),
         "remaining_pieces": list(state.remaining_pieces),
         "active_player": state.active_player,
@@ -314,7 +321,7 @@ def deserialize_state(serialized: str) -> GameState:
     data = json.loads(serialized)
     if not isinstance(data, Mapping):
         raise ValueError("Serialized state must contain a JSON object.")
-    expected_keys = {
+    legacy_keys = {
         "schema_version",
         "mode",
         "board",
@@ -327,7 +334,8 @@ def deserialize_state(serialized: str) -> GameState:
         "result",
         "history",
     }
-    if set(data) != expected_keys:
+    expected_keys = legacy_keys | {"starting_player"}
+    if set(data) not in (legacy_keys, expected_keys):
         raise ValueError("Serialized state has missing or unexpected fields.")
     if data["schema_version"] != STATE_SCHEMA_VERSION:
         raise ValueError("Unsupported state schema version.")
@@ -337,6 +345,7 @@ def deserialize_state(serialized: str) -> GameState:
     history_data = _require_list(data["history"], "history")
     state = GameState(
         mode=_parse_mode(data["mode"]),
+        starting_player=_parse_player(data.get("starting_player", "player_1")),
         board=tuple(_parse_optional_piece(piece) for piece in board_data),
         remaining_pieces=tuple(_require_piece_id(piece) for piece in remaining_data),
         active_player=_parse_player(data["active_player"]),
@@ -356,6 +365,7 @@ def serialize_replay(state: GameState) -> str:
     replay = {
         "schema_version": REPLAY_SCHEMA_VERSION,
         "mode": state.mode,
+        "starting_player": state.starting_player,
         "actions": [_action_to_dict(action) for action in state.history],
         "result": _result_to_dict(state.result),
     }
@@ -366,15 +376,17 @@ def replay_game(serialized_replay: str) -> GameState:
     replay = json.loads(serialized_replay)
     if not isinstance(replay, Mapping):
         raise ValueError("Serialized replay must contain a JSON object.")
-    expected_keys = {"schema_version", "mode", "actions", "result"}
-    if set(replay) != expected_keys:
+    legacy_keys = {"schema_version", "mode", "actions", "result"}
+    expected_keys = legacy_keys | {"starting_player"}
+    if set(replay) not in (legacy_keys, expected_keys):
         raise ValueError("Serialized replay has missing or unexpected fields.")
     if replay["schema_version"] != REPLAY_SCHEMA_VERSION:
         raise ValueError("Unsupported replay schema version.")
 
     mode = _parse_mode(replay["mode"])
+    starting_player = _parse_player(replay.get("starting_player", "player_1"))
     actions = _require_list(replay["actions"], "actions")
-    state = new_game(mode)
+    state = new_game(mode, starting_player=starting_player)
     for action in actions:
         if not isinstance(action, Mapping):
             raise ValueError("Every replay action must be an object.")
@@ -387,6 +399,7 @@ def replay_game(serialized_replay: str) -> GameState:
 
 def _validate_state(state: GameState) -> None:
     _parse_mode(state.mode)
+    _parse_player(state.starting_player)
     _parse_player(state.active_player)
     _parse_phase(state.phase)
     if len(state.board) != PIECE_COUNT:
@@ -431,6 +444,8 @@ def _validate_state(state: GameState) -> None:
 
     for action in state.history:
         _validate_action_record(action)
+    if state.history and state.history[0].player != state.starting_player:
+        raise ValueError("The first action must be made by the starting player.")
 
 
 def _validate_result(state: GameState) -> None:

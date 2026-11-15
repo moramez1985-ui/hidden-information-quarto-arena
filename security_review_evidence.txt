@@ -1,0 +1,999 @@
+﻿QUARTO SECURITY REVIEW EVIDENCE
+
+==========================================================================================
+WORKTREE STATUS
+==========================================================================================
+## main
+ M README.md
+ M phase0_foundation.py
+ M quarto_engine.py
+ M tests/test_phase0_foundation.py
+ M tests/test_quarto_engine.py
+?? .github/
+?? .vscode/
+?? data/
+?? decision_trace.py
+?? deepseek_placement_test.jsonl
+?? deepseek_rule_test.jsonl
+?? deepseek_selection_test.jsonl
+?? docs/
+?? evaluator/
+?? experiments/
+?? hidden_quarto_benchmark.py
+?? kaggle_agent_adapter.py
+?? kaggle_dataset_staging/
+?? kaggle_task/
+?? notebooks/
+?? out.txt
+?? reports/
+?? security_review_evidence.txt
+?? tests/fixtures/
+?? tests/test_decision_trace.py
+?? tests/test_evaluator.py
+?? tests/test_hidden_quarto_benchmark.py
+?? tests/test_kaggle_adapter_metadata.py
+?? tests/test_kaggle_agent_adapter.py
+?? tests/test_phase1_qm9_adapter.py
+?? tests/test_quarto_two_model_task.py
+?? tests/test_tournament_harness.py
+?? tournament_harness.py
+
+
+==========================================================================================
+ENTITY ID GENERATION
+==========================================================================================
+
+  phase0_foundation.py:3:import copy
+  phase0_foundation.py:4:from collections.abc import Iterable, Mapping
+  phase0_foundation.py:5:from dataclasses import dataclass
+  phase0_foundation.py:6:from types import MappingProxyType
+  phase0_foundation.py:7:from typing import Any, Protocol, runtime_checkable
+> phase0_foundation.py:8:from uuid import UUID, uuid4
+  phase0_foundation.py:9:
+  phase0_foundation.py:10:from quarto_engine import (
+  phase0_foundation.py:11:    GameState,
+  phase0_foundation.py:12:    Mode,
+  phase0_foundation.py:13:    Player,
+  phase0_foundation.py:14:    legal_actions,
+  phase0_foundation.py:15:    new_game,
+  phase0_foundation.py:16:    place_piece,
+  phase0_foundation.py:17:    serialize_replay,
+  phase0_foundation.py:18:    select_piece,
+  phase0_foundation.py:19:    replay_game,
+  phase0_foundation.py:20:)
+  phase0_foundation.py:33:    "public_history",
+  phase0_foundation.py:34:    "result",
+  phase0_foundation.py:35:    "legal_actions",
+  phase0_foundation.py:36:})
+  phase0_foundation.py:37:_REQUIRED_RESTRICTED_AUDIT_FIELDS = frozenset({
+> phase0_foundation.py:38:    "entity_to_piece",
+  phase0_foundation.py:39:    "piece_to_entity",
+  phase0_foundation.py:40:    "feature_to_bit",
+  phase0_foundation.py:41:    "private_feature_ownership",
+  phase0_foundation.py:42:    "engine_replay",
+  phase0_foundation.py:43:    "engine_state_snapshot",
+  phase0_foundation.py:44:})
+  phase0_foundation.py:45:_RESTRICTED_AUDIT_FIELDS = _REQUIRED_RESTRICTED_AUDIT_FIELDS | {
+  phase0_foundation.py:46:    "instance_validation",
+  phase0_foundation.py:47:}
+  phase0_foundation.py:48:_ENGINE_STATE_FIELDS = frozenset({
+  phase0_foundation.py:49:    "mode",
+  phase0_foundation.py:50:    "starting_player",
+  phase0_foundation.py:428:        return False
+  phase0_foundation.py:429:
+  phase0_foundation.py:430:    if public_audit.get("starting_player") != engine_state_snapshot.get("starting_player"):
+  phase0_foundation.py:431:        return False
+  phase0_foundation.py:432:
+> phase0_foundation.py:433:    entity_to_piece = restricted.get("entity_to_piece")
+  phase0_foundation.py:434:    piece_to_entity = restricted.get("piece_to_entity")
+  phase0_foundation.py:435:    feature_to_bit = restricted.get("feature_to_bit")
+  phase0_foundation.py:436:    private_feature_ownership = restricted.get("private_feature_ownership")
+> phase0_foundation.py:437:    if not isinstance(entity_to_piece, Mapping) or not isinstance(piece_to_entity, Mapping):
+  phase0_foundation.py:438:        return False
+  phase0_foundation.py:439:    if not isinstance(feature_to_bit, Mapping) or not isinstance(private_feature_ownership, Mapping):
+  phase0_foundation.py:440:        return False
+  phase0_foundation.py:441:
+  phase0_foundation.py:442:    try:
+> phase0_foundation.py:443:        if any(not _is_opaque_entity_id(entity_id) for entity_id in entity_to_piece):
+  phase0_foundation.py:444:            return False
+> phase0_foundation.py:445:        if any(type(piece_id) is not int for piece_id in entity_to_piece.values()):
+  phase0_foundation.py:446:            return False
+  phase0_foundation.py:447:        if any(type(piece_id) is not int for piece_id in piece_to_entity):
+  phase0_foundation.py:448:            return False
+  phase0_foundation.py:449:        if any(not _is_opaque_entity_id(entity_id) for entity_id in piece_to_entity.values()):
+  phase0_foundation.py:450:            return False
+> phase0_foundation.py:451:        if set(entity_to_piece) != set(piece_to_entity.values()):
+  phase0_foundation.py:452:            return False
+  phase0_foundation.py:453:        if set(piece_to_entity) != set(range(16)):
+  phase0_foundation.py:454:            return False
+> phase0_foundation.py:455:        if len(entity_to_piece) != 16 or len(piece_to_entity) != 16:
+  phase0_foundation.py:456:            return False
+> phase0_foundation.py:457:        if set(entity_to_piece.values()) != set(range(16)):
+  phase0_foundation.py:458:            return False
+> phase0_foundation.py:459:        if {piece_id: entity_id for entity_id, piece_id in entity_to_piece.items()} != piece_to_entity:
+  phase0_foundation.py:460:            return False
+> phase0_foundation.py:461:        if {entity_id: piece_id for piece_id, entity_id in piece_to_entity.items()} != entity_to_piece:
+  phase0_foundation.py:462:            return False
+  phase0_foundation.py:463:    except Exception:
+  phase0_foundation.py:464:        return False
+  phase0_foundation.py:465:
+  phase0_foundation.py:466:    if not _valid_public_audit_shape(
+  phase0_foundation.py:467:        public_audit,
+  phase0_foundation.py:468:        snapshot.match_id,
+> phase0_foundation.py:469:        set(entity_to_piece),
+  phase0_foundation.py:470:    ):
+  phase0_foundation.py:471:        return False
+  phase0_foundation.py:472:
+  phase0_foundation.py:473:    try:
+  phase0_foundation.py:474:        if len(feature_to_bit) != 4:
+  phase0_foundation.py:475:            return False
+  phase0_foundation.py:476:        if len(set(feature_to_bit)) != 4:
+  phase0_foundation.py:477:            return False
+  phase0_foundation.py:478:        if any(not isinstance(feature_id, str) or not feature_id for feature_id in feature_to_bit):
+  phase0_foundation.py:479:            return False
+  phase0_foundation.py:480:        if any(type(bit_index) is not int for bit_index in feature_to_bit.values()):
+  phase0_foundation.py:481:            return False
+  phase0_foundation.py:694:        self.mode = mode
+  phase0_foundation.py:695:        self.engine_state = new_game(mode, starting_player=starting_player)
+  phase0_foundation.py:696:        self._source_to_public_entity_id = self._generate_public_entity_ids(
+  phase0_foundation.py:697:            instance.entity_ids
+  phase0_foundation.py:698:        )
+> phase0_foundation.py:699:        self.entity_to_piece = self._build_entity_to_piece(
+  phase0_foundation.py:700:            instance,
+  phase0_foundation.py:701:            self._source_to_public_entity_id,
+  phase0_foundation.py:702:        )
+> phase0_foundation.py:703:        self.piece_to_entity = {piece_id: entity_id for entity_id, piece_id in self.entity_to_piece.items()}
+> phase0_foundation.py:704:        self._public_entity_order = tuple(sorted(self.entity_to_piece))
+  phase0_foundation.py:705:        self.selected_entity_id: str | None = None
+  phase0_foundation.py:706:        self.private_feature_ownership = {
+  phase0_foundation.py:707:            "player_1": tuple(instance.feature_ids[:2]),
+  phase0_foundation.py:708:            "player_2": tuple(instance.feature_ids[2:4]),
+  phase0_foundation.py:709:        }
+  phase0_foundation.py:710:        self.secret_bit_mapping = {feature_id: index for index, feature_id in enumerate(instance.feature_ids)}
+  phase0_foundation.py:711:        self.public_history: list[dict[str, Any]] = []
+  phase0_foundation.py:712:        self._public_feedback: dict[str, str | None] = {"player_1": None, "player_2": None}
+> phase0_foundation.py:713:        self.match_id = f"match:{uuid4()}"
+  phase0_foundation.py:714:
+  phase0_foundation.py:715:    @staticmethod
+  phase0_foundation.py:716:    def _validate_domain(domain: DomainCatalog) -> None:
+  phase0_foundation.py:717:        if not domain.entities or not domain.features:
+  phase0_foundation.py:718:            raise ValueError("Domain catalog must contain entities and features.")
+  phase0_foundation.py:719:        entity_ids = [entity.entity_id for entity in domain.entities]
+  phase0_foundation.py:720:        if len(entity_ids) != len(set(entity_ids)):
+  phase0_foundation.py:721:            raise ValueError("Entity IDs must be unique.")
+  phase0_foundation.py:722:        feature_ids = [feature.feature_id for feature in domain.features]
+  phase0_foundation.py:723:        if len(feature_ids) != len(set(feature_ids)):
+  phase0_foundation.py:724:            raise ValueError("Feature IDs must be unique.")
+  phase0_foundation.py:725:
+  phase0_foundation.py:775:        for entity_id, signature in instance.signature_map.items():
+  phase0_foundation.py:776:            if type(signature) is not int or not (0 <= signature <= 15):
+  phase0_foundation.py:777:                raise ValueError(f"Signature for {entity_id} must be a valid integer in 0..15.")
+  phase0_foundation.py:778:
+  phase0_foundation.py:779:    @staticmethod
+> phase0_foundation.py:780:    def _generate_public_entity_ids(entity_ids: tuple[str, ...]) -> dict[str, str]:
+  phase0_foundation.py:781:        generated: dict[str, str] = {}
+  phase0_foundation.py:782:        used: set[str] = set()
+  phase0_foundation.py:783:        for entity_id in entity_ids:
+> phase0_foundation.py:784:            public_id = uuid4().hex
+  phase0_foundation.py:785:            while public_id in used:
+> phase0_foundation.py:786:                public_id = uuid4().hex
+  phase0_foundation.py:787:            generated[entity_id] = public_id
+  phase0_foundation.py:788:            used.add(public_id)
+  phase0_foundation.py:789:        return generated
+  phase0_foundation.py:790:
+  phase0_foundation.py:791:    @staticmethod
+> phase0_foundation.py:792:    def _build_entity_to_piece(
+  phase0_foundation.py:793:        instance: InstanceSpec,
+  phase0_foundation.py:794:        public_ids_by_source: Mapping[str, str],
+  phase0_foundation.py:795:    ) -> dict[str, int]:
+> phase0_foundation.py:796:        entity_to_piece = {}
+  phase0_foundation.py:797:        for entity_id, signature in instance.signature_map.items():
+> phase0_foundation.py:798:            entity_to_piece[public_ids_by_source[entity_id]] = int(signature)
+> phase0_foundation.py:799:        return entity_to_piece
+  phase0_foundation.py:800:
+  phase0_foundation.py:801:    def _public_entity_ids_for_pieces(self, piece_ids: Iterable[int]) -> list[str]:
+  phase0_foundation.py:802:        available = {self.piece_to_entity[piece_id] for piece_id in piece_ids}
+  phase0_foundation.py:803:        return [
+  phase0_foundation.py:804:            entity_id
+  phase0_foundation.py:805:            for entity_id in self._public_entity_order
+  phase0_foundation.py:806:            if entity_id in available
+  phase0_foundation.py:807:        ]
+  phase0_foundation.py:808:
+  phase0_foundation.py:809:    @property
+  phase0_foundation.py:810:    def current_player(self) -> Player:
+  phase0_foundation.py:811:        return self.engine_state.active_player
+  phase0_foundation.py:832:
+  phase0_foundation.py:833:        observation = {
+  phase0_foundation.py:834:            "mode": self.engine_state.mode,
+  phase0_foundation.py:835:            "phase": self.engine_state.phase,
+  phase0_foundation.py:836:            "current_player": self.engine_state.active_player,
+> phase0_foundation.py:837:            "public_entities": [
+  phase0_foundation.py:838:                {"entity_id": entity_id, "label": entity_id}
+  phase0_foundation.py:839:                for entity_id in self._public_entity_order
+  phase0_foundation.py:840:            ],
+  phase0_foundation.py:841:            "board": [None if piece_id is None else self.piece_to_entity[piece_id] for piece_id in self.engine_state.board],
+  phase0_foundation.py:842:            "available_entities": self._public_entity_ids_for_pieces(
+  phase0_foundation.py:843:                self.engine_state.remaining_pieces
+  phase0_foundation.py:844:            ),
+  phase0_foundation.py:845:            "selected_entity": self.selected_entity_id,
+  phase0_foundation.py:846:            "legal_actions": public_actions,
+  phase0_foundation.py:847:            "history": copy.deepcopy(self.public_history),
+  phase0_foundation.py:848:            "terminal": self.engine_state.is_terminal,
+  phase0_foundation.py:849:        }
+  phase0_foundation.py:872:        kind = action.get("kind")
+  phase0_foundation.py:873:        if kind == PUBLIC_ACTION_KIND_SELECT:
+  phase0_foundation.py:874:            entity_id = action.get("entity_id")
+  phase0_foundation.py:875:            if not isinstance(entity_id, str):
+  phase0_foundation.py:876:                raise ValueError("select_entity requires a valid string entity_id.")
+> phase0_foundation.py:877:            if entity_id not in self.entity_to_piece:
+  phase0_foundation.py:878:                raise ValueError("Unknown public entity id.")
+  phase0_foundation.py:879:            if self.engine_state.phase != "select":
+  phase0_foundation.py:880:                raise ValueError("A selection action is only valid in the select phase.")
+> phase0_foundation.py:881:            piece_id = self.entity_to_piece[entity_id]
+  phase0_foundation.py:882:            if piece_id not in self.engine_state.remaining_pieces:
+  phase0_foundation.py:883:                raise ValueError("The selected entity is unavailable.")
+  phase0_foundation.py:884:            self.engine_state = select_piece(self.engine_state, requester, piece_id)
+  phase0_foundation.py:885:            self.selected_entity_id = entity_id
+  phase0_foundation.py:886:            self.public_history.append({
+  phase0_foundation.py:887:                "kind": PUBLIC_ACTION_KIND_SELECT,
+  phase0_foundation.py:888:                "player": requester,
+  phase0_foundation.py:889:                "entity_id": entity_id,
+  phase0_foundation.py:890:            })
+  phase0_foundation.py:891:            return self.public_observation(requester)
+  phase0_foundation.py:892:
+  phase0_foundation.py:893:        if kind == PUBLIC_ACTION_KIND_PLACE:
+  phase0_foundation.py:935:            "public_history": public_history,
+  phase0_foundation.py:936:            "result": result,
+  phase0_foundation.py:937:            "legal_actions": public_actions,
+  phase0_foundation.py:938:        })
+  phase0_foundation.py:939:        restricted = _freeze_value({
+> phase0_foundation.py:940:            "entity_to_piece": dict(self.entity_to_piece),
+  phase0_foundation.py:941:            "piece_to_entity": dict(self.piece_to_entity),
+  phase0_foundation.py:942:            "feature_to_bit": dict(self.secret_bit_mapping),
+  phase0_foundation.py:943:            "private_feature_ownership": dict(self.private_feature_ownership),
+  phase0_foundation.py:944:            "engine_replay": serialize_replay(self.engine_state),
+  phase0_foundation.py:945:            "engine_state_snapshot": {
+  phase0_foundation.py:946:                "mode": self.engine_state.mode,
+  phase0_foundation.py:947:                "starting_player": self.engine_state.starting_player,
+  phase0_foundation.py:948:                "phase": self.engine_state.phase,
+  phase0_foundation.py:949:                "active_player": self.engine_state.active_player,
+  phase0_foundation.py:950:                "board": tuple(self.engine_state.board),
+  phase0_foundation.py:951:                "selected_piece": self.engine_state.selected_piece,
+  phase0_foundation.py:952:                "selected_by": self.engine_state.selected_by,
+
+
+
+
+==========================================================================================
+AUDIT VALIDATION
+==========================================================================================
+
+  phase0_foundation.py:20:)
+  phase0_foundation.py:21:
+  phase0_foundation.py:22:
+  phase0_foundation.py:23:PUBLIC_ACTION_KIND_SELECT = "select_entity"
+  phase0_foundation.py:24:PUBLIC_ACTION_KIND_PLACE = "place_entity"
+> phase0_foundation.py:25:PUBLIC_AUDIT_FIELDS = frozenset({
+  phase0_foundation.py:26:    "match_id",
+  phase0_foundation.py:27:    "mode",
+  phase0_foundation.py:28:    "starting_player",
+  phase0_foundation.py:29:    "phase",
+  phase0_foundation.py:30:    "current_player",
+  phase0_foundation.py:31:    "selected_entity",
+  phase0_foundation.py:32:    "board",
+  phase0_foundation.py:33:    "public_history",
+  phase0_foundation.py:34:    "result",
+  phase0_foundation.py:35:    "legal_actions",
+  phase0_foundation.py:36:})
+> phase0_foundation.py:37:_REQUIRED_RESTRICTED_AUDIT_FIELDS = frozenset({
+  phase0_foundation.py:38:    "entity_to_piece",
+  phase0_foundation.py:39:    "piece_to_entity",
+  phase0_foundation.py:40:    "feature_to_bit",
+  phase0_foundation.py:41:    "private_feature_ownership",
+  phase0_foundation.py:42:    "engine_replay",
+  phase0_foundation.py:43:    "engine_state_snapshot",
+  phase0_foundation.py:44:})
+> phase0_foundation.py:45:_RESTRICTED_AUDIT_FIELDS = _REQUIRED_RESTRICTED_AUDIT_FIELDS | {
+  phase0_foundation.py:46:    "instance_validation",
+  phase0_foundation.py:47:}
+  phase0_foundation.py:48:_ENGINE_STATE_FIELDS = frozenset({
+  phase0_foundation.py:49:    "mode",
+  phase0_foundation.py:50:    "starting_player",
+  phase0_foundation.py:51:    "phase",
+  phase0_foundation.py:52:    "active_player",
+  phase0_foundation.py:53:    "board",
+  phase0_foundation.py:54:    "selected_piece",
+  phase0_foundation.py:55:    "selected_by",
+  phase0_foundation.py:56:    "remaining_pieces",
+  phase0_foundation.py:57:    "is_terminal",
+  phase0_foundation.py:58:    "result",
+  phase0_foundation.py:59:    "history",
+  phase0_foundation.py:60:})
+  phase0_foundation.py:61:_ENGINE_RESULT_FIELDS = frozenset({"mode", "outcome", "winner", "reason"})
+  phase0_foundation.py:62:
+  phase0_foundation.py:63:
+  phase0_foundation.py:79:    except ValueError:
+  phase0_foundation.py:80:        return False
+  phase0_foundation.py:81:    return parsed.version == 4
+  phase0_foundation.py:82:
+  phase0_foundation.py:83:
+> phase0_foundation.py:84:def _valid_public_audit_shape(
+> phase0_foundation.py:85:    public_audit: Mapping[str, Any],
+  phase0_foundation.py:86:    match_id: str,
+  phase0_foundation.py:87:    known_entity_ids: set[str],
+  phase0_foundation.py:88:) -> bool:
+> phase0_foundation.py:89:    if set(public_audit) != PUBLIC_AUDIT_FIELDS:
+  phase0_foundation.py:90:        return False
+> phase0_foundation.py:91:    if public_audit.get("match_id") != match_id or not _is_match_id(match_id):
+  phase0_foundation.py:92:        return False
+  phase0_foundation.py:93:
+> phase0_foundation.py:94:    mode = public_audit.get("mode")
+> phase0_foundation.py:95:    starting_player = public_audit.get("starting_player")
+> phase0_foundation.py:96:    phase = public_audit.get("phase")
+> phase0_foundation.py:97:    current_player = public_audit.get("current_player")
+  phase0_foundation.py:98:    if mode not in ("classic", "self_selection"):
+  phase0_foundation.py:99:        return False
+  phase0_foundation.py:100:    if starting_player not in ("player_1", "player_2"):
+  phase0_foundation.py:101:        return False
+  phase0_foundation.py:102:    if current_player not in ("player_1", "player_2"):
+  phase0_foundation.py:103:        return False
+  phase0_foundation.py:104:    if phase not in ("select", "place", "terminal"):
+  phase0_foundation.py:105:        return False
+  phase0_foundation.py:106:
+> phase0_foundation.py:107:    selected_entity = public_audit.get("selected_entity")
+  phase0_foundation.py:108:    if selected_entity is not None and (
+  phase0_foundation.py:109:        not _is_opaque_entity_id(selected_entity)
+  phase0_foundation.py:110:        or selected_entity not in known_entity_ids
+  phase0_foundation.py:111:    ):
+  phase0_foundation.py:112:        return False
+  phase0_foundation.py:113:    if (phase == "place") != (selected_entity is not None):
+  phase0_foundation.py:114:        return False
+  phase0_foundation.py:115:
+> phase0_foundation.py:116:    board = public_audit.get("board")
+  phase0_foundation.py:117:    if not isinstance(board, (tuple, list)) or len(board) != 16:
+  phase0_foundation.py:118:        return False
+  phase0_foundation.py:119:    board_entities = [entity_id for entity_id in board if entity_id is not None]
+  phase0_foundation.py:120:    if any(
+  phase0_foundation.py:121:        not _is_opaque_entity_id(entity_id) or entity_id not in known_entity_ids
+  phase0_foundation.py:122:        for entity_id in board_entities
+  phase0_foundation.py:123:    ):
+  phase0_foundation.py:124:        return False
+  phase0_foundation.py:125:    if len(board_entities) != len(set(board_entities)):
+  phase0_foundation.py:126:        return False
+  phase0_foundation.py:127:
+> phase0_foundation.py:128:    history = public_audit.get("public_history")
+  phase0_foundation.py:129:    if not isinstance(history, (tuple, list)):
+  phase0_foundation.py:130:        return False
+  phase0_foundation.py:131:    for action in history:
+  phase0_foundation.py:132:        if not isinstance(action, Mapping):
+  phase0_foundation.py:133:            return False
+  phase0_foundation.py:134:        if action.get("kind") == "select_entity":
+  phase0_foundation.py:135:            if set(action) != {"kind", "player", "entity_id"}:
+  phase0_foundation.py:136:                return False
+  phase0_foundation.py:137:            if action.get("player") not in ("player_1", "player_2"):
+  phase0_foundation.py:138:                return False
+  phase0_foundation.py:139:            entity_id = action.get("entity_id")
+  phase0_foundation.py:140:            if (
+  phase0_foundation.py:141:                not _is_opaque_entity_id(entity_id)
+  phase0_foundation.py:142:                or entity_id not in known_entity_ids
+  phase0_foundation.py:143:            ):
+  phase0_foundation.py:144:                return False
+  phase0_foundation.py:145:        elif action.get("kind") == "place_entity":
+  phase0_foundation.py:146:            if set(action) != {"kind", "player", "cell"}:
+  phase0_foundation.py:150:            if type(action.get("cell")) is not int or not 0 <= action["cell"] < 16:
+  phase0_foundation.py:151:                return False
+  phase0_foundation.py:152:        else:
+  phase0_foundation.py:153:            return False
+  phase0_foundation.py:154:
+> phase0_foundation.py:155:    result = public_audit.get("result")
+  phase0_foundation.py:156:    if result is None:
+  phase0_foundation.py:157:        if phase == "terminal":
+  phase0_foundation.py:158:            return False
+  phase0_foundation.py:159:    else:
+  phase0_foundation.py:160:        if not isinstance(result, Mapping) or set(result) != _ENGINE_RESULT_FIELDS:
+  phase0_foundation.py:161:            return False
+  phase0_foundation.py:162:        if result.get("mode") != mode:
+  phase0_foundation.py:163:            return False
+  phase0_foundation.py:164:        if result.get("outcome") == "win":
+  phase0_foundation.py:165:            if (
+  phase0_foundation.py:166:                result.get("winner") not in ("player_1", "player_2")
+  phase0_foundation.py:167:                or result.get("reason") != "quarto"
+  phase0_foundation.py:168:            ):
+  phase0_foundation.py:169:                return False
+  phase0_foundation.py:170:        elif result.get("outcome") == "draw":
+  phase0_foundation.py:171:            if result.get("winner") is not None or result.get("reason") != "board_full":
+  phase0_foundation.py:172:                return False
+  phase0_foundation.py:173:        else:
+  phase0_foundation.py:174:            return False
+  phase0_foundation.py:175:        if phase != "terminal":
+  phase0_foundation.py:176:            return False
+  phase0_foundation.py:177:
+> phase0_foundation.py:178:    legal_actions = public_audit.get("legal_actions")
+  phase0_foundation.py:179:    if not isinstance(legal_actions, Mapping):
+  phase0_foundation.py:180:        return False
+  phase0_foundation.py:181:    action_kind = legal_actions.get("kind")
+  phase0_foundation.py:182:    if phase == "select":
+  phase0_foundation.py:183:        if set(legal_actions) != {"kind", "entity_ids"} or action_kind != "select_entity":
+  phase0_foundation.py:184:            return False
+  phase0_foundation.py:185:        entity_ids = legal_actions.get("entity_ids")
+  phase0_foundation.py:186:        if not isinstance(entity_ids, (tuple, list)):
+  phase0_foundation.py:187:            return False
+  phase0_foundation.py:188:        if any(
+  phase0_foundation.py:189:            not _is_opaque_entity_id(entity_id)
+  phase0_foundation.py:190:            or entity_id not in known_entity_ids
+  phase0_foundation.py:191:            for entity_id in entity_ids
+  phase0_foundation.py:192:        ):
+  phase0_foundation.py:193:            return False
+  phase0_foundation.py:194:        if len(entity_ids) != len(set(entity_ids)):
+  phase0_foundation.py:195:            return False
+  phase0_foundation.py:196:    elif phase == "place":
+  phase0_foundation.py:286:
+  phase0_foundation.py:287:
+  phase0_foundation.py:288:@dataclass(frozen=True, slots=True)
+  phase0_foundation.py:289:class AuditSnapshot:
+  phase0_foundation.py:290:    match_id: str
+> phase0_foundation.py:291:    public_audit: MappingProxyType[str, Any]
+> phase0_foundation.py:292:    restricted_evaluator_data: MappingProxyType[str, Any]
+  phase0_foundation.py:293:
+  phase0_foundation.py:294:    def validate_replay(self) -> bool:
+> phase0_foundation.py:295:        replay = self.restricted_evaluator_data.get("engine_replay")
+> phase0_foundation.py:296:        state_snapshot = self.restricted_evaluator_data.get("engine_state_snapshot")
+  phase0_foundation.py:297:        if not isinstance(replay, str) or not isinstance(state_snapshot, MappingProxyType):
+  phase0_foundation.py:298:            return False
+  phase0_foundation.py:299:        try:
+  phase0_foundation.py:300:            replayed_state = replay_game(replay)
+  phase0_foundation.py:301:        except Exception:
+  phase0_foundation.py:302:            return False
+  phase0_foundation.py:303:
+  phase0_foundation.py:304:        encoded_snapshot = {
+  phase0_foundation.py:305:            "mode": replayed_state.mode,
+  phase0_foundation.py:306:            "starting_player": replayed_state.starting_player,
+  phase0_foundation.py:307:            "phase": replayed_state.phase,
+  phase0_foundation.py:308:            "active_player": replayed_state.active_player,
+  phase0_foundation.py:309:            "board": tuple(replayed_state.board),
+  phase0_foundation.py:310:            "remaining_pieces": tuple(replayed_state.remaining_pieces),
+  phase0_foundation.py:311:            "selected_piece": replayed_state.selected_piece,
+  phase0_foundation.py:312:            "selected_by": replayed_state.selected_by,
+  phase0_foundation.py:313:            "is_terminal": replayed_state.is_terminal,
+  phase0_foundation.py:314:            "result": None if replayed_state.result is None else {
+  phase0_foundation.py:357:        if tuple(state_snapshot.get("history", ())) != encoded_snapshot["history"]:
+  phase0_foundation.py:358:            return False
+  phase0_foundation.py:359:        return True
+  phase0_foundation.py:360:
+  phase0_foundation.py:361:
+> phase0_foundation.py:362:def validate_audit_snapshot(snapshot: AuditSnapshot) -> bool:
+  phase0_foundation.py:363:    if not isinstance(snapshot, AuditSnapshot):
+  phase0_foundation.py:364:        return False
+  phase0_foundation.py:365:
+> phase0_foundation.py:366:    for attr_name in ("public_audit", "restricted_evaluator_data"):
+  phase0_foundation.py:367:        value = getattr(snapshot, attr_name)
+  phase0_foundation.py:368:        if not isinstance(value, MappingProxyType):
+  phase0_foundation.py:369:            return False
+  phase0_foundation.py:370:
+  phase0_foundation.py:371:    if not isinstance(snapshot.match_id, str) or not snapshot.match_id:
+  phase0_foundation.py:372:        return False
+  phase0_foundation.py:373:
+  phase0_foundation.py:374:    if not snapshot.validate_replay():
+  phase0_foundation.py:375:        return False
+  phase0_foundation.py:376:
+> phase0_foundation.py:377:    public_audit = dict(snapshot.public_audit)
+> phase0_foundation.py:378:    restricted = dict(snapshot.restricted_evaluator_data)
+> phase0_foundation.py:379:    if set(public_audit) != PUBLIC_AUDIT_FIELDS:
+  phase0_foundation.py:380:        return False
+> phase0_foundation.py:381:    if not _REQUIRED_RESTRICTED_AUDIT_FIELDS.issubset(restricted):
+  phase0_foundation.py:382:        return False
+> phase0_foundation.py:383:    if not set(restricted).issubset(_RESTRICTED_AUDIT_FIELDS):
+  phase0_foundation.py:384:        return False
+> phase0_foundation.py:385:    instance_validation = restricted.get("instance_validation")
+> phase0_foundation.py:386:    if "instance_validation" in restricted:
+  phase0_foundation.py:387:        if not isinstance(instance_validation, Mapping):
+  phase0_foundation.py:388:            return False
+  phase0_foundation.py:389:        quartet_validation = instance_validation.get("quartet_validation")
+  phase0_foundation.py:390:        if (
+  phase0_foundation.py:391:            instance_validation.get("match_id") != snapshot.match_id
+  phase0_foundation.py:392:            or not isinstance(instance_validation.get("instance_id"), str)
+  phase0_foundation.py:393:            or instance_validation.get("accepted") is not True
+  phase0_foundation.py:394:            or getattr(quartet_validation, "accepted", False) is not True
+  phase0_foundation.py:395:            or getattr(quartet_validation, "instance_id", None)
+  phase0_foundation.py:396:            != instance_validation.get("instance_id")
+  phase0_foundation.py:397:            or type(instance_validation.get("id_level_count")) is not int
+  phase0_foundation.py:398:            or instance_validation["id_level_count"]
+  phase0_foundation.py:399:            != getattr(quartet_validation, "id_level_count", None)
+  phase0_foundation.py:400:            or instance_validation["id_level_count"] <= 1
+  phase0_foundation.py:401:            or type(instance_validation.get("structural_count")) is not int
+  phase0_foundation.py:402:            or instance_validation["structural_count"]
+  phase0_foundation.py:403:            != getattr(quartet_validation, "structural_count", None)
+  phase0_foundation.py:404:            or instance_validation["structural_count"] <= 1
+  phase0_foundation.py:412:            or not isinstance(instance_validation.get("eligible_feature_pool_id"), str)
+  phase0_foundation.py:413:            or not isinstance(instance_validation.get("validator_version"), str)
+  phase0_foundation.py:414:            or not isinstance(instance_validation.get("dataset_identity"), Mapping)
+  phase0_foundation.py:415:        ):
+  phase0_foundation.py:416:            return False
+> phase0_foundation.py:417:        if "instance_validation" in public_audit:
+  phase0_foundation.py:418:            return False
+  phase0_foundation.py:419:
+> phase0_foundation.py:420:    engine_state_snapshot = restricted.get("engine_state_snapshot")
+  phase0_foundation.py:421:    if not isinstance(engine_state_snapshot, Mapping):
+  phase0_foundation.py:422:        return False
+  phase0_foundation.py:423:    try:
+  phase0_foundation.py:424:        engine_state_snapshot = dict(engine_state_snapshot)
+  phase0_foundation.py:425:    except Exception:
+  phase0_foundation.py:426:        return False
+  phase0_foundation.py:427:    if set(engine_state_snapshot) != _ENGINE_STATE_FIELDS:
+  phase0_foundation.py:428:        return False
+  phase0_foundation.py:429:
+> phase0_foundation.py:430:    if public_audit.get("starting_player") != engine_state_snapshot.get("starting_player"):
+  phase0_foundation.py:431:        return False
+  phase0_foundation.py:432:
+> phase0_foundation.py:433:    entity_to_piece = restricted.get("entity_to_piece")
+> phase0_foundation.py:434:    piece_to_entity = restricted.get("piece_to_entity")
+> phase0_foundation.py:435:    feature_to_bit = restricted.get("feature_to_bit")
+> phase0_foundation.py:436:    private_feature_ownership = restricted.get("private_feature_ownership")
+  phase0_foundation.py:437:    if not isinstance(entity_to_piece, Mapping) or not isinstance(piece_to_entity, Mapping):
+  phase0_foundation.py:438:        return False
+  phase0_foundation.py:439:    if not isinstance(feature_to_bit, Mapping) or not isinstance(private_feature_ownership, Mapping):
+  phase0_foundation.py:440:        return False
+  phase0_foundation.py:441:
+  phase0_foundation.py:442:    try:
+  phase0_foundation.py:443:        if any(not _is_opaque_entity_id(entity_id) for entity_id in entity_to_piece):
+  phase0_foundation.py:444:            return False
+  phase0_foundation.py:445:        if any(type(piece_id) is not int for piece_id in entity_to_piece.values()):
+  phase0_foundation.py:446:            return False
+  phase0_foundation.py:447:        if any(type(piece_id) is not int for piece_id in piece_to_entity):
+  phase0_foundation.py:448:            return False
+  phase0_foundation.py:449:        if any(not _is_opaque_entity_id(entity_id) for entity_id in piece_to_entity.values()):
+  phase0_foundation.py:450:            return False
+  phase0_foundation.py:451:        if set(entity_to_piece) != set(piece_to_entity.values()):
+  phase0_foundation.py:452:            return False
+  phase0_foundation.py:453:        if set(piece_to_entity) != set(range(16)):
+  phase0_foundation.py:454:            return False
+  phase0_foundation.py:461:        if {entity_id: piece_id for piece_id, entity_id in piece_to_entity.items()} != entity_to_piece:
+  phase0_foundation.py:462:            return False
+  phase0_foundation.py:463:    except Exception:
+  phase0_foundation.py:464:        return False
+  phase0_foundation.py:465:
+> phase0_foundation.py:466:    if not _valid_public_audit_shape(
+> phase0_foundation.py:467:        public_audit,
+  phase0_foundation.py:468:        snapshot.match_id,
+  phase0_foundation.py:469:        set(entity_to_piece),
+  phase0_foundation.py:470:    ):
+  phase0_foundation.py:471:        return False
+  phase0_foundation.py:472:
+  phase0_foundation.py:473:    try:
+  phase0_foundation.py:474:        if len(feature_to_bit) != 4:
+  phase0_foundation.py:475:            return False
+  phase0_foundation.py:476:        if len(set(feature_to_bit)) != 4:
+  phase0_foundation.py:477:            return False
+  phase0_foundation.py:478:        if any(not isinstance(feature_id, str) or not feature_id for feature_id in feature_to_bit):
+  phase0_foundation.py:479:            return False
+  phase0_foundation.py:480:        if any(type(bit_index) is not int for bit_index in feature_to_bit.values()):
+  phase0_foundation.py:481:            return False
+  phase0_foundation.py:482:        if set(feature_to_bit.values()) != {0, 1, 2, 3}:
+  phase0_foundation.py:483:            return False
+  phase0_foundation.py:484:    except Exception:
+  phase0_foundation.py:485:        return False
+  phase0_foundation.py:507:        return False
+  phase0_foundation.py:508:    if ownership["player_1"] | ownership["player_2"] != set(feature_to_bit):
+  phase0_foundation.py:509:        return False
+  phase0_foundation.py:510:
+  phase0_foundation.py:511:    try:
+> phase0_foundation.py:512:        public_board = tuple(public_audit["board"])
+  phase0_foundation.py:513:        internal_board = tuple(engine_state_snapshot["board"])
+  phase0_foundation.py:514:    except Exception:
+  phase0_foundation.py:515:        return False
+  phase0_foundation.py:516:    if len(public_board) != 16 or len(internal_board) != 16:
+  phase0_foundation.py:517:        return False
+  phase0_foundation.py:518:    translated = tuple(
+  phase0_foundation.py:519:        None if piece_id is None else piece_to_entity.get(piece_id) for piece_id in internal_board
+  phase0_foundation.py:520:    )
+  phase0_foundation.py:521:    if public_board != translated:
+  phase0_foundation.py:522:        return False
+  phase0_foundation.py:523:
+  phase0_foundation.py:524:    try:
+> phase0_foundation.py:525:        replayed_state = replay_game(restricted["engine_replay"])
+  phase0_foundation.py:526:        expected_public_history = []
+  phase0_foundation.py:527:        for action in replayed_state.history:
+  phase0_foundation.py:528:            if action.kind == "select_piece":
+  phase0_foundation.py:529:                entity_id = piece_to_entity.get(action.piece_id)
+  phase0_foundation.py:530:                if not isinstance(entity_id, str):
+  phase0_foundation.py:531:                    return False
+  phase0_foundation.py:532:                expected_public_history.append({
+  phase0_foundation.py:533:                    "kind": "select_entity",
+  phase0_foundation.py:534:                    "player": action.player,
+  phase0_foundation.py:535:                    "entity_id": entity_id,
+  phase0_foundation.py:536:                })
+  phase0_foundation.py:537:            else:
+  phase0_foundation.py:538:                expected_public_history.append({
+  phase0_foundation.py:539:                    "kind": "place_entity",
+  phase0_foundation.py:540:                    "player": action.player,
+  phase0_foundation.py:541:                    "cell": action.cell,
+  phase0_foundation.py:542:                })
+  phase0_foundation.py:543:        actual_public_history = tuple(
+> phase0_foundation.py:544:            dict(action) for action in public_audit["public_history"]
+  phase0_foundation.py:545:        )
+  phase0_foundation.py:546:    except (KeyError, TypeError, ValueError):
+  phase0_foundation.py:547:        return False
+  phase0_foundation.py:548:    if actual_public_history != tuple(expected_public_history):
+  phase0_foundation.py:549:        return False
+  phase0_foundation.py:550:
+  phase0_foundation.py:551:    required_state_fields = (("mode", "mode"), ("phase", "phase"), ("current_player", "active_player"))
+  phase0_foundation.py:552:    for public_name, internal_name in required_state_fields:
+> phase0_foundation.py:553:        if public_audit.get(public_name) != engine_state_snapshot.get(internal_name):
+  phase0_foundation.py:554:            return False
+  phase0_foundation.py:555:    selected_piece = engine_state_snapshot.get("selected_piece")
+  phase0_foundation.py:556:    expected_selected_entity = (
+  phase0_foundation.py:557:        None if selected_piece is None else piece_to_entity.get(selected_piece)
+  phase0_foundation.py:558:    )
+> phase0_foundation.py:559:    if public_audit.get("selected_entity") != expected_selected_entity:
+  phase0_foundation.py:560:        return False
+  phase0_foundation.py:561:
+  phase0_foundation.py:562:    legal = legal_actions(replayed_state)
+> phase0_foundation.py:563:    public_legal = public_audit["legal_actions"]
+  phase0_foundation.py:564:    if legal["type"] == "select_piece":
+  phase0_foundation.py:565:        expected_legal = tuple(
+  phase0_foundation.py:566:            piece_to_entity[piece_id] for piece_id in legal["piece_ids"]
+  phase0_foundation.py:567:        )
+  phase0_foundation.py:568:        if set(public_legal["entity_ids"]) != set(expected_legal):
+  phase0_foundation.py:569:            return False
+  phase0_foundation.py:570:    elif legal["type"] == "place_piece":
+  phase0_foundation.py:571:        if tuple(public_legal["cells"]) != tuple(legal["cells"]):
+  phase0_foundation.py:572:            return False
+  phase0_foundation.py:573:    elif public_legal["kind"] != "terminal":
+  phase0_foundation.py:574:        return False
+  phase0_foundation.py:575:
+  phase0_foundation.py:576:    engine_result = engine_state_snapshot.get("result")
+> phase0_foundation.py:577:    public_result = public_audit.get("result")
+  phase0_foundation.py:578:    if engine_result is None:
+  phase0_foundation.py:579:        if public_result is not None:
+  phase0_foundation.py:580:            return False
+  phase0_foundation.py:581:    else:
+  phase0_foundation.py:582:        if not isinstance(engine_result, Mapping):
+  phase0_foundation.py:583:            return False
+  phase0_foundation.py:584:        try:
+  phase0_foundation.py:585:            normalized = {
+  phase0_foundation.py:586:                "mode": engine_result["mode"],
+  phase0_foundation.py:587:                "outcome": engine_result["outcome"],
+  phase0_foundation.py:588:                "winner": engine_result["winner"],
+  phase0_foundation.py:589:                "reason": engine_result["reason"],
+  phase0_foundation.py:590:            }
+  phase0_foundation.py:591:        except Exception:
+  phase0_foundation.py:592:            return False
+  phase0_foundation.py:593:        if not isinstance(public_result, Mapping):
+  phase0_foundation.py:594:            return False
+  phase0_foundation.py:595:        if set(engine_result) != _ENGINE_RESULT_FIELDS:
+  phase0_foundation.py:922:                "winner": self.engine_state.result.winner,
+  phase0_foundation.py:923:                "reason": self.engine_state.result.reason,
+  phase0_foundation.py:924:            })
+  phase0_foundation.py:925:        )
+  phase0_foundation.py:926:        public_actions = _freeze_value(self._public_action_metadata())
+> phase0_foundation.py:927:        public_audit = _freeze_value({
+  phase0_foundation.py:928:            "match_id": self.match_id,
+  phase0_foundation.py:929:            "mode": self.engine_state.mode,
+  phase0_foundation.py:930:            "starting_player": self.engine_state.starting_player,
+  phase0_foundation.py:931:            "phase": self.engine_state.phase,
+  phase0_foundation.py:932:            "current_player": self.engine_state.active_player,
+  phase0_foundation.py:933:            "selected_entity": self.selected_entity_id,
+  phase0_foundation.py:934:            "board": tuple(None if piece_id is None else self.piece_to_entity[piece_id] for piece_id in self.engine_state.board),
+  phase0_foundation.py:935:            "public_history": public_history,
+  phase0_foundation.py:936:            "result": result,
+  phase0_foundation.py:937:            "legal_actions": public_actions,
+  phase0_foundation.py:938:        })
+> phase0_foundation.py:939:        restricted = _freeze_value({
+  phase0_foundation.py:940:            "entity_to_piece": dict(self.entity_to_piece),
+  phase0_foundation.py:941:            "piece_to_entity": dict(self.piece_to_entity),
+  phase0_foundation.py:942:            "feature_to_bit": dict(self.secret_bit_mapping),
+  phase0_foundation.py:943:            "private_feature_ownership": dict(self.private_feature_ownership),
+  phase0_foundation.py:944:            "engine_replay": serialize_replay(self.engine_state),
+  phase0_foundation.py:945:            "engine_state_snapshot": {
+  phase0_foundation.py:946:                "mode": self.engine_state.mode,
+  phase0_foundation.py:947:                "starting_player": self.engine_state.starting_player,
+  phase0_foundation.py:948:                "phase": self.engine_state.phase,
+  phase0_foundation.py:949:                "active_player": self.engine_state.active_player,
+  phase0_foundation.py:950:                "board": tuple(self.engine_state.board),
+  phase0_foundation.py:951:                "selected_piece": self.engine_state.selected_piece,
+  phase0_foundation.py:952:                "selected_by": self.engine_state.selected_by,
+  phase0_foundation.py:953:                "remaining_pieces": tuple(self.engine_state.remaining_pieces),
+  phase0_foundation.py:954:                "is_terminal": self.engine_state.is_terminal,
+  phase0_foundation.py:955:                "result": None if self.engine_state.result is None else {
+  phase0_foundation.py:956:                    "mode": self.engine_state.result.mode,
+  phase0_foundation.py:957:                    "outcome": self.engine_state.result.outcome,
+  phase0_foundation.py:976:                else {}
+  phase0_foundation.py:977:            ),
+  phase0_foundation.py:978:        })
+  phase0_foundation.py:979:        return AuditSnapshot(
+  phase0_foundation.py:980:            match_id=self.match_id,
+> phase0_foundation.py:981:            public_audit=public_audit,
+> phase0_foundation.py:982:            restricted_evaluator_data=restricted,
+  phase0_foundation.py:983:        )
+  phase0_foundation.py:984:
+  phase0_foundation.py:985:    def _public_action_metadata(self) -> dict[str, Any]:
+  phase0_foundation.py:986:        legal = legal_actions(self.engine_state)
+  phase0_foundation.py:987:        if legal["type"] == "select_piece":
+  phase0_foundation.py:988:            return {
+  phase0_foundation.py:989:                "kind": PUBLIC_ACTION_KIND_SELECT,
+  phase0_foundation.py:990:                "entity_ids": self._public_entity_ids_for_pieces(legal["piece_ids"]),
+  phase0_foundation.py:991:            }
+  phase0_foundation.py:992:        if legal["type"] == "place_piece":
+  phase0_foundation.py:993:            return {
+  phase0_foundation.py:994:                "kind": PUBLIC_ACTION_KIND_PLACE,
+  phase0_foundation.py:995:                "cells": list(legal["cells"]),
+  phase0_foundation.py:996:            }
+  phase0_foundation.py:997:        return {"kind": "terminal"}
+  phase0_foundation.py:998:
+  phase0_foundation.py:999:
+  phase0_foundation.py:1000:class Phase0Controller:
+
+
+
+
+==========================================================================================
+PUBLIC REPLAY
+==========================================================================================
+
+  kaggle_task\quarto_two_model_match.py:14:SOURCE_ROOT_ENV = "QUARTO_SOURCE_SNAPSHOT_ROOT"
+  kaggle_task\quarto_two_model_match.py:15:DEFAULT_SOURCE_ROOT = Path("/kaggle/input/quarto-two-model-source-v1")
+  kaggle_task\quarto_two_model_match.py:16:PLAYER_1_MODEL = "google/gemini-3.8-flash"
+  kaggle_task\quarto_two_model_match.py:17:PLAYER_2_REGISTRY_KEY = "anthropic/claude-sonnet-4-6@default"
+  kaggle_task\quarto_two_model_match.py:18:PLAYER_2_MODEL = "anthropic/claude-sonnet-4-6@default"
+> kaggle_task\quarto_two_model_match.py:19:PUBLIC_REPLAY_SCHEMA_VERSION = 1
+  kaggle_task\quarto_two_model_match.py:20:_PUBLIC_AUDIT_FIELDS = frozenset({
+  kaggle_task\quarto_two_model_match.py:21:    "match_id",
+  kaggle_task\quarto_two_model_match.py:22:    "mode",
+  kaggle_task\quarto_two_model_match.py:23:    "starting_player",
+  kaggle_task\quarto_two_model_match.py:24:    "phase",
+  kaggle_task\quarto_two_model_match.py:25:    "current_player",
+  kaggle_task\quarto_two_model_match.py:26:    "selected_entity",
+  kaggle_task\quarto_two_model_match.py:27:    "board",
+  kaggle_task\quarto_two_model_match.py:28:    "public_history",
+  kaggle_task\quarto_two_model_match.py:29:    "result",
+  kaggle_task\quarto_two_model_match.py:30:    "legal_actions",
+  kaggle_task\quarto_two_model_match.py:31:})
+> kaggle_task\quarto_two_model_match.py:32:_PUBLIC_REPLAY_FIELDS = frozenset({
+  kaggle_task\quarto_two_model_match.py:33:    "match_id",
+> kaggle_task\quarto_two_model_match.py:34:    "replay_schema_version",
+  kaggle_task\quarto_two_model_match.py:35:    "mode",
+  kaggle_task\quarto_two_model_match.py:36:    "starting_player",
+  kaggle_task\quarto_two_model_match.py:37:    "board",
+  kaggle_task\quarto_two_model_match.py:38:    "public_history",
+  kaggle_task\quarto_two_model_match.py:39:    "result",
+  kaggle_task\quarto_two_model_match.py:40:})
+  kaggle_task\quarto_two_model_match.py:41:EXPECTED_SNAPSHOT_FILES = {
+  kaggle_task\quarto_two_model_match.py:42:    "quarto_two_model_match.py",
+  kaggle_task\quarto_two_model_match.py:43:    "requirements.txt",
+  kaggle_task\quarto_two_model_match.py:44:    "kaggle_agent_adapter.py",
+  kaggle_task\quarto_two_model_match.py:45:    "tournament_harness.py",
+  kaggle_task\quarto_two_model_match.py:46:    "phase0_foundation.py",
+  kaggle_task\quarto_two_model_match.py:47:    "quarto_engine.py",
+  kaggle_task\quarto_two_model_match.py:48:    "decision_trace.py",
+  kaggle_task\quarto_two_model_match.py:49:    "domain_adapters.zip",
+  kaggle_task\quarto_two_model_match.py:50:}
+  kaggle_task\quarto_two_model_match.py:51:EXPECTED_DOMAIN_ADAPTERS = {
+  kaggle_task\quarto_two_model_match.py:52:    "domain_adapters/__init__.py",
+  kaggle_task\quarto_two_model_match.py:75:    except ValueError:
+  kaggle_task\quarto_two_model_match.py:76:        return False
+  kaggle_task\quarto_two_model_match.py:77:    return parsed.version == 4
+  kaggle_task\quarto_two_model_match.py:78:
+  kaggle_task\quarto_two_model_match.py:79:
+> kaggle_task\quarto_two_model_match.py:80:def _project_public_replay(public_audit: object) -> dict[str, Any]:
+  kaggle_task\quarto_two_model_match.py:81:    if not isinstance(public_audit, Mapping) or set(public_audit) != _PUBLIC_AUDIT_FIELDS:
+  kaggle_task\quarto_two_model_match.py:82:        raise ValueError("Public audit has missing or unexpected fields.")
+  kaggle_task\quarto_two_model_match.py:83:    if not _is_match_id(public_audit.get("match_id")):
+  kaggle_task\quarto_two_model_match.py:84:        raise ValueError("Public audit has an invalid match identifier.")
+  kaggle_task\quarto_two_model_match.py:85:    if public_audit.get("mode") not in ("classic", "self_selection"):
+  kaggle_task\quarto_two_model_match.py:86:        raise ValueError("Public audit has an invalid mode.")
+  kaggle_task\quarto_two_model_match.py:87:    if public_audit.get("starting_player") not in ("player_1", "player_2"):
+  kaggle_task\quarto_two_model_match.py:88:        raise ValueError("Public audit has an invalid starting player.")
+  kaggle_task\quarto_two_model_match.py:89:    if public_audit.get("current_player") not in ("player_1", "player_2"):
+  kaggle_task\quarto_two_model_match.py:90:        raise ValueError("Public audit has an invalid current player.")
+  kaggle_task\quarto_two_model_match.py:91:    phase = public_audit.get("phase")
+  kaggle_task\quarto_two_model_match.py:92:    if phase not in ("select", "place", "terminal"):
+  kaggle_task\quarto_two_model_match.py:93:        raise ValueError("Public audit has an invalid phase.")
+  kaggle_task\quarto_two_model_match.py:94:
+  kaggle_task\quarto_two_model_match.py:95:    board = public_audit.get("board")
+  kaggle_task\quarto_two_model_match.py:96:    if not isinstance(board, (list, tuple)) or len(board) != 16:
+  kaggle_task\quarto_two_model_match.py:97:        raise ValueError("Public audit board must contain exactly 16 cells.")
+  kaggle_task\quarto_two_model_match.py:98:    board_entities = [entity_id for entity_id in board if entity_id is not None]
+  kaggle_task\quarto_two_model_match.py:183:    elif set(legal_actions) != {"kind"} or legal_actions.get("kind") != "terminal":
+  kaggle_task\quarto_two_model_match.py:184:        raise ValueError("Terminal public audit has invalid legal-action metadata.")
+  kaggle_task\quarto_two_model_match.py:185:
+  kaggle_task\quarto_two_model_match.py:186:    return {
+  kaggle_task\quarto_two_model_match.py:187:        "match_id": public_audit["match_id"],
+> kaggle_task\quarto_two_model_match.py:188:        "replay_schema_version": PUBLIC_REPLAY_SCHEMA_VERSION,
+  kaggle_task\quarto_two_model_match.py:189:        "mode": public_audit["mode"],
+  kaggle_task\quarto_two_model_match.py:190:        "starting_player": public_audit["starting_player"],
+  kaggle_task\quarto_two_model_match.py:191:        "board": list(board),
+  kaggle_task\quarto_two_model_match.py:192:        "public_history": public_history,
+  kaggle_task\quarto_two_model_match.py:193:        "result": None if result is None else {
+  kaggle_task\quarto_two_model_match.py:194:            "mode": result["mode"],
+  kaggle_task\quarto_two_model_match.py:195:            "outcome": result["outcome"],
+  kaggle_task\quarto_two_model_match.py:196:            "winner": result["winner"],
+  kaggle_task\quarto_two_model_match.py:197:            "reason": result["reason"],
+  kaggle_task\quarto_two_model_match.py:198:        },
+  kaggle_task\quarto_two_model_match.py:199:    }
+  kaggle_task\quarto_two_model_match.py:200:
+  kaggle_task\quarto_two_model_match.py:201:
+> kaggle_task\quarto_two_model_match.py:202:def _validate_public_replay(public_replay: object) -> bool:
+> kaggle_task\quarto_two_model_match.py:203:    if not isinstance(public_replay, Mapping) or set(public_replay) != _PUBLIC_REPLAY_FIELDS:
+  kaggle_task\quarto_two_model_match.py:204:        return False
+> kaggle_task\quarto_two_model_match.py:205:    if type(public_replay.get("replay_schema_version")) is not int:
+  kaggle_task\quarto_two_model_match.py:206:        return False
+> kaggle_task\quarto_two_model_match.py:207:    if public_replay["replay_schema_version"] != PUBLIC_REPLAY_SCHEMA_VERSION:
+  kaggle_task\quarto_two_model_match.py:208:        return False
+> kaggle_task\quarto_two_model_match.py:209:    mode = public_replay.get("mode")
+  kaggle_task\quarto_two_model_match.py:210:    if mode not in ("classic", "self_selection"):
+  kaggle_task\quarto_two_model_match.py:211:        return False
+> kaggle_task\quarto_two_model_match.py:212:    if public_replay.get("starting_player") not in ("player_1", "player_2"):
+  kaggle_task\quarto_two_model_match.py:213:        return False
+> kaggle_task\quarto_two_model_match.py:214:    if not _is_match_id(public_replay.get("match_id")):
+  kaggle_task\quarto_two_model_match.py:215:        return False
+  kaggle_task\quarto_two_model_match.py:216:
+> kaggle_task\quarto_two_model_match.py:217:    board = public_replay.get("board")
+> kaggle_task\quarto_two_model_match.py:218:    history = public_replay.get("public_history")
+> kaggle_task\quarto_two_model_match.py:219:    result = public_replay.get("result")
+  kaggle_task\quarto_two_model_match.py:220:    if not isinstance(board, (list, tuple)) or len(board) != 16:
+  kaggle_task\quarto_two_model_match.py:221:        return False
+  kaggle_task\quarto_two_model_match.py:222:    if not isinstance(history, (list, tuple)):
+  kaggle_task\quarto_two_model_match.py:223:        return False
+  kaggle_task\quarto_two_model_match.py:224:    if (
+  kaggle_task\quarto_two_model_match.py:225:        result is None
+  kaggle_task\quarto_two_model_match.py:226:        or not _is_valid_terminal_result(result)
+  kaggle_task\quarto_two_model_match.py:227:        or result["mode"] != mode
+  kaggle_task\quarto_two_model_match.py:228:    ):
+  kaggle_task\quarto_two_model_match.py:229:        return False
+  kaggle_task\quarto_two_model_match.py:230:    board_entities = [entity_id for entity_id in board if entity_id is not None]
+  kaggle_task\quarto_two_model_match.py:231:    if any(not _is_opaque_entity_id(entity_id) for entity_id in board_entities):
+  kaggle_task\quarto_two_model_match.py:232:        return False
+  kaggle_task\quarto_two_model_match.py:233:    if len(board_entities) != len(set(board_entities)):
+  kaggle_task\quarto_two_model_match.py:234:        return False
+  kaggle_task\quarto_two_model_match.py:235:
+  kaggle_task\quarto_two_model_match.py:236:    reconstructed_board: list[str | None] = [None] * 16
+> kaggle_task\quarto_two_model_match.py:237:    active_player = public_replay["starting_player"]
+  kaggle_task\quarto_two_model_match.py:238:    selected_entity: str | None = None
+  kaggle_task\quarto_two_model_match.py:239:    expected_placer: str | None = None
+  kaggle_task\quarto_two_model_match.py:240:    used_entities: set[str] = set()
+  kaggle_task\quarto_two_model_match.py:241:    for action in history:
+  kaggle_task\quarto_two_model_match.py:242:        if not isinstance(action, Mapping):
+  kaggle_task\quarto_two_model_match.py:243:            return False
+  kaggle_task\quarto_two_model_match.py:244:        if action.get("kind") == "select_entity":
+  kaggle_task\quarto_two_model_match.py:245:            if set(action) != {"kind", "player", "entity_id"}:
+  kaggle_task\quarto_two_model_match.py:246:                return False
+  kaggle_task\quarto_two_model_match.py:247:            entity_id = action.get("entity_id")
+  kaggle_task\quarto_two_model_match.py:248:            player = action.get("player")
+  kaggle_task\quarto_two_model_match.py:249:            if (
+  kaggle_task\quarto_two_model_match.py:250:                selected_entity is not None
+  kaggle_task\quarto_two_model_match.py:251:                or player != active_player
+  kaggle_task\quarto_two_model_match.py:252:                or not _is_opaque_entity_id(entity_id)
+  kaggle_task\quarto_two_model_match.py:253:                or entity_id in used_entities
+  kaggle_task\quarto_two_model_match.py:254:            ):
+  kaggle_task\quarto_two_model_match.py:255:                return False
+  kaggle_task\quarto_two_model_match.py:623:        and _is_valid_terminal_result(terminal_result)
+  kaggle_task\quarto_two_model_match.py:624:    )
+  kaggle_task\quarto_two_model_match.py:625:    assert match_passed, (
+  kaggle_task\quarto_two_model_match.py:626:        "Quarto match did not finish with a valid terminal result, audit, and replay."
+  kaggle_task\quarto_two_model_match.py:627:    )
+> kaggle_task\quarto_two_model_match.py:628:    public_replay = _project_public_replay(public_audit)
+> kaggle_task\quarto_two_model_match.py:629:    public_replay_valid = _validate_public_replay(public_replay)
+> kaggle_task\quarto_two_model_match.py:630:    assert public_replay_valid, "Quarto public replay failed validation."
+  kaggle_task\quarto_two_model_match.py:631:
+  kaggle_task\quarto_two_model_match.py:632:    return {
+  kaggle_task\quarto_two_model_match.py:633:        "status": "passed",
+  kaggle_task\quarto_two_model_match.py:634:        "passed": True,
+  kaggle_task\quarto_two_model_match.py:635:        "source_snapshot": str(source_root),
+  kaggle_task\quarto_two_model_match.py:636:        "task_source_integrity": task_source_integrity,
+  kaggle_task\quarto_two_model_match.py:637:        "timeout": {
+  kaggle_task\quarto_two_model_match.py:638:            "match_wall_clock_seconds": 900.0,
+  kaggle_task\quarto_two_model_match.py:639:            "provider_call_interruptible": False,
+  kaggle_task\quarto_two_model_match.py:640:            "limitation": (
+  kaggle_task\quarto_two_model_match.py:641:                "The Kaggle adapter's timeout is not forwarded to llm.prompt(); "
+  kaggle_task\quarto_two_model_match.py:642:                "a blocking provider call may outlive the Runner deadline."
+  kaggle_task\quarto_two_model_match.py:643:            ),
+  kaggle_task\quarto_two_model_match.py:644:        },
+  kaggle_task\quarto_two_model_match.py:645:        "model_metadata": model_metadata,
+  kaggle_task\quarto_two_model_match.py:646:        "match": {
+  kaggle_task\quarto_two_model_match.py:647:            "match_id": result.match_id,
+  kaggle_task\quarto_two_model_match.py:648:            "instance_id": instance.instance_id,
+  kaggle_task\quarto_two_model_match.py:657:            ),
+  kaggle_task\quarto_two_model_match.py:658:            "action_count": result.action_count,
+  kaggle_task\quarto_two_model_match.py:659:            "duration_seconds": round(result.elapsed_seconds, 3),
+  kaggle_task\quarto_two_model_match.py:660:            "audit_valid": result.audit_valid,
+  kaggle_task\quarto_two_model_match.py:661:            "replay_valid": result.replay_valid,
+> kaggle_task\quarto_two_model_match.py:662:            "public_replay_valid": public_replay_valid,
+  kaggle_task\quarto_two_model_match.py:663:            "failure": result.failure,
+  kaggle_task\quarto_two_model_match.py:664:        },
+> kaggle_task\quarto_two_model_match.py:665:        "public_replay": public_replay,
+  kaggle_task\quarto_two_model_match.py:666:        "private_trace_storage": {
+  kaggle_task\quarto_two_model_match.py:667:            "status": "not_emitted",
+  kaggle_task\quarto_two_model_match.py:668:            "reason": (
+  kaggle_task\quarto_two_model_match.py:669:                "Kaggle Task result and Notebook outputs have no verified "
+  kaggle_task\quarto_two_model_match.py:670:                "field-level privacy boundary; secure storage requires a "
+  kaggle_task\quarto_two_model_match.py:671:                "separate access-controlled design."
+  kaggle_task\quarto_two_model_match.py:672:            ),
+  kaggle_task\quarto_two_model_match.py:673:        },
+  kaggle_task\quarto_two_model_match.py:674:        "evaluator": {
+  kaggle_task\quarto_two_model_match.py:675:            "status": "not_run",
+  kaggle_task\quarto_two_model_match.py:676:            "reason": (
+  kaggle_task\quarto_two_model_match.py:677:                "No match-specific human-gold annotations are included in this "
+  kaggle_task\quarto_two_model_match.py:678:                "source snapshot."
+  kaggle_task\quarto_two_model_match.py:679:            ),
+  kaggle_task\quarto_two_model_match.py:680:        },
+  kaggle_task\quarto_two_model_match.py:681:    }
+  kaggle_task\quarto_two_model_match.py:682:
+  kaggle_task\quarto_two_model_match.py:683:
+
+
+
+
+==========================================================================================
+PRIVACY CHECK
+==========================================================================================
+
+  tournament_harness.py:1094:        instance_id="qm9_pilot_hf_ring_db_0001",
+  tournament_harness.py:1095:    )
+  tournament_harness.py:1096:    return selected_adapter, instance
+  tournament_harness.py:1097:
+  tournament_harness.py:1098:
+> tournament_harness.py:1099:def recursive_privacy_check(
+  tournament_harness.py:1100:    value: Any,
+  tournament_harness.py:1101:    *,
+  tournament_harness.py:1102:    forbidden_values: Sequence[str] = (),
+  tournament_harness.py:1103:) -> list[str]:
+  tournament_harness.py:1104:    findings: list[str] = []
+  tournament_harness.py:1105:    forbidden = set(forbidden_values)
+  tournament_harness.py:1106:
+  tournament_harness.py:1107:    def contains_token(text: str, secret: str) -> bool:
+  tournament_harness.py:1108:        if (
+  tournament_harness.py:1109:            len(text) == 32
+  tournament_harness.py:1110:            and all(character in "0123456789abcdef" for character in text)
+  tournament_harness.py:1111:        ):
+  tournament_harness.py:1112:            return False
+  tournament_harness.py:1113:        offset = 0
+  tournament_harness.py:1114:        while True:
+  tournament_harness.py:1145:
+  tournament_harness.py:1146:    visit(value)
+  tournament_harness.py:1147:    return findings
+  tournament_harness.py:1148:
+  tournament_harness.py:1149:
+> tournament_harness.py:1150:def run_security_audit() -> dict[str, Any]:
+  tournament_harness.py:1151:    from phase0_foundation import SyntheticAdapter
+  tournament_harness.py:1152:
+  tournament_harness.py:1153:    adapter = SyntheticAdapter()
+  tournament_harness.py:1154:    instance = adapter.build_instance()
+  tournament_harness.py:1155:    controller = Phase0Controller(adapter, mode="classic", instance=instance)
+  tournament_harness.py:1156:    public_observation = controller.public_observation("player_1")
+  tournament_harness.py:1157:    p1_private = controller.private_observation("player_1")
+  tournament_harness.py:1158:    p2_private = controller.private_observation("player_2")
+  tournament_harness.py:1159:    agent = AgentAdapter(_NoopClient())
+  tournament_harness.py:1160:    p1_messages = agent.build_messages(public_observation, p1_private)
+  tournament_harness.py:1161:    p2_messages = agent.build_messages(public_observation, p2_private)
+  tournament_harness.py:1162:    p1_owned = p1_private["private"]["owned_features"]
+  tournament_harness.py:1163:    p2_owned = p2_private["private"]["owned_features"]
+  tournament_harness.py:1164:    p1_prompt = json.loads(p1_messages[1]["content"])
+  tournament_harness.py:1165:    p2_prompt = json.loads(p2_messages[1]["content"])
+  tournament_harness.py:1169:        {
+  tournament_harness.py:1170:            "check": "public_observation_excludes_internal_state",
+  tournament_harness.py:1171:            "passed": not recursive_privacy_check(public_observation),
+  tournament_harness.py:1172:        },
+  tournament_harness.py:1173:        {
+> tournament_harness.py:1174:            "check": "player_1_prompt_excludes_player_2_private_features",
+  tournament_harness.py:1175:            "passed": p1_prompt_features == p1_owned and not set(p1_prompt_features) & set(p2_owned),
+  tournament_harness.py:1176:        },
+  tournament_harness.py:1177:        {
+> tournament_harness.py:1178:            "check": "player_2_prompt_excludes_player_1_private_features",
+  tournament_harness.py:1179:            "passed": p2_prompt_features == p2_owned and not set(p2_prompt_features) & set(p1_owned),
+  tournament_harness.py:1180:        },
+  tournament_harness.py:1181:        {
+  tournament_harness.py:1182:            "check": "private_observations_exclude_internal_state",
+  tournament_harness.py:1183:            "passed": not recursive_privacy_check(p1_private, forbidden_values=p2_owned)
+  tournament_harness.py:1184:            and not recursive_privacy_check(p2_private, forbidden_values=p1_owned),
+  tournament_harness.py:1185:        },
+  tournament_harness.py:1186:        {
+  tournament_harness.py:1187:            "check": "no_tools_or_external_url_channel_in_protocol",
+  tournament_harness.py:1188:            "passed": (
+  tournament_harness.py:1189:                "no tools" in PROTOCOL_TEXT.lower()
+  tournament_harness.py:1190:                and "https://" not in PROTOCOL_TEXT.lower()
+  tournament_harness.py:1191:                and [message["role"] for message in p1_messages] == ["system", "user"]
+  tournament_harness.py:1192:            ),
+  tournament_harness.py:1193:        },
+
+
+

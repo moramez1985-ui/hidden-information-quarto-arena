@@ -1,0 +1,766 @@
+{
+  "architecture_and_privacy": {
+    "chat_contexts": "Each llm.prompt call is wrapped in a fresh kbench.chats.new(..., orphan=True) context; no cross-player conversation history is shared.",
+    "correction_attempts": 0,
+    "engine_or_core_changes": "No Quarto Engine rules or state transitions changed. Phase 0 accepts an optional restricted source-ID mapping and exposes its public-UUID crosswalk only through restricted evaluator data; public observations and audit schemas remain unchanged.",
+    "observation_boundary": "AgentAdapter validates exact nested public/requester-private observation schemas, requires the private requester marker to match public current_player and the embedded public state, then serializes a fixed allowlisted public projection plus the acting player's private payload. Public match entities use opaque, per-match UUIDv4 identifiers with piece-independent presentation order.",
+    "public_result": "Task output uses an explicit public replay schema version 1 projection: match_id, mode, starting_player, board, public_history, and result. Restricted evaluator data, engine mappings, legal-action metadata, and Decision Traces are omitted.",
+    "restricted_output": "Public Task output uses the allowlisted replay projection only. The source-ID/public-UUID crosswalk is stored only in restricted evaluator data and is never returned with the public result.",
+    "runner_injection": "The Task resolves exact Gemini and Claude model identities and injects those identity strings as TournamentRunner tags; deterministic fake agents are used only by local offline tests."
+  },
+  "attribution_notice": {
+    "file": "ATTRIBUTION.md",
+    "status": "CONDITIONALLY CONFIRMED",
+    "fma_archive_included": false,
+    "scope_caveat": "The upstream README states that FMA metadata is CC BY 4.0, but the audit does not conclusively resolve coverage of all audio-derived feature vectors, the research-purpose wording, or third-party and jurisdiction-specific rights. This notice is not legal approval."
+  },
+  "archive_members": [
+    {
+      "path": "domain_adapters/__init__.py",
+      "size_bytes": 718,
+      "sha256": "31275eb56f44e9e2e57e8914d17be00b9a7ae9c1a251458ba462d0d083bb5e7d"
+    },
+    {
+      "path": "domain_adapters/instance_builder.py",
+      "size_bytes": 29475,
+      "sha256": "c8129959a976bb30195e4c791c4ba2e1bf3525581a574dd96e127dfee76efaed"
+    },
+    {
+      "path": "domain_adapters/dataset_adapter.py",
+      "size_bytes": 18241,
+      "sha256": "39d7dd05ee21cbb06f698828807aca7c4986e5bcd3c1806f8f836219a27dabc5"
+    },
+    {
+      "path": "domain_adapters/fma_adapter.py",
+      "size_bytes": 25166,
+      "sha256": "f1020bfb0bacc0524f24617f2e69a7a45d8865d5119c405b2e8c8d7d7d76eff4"
+    },
+    {
+      "path": "domain_adapters/qm9_adapter.py",
+      "size_bytes": 10723,
+      "sha256": "5d844155e09a0964e5b1649e5fb624569c051654bacb897848377fbe1375d7f2"
+    }
+  ],
+  "created_at_utc": "2026-11-12T10:23:32.856744+00:00",
+  "excluded": {
+    "datasets_and_local_data": "The FMA archive and unrelated local data, reports, notebooks, experiment outputs, credentials, and caches are not copied. The fixed candidate JSON contains only the approved IDs, quartet, thresholds, and validation provenance. ATTRIBUTION.md accompanies the source package.",
+    "evaluator": "Not imported or needed because no match-specific gold annotations are provided.",
+    "kaggle_upload_metadata": "Kaggle dataset-metadata.json was not created because it requires the owner slug and license choice; supply it separately when preparing an upload.",
+    "reports_and_credentials": "No reports, .env files, credentials, caches, virtual environments, or temporary outputs copied.",
+    "tests": "Not needed at runtime; retained in repository only."
+  },
+  "included_files": [
+    {
+      "path": "ATTRIBUTION.md",
+      "size_bytes": 3399,
+      "sha256": "9297a2b92fb7a1a48c809451dd6d9f482f58b58f08d610ab6c68eb4238c3e6d8"
+    },
+    {
+      "path": "decision_trace.py",
+      "size_bytes": 10669,
+      "sha256": "7e6bb47f1bdfb51e9242fcdd029c06364094e083770bfdf0aff4a86ea07f18ad"
+    },
+    {
+      "path": "domain_adapters.zip",
+      "size_bytes": 18545,
+      "sha256": "57968451289cca21176509f40d0b71da53b54dd6bcabb1d00941c5ad6f2282c6"
+    },
+    {
+      "path": "fma_pilot.py",
+      "size_bytes": 8599,
+      "sha256": "4cb2741a85e5d94247f3f17cbd5b103d11a37e053c4f30e64897e53176604f1b"
+    },
+    {
+      "path": "fma_pilot_instance.json",
+      "size_bytes": 1542,
+      "sha256": "4acb26e5937c86d35dd7f0f0b805c4a0f0790d1bec06f27a0fae730dad410fbd"
+    },
+    {
+      "path": "kaggle_agent_adapter.py",
+      "size_bytes": 2232,
+      "sha256": "693d14df4ba5d0dc2ef1ddf2a8cfd51492f7c4d9bf4c75ef39f00777427d04c4"
+    },
+    {
+      "path": "phase0_foundation.py",
+      "size_bytes": 80992,
+      "sha256": "5b90c396eef12dfe0a0d5f6097fda7d927819b6649d6e5fbcae710c6004779d8"
+    },
+    {
+      "path": "quarto_engine.py",
+      "size_bytes": 23443,
+      "sha256": "35594c80861b88586d97dc7e53114fd6d6bbd5144691f72f091633754fc597c1"
+    },
+    {
+      "path": "quarto_two_model_match.py",
+      "size_bytes": 37858,
+      "sha256": "34f0488485514e45eecee2d96d295ce056c6667ed88ff1f38856907a0a65716e"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 93,
+      "sha256": "be2ca1cce45c001d74ee2cb6080f1a8cfb9ef17c602bcb3a7095bc29f81dd438"
+    },
+    {
+      "path": "tournament_harness.py",
+      "size_bytes": 90571,
+      "sha256": "c6541d205237147c44532deaca9d0e063c1fb18e824a7c5be607ff9bda512f2e"
+    }
+  ],
+  "integrity": {
+    "archive_member_count": 5,
+    "manifest_and_checksum_sidecar": "manifest.json and manifest.sha256 are integrity metadata and intentionally excluded from included_files; manifest.sha256 contains the SHA-256 of manifest.json.",
+    "payload_file_count": 11,
+    "staging_content": "Reviewed runtime source, adapter package, fixed candidate definition, and FMA attribution notice are included. The FMA metadata archive is excluded and must be mounted separately after rights review."
+  },
+  "manifest_version": 1,
+  "models": {
+    "identity_sources": [
+      "https://github.com/Kaggle/kaggle-benchmarks/blob/5ffefc57696e26b172fc3626392731ebecbb1195/documentation/examples/quick_start_examples.py",
+      "https://github.com/Kaggle/kaggle-benchmarks/blob/5ffefc57696e26b172fc3626392731ebecbb1195/tests/test_openai_client.py"
+    ],
+    "model_version": "Not fabricated; upstream ModelProxy handle exposes model/name but no model_version in inspected implementation. Runtime metadata is copied only if present.",
+    "player_1": {
+      "required_model_identity": "google/gemini-3.8-flash",
+      "source": "Task-injected llm"
+    },
+    "player_2": {
+      "registry": "kbench.llms",
+      "required_exact_registry_key": "anthropic/claude-sonnet-4-6@default",
+      "required_model_identity": "anthropic/claude-sonnet-4-6@default",
+      "runtime_requirement": "Exactly one key match and exactly one registry handle with this model identity; otherwise fail before match inference."
+    }
+  },
+  "original_git_status": {
+    "captured_before_task_created_paths_were_added": true,
+    "deleted_files": [],
+    "modified_tracked_files": [
+      "README.md",
+      "quarto_engine.py",
+      "tests/test_quarto_engine.py"
+    ],
+    "quarto_engine.py": "Modified tracked file before this task; retained verbatim in snapshot.",
+    "records": [
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-collections-post-response.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-collections-pre-request.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-folder-post-response.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-folder-pre-request.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-http-request-post-response.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".github/instructions/postman-http-request-pre-request.instructions.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": ".vscode/settings.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": " ",
+        "path": "README.md",
+        "worktree_status": "M"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata.zip",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/README.txt",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/checksums",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/echonest.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/features.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/genres.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/not_found.pickle",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/raw_albums.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/raw_artists.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/raw_echonest.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/raw_genres.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/raw_tracks.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/fma_metadata/fma_metadata/tracks.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/pubchem_periodic_table_2026-11-08.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "data/pubchem_periodic_table_2026-11-08.metadata.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "decision_trace.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "deepseek_placement_test.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "deepseek_rule_test.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "deepseek_selection_test.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "docs/evaluation_protocol.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "docs/evaluator_v0_1.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/__init__.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/__main__.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/adapters.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/annotations.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/metrics.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/report.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "evaluator/semantic_judge.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/pilot_tournament/README.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/pilot_tournament/public_report.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/pilot_tournament/restricted_match_log.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/pilot_tournament/security_report.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/.ipython/profile_default/history.sqlite",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/.ipython/profile_default/startup/README",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/.mplconfig/fontlist-v3.11.0.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/REPORT.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/dataset_provenance.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/dsgdb9nsd.xyz.tar.bz2",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/entity_manifest.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/feature_matrix.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/feature_registry.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/global_feasibility_report.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/global_feasibility_results.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/playable_candidate_features.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/preprocessing_config.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/qm9_experiment.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/qm9_hidden_quarto_experiment.ipynb",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/random_sampling_probability_audit.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/random_sampling_probability_audit.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/results.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "experiments/qm9_quarto/validation_report.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "hidden_quarto_benchmark.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "kaggle_agent_adapter.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "notebooks/quarto_hidden_information_v1.ipynb",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "out.txt",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": " ",
+        "path": "quarto_engine.py",
+        "worktree_status": "M"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/fma_feasibility_seed11_20261109_203057_634004.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/fma_feasibility_seed11_20261109_204633_336807.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/fma_first_accepted_instance_inspection.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/fma_holdout_seed23_20261109.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/fma_holdout_seed23_20261109.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/qm9_alternative_selection_seed11_20261109_190753.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/diagnostics/qm9_structural_diversity_seed11_20261109_191302_498132.jsonl",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/evaluations/jev/jev_playground_poc_report_20261110.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/evaluations/jev/raw_outputs/jev_c5_latest_20261110.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/evaluations/jev/reproduction/README.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/discovery_summary.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/kaggle_cli_capability_report_20261110.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/model_variations.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/model_variations_raw.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/models_catalog.csv",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_discovery/models_catalog_raw.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "reports/kaggle_model_discovery_feasibility_20261110.md",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/fixtures/evaluator_v0_1/gold_annotations.json",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_decision_trace.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_evaluator.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_hidden_quarto_benchmark.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_kaggle_agent_adapter.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_phase1_qm9_adapter.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": " ",
+        "path": "tests/test_quarto_engine.py",
+        "worktree_status": "M"
+      },
+      {
+        "index_status": "?",
+        "path": "tests/test_tournament_harness.py",
+        "worktree_status": "?"
+      },
+      {
+        "index_status": "?",
+        "path": "tournament_harness.py",
+        "worktree_status": "?"
+      }
+    ],
+    "staged_files": [],
+    "untracked_files": [
+      ".github/instructions/postman-collections-post-response.instructions.md",
+      ".github/instructions/postman-collections-pre-request.instructions.md",
+      ".github/instructions/postman-folder-post-response.instructions.md",
+      ".github/instructions/postman-folder-pre-request.instructions.md",
+      ".github/instructions/postman-http-request-post-response.instructions.md",
+      ".github/instructions/postman-http-request-pre-request.instructions.md",
+      ".vscode/settings.json",
+      "data/fma_metadata.zip",
+      "data/fma_metadata/fma_metadata/README.txt",
+      "data/fma_metadata/fma_metadata/checksums",
+      "data/fma_metadata/fma_metadata/echonest.csv",
+      "data/fma_metadata/fma_metadata/features.csv",
+      "data/fma_metadata/fma_metadata/genres.csv",
+      "data/fma_metadata/fma_metadata/not_found.pickle",
+      "data/fma_metadata/fma_metadata/raw_albums.csv",
+      "data/fma_metadata/fma_metadata/raw_artists.csv",
+      "data/fma_metadata/fma_metadata/raw_echonest.csv",
+      "data/fma_metadata/fma_metadata/raw_genres.csv",
+      "data/fma_metadata/fma_metadata/raw_tracks.csv",
+      "data/fma_metadata/fma_metadata/tracks.csv",
+      "data/pubchem_periodic_table_2026-11-08.csv",
+      "data/pubchem_periodic_table_2026-11-08.metadata.json",
+      "decision_trace.py",
+      "deepseek_placement_test.jsonl",
+      "deepseek_rule_test.jsonl",
+      "deepseek_selection_test.jsonl",
+      "docs/evaluation_protocol.md",
+      "docs/evaluator_v0_1.md",
+      "evaluator/__init__.py",
+      "evaluator/__main__.py",
+      "evaluator/adapters.py",
+      "evaluator/annotations.py",
+      "evaluator/metrics.py",
+      "evaluator/report.py",
+      "evaluator/semantic_judge.py",
+      "experiments/pilot_tournament/README.md",
+      "experiments/pilot_tournament/public_report.json",
+      "experiments/pilot_tournament/restricted_match_log.json",
+      "experiments/pilot_tournament/security_report.json",
+      "experiments/qm9_quarto/.ipython/profile_default/history.sqlite",
+      "experiments/qm9_quarto/.ipython/profile_default/startup/README",
+      "experiments/qm9_quarto/.mplconfig/fontlist-v3.11.0.json",
+      "experiments/qm9_quarto/REPORT.md",
+      "experiments/qm9_quarto/dataset_provenance.json",
+      "experiments/qm9_quarto/dsgdb9nsd.xyz.tar.bz2",
+      "experiments/qm9_quarto/entity_manifest.csv",
+      "experiments/qm9_quarto/feature_matrix.csv",
+      "experiments/qm9_quarto/feature_registry.csv",
+      "experiments/qm9_quarto/global_feasibility_report.md",
+      "experiments/qm9_quarto/global_feasibility_results.json",
+      "experiments/qm9_quarto/playable_candidate_features.json",
+      "experiments/qm9_quarto/preprocessing_config.json",
+      "experiments/qm9_quarto/qm9_experiment.py",
+      "experiments/qm9_quarto/qm9_hidden_quarto_experiment.ipynb",
+      "experiments/qm9_quarto/random_sampling_probability_audit.json",
+      "experiments/qm9_quarto/random_sampling_probability_audit.md",
+      "experiments/qm9_quarto/results.json",
+      "experiments/qm9_quarto/validation_report.json",
+      "hidden_quarto_benchmark.py",
+      "kaggle_agent_adapter.py",
+      "notebooks/quarto_hidden_information_v1.ipynb",
+      "out.txt",
+      "reports/diagnostics/fma_feasibility_seed11_20261109_203057_634004.jsonl",
+      "reports/diagnostics/fma_feasibility_seed11_20261109_204633_336807.jsonl",
+      "reports/diagnostics/fma_first_accepted_instance_inspection.md",
+      "reports/diagnostics/fma_holdout_seed23_20261109.jsonl",
+      "reports/diagnostics/fma_holdout_seed23_20261109.md",
+      "reports/diagnostics/qm9_alternative_selection_seed11_20261109_190753.jsonl",
+      "reports/diagnostics/qm9_structural_diversity_seed11_20261109_191302_498132.jsonl",
+      "reports/evaluations/jev/jev_playground_poc_report_20261110.md",
+      "reports/evaluations/jev/raw_outputs/jev_c5_latest_20261110.json",
+      "reports/evaluations/jev/reproduction/README.md",
+      "reports/kaggle_discovery/discovery_summary.json",
+      "reports/kaggle_discovery/kaggle_cli_capability_report_20261110.md",
+      "reports/kaggle_discovery/model_variations.csv",
+      "reports/kaggle_discovery/model_variations_raw.json",
+      "reports/kaggle_discovery/models_catalog.csv",
+      "reports/kaggle_discovery/models_catalog_raw.json",
+      "reports/kaggle_model_discovery_feasibility_20261110.md",
+      "tests/fixtures/evaluator_v0_1/gold_annotations.json",
+      "tests/test_decision_trace.py",
+      "tests/test_evaluator.py",
+      "tests/test_hidden_quarto_benchmark.py",
+      "tests/test_kaggle_agent_adapter.py",
+      "tests/test_phase1_qm9_adapter.py",
+      "tests/test_tournament_harness.py",
+      "tournament_harness.py"
+    ]
+  },
+  "refreshed_at_utc": "2026-11-14T12:20:49+00:00",
+  "runtime": {
+    "evaluator": "Not invoked: no match-specific human-gold annotations are included. Evaluator modules are therefore not part of this Task runtime closure.",
+    "fma_input_gate": "Task execution requires QUARTO_FMA_ARCHIVE_PATH to name a mounted archive whose SHA-256 matches the pinned pilot archive and QUARTO_FMA_LICENSE_APPROVED=1 only after an operator confirms applicable rights for the intended use. The audit is CONDITIONALLY CONFIRMED, not legal approval; audio-derived feature scope and other rights remain unresolved. No archive is bundled.",
+    "kaggle_sdk": {
+      "declared_dependencies": [
+        "openai>=1.66",
+        "pandas",
+        "tqdm",
+        "python-dotenv>=1.0.1",
+        "protobuf>=5.29.3,<6.0",
+        "jupyter",
+        "docker>=7.1.0",
+        "panel>=1.6.3",
+        "playwright>=1.50.0",
+        "nest-asyncio>=1.6.0",
+        "hishel[httpx]>1.1.8",
+        "pydantic>=2.11.5",
+        "joblib",
+        "google-genai>=1.38.0",
+        "certifi>=2026.10.23"
+      ],
+      "distribution": "kaggle_benchmarks",
+      "local_installation": "Not installed; no packages were installed during this task.",
+      "project_metadata_source": "https://github.com/Kaggle/kaggle-benchmarks/blob/5ffefc57696e26b172fc3626392731ebecbb1195/pyproject.toml",
+      "resolution_note": "These are upstream declared ranges, not locally resolved package versions. The Kaggle-hosted Task runtime must supply the SDK and its dependencies.",
+      "version": "0.6.2",
+      "version_source": "https://github.com/Kaggle/kaggle-benchmarks/blob/5ffefc57696e26b172fc3626392731ebecbb1195/src/kaggle_benchmarks/__init__.py"
+    },
+    "kaggle_task_minimum_python": ">=3.11, as declared by the inspected upstream Kaggle Benchmarks SDK pyproject.toml.",
+    "local_python": "3.14.0",
+    "project_python_requirement": "No Python minimum is declared in this repository.",
+    "quarto_source_dependencies": "Python standard library plus the hosted Kaggle Benchmarks SDK. The FMA metadata archive is a separately mounted runtime input and is not included in the source snapshot.",
+    "source_integrity_notebook_limit": "The staged Python source and snapshot payload are hash-verified. If execution cannot identify a matching .py source file, the Task fails closed before preflight or prompts. This does not independently bind the actual Kaggle-executed Notebook to the reviewed source; external source attestation remains required.",
+    "source_package_transport": "domain_adapters.zip contains the package under its domain_adapters/ path and is added to sys.path; this avoids Kaggle CLI directory-skip behavior. Task disables bytecode writes before importing staged modules so the mounted snapshot remains immutable and hash-verifiable.",
+    "task_result_privacy": "KaggleClient persists the complete Run result as a dictionary result and exposes no per-field privacy labeling in the inspected SDK; private traces are not returned.",
+    "timeout_limitation": "TournamentRunner wall-clock deadline is 900 seconds. Responses returned after the local deadline are rejected before action submission, but _KagglePromptClient.chat timeout is not forwarded to llm.prompt(); a blocking provider call may overrun the deadline until it returns."
+  },
+  "snapshot_id": "quarto-two-model-source-v1",
+  "source_repository": {
+    "branch": "main",
+    "head": "fc7e5d355162c81c267eb3d02462539bc2283113",
+    "identifier": "Local checkout; no Git remote configured",
+    "local_path_at_creation": "D:\\CODES\\quarto",
+    "origin_remote": null
+  },
+  "task_entrypoint": {
+    "decorator": "@kbench.task(name=\"Quarto Two-Model Match\")",
+    "fma_archive_environment_variable": "QUARTO_FMA_ARCHIVE_PATH",
+    "fma_license_acknowledgment_environment_variable": "QUARTO_FMA_LICENSE_APPROVED",
+    "invocation": "run_quarto_two_model_match.run(llm=kbench.llm), with an outer assertion on Run.passed.",
+    "optional_source_root_environment_variable": "QUARTO_SOURCE_SNAPSHOT_ROOT",
+    "repository_path": "kaggle_task/quarto_two_model_match.py",
+    "required_dataset_mount": "/kaggle/input/quarto-two-model-source-v1",
+    "required_model_identities": [
+      "google/gemini-3.8-flash",
+      "anthropic/claude-sonnet-4-6@default"
+    ],
+    "result_type": "The un-deferred dict return annotation is inferred by Kaggle Benchmarks as results.Dictionary.",
+    "snapshot_path": "quarto_two_model_match.py"
+  },
+  "unresolved_runtime_assumptions": [
+    "The Task runtime must mount the versioned source Dataset at /kaggle/input/quarto-two-model-source-v1 or set QUARTO_SOURCE_SNAPSHOT_ROOT.",
+    "The FMA archive must be separately mounted and QUARTO_FMA_ARCHIVE_PATH set; the archive is not bundled.",
+    "QUARTO_FMA_LICENSE_APPROVED=1 is an explicit operator acknowledgment and must only be set after confirming applicable rights for the intended use; this repository audit is conditional and does not provide legal approval.",
+    "Availability of the exact Claude registry entry and the selected Gemini model identity is checked only at Task runtime; no live Kaggle registry was queried.",
+    "The hosted Kaggle Benchmarks runtime and Task-version access controls have not been independently queried.",
+    "Late provider responses are rejected locally, but calls through llm.prompt() are not interrupted by the Runner timeout; private Decision Traces are not emitted."
+  ],
+  "validation": {
+    "focused_regression_tests": "Passed locally for this remediation with python -B -m unittest discover: test_tournament_harness.py 33; test_fma_pilot.py 5; test_kaggle_agent_adapter.py 20; test_quarto_two_model_task.py 14. These are offline tests only; no Kaggle Task or live model was executed.",
+    "kaggle_cli_conversion": "Not rerun after the pilot implementation. No Kaggle upload, Task publication, or hosted execution was performed.",
+    "local_fma_pilot_fake_matches": "passed; python -B -m unittest discover -s tests -p test_fma_pilot.py: 5 tests passed. The pinned archive produced the approved candidate with id_level_count=2 and structural_count=2; preflight scanned all five phases through public projection and prompt construction, including win/draw replay checks; two offline fake-agent matches passed audit/replay with both starting seats and distinct per-match public UUIDs.",
+    "offline_task_fake_model_smoke": "passed; python -B -m unittest discover -s tests -p test_quarto_two_model_task.py: 14 tests passed. The staged source snapshot and manifest were validated; fake SDK/model handles ran a local match using the real FMA adapter and approved fixed candidate. A matching Python source file is required; unverifiable Notebook execution, missing license acknowledgment, and missing archive fail before prompts. No live inference.",
+    "raw_feature_signatures": "Independently re-read all 16 selected rows from the pinned archive and recomputed signatures in feature-bit order; they match the retained seed-11 candidate row exactly and cover 0 through 15.",
+    "real_kaggle_inference": "not run; prohibited for this implementation task",
+    "registry_ambiguity_guard": "passed; duplicate identity rejected before any fake prompt invocation.",
+    "relevant_unit_tests": "33 TournamentRunner/security tests, 20 Kaggle adapter tests, 5 FMA pilot tests, and 14 Task tests passed for this remediation.",
+    "snapshot_syntax_import_completeness": "passed through the final offline Kaggle Task regression suite; source manifest checksum, every payload hash, all adapter archive member hashes, Task source parity, and staged source-root resolution were exercised. Kaggle SDK itself is not installed locally.",
+    "source_archive_hash": "The mounted local archive matched the pinned SHA-256; it was not copied into staging."
+  }
+}

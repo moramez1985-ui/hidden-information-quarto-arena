@@ -1,0 +1,180 @@
+PRE-PUBLICATION RIGHTS & LICENSE AUDIT
+
+Dataset slug: quarto-two-model-source-v1
+Dataset title: Quarto Two-Model Match Source v1
+Intended visibility: Private
+Intended license for Quarto-owned software: Apache-2.0
+Audit scope: Exact payload in kaggle_dataset_staging/quarto-two-model-source-v1/
+
+FINAL VERDICT: BLOCKED — RIGHTS VERIFICATION REQUIRED
+
+Reason: The payload includes selected FMA metadata-derived feature identifiers
+and numeric thresholds in domain_adapters.zip. The upstream FMA project says
+its metadata is CC BY 4.0, but the staged payload has no attribution/license
+notice identifying that material or the changes made to it. In addition, the
+staged payload has no Apache-2.0 license or copyright notice, and several
+included project files were untracked in the source checkout, so their
+authorship/rights chain cannot be independently established from local Git
+history. The owner's stated approval of Apache-2.0 for Quarto's own software
+is noted, but does not establish rights to third-party material or unknown
+contributors' work.
+
+This is a focused evidence report, not legal advice. It does not assert that a
+law has been violated or that publication has occurred.
+
+1. EXACT DATASET PAYLOAD
+
+The manifest lists eight payload files. manifest.json and manifest.sha256 are
+integrity metadata, not payload entries.
+
+- decision_trace.py
+- domain_adapters.zip
+- kaggle_agent_adapter.py
+- phase0_foundation.py
+- quarto_engine.py
+- quarto_two_model_match.py
+- requirements.txt
+- tournament_harness.py
+
+domain_adapters.zip contains exactly five Python modules:
+
+- domain_adapters/__init__.py
+- domain_adapters/dataset_adapter.py
+- domain_adapters/fma_adapter.py
+- domain_adapters/instance_builder.py
+- domain_adapters/qm9_adapter.py
+
+No datasets, audio, QM9 archive, feature matrices, reports, notebooks, UI
+assets, fonts, or model weights are in the manifest payload. The ZIP contains
+source code only. The manifest states that data, evaluator, tests, reports,
+credentials, and notebooks were excluded.
+
+Integrity findings: all eight payload hashes match manifest.json; the
+manifest.sha256 digest matches manifest.json; all five ZIP member hashes and
+member paths match the manifest and corresponding root source files. The
+staged Task file matches its manifest hash but differs from the current root
+kaggle_task/quarto_two_model_match.py; the root Task has since changed. The
+staged requirements.txt was created in the staging directory and has no root
+counterpart. These are provenance/parity observations, not license grants.
+
+2. THIRD-PARTY COMPONENT AND DEPENDENCY LICENSE TABLE
+
+Component / file | Classification and evidence | License | Redistribution assessment
+-----------------|--------------------------------|---------|----------------------------
+Quarto engine, controller, runner, trace, Kaggle adapter and Task source; all listed .py files except FMA-derived data noted below | Project code indicated by local source paths, project history/manifest, and no third-party code blocks or copyright headers found in the staged source scan. The manifest identifies decision_trace.py, kaggle_agent_adapter.py, tournament_harness.py and the Task as untracked at snapshot creation. The checkout has no Git remote. | Intended Apache-2.0 per owner instruction; no license identifier or copyright grant is present in the staged files. | Conditionally redistributable only for rights the project owner controls. Confirm authorship/assignment for untracked files and attach an actual Apache-2.0 grant; do not infer a grant solely from absent third-party notices.
+FMA-derived feature constants in domain_adapters.zip, domain_adapters/fma_adapter.py lines 44-62; FMA source references at lines 318 and 385 | Selected feature identifiers, source-column names, interpretations and thresholds are embedded. Adapter provenance says Free Music Archive metadata and links to github.com/mdeff/fma. The upstream FMA README states metadata is CC BY 4.0 and code is MIT. The FMA code itself was not found copied into the payload; the constants are data-derived content. | CC BY 4.0 for FMA metadata; the exact scope of that license over the derived thresholds is not resolved here. | CC BY 4.0 permits sharing/adaptation, including commercially, subject to attribution, license link and change indication. Those notices are missing from the payload. Do not blanket-license this material as Apache-2.0. Treat the derived constants' exact rights status as UNKNOWN — NEEDS VERIFICATION until attribution/coverage is confirmed.
+FMA upstream source code | Referenced as the adapter's source dataset; no FMA upstream code was identified in the ZIP during source inspection. | MIT, per upstream FMA LICENSE.txt and README. | No MIT redistribution obligations attach merely from referencing the project. If upstream code is later found to be copied, include its copyright and MIT license text.
+kaggle_benchmarks==0.6.2 in requirements.txt line 2 | Direct runtime dependency; requirements.txt says Kaggle supplies it in the hosted Task runtime. It is not bundled as source or a wheel. | Apache-2.0, verified in Kaggle's upstream LICENSE at commit 5ffefc57696e26b172fc3626392731ebecbb1195. The corresponding pyproject.toml declares the package/version sources and runtime requirements but does not set a project.license field. | Not redistributed in this Dataset payload; no SDK license copy is required here solely because the Task imports the package. Its upstream examples are references only and were not found bundled.
+Kaggle Benchmarks SDK dependency closure | Upstream pyproject declares openai, pandas, tqdm, python-dotenv, protobuf, jupyter, docker, panel, playwright, nest-asyncio, hishel[httpx], pydantic, joblib, google-genai and certifi. The manifest says these are supplied by the hosted runtime; no lockfile or resolved versions are included. | Per-package versions/licenses were not independently resolved. | Not bundled in the Dataset, so they are not components being redistributed here. A packaged runtime/container would need its own versioned license/NOTICE audit.
+Kaggle Model Proxy and named model providers | External hosted services/models invoked through the injected Kaggle SDK; no service implementation or model weights are in the payload. | Not applicable as redistributed software; service/provider terms govern usage. | No hosted API or provider assets are redistributed in this Dataset.
+
+Evidence sources:
+- Local staged requirements.txt line 2 and manifest.json runtime section.
+- Kaggle Benchmarks upstream LICENSE and pyproject.toml at commit
+  5ffefc57696e26b172fc3626392731ebecbb1195:
+  https://github.com/Kaggle/kaggle-benchmarks/tree/5ffefc57696e26b172fc3626392731ebecbb1195
+- FMA upstream README and LICENSE.txt:
+  https://github.com/mdeff/fma
+  The README states that FMA metadata is CC BY 4.0, the repository code is MIT,
+  and audio tracks carry their artists' licenses. The payload includes no
+  audio. CC BY 4.0 terms:
+  https://creativecommons.org/licenses/by/4.0/
+
+3. COPYRIGHT, ATTRIBUTION AND PROVENANCE FINDINGS
+
+- No root LICENSE, NOTICE, or COPYRIGHT file was found. None is in the staged
+  payload. The only tracked license-like file found elsewhere is for
+  jquery-ui, which is not part of this Dataset.
+- No SPDX, copyright, or license headers were found in the staged Python
+  source. The manifest records a local Git checkout with no configured remote.
+- The project owner has stated that Apache-2.0 is approved for Quarto's own
+  software. The audit cannot independently verify every contributor's
+  ownership or assignment, particularly for files identified as untracked by
+  the manifest.
+- Kaggle SDK example files are referenced by URL in manifest metadata, but are
+  not payload files. The staged Task and adapter use the SDK API; no copied
+  example block was identified by inspection. This was not a formal
+  similarity search.
+- The FMA adapter's source URL is useful provenance but is not a complete
+  attribution notice. The FMA upstream README names the dataset authors and
+  asks users to cite its paper. A compliant attribution should identify the
+  FMA metadata source, link CC BY 4.0, and indicate that feature selection and
+  thresholding were performed/changed.
+- The Task code and model identifiers refer to Kaggle and model providers;
+  that does not include their code, models or service assets in the Dataset.
+
+4. POTENTIAL REDISTRIBUTION CONFLICTS
+
+1. FMA metadata-derived constants have a separate CC BY 4.0 provenance.
+   The payload has a source URL but no clear attribution/license notice or
+   change statement. CC BY 4.0 permits redistribution when its conditions are
+   met; an Apache-only blanket designation would not remove those conditions.
+2. The staged payload contains no actual Apache-2.0 license/copyright notice.
+   The owner's approval is a relevant authorization statement, but must be
+   reflected in the Dataset's license metadata and/or included license file,
+   subject to confirming rights in all contributions.
+3. Untracked project source has no local Git history to establish authorship.
+   The manifest calls out the Task, decision trace, Kaggle adapter and
+   tournament harness as untracked at snapshot creation. Their status alone
+   does not establish third-party origin, but ownership remains
+   UNKNOWN — NEEDS VERIFICATION.
+4. No known incompatible third-party code or binary asset was found in the
+   payload. Source inspection is not proof of complete provenance or of the
+   absence of copied material.
+
+5. FILES THAT MAY BE DISTRIBUTED UNDER APACHE-2.0
+
+The Quarto-authored source files may be distributed under Apache-2.0 if the
+project owner controls all relevant rights and contributor provenance is
+confirmed. This conditional assessment applies to the Quarto code, not to
+FMA-derived metadata or the separately installed Kaggle SDK. The requirements
+line is a dependency declaration, not a redistribution of the SDK.
+
+The following are not cleared for an Apache-only designation based on current
+payload evidence:
+- domain_adapters.zip/domain_adapters/fma_adapter.py feature constants and
+  thresholds derived from FMA metadata: retain CC BY 4.0 attribution or
+  separately verify/exclude the derived material.
+- Any contribution whose author/rights holder cannot be confirmed.
+
+6. FILES REQUIRING SEPARATE TREATMENT OR VERIFICATION
+
+- domain_adapters.zip, especially domain_adapters/fma_adapter.py lines 44-62:
+  include a suitable FMA metadata attribution, CC BY 4.0 link, and indication
+  of the selected/derived/thresholded content; verify the precise provenance
+  and scope of rights in the numeric thresholds.
+- All Quarto source: confirm the owner can grant Apache-2.0 rights to every
+  included contribution, including files untracked in the source repository.
+- Kaggle Dataset publication metadata: the manifest says
+  dataset-metadata.json was not created. Ensure the actual selected license
+  and owner/slug metadata are supplied at publication; do not treat the
+  intended license alone as a completed grant.
+
+7. LICENSE AND NOTICE REQUIREMENTS
+
+- Include or otherwise clearly attach the Apache License 2.0 and a copyright
+  holder notice for Quarto-owned code when granting that license.
+- Apache-2.0 does not require inventing a NOTICE file when none is applicable.
+  CC BY 4.0 does require appropriate credit, a license link and change
+  indication. A NOTICE/CREDITS file is a suitable way to meet that need, but
+  should preserve the separate CC BY 4.0 status rather than relicense the FMA
+  material as Apache-2.0.
+- No FMA audio is included, so track-level artist licenses are not
+  redistributed by this payload. The FMA metadata-derived constants still
+  require the separate analysis above.
+
+8. AUDIT LIMITS AND PRESERVATION
+
+The audit inspected the manifest, exact staged files, ZIP members, matching
+root sources, local license/provenance references, relevant local history,
+and the cited upstream FMA and Kaggle license materials. Integrity checks were
+read-only and passed. It did not perform a full source-code similarity scan,
+resolve the hosted SDK dependency tree, determine copyrightability of factual
+statistics, or obtain legal advice. Those limits are material to the verdict.
+
+Git preservation: initial and pre-report status were identical on branch
+main; no staged changes were present. Existing modifications and untracked
+paths were preserved. The only intended filesystem change for this task is
+this report: artifacts/prepublication_rights_audit.txt. No source, tests,
+manifest, snapshot payload, or remote resource was modified. No Kaggle
+operation, upload, publish, or model inference was performed.

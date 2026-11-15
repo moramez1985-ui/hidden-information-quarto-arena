@@ -1,0 +1,479 @@
+{
+  "report_date": "2026-11-10",
+  "environment": {
+    "kaggle_cli_version": "2.2.5",
+    "python_version": "3.14.0",
+    "python_implementation": "CPython",
+    "operating_system": "Windows-11-10.0.26300-SP0",
+    "authentication_status": {
+      "auth_status_command_supported": false,
+      "auth_status_error": "kaggle auth has no status subcommand",
+      "authenticated_read_access": "VERIFIED by successful catalog/model metadata, quota, owned-kernel, and benchmark metadata calls",
+      "credentials_printed_or_saved": false
+    }
+  },
+  "catalog": {
+    "complete_global_catalog_retrieval": false,
+    "unfiltered_pagination_completed": true,
+    "enumeration_command": "kaggle models list --sort-by createTime --page-size 200 --format json [--page-token <opaque-pagination-token>]",
+    "sort_by": "createTime",
+    "requested_page_size": 200,
+    "observed_page_sizes": {
+      "50": 200
+    },
+    "pages_returned": 200,
+    "raw_records": 10000,
+    "unique_model_references": 10000,
+    "duplicate_references": 0,
+    "records_missing_reference": 0,
+    "final_page_next_token_present": false,
+    "termination_evidence": "Final page returned no next-page token.",
+    "global_completeness_limitation": "The unfiltered createTime listing ended at 10,000 records with no next-page token. Filtered search/owner queries returned public Google models google/gemma-3 and google/gemma-4 that were absent from those 10,000 references and themselves exposed further page tokens. Therefore the API termination is not sufficient evidence that the full catalog was enumerated.",
+    "known_public_omissions": [
+      "google/gemma-3",
+      "google/gemma-4"
+    ],
+    "initial_repeat_page_counts": "NOT_RETAINED_SEPARATELY",
+    "initial_repeat_page_token_counts": "NOT_RETAINED_SEPARATELY",
+    "secondary_verification": {
+      "status": "incomplete_connection_reset",
+      "pages_completed": 11,
+      "records_seen": 550,
+      "unique_references_seen": 550,
+      "duplicates_seen": 0,
+      "repeated_pages_seen": 0,
+      "repeated_tokens_seen": 0,
+      "final_page_had_next_token": true,
+      "errors": [
+        {
+          "type": "ConnectionError",
+          "message": "('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))"
+        }
+      ],
+      "note": "A separate redundant full-walk check was interrupted by a remote connection reset after 11 pages; this does not replace the first completed 200-page CLI enumeration."
+    },
+    "filtered_discovery_evidence": [
+      {
+        "command": "kaggle models list --search gemma-3 --page-size 200 --format json",
+        "records_returned": 50,
+        "next_page_token_present": true,
+        "omitted_reference_observed": "google/gemma-3",
+        "note": "Supplemental discovery only; not used as a substitute for complete unfiltered enumeration."
+      },
+      {
+        "command": "kaggle models list --owner google --page-size 200 --format json",
+        "records_returned": 50,
+        "next_page_token_present": true,
+        "omitted_reference_observed": "google/gemma-3",
+        "note": "Supplemental owner-filter evidence shows more than one page for the owner."
+      }
+    ],
+    "pagination_audit_note": "The completed first unfiltered CLI walk had 200 pages at 50 records each and the terminal page had no next-page token. The original per-page token chain was not retained separately. A redundant unfiltered API walk later failed after 11 pages with a connection reset. Filtered results expose additional public model references, so global completeness is false despite unfiltered pagination termination."
+  },
+  "catalog_family_matches_overlapping_substring_search": {
+    "gemma": 197,
+    "qwen3": 304,
+    "qwen": 478,
+    "deepseek": 40,
+    "mistral": 24,
+    "llama": 117,
+    "phi": 32,
+    "granite": 2,
+    "olmo": 22,
+    "gpt-oss": 21
+  },
+  "variation_version_coverage": {
+    "catalog_models_total_in_unfiltered_export": 10000,
+    "in_catalog_model_references_queried": 12,
+    "additional_search_discovered_model_references": [
+      "google/gemma-3",
+      "google/gemma-4"
+    ],
+    "total_model_references_queried": 14,
+    "variation_records_retrieved": 120,
+    "version_records_retrieved": 165,
+    "version_csv_rows": 165,
+    "model_versions_with_file_metadata_retrieved": 13,
+    "file_metadata_file_records_retrieved": 163,
+    "file_metadata_lookup_errors": 1,
+    "catalog_wide_coverage": false,
+    "coverage_reason": "Twelve model references selected from the unfiltered result received complete per-model variation/version lookups. Two additional public Google Gemma model references found by filtered search were fully version-enumerated; their returned version lists demonstrate omissions from the 10,000-row unfiltered result. File metadata was retrieved for all 12 selected candidate versions and for one Gemma 4 version; the Gemma 3 file-list endpoint returned HTTP 403."
+  },
+  "account_capabilities": {
+    "accelerator_quota": [
+      {
+        "resource": "GPU",
+        "used": "0.00h",
+        "remaining": "30.00h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00+00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-14T00:00:00+00:00"
+      }
+    ],
+    "model_proxy_quota": [
+      {
+        "period": "Daily",
+        "used": "$0.00",
+        "remaining": "$10.00",
+        "total": "$10.00",
+        "refillAt": ""
+      },
+      {
+        "period": "Monthly",
+        "used": "$0.00",
+        "remaining": "$100.00",
+        "total": "$100.00",
+        "refillAt": ""
+      }
+    ],
+    "benchmark_tasks_list_exit_code": 0,
+    "benchmark_tasks_list_output": "No tasks found. Use 'kaggle b t push' to create one.",
+    "benchmark_model_proxy_catalog_exit_code": 0,
+    "benchmark_model_proxy_models": [
+      {
+        "slug": "gemini-3.8-flash",
+        "display_name": "Gemini 3.8 Flash"
+      },
+      {
+        "slug": "claude-haiku-4-5-20251001",
+        "display_name": "Claude Haiku 4.5"
+      },
+      {
+        "slug": "claude-haiku-5-5",
+        "display_name": "Claude Haiku 5.5"
+      },
+      {
+        "slug": "claude-opus-4-5-20251101",
+        "display_name": "Claude Opus 4.5"
+      },
+      {
+        "slug": "claude-opus-4-6-default",
+        "display_name": "Claude Opus 4.6"
+      },
+      {
+        "slug": "claude-opus-4-7-default",
+        "display_name": "Claude Opus 4.7"
+      },
+      {
+        "slug": "claude-opus-4-8-default",
+        "display_name": "Claude Opus 4.8"
+      },
+      {
+        "slug": "claude-opus-5-default",
+        "display_name": "Claude Opus 5"
+      },
+      {
+        "slug": "claude-opus-5-5-default",
+        "display_name": "Claude Opus 5.5"
+      },
+      {
+        "slug": "claude-sonnet-4-6-default",
+        "display_name": "Claude Sonnet 4.6"
+      },
+      {
+        "slug": "claude-sonnet-5-default",
+        "display_name": "Claude Sonnet 5"
+      },
+      {
+        "slug": "claude-sonnet-5-5-default",
+        "display_name": "Claude Sonnet 5.5"
+      },
+      {
+        "slug": "gemini-2.5-flash",
+        "display_name": "Gemini 2.5 Flash"
+      },
+      {
+        "slug": "gemini-2.5-pro",
+        "display_name": "Gemini 2.5 Pro"
+      },
+      {
+        "slug": "gemini-3-flash-preview",
+        "display_name": "Gemini 3 Flash Preview"
+      },
+      {
+        "slug": "gemini-3.1-flash-lite-preview",
+        "display_name": "Gemini 3.1 Flash-Lite Preview"
+      },
+      {
+        "slug": "gemini-3.1-pro-preview",
+        "display_name": "Gemini 3.1 Pro Preview"
+      },
+      {
+        "slug": "gemini-3.5-flash-lite",
+        "display_name": "Gemini 3.5 Flash-Lite"
+      },
+      {
+        "slug": "gemini-3.6-flash",
+        "display_name": "Gemini 3.6 Flash"
+      },
+      {
+        "slug": "gemini-4-argon",
+        "display_name": "Gemini 4 Argon"
+      },
+      {
+        "slug": "gemma-4-26b-a4b-it",
+        "display_name": "Gemma 4 26B A4B"
+      },
+      {
+        "slug": "gemma-4-31b-it",
+        "display_name": "Gemma 4 31B"
+      },
+      {
+        "slug": "gpt-5.4-2026-03-05",
+        "display_name": "GPT-5.4"
+      },
+      {
+        "slug": "gpt-5.4-mini-2026-03-17",
+        "display_name": "GPT-5.4 mini"
+      },
+      {
+        "slug": "gpt-5.4-nano-2026-03-17",
+        "display_name": "GPT-5.4 nano"
+      },
+      {
+        "slug": "gpt-5.5-2026-04-23",
+        "display_name": "GPT-5.5"
+      },
+      {
+        "slug": "gpt-5.6-luna",
+        "display_name": "GPT-5.6 Luna"
+      },
+      {
+        "slug": "gpt-5.6-sol",
+        "display_name": "GPT-5.6 Sol"
+      },
+      {
+        "slug": "gpt-5.6-terra",
+        "display_name": "GPT-5.6 Terra"
+      },
+      {
+        "slug": "gpt-6-astra",
+        "display_name": "GPT-6 Astra"
+      },
+      {
+        "slug": "gpt-6-luna",
+        "display_name": "GPT-6 Luna"
+      },
+      {
+        "slug": "gpt-6-sol",
+        "display_name": "GPT-6 Sol"
+      },
+      {
+        "slug": "gpt-6.1-sol",
+        "display_name": "GPT-6.1 Sol"
+      },
+      {
+        "slug": "gpt-oss-120b",
+        "display_name": "gpt-oss-120b"
+      },
+      {
+        "slug": "grok-4.5-0708",
+        "display_name": "Grok 4.5"
+      },
+      {
+        "slug": "grok-4.6",
+        "display_name": "Grok 4.6"
+      },
+      {
+        "slug": "grok-4.7",
+        "display_name": "Grok 4.7"
+      }
+    ],
+    "benchmark_model_proxy_model_count": 37,
+    "owned_kernels_count": 2,
+    "notebook_runtime_started": false,
+    "actual_accelerator_visibility": "UNKNOWN",
+    "runtime_ram_disk_gpu_vram": "UNKNOWN",
+    "internet_access_in_runtime": "UNKNOWN",
+    "package_install_in_runtime": "UNKNOWN",
+    "notebook_execution_limits": "UNKNOWN beyond CLI timeout option and global-max note",
+    "account_specific_accelerator_eligibility": "UNKNOWN"
+  },
+  "notebook_documented_accelerators_as_of_2026_09": [
+    "NvidiaTeslaT4",
+    "NvidiaTeslaA100",
+    "NvidiaL4",
+    "TpuV5E8",
+    "NvidiaL4X1",
+    "TpuV6E8",
+    "NvidiaH100",
+    "NvidiaRtxPro6000"
+  ],
+  "candidates": [
+    {
+      "model_reference": "nvidia/qwen3-8-flash-next-nvfp4",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Qwen3.8-Flash-Next-NVFP4",
+      "model_title": "Qwen3.8-Flash-Next-NVFP4",
+      "author": "NVIDIA",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "professorice/mistral-small-4-119b-2603",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Mistral-Small-4-119B-2603",
+      "model_title": "Mistral-Small-4-119B-2603",
+      "author": "Menelik Zafir",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "giridharan17/deepseek-r1-32b",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "deepseek_r1_32b",
+      "model_title": "deepseek_r1_32b",
+      "author": "Giridharan G",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "corethrive/deepseek-r1-distill-qwen-1.5b",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "deepseek-r1-distill-qwen-1.5b",
+      "model_title": "deepseek-r1-distill-qwen-1.5b",
+      "author": "Core Thrive",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "kentarctic/phi-4-mini-instruct",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Phi-4-mini-instruct",
+      "model_title": "Phi-4-mini-instruct",
+      "author": "kentarctic",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "dineshkumar0705/gemma-4-31b-it-qat-w4a16",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Gemma 4 31B IT QAT W4A16",
+      "model_title": "Gemma 4 31B IT QAT W4A16",
+      "author": "Dinesh kumar Thiyagarajan",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "romanromenskyi/gemma-4-e4b-it-ipsupport",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Gemma 4 E4B IT — IPSupport QAT MLX",
+      "model_title": "Gemma 4 E4B IT — IPSupport QAT MLX",
+      "author": "Roman Romenskyi",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "greymatter69/qwen3-8b-q4km",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Qwen3 8B",
+      "model_title": "Qwen3 8B",
+      "author": "Aaryan",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "thomasplocher/gemma-4-31b-w4a16-ct-mirror",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "gemma-4-31b-w4a16-ct-mirror",
+      "model_title": "gemma-4-31b-w4a16-ct-mirror",
+      "author": "Thomas Plocher",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "danbth/llama-3-2-3b-instruct",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "Llama-3.2-3B-Instruct",
+      "model_title": "Llama-3.2-3B-Instruct",
+      "author": "danbth",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "alexchilton/mistral-7b-v0-3-base",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "mistral-7b-v0-3-base",
+      "model_title": "mistral-7b-v0-3-base",
+      "author": "alex chilton",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "guoqingu/gpt-oss-20b-gguf",
+      "catalog_listing_state": "IN_UNFILTERED_10K_RESULT",
+      "catalog_title": "gpt-oss-20b-GGUF",
+      "model_title": "gpt-oss-20b-GGUF",
+      "author": "guoqin gu",
+      "variation_count": 1,
+      "version_count": 1,
+      "lookup_status": "complete"
+    },
+    {
+      "model_reference": "google/gemma-3",
+      "catalog_listing_state": "FOUND_BY_SEARCH_BUT_ABSENT_FROM_10K_UNFILTERED_CREATE_TIME_RESULT",
+      "catalog_title": null,
+      "model_title": "Gemma 3",
+      "author": "Google",
+      "variation_count": 61,
+      "version_count": 80,
+      "lookup_status": "versions_complete_file_metadata_restricted"
+    },
+    {
+      "model_reference": "google/gemma-4",
+      "catalog_listing_state": "FOUND_BY_SEARCH_BUT_ABSENT_FROM_10K_UNFILTERED_CREATE_TIME_RESULT",
+      "catalog_title": null,
+      "model_title": "Gemma 4",
+      "author": "Google",
+      "variation_count": 47,
+      "version_count": 73,
+      "lookup_status": "complete_selected_file_metadata"
+    }
+  ],
+  "actions_not_performed": [
+    "model weight downloads",
+    "Notebook creation/start/execution",
+    "Benchmark submission/execution",
+    "Model Proxy inference",
+    "external model API calls",
+    "Quarto matches or private game-data prompts",
+    "credential/token retrieval or persistence",
+    "package installation"
+  ],
+  "generated_files": [
+    "reports/kaggle_discovery/models_catalog_raw.json",
+    "reports/kaggle_discovery/models_catalog.csv",
+    "reports/kaggle_discovery/model_variations_raw.json",
+    "reports/kaggle_discovery/model_variations.csv",
+    "reports/kaggle_discovery/discovery_summary.json",
+    "reports/kaggle_discovery/kaggle_cli_capability_report_20261110.md"
+  ],
+  "unresolved_blockers": [
+    "unfiltered model listing terminates at 10,000 but filtered owner/search queries find additional public models; exhaustive global inventory is not achieved",
+    "a secondary pagination verification was interrupted by a connection reset after 11 pages; the original returned result set was 200 pages",
+    "initial per-page token chain and repeated-token/page counts were not retained; only record/reference duplicate counts and terminal token evidence remain",
+    "variation/version metadata was inspected for 14 model references, not all entries; exhaustive 10,000-model variation calls are impractical",
+    "Gemma 3 selected file metadata query returned HTTP 403 despite public variation listing; account file access is not uniform",
+    "no Notebook runtime test, so actual GPU/TPU, VRAM, RAM, disk, internet, and packages remain unknown",
+    "public metadata does not prove weights can be downloaded or executed",
+    "Benchmark task list was empty for this account; Proxy credentials were intentionally not created",
+    "Model Proxy listing exposes model slugs but not full publisher, pinned revision, license, or latency metadata"
+  ]
+}

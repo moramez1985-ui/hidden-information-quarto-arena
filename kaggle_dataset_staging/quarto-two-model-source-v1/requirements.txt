@@ -1,0 +1,2 @@
+# Kaggle Benchmarks supplies this SDK in its hosted Task runtime.
+kaggle_benchmarks==0.6.2

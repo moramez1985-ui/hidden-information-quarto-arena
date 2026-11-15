@@ -153,17 +153,48 @@ class QuartoEngineTests(unittest.TestCase):
 
     def test_state_and_replay_round_trip_preserve_mode_and_actions(self):
         for mode in ("classic", "self_selection"):
+            for starting_player in ("player_1", "player_2"):
+                with self.subTest(mode=mode, starting_player=starting_player):
+                    state = new_game(mode, starting_player=starting_player)
+                    state = select_piece(state, state.active_player, 3)
+                    state = place_piece(state, state.active_player, 5)
+
+                    restored = deserialize_state(serialize_state(state))
+                    replayed = replay_game(serialize_replay(state))
+
+                    self.assertEqual(restored, state)
+                    self.assertEqual(replayed, state)
+                    self.assertEqual(replayed.mode, mode)
+                    self.assertEqual(replayed.starting_player, starting_player)
+
+    def test_legacy_state_and_replay_default_to_player_one(self):
+        state = new_game("classic")
+        serialized_state = json.loads(serialize_state(state))
+        serialized_replay = json.loads(serialize_replay(state))
+        serialized_state.pop("starting_player")
+        serialized_replay.pop("starting_player")
+
+        restored = deserialize_state(json.dumps(serialized_state))
+        replayed = replay_game(json.dumps(serialized_replay))
+
+        self.assertEqual(restored.starting_player, "player_1")
+        self.assertEqual(replayed.starting_player, "player_1")
+
+    def test_player_two_can_start_in_both_modes(self):
+        for mode in ("classic", "self_selection"):
             with self.subTest(mode=mode):
-                state = new_game(mode)
-                state = select_piece(state, state.active_player, 3)
-                state = place_piece(state, state.active_player, 5)
+                state = new_game(mode, starting_player="player_2")
+                self.assertEqual(state.active_player, "player_2")
+                selected = select_piece(state, "player_2", 3)
+                expected_placer = "player_1" if mode == "classic" else "player_2"
+                self.assertEqual(selected.active_player, expected_placer)
+                placed = place_piece(selected, expected_placer, 5)
+                expected_next = "player_1" if mode == "classic" else "player_1"
+                self.assertEqual(placed.active_player, expected_next)
 
-                restored = deserialize_state(serialize_state(state))
-                replayed = replay_game(serialize_replay(state))
-
-                self.assertEqual(restored, state)
-                self.assertEqual(replayed, state)
-                self.assertEqual(replayed.mode, mode)
+    def test_invalid_starting_player_is_rejected(self):
+        with self.assertRaises(ValueError):
+            new_game("classic", starting_player="player_3")
 
     def test_winning_lines_are_stable_complete_and_isolated(self):
         probe = textwrap.dedent(

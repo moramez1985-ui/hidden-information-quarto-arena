@@ -1,6 +1,8 @@
+import json
 import unittest
 from dataclasses import replace
 from types import MappingProxyType
+from uuid import UUID
 
 from phase0_foundation import (
     AuditSnapshot,
@@ -118,10 +120,6 @@ class Phase0FoundationTests(unittest.TestCase):
                 self.assertEqual(public1, public2)
                 self.assertEqual(public1["current_player"], "player_2")
                 self.assertEqual(
-                    controller.private_observation("player_1")["private"]["owned_features"],
-                    list(instance.feature_ids[:2]),
-                )
-                self.assertEqual(
                     controller.private_observation("player_2")["private"]["owned_features"],
                     list(instance.feature_ids[2:4]),
                 )
@@ -138,6 +136,10 @@ class Phase0FoundationTests(unittest.TestCase):
                     {"kind": "place_entity", "cell": 0},
                 )
                 self.assertEqual(placed["current_player"], "player_1")
+                self.assertEqual(
+                    controller.private_observation("player_1")["private"]["owned_features"],
+                    list(instance.feature_ids[:2]),
+                )
 
                 snapshot = controller.get_read_only_audit_view()
                 self.assertEqual(snapshot.public_audit["starting_player"], "player_2")
@@ -307,7 +309,8 @@ class Phase0FoundationTests(unittest.TestCase):
         self.assertTrue(validate_audit_snapshot(snapshot))
 
         with self.assertRaises(TypeError):
-            snapshot.restricted_evaluator_data["entity_to_piece"]["e00"] = "tampered"
+            entity_id = next(iter(snapshot.restricted_evaluator_data["entity_to_piece"]))
+            snapshot.restricted_evaluator_data["entity_to_piece"][entity_id] = "tampered"
         with self.assertRaises(TypeError):
             snapshot.restricted_evaluator_data["engine_state_snapshot"]["history"][0]["kind"] = "tampered"
         with self.assertRaises(AttributeError):
@@ -318,6 +321,296 @@ class Phase0FoundationTests(unittest.TestCase):
         after = snapshot.restricted_evaluator_data
         self.assertEqual(before["engine_state_snapshot"]["phase"], after["engine_state_snapshot"]["phase"])
         self.assertEqual(tuple(before["engine_state_snapshot"]["board"]), tuple(after["engine_state_snapshot"]["board"]))
+
+    def test_validate_replay_rejects_malformed_engine_state_snapshots(self):
+        snapshot = Phase0Controller(SyntheticAdapter()).get_read_only_audit_view()
+        original_state = dict(snapshot.restricted_evaluator_data["engine_state_snapshot"])
+
+        def remove_starting_player(state):
+            state.pop("starting_player")
+
+        def remove_result(state):
+            state.pop("result")
+
+        def add_unexpected_field(state):
+            state["internal_debug"] = "unexpected"
+
+        def use_invalid_type(state):
+            state["is_terminal"] = 1
+
+        def use_invalid_board_piece_type(state):
+            state["board"] = (False, *state["board"][1:])
+
+        def make_phase_and_result_inconsistent(state):
+            state["phase"] = "terminal"
+            state["is_terminal"] = True
+
+        mutations = (
+            ("missing starting_player", remove_starting_player),
+            ("missing result", remove_result),
+            ("unexpected field", add_unexpected_field),
+            ("invalid field type", use_invalid_type),
+            ("invalid board piece type", use_invalid_board_piece_type),
+            ("inconsistent phase/result", make_phase_and_result_inconsistent),
+        )
+        for label, mutate in mutations:
+            with self.subTest(case=label):
+                engine_state = dict(original_state)
+                mutate(engine_state)
+                restricted = dict(snapshot.restricted_evaluator_data)
+                restricted["engine_state_snapshot"] = MappingProxyType(engine_state)
+                malformed = replace(
+                    snapshot,
+                    restricted_evaluator_data=MappingProxyType(restricted),
+                )
+
+                self.assertFalse(malformed.validate_replay())
+                self.assertFalse(validate_audit_snapshot(malformed))
+
+    def test_validate_replay_accepts_valid_modes_starting_players_and_outcomes(self):
+        draw_order = (12, 5, 0, 10, 6, 2, 13, 9, 15, 11, 7, 4, 1, 14, 3, 8)
+        outcomes = (
+            ("win", (0, 1, 2, 3)),
+            ("draw", draw_order),
+        )
+
+        def assert_valid_snapshot(controller):
+            audit_snapshot = controller.get_read_only_audit_view()
+            self.assertTrue(audit_snapshot.validate_replay())
+            self.assertTrue(validate_audit_snapshot(audit_snapshot))
+
+        for mode in ("classic", "self_selection"):
+            for starting_player in ("player_1", "player_2"):
+                for expected_outcome, pieces in outcomes:
+                    with self.subTest(
+                        mode=mode,
+                        starting_player=starting_player,
+                        outcome=expected_outcome,
+                    ):
+                        controller = Phase0Controller(
+                            SyntheticAdapter(),
+                            mode=mode,
+                            starting_player=starting_player,
+                        )
+                        assert_valid_snapshot(controller)
+
+                        for cell, piece_id in enumerate(pieces):
+                            active_player = controller.session.engine_state.active_player
+                            public = controller.public_observation(active_player)
+                            entity_id = controller.session.piece_to_entity[piece_id]
+                            self.assertIn(
+                                entity_id,
+                                public["legal_actions"]["entity_ids"],
+                            )
+                            controller.submit_agent_action(
+                                active_player,
+                                {"kind": "select_entity", "entity_id": entity_id},
+                            )
+                            if cell == 0:
+                                assert_valid_snapshot(controller)
+
+                            placer = controller.session.engine_state.active_player
+                            controller.submit_agent_action(
+                                placer,
+                                {"kind": "place_entity", "cell": cell},
+                            )
+                            if cell == 0:
+                                assert_valid_snapshot(controller)
+
+                        self.assertEqual(
+                            controller.session.engine_state.result.outcome,
+                            expected_outcome,
+                        )
+                        assert_valid_snapshot(controller)
+
+    def test_match_entity_ids_are_opaque_unique_and_stable(self):
+        adapter = SyntheticAdapter()
+        instance = adapter.build_instance()
+        controller = Phase0Controller(adapter, mode="classic", instance=instance)
+        observation = controller.public_observation("player_1")
+        public_ids = tuple(
+            entity["entity_id"] for entity in observation["public_entities"]
+        )
+
+        self.assertEqual(len(public_ids), 16)
+        self.assertEqual(len(set(public_ids)), 16)
+        self.assertEqual(public_ids, tuple(sorted(public_ids)))
+        self.assertTrue(all(UUID(hex=entity_id).version == 4 for entity_id in public_ids))
+        self.assertTrue(set(public_ids).isdisjoint(instance.entity_ids))
+        self.assertTrue(
+            all(
+                entity_id not in {str(signature) for signature in instance.signature_map.values()}
+                for entity_id in public_ids
+            )
+        )
+        self.assertEqual(
+            tuple(observation["legal_actions"]["entity_ids"]),
+            public_ids,
+        )
+        self.assertEqual(tuple(observation["available_entities"]), public_ids)
+        self.assertEqual(
+            {entity["label"] for entity in observation["public_entities"]},
+            set(public_ids),
+        )
+
+        second_match = Phase0Controller(adapter, mode="classic", instance=instance)
+        second_ids = {
+            entity["entity_id"]
+            for entity in second_match.public_observation("player_1")["public_entities"]
+        }
+        self.assertTrue(set(public_ids).isdisjoint(second_ids))
+
+        entity_id = observation["legal_actions"]["entity_ids"][0]
+        selected = controller.submit_agent_action(
+            "player_1",
+            {"kind": "select_entity", "entity_id": entity_id},
+        )
+        self.assertEqual(selected["selected_entity"], entity_id)
+        self.assertEqual(selected["history"][0]["entity_id"], entity_id)
+        placed = controller.submit_agent_action(
+            "player_2",
+            {"kind": "place_entity", "cell": 0},
+        )
+        self.assertEqual(placed["board"][0], entity_id)
+        self.assertEqual(placed["history"][0]["entity_id"], entity_id)
+        snapshot = controller.get_read_only_audit_view()
+        self.assertEqual(snapshot.public_audit["board"][0], entity_id)
+        self.assertEqual(
+            snapshot.restricted_evaluator_data["piece_to_entity"][
+                snapshot.restricted_evaluator_data["entity_to_piece"][entity_id]
+            ],
+            entity_id,
+        )
+        self.assertTrue(validate_audit_snapshot(snapshot))
+
+    def test_source_id_crosswalk_is_restricted_and_audit_validated(self):
+        adapter = SyntheticAdapter()
+        instance = adapter.build_instance()
+        restricted_source_ids = {
+            entity_id: f"private-source-{index:02d}"
+            for index, entity_id in enumerate(instance.entity_ids)
+        }
+        controller = Phase0Controller(
+            adapter,
+            instance=instance,
+            restricted_source_ids=restricted_source_ids,
+        )
+        public_observation = controller.public_observation("player_1")
+        snapshot = controller.get_read_only_audit_view()
+        public_text = json.dumps(_to_plain(public_observation), sort_keys=True)
+        public_audit_text = json.dumps(_to_plain(snapshot.public_audit), sort_keys=True)
+
+        self.assertTrue(validate_audit_snapshot(snapshot))
+        crosswalk = snapshot.restricted_evaluator_data["public_entity_to_source_id"]
+        entity_to_piece = snapshot.restricted_evaluator_data["entity_to_piece"]
+        source_to_entity = {
+            source_id: entity_id
+            for entity_id, source_id in restricted_source_ids.items()
+        }
+        self.assertEqual(set(crosswalk), set(entity_to_piece))
+        for public_id, source_id in crosswalk.items():
+            self.assertEqual(
+                instance.signature_map[source_to_entity[source_id]],
+                entity_to_piece[public_id],
+            )
+        for source_id in restricted_source_ids.values():
+            self.assertNotIn(source_id, public_text)
+            self.assertNotIn(source_id, public_audit_text)
+
+        restricted = dict(snapshot.restricted_evaluator_data)
+        crosswalk = dict(restricted["public_entity_to_source_id"])
+        keys = list(crosswalk)
+        crosswalk[keys[0]] = crosswalk[keys[1]]
+        restricted["public_entity_to_source_id"] = MappingProxyType(crosswalk)
+        malformed = replace(
+            snapshot,
+            restricted_evaluator_data=MappingProxyType(restricted),
+        )
+        self.assertFalse(validate_audit_snapshot(malformed))
+
+    def test_controller_rejects_incomplete_or_duplicate_source_id_crosswalks(self):
+        adapter = SyntheticAdapter()
+        instance = adapter.build_instance()
+        incomplete = {entity_id: entity_id for entity_id in instance.entity_ids[:-1]}
+        duplicate = {
+            entity_id: "duplicate-source-id"
+            for entity_id in instance.entity_ids
+        }
+
+        with self.assertRaises(ValueError):
+            Phase0Controller(adapter, instance=instance, restricted_source_ids=incomplete)
+        with self.assertRaises(ValueError):
+            Phase0Controller(adapter, instance=instance, restricted_source_ids=duplicate)
+
+    def test_validate_audit_snapshot_rejects_unexpected_public_and_restricted_fields(self):
+        controller = Phase0Controller(SyntheticAdapter(), mode="classic")
+        snapshot = controller.get_read_only_audit_view()
+
+        public_audit = dict(snapshot.public_audit)
+        public_audit["restricted_evaluator_data"] = "RESTRICTED_SENTINEL"
+        self.assertFalse(
+            validate_audit_snapshot(
+                replace(snapshot, public_audit=MappingProxyType(public_audit))
+            )
+        )
+
+        restricted = dict(snapshot.restricted_evaluator_data)
+        restricted["unrecognized_internal_value"] = "RESTRICTED_SENTINEL"
+        self.assertFalse(
+            validate_audit_snapshot(
+                replace(
+                    snapshot,
+                    restricted_evaluator_data=MappingProxyType(restricted),
+                )
+            )
+        )
+
+    def test_validate_audit_snapshot_rejects_unexpected_nested_public_fields(self):
+        controller = Phase0Controller(SyntheticAdapter(), mode="classic")
+        controller.submit_agent_action(
+            "player_1",
+            {
+                "kind": "select_entity",
+                "entity_id": controller.public_observation("player_1")[
+                    "legal_actions"
+                ]["entity_ids"][0],
+            },
+        )
+        controller.submit_agent_action("player_2", {"kind": "place_entity", "cell": 0})
+        snapshot = controller.get_read_only_audit_view()
+
+        public_audit = dict(snapshot.public_audit)
+        legal_actions = dict(public_audit["legal_actions"])
+        legal_actions["piece_id"] = 0
+        public_audit["legal_actions"] = MappingProxyType(legal_actions)
+        self.assertFalse(
+            validate_audit_snapshot(
+                replace(snapshot, public_audit=MappingProxyType(public_audit))
+            )
+        )
+
+        public_audit = dict(snapshot.public_audit)
+        history = [dict(action) for action in public_audit["public_history"]]
+        history[0]["piece_id"] = 0
+        public_audit["public_history"] = tuple(
+            MappingProxyType(action) for action in history
+        )
+        self.assertFalse(
+            validate_audit_snapshot(
+                replace(snapshot, public_audit=MappingProxyType(public_audit))
+            )
+        )
+
+    def test_restricted_identifier_sentinel_is_rejected_from_public_fields(self):
+        controller = Phase0Controller(SyntheticAdapter(), mode="classic")
+        snapshot = controller.get_read_only_audit_view()
+        public_audit = dict(snapshot.public_audit)
+        public_audit["selected_entity"] = "piece_to_entity"
+        self.assertFalse(
+            validate_audit_snapshot(
+                replace(snapshot, public_audit=MappingProxyType(public_audit))
+            )
+        )
 
     def test_validate_audit_snapshot_accepts_exact_ownership_partition(self):
         controller = Phase0Controller(SyntheticAdapter(), mode="classic")
@@ -392,10 +685,11 @@ class Phase0FoundationTests(unittest.TestCase):
 
         restricted = dict(snapshot.restricted_evaluator_data)
         entity_to_piece = dict(restricted["entity_to_piece"])
-        entity_to_piece["e00"] = 1
+        public_ids = list(entity_to_piece)
+        entity_to_piece[public_ids[0]] = 1
         piece_to_entity = dict(restricted["piece_to_entity"])
-        piece_to_entity[1] = "e01"
-        piece_to_entity[0] = "e02"
+        piece_to_entity[1] = public_ids[1]
+        piece_to_entity[0] = public_ids[2]
         restricted["entity_to_piece"] = entity_to_piece
         restricted["piece_to_entity"] = piece_to_entity
         self.assertFalse(validate_audit_snapshot(replace(snapshot, restricted_evaluator_data=MappingProxyType(restricted))))
@@ -407,7 +701,8 @@ class Phase0FoundationTests(unittest.TestCase):
         restricted = dict(snapshot.restricted_evaluator_data)
         public_audit = dict(snapshot.public_audit)
         public_audit["board"] = tuple(
-            "e00" if index == 0 else value for index, value in enumerate(public_audit["board"])
+            "not-an-entity" if index == 0 else value
+            for index, value in enumerate(public_audit["board"])
         )
         restricted["engine_state_snapshot"] = dict(restricted["engine_state_snapshot"])
         restricted["engine_state_snapshot"]["board"] = tuple(None if index == 0 else piece_id for index, piece_id in enumerate(restricted["engine_state_snapshot"]["board"]))
@@ -429,12 +724,26 @@ class Phase0FoundationTests(unittest.TestCase):
 
     def test_public_and_private_observations_hide_sensitive_state_in_both_modes(self):
         for mode in ("classic", "self_selection"):
-            controller = Phase0Controller(SyntheticAdapter(), mode=mode)
+            adapter = SyntheticAdapter()
+            instance = adapter.build_instance()
+            controller = Phase0Controller(adapter, mode=mode, instance=instance)
             public1 = controller.public_observation("player_1")
             private1 = controller.private_observation("player_1")
-            public2 = controller.public_observation("player_2")
-            private2 = controller.private_observation("player_2")
+            player_2_controller = Phase0Controller(
+                adapter,
+                mode=mode,
+                instance=instance,
+                starting_player="player_2",
+            )
+            public2 = player_2_controller.public_observation("player_2")
+            private2 = player_2_controller.private_observation("player_2")
 
+            self.assertEqual(private1["requester"], "player_1")
+            self.assertEqual(private2["requester"], "player_2")
+            with self.assertRaisesRegex(ValueError, "active player"):
+                controller.private_observation("player_2")
+            with self.assertRaisesRegex(ValueError, "active player"):
+                controller.session.private_observation("player_2")
             for obs in (public1, public2, private1, private2):
                 self.assertNotIn("entity_to_piece", obs)
                 self.assertNotIn("piece_to_entity", obs)
@@ -448,6 +757,13 @@ class Phase0FoundationTests(unittest.TestCase):
             self.assertEqual(private2["private"]["owned_features"], ["f2", "f3"])
             self.assertNotIn("private_feature_ownership", public1)
             self.assertNotIn("private_feature_ownership", public2)
+            self.assertNotIn("private", public1)
+            self.assertNotIn("private", public2)
+
+            public_audit = controller.get_read_only_audit_view().public_audit
+            self.assertNotIn("private_feature_ownership", public_audit)
+            self.assertNotIn("owned_features", public_audit)
+            self.assertNotIn("private", public_audit)
 
     def test_actual_engine_semantics_hold_for_two_cycles_in_each_mode(self):
         def assert_cycle(controller, active_player, selected_entity, board_cell):

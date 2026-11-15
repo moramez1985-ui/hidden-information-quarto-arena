@@ -1,0 +1,389 @@
+{
+  "archive_path": "dsgdb9nsd.xyz.tar.bz2",
+  "archive_record_count": 133885,
+  "archive_sha256": "3a63848ac80691bdb8d41834b575afad345b9300d7a2db0c38adb7f6eaa8360c",
+  "archive_size_bytes": 86144227,
+  "download_url": "https://ndownloader.figshare.com/files/3195389",
+  "excluded_record_count": 1,
+  "excluded_records": [
+    {
+      "alternate_inchi": "InChI=1S/C5H3N3O/c6-3-4-1-2-7-8-5(4)9/h1-2H,(H,8,9)",
+      "alternate_smiles": "c1(ccnnc1=O)C#N",
+      "original_inchi": "InChI=1S/C4HN3O2/c5-1-3-2-9-7-6-4(3)8/h2H",
+      "original_smiles": "O=C1N=NOC=C1C#N",
+      "reason": "source XYZ elemental composition does not match the source SMILES formula",
+      "source_id": "dsgdb9nsd_130667"
+    }
+  ],
+  "figshare_file_id": 3195389,
+  "nonisomeric_graphs_with_multiple_isomeric_smiles": 0,
+  "original_archive_filename": "dsgdb9nsd.xyz.tar.bz2",
+  "original_source_url": "https://quantum-machine.org/datasets/",
+  "parsed_entity_count": 133884,
+  "repeated_canonical_structure_count": 87,
+  "repeated_canonical_structures": {
+    "C#CCc1cnccn1": [
+      "dsgdb9nsd_024027",
+      "dsgdb9nsd_024031"
+    ],
+    "C#Cc1cnc(C)cn1": [
+      "dsgdb9nsd_028636",
+      "dsgdb9nsd_028644"
+    ],
+    "C#Cc1cnc(F)cn1": [
+      "dsgdb9nsd_132716",
+      "dsgdb9nsd_132724"
+    ],
+    "C#Cc1cnc(N)cn1": [
+      "dsgdb9nsd_028650",
+      "dsgdb9nsd_028658"
+    ],
+    "C#Cc1cnc(O)cn1": [
+      "dsgdb9nsd_028663",
+      "dsgdb9nsd_028670"
+    ],
+    "C#Cc1cnccn1": [
+      "dsgdb9nsd_005340",
+      "dsgdb9nsd_005344"
+    ],
+    "CC#Cc1cnccn1": [
+      "dsgdb9nsd_025673",
+      "dsgdb9nsd_025677"
+    ],
+    "CC(=O)c1cnccn1": [
+      "dsgdb9nsd_025834",
+      "dsgdb9nsd_025838"
+    ],
+    "CC(C)c1cnccn1": [
+      "dsgdb9nsd_026267",
+      "dsgdb9nsd_026271"
+    ],
+    "CC(O)c1cnccn1": [
+      "dsgdb9nsd_026277",
+      "dsgdb9nsd_026281"
+    ],
+    "CCCc1cnccn1": [
+      "dsgdb9nsd_032986",
+      "dsgdb9nsd_032990"
+    ],
+    "CCNc1cnccn1": [
+      "dsgdb9nsd_032995",
+      "dsgdb9nsd_032999"
+    ],
+    "CCOc1cnccn1": [
+      "dsgdb9nsd_033005",
+      "dsgdb9nsd_033009"
+    ],
+    "CCc1cnc(C)cn1": [
+      "dsgdb9nsd_031805",
+      "dsgdb9nsd_031815"
+    ],
+    "CCc1cnc(F)cn1": [
+      "dsgdb9nsd_133035",
+      "dsgdb9nsd_133039"
+    ],
+    "CCc1cnc(N)cn1": [
+      "dsgdb9nsd_031808",
+      "dsgdb9nsd_031818"
+    ],
+    "CCc1cnc(O)cn1": [
+      "dsgdb9nsd_031811",
+      "dsgdb9nsd_031821"
+    ],
+    "CCc1cnccn1": [
+      "dsgdb9nsd_005382",
+      "dsgdb9nsd_005386"
+    ],
+    "CN(C)c1cnccn1": [
+      "dsgdb9nsd_026286",
+      "dsgdb9nsd_026290"
+    ],
+    "CNc1cnc(C)cn1": [
+      "dsgdb9nsd_031826",
+      "dsgdb9nsd_031836"
+    ],
+    "CNc1cnc(F)cn1": [
+      "dsgdb9nsd_133042",
+      "dsgdb9nsd_133046"
+    ],
+    "CNc1cnc(N)cn1": [
+      "dsgdb9nsd_031829",
+      "dsgdb9nsd_031839"
+    ],
+    "CNc1cnc(O)cn1": [
+      "dsgdb9nsd_031832",
+      "dsgdb9nsd_031842"
+    ],
+    "CNc1cnccn1": [
+      "dsgdb9nsd_005391",
+      "dsgdb9nsd_005395"
+    ],
+    "COCc1cnccn1": [
+      "dsgdb9nsd_033017",
+      "dsgdb9nsd_033021"
+    ],
+    "COc1cnc(C)cn1": [
+      "dsgdb9nsd_031847",
+      "dsgdb9nsd_031857"
+    ],
+    "COc1cnc(F)cn1": [
+      "dsgdb9nsd_133049",
+      "dsgdb9nsd_133053"
+    ],
+    "COc1cnc(N)cn1": [
+      "dsgdb9nsd_031850",
+      "dsgdb9nsd_031860"
+    ],
+    "COc1cnc(O)cn1": [
+      "dsgdb9nsd_031853",
+      "dsgdb9nsd_031863"
+    ],
+    "COc1cnccn1": [
+      "dsgdb9nsd_005401",
+      "dsgdb9nsd_005405"
+    ],
+    "Cc1c(F)cnnc1F": [
+      "dsgdb9nsd_133151",
+      "dsgdb9nsd_133158"
+    ],
+    "Cc1c(F)cnnc1N": [
+      "dsgdb9nsd_133133",
+      "dsgdb9nsd_133148"
+    ],
+    "Cc1c(F)cnnc1O": [
+      "dsgdb9nsd_133150",
+      "dsgdb9nsd_133156"
+    ],
+    "Cc1c(O)cnnc1F": [
+      "dsgdb9nsd_133149",
+      "dsgdb9nsd_133157"
+    ],
+    "Cc1c(O)cnnc1N": [
+      "dsgdb9nsd_125034",
+      "dsgdb9nsd_125112"
+    ],
+    "Cc1c(O)cnnc1O": [
+      "dsgdb9nsd_125113",
+      "dsgdb9nsd_125115"
+    ],
+    "Cc1cnc(C#N)cn1": [
+      "dsgdb9nsd_028637",
+      "dsgdb9nsd_028645"
+    ],
+    "Cc1cnc(C=O)cn1": [
+      "dsgdb9nsd_028616",
+      "dsgdb9nsd_028620"
+    ],
+    "Cc1cnc(CO)cn1": [
+      "dsgdb9nsd_031796",
+      "dsgdb9nsd_031800"
+    ],
+    "Cc1cnc(F)cn1": [
+      "dsgdb9nsd_023703",
+      "dsgdb9nsd_023707"
+    ],
+    "Cc1cnc(N)cn1": [
+      "dsgdb9nsd_004570",
+      "dsgdb9nsd_004577"
+    ],
+    "Cc1cnc(O)cn1": [
+      "dsgdb9nsd_004573",
+      "dsgdb9nsd_004580"
+    ],
+    "Cc1cnccn1": [
+      "dsgdb9nsd_000933",
+      "dsgdb9nsd_000937"
+    ],
+    "Fc1cnccn1": [
+      "dsgdb9nsd_004211",
+      "dsgdb9nsd_004215"
+    ],
+    "N#CCc1cnccn1": [
+      "dsgdb9nsd_024037",
+      "dsgdb9nsd_024041"
+    ],
+    "N#Cc1cnc(F)cn1": [
+      "dsgdb9nsd_132717",
+      "dsgdb9nsd_132725"
+    ],
+    "N#Cc1cnc(N)cn1": [
+      "dsgdb9nsd_028651",
+      "dsgdb9nsd_028659"
+    ],
+    "N#Cc1cnc(O)cn1": [
+      "dsgdb9nsd_028664",
+      "dsgdb9nsd_028671"
+    ],
+    "N#Cc1cnccn1": [
+      "dsgdb9nsd_005350",
+      "dsgdb9nsd_005354"
+    ],
+    "N=CNc1cnccn1": [
+      "dsgdb9nsd_025477",
+      "dsgdb9nsd_025481"
+    ],
+    "N=COc1cnccn1": [
+      "dsgdb9nsd_025487",
+      "dsgdb9nsd_025491"
+    ],
+    "NC(=O)c1cnccn1": [
+      "dsgdb9nsd_025846",
+      "dsgdb9nsd_025850"
+    ],
+    "NC=Nc1cnccn1": [
+      "dsgdb9nsd_030542",
+      "dsgdb9nsd_030544"
+    ],
+    "Nc1c(F)cnnc1F": [
+      "dsgdb9nsd_133321",
+      "dsgdb9nsd_133328"
+    ],
+    "Nc1c(F)cnnc1O": [
+      "dsgdb9nsd_133320",
+      "dsgdb9nsd_133326"
+    ],
+    "Nc1c(O)cnnc1F": [
+      "dsgdb9nsd_133319",
+      "dsgdb9nsd_133327"
+    ],
+    "Nc1c(O)cnnc1O": [
+      "dsgdb9nsd_129715",
+      "dsgdb9nsd_129721"
+    ],
+    "Nc1cnc(C=O)cn1": [
+      "dsgdb9nsd_028623",
+      "dsgdb9nsd_028627"
+    ],
+    "Nc1cnc(CO)cn1": [
+      "dsgdb9nsd_031866",
+      "dsgdb9nsd_031870"
+    ],
+    "Nc1cnc(F)nn1": [
+      "dsgdb9nsd_023785",
+      "dsgdb9nsd_023789"
+    ],
+    "Nc1cnc(O)nn1": [
+      "dsgdb9nsd_021584",
+      "dsgdb9nsd_021641"
+    ],
+    "Nc1cnccn1": [
+      "dsgdb9nsd_000942",
+      "dsgdb9nsd_000946"
+    ],
+    "Nc1cnnc(F)c1": [
+      "dsgdb9nsd_023784",
+      "dsgdb9nsd_023786"
+    ],
+    "Nc1cnnc(F)n1": [
+      "dsgdb9nsd_023787",
+      "dsgdb9nsd_023788"
+    ],
+    "Nc1cnnc(O)c1": [
+      "dsgdb9nsd_021576",
+      "dsgdb9nsd_021585"
+    ],
+    "Nc1cnnc(O)n1": [
+      "dsgdb9nsd_021586",
+      "dsgdb9nsd_021628"
+    ],
+    "Nc1nncc(F)c1F": [
+      "dsgdb9nsd_133318",
+      "dsgdb9nsd_133367"
+    ],
+    "Nc1nncc(F)c1N": [
+      "dsgdb9nsd_133301",
+      "dsgdb9nsd_133364"
+    ],
+    "Nc1nncc(F)c1O": [
+      "dsgdb9nsd_133316",
+      "dsgdb9nsd_133366"
+    ],
+    "Nc1nncc(O)c1F": [
+      "dsgdb9nsd_133317",
+      "dsgdb9nsd_133365"
+    ],
+    "Nc1nncc(O)c1O": [
+      "dsgdb9nsd_129713",
+      "dsgdb9nsd_130115"
+    ],
+    "O=CCc1cnccn1": [
+      "dsgdb9nsd_025497",
+      "dsgdb9nsd_025501"
+    ],
+    "O=CNc1cnccn1": [
+      "dsgdb9nsd_025507",
+      "dsgdb9nsd_025511"
+    ],
+    "O=COc1cnccn1": [
+      "dsgdb9nsd_025517",
+      "dsgdb9nsd_025521"
+    ],
+    "O=Cc1cnc(F)cn1": [
+      "dsgdb9nsd_132707",
+      "dsgdb9nsd_132711"
+    ],
+    "O=Cc1cnc(O)cn1": [
+      "dsgdb9nsd_028628",
+      "dsgdb9nsd_028631"
+    ],
+    "O=Cc1cnccn1": [
+      "dsgdb9nsd_005360",
+      "dsgdb9nsd_005364"
+    ],
+    "O=[N+]([O-])c1cnccn1": [
+      "dsgdb9nsd_131918",
+      "dsgdb9nsd_131922"
+    ],
+    "OCCc1cnccn1": [
+      "dsgdb9nsd_033027",
+      "dsgdb9nsd_033031"
+    ],
+    "OCc1cnc(F)cn1": [
+      "dsgdb9nsd_133056",
+      "dsgdb9nsd_133060"
+    ],
+    "OCc1cnc(O)cn1": [
+      "dsgdb9nsd_031873",
+      "dsgdb9nsd_031877"
+    ],
+    "OCc1cnccn1": [
+      "dsgdb9nsd_005411",
+      "dsgdb9nsd_005415"
+    ],
+    "Oc1cnccn1": [
+      "dsgdb9nsd_000952",
+      "dsgdb9nsd_000956"
+    ],
+    "c1cnc(C2CC2)cn1": [
+      "dsgdb9nsd_024638",
+      "dsgdb9nsd_024642"
+    ],
+    "c1cnc(C2CN2)cn1": [
+      "dsgdb9nsd_024657",
+      "dsgdb9nsd_024661"
+    ],
+    "c1cnc(C2CO2)cn1": [
+      "dsgdb9nsd_024667",
+      "dsgdb9nsd_024671"
+    ],
+    "c1cnc(N2CC2)cn1": [
+      "dsgdb9nsd_024647",
+      "dsgdb9nsd_024651"
+    ]
+  },
+  "repeated_source_id_count": 0,
+  "source_license_note": "The accessible Figshare download response did not expose a license for the raw archive. The article is indexed as CC BY-NC-SA 4.0, but that must not be assumed to license the archive. Verify archive-specific reuse and redistribution terms before redistributing it.",
+  "source_name": "QM9 original XYZ archive",
+  "source_publication": {
+    "article_license": "CC BY-NC-SA 4.0 per Crossref metadata; this applies to the article and is not evidence of the separate raw-archive license.",
+    "citation": "Ramakrishnan et al., Quantum chemistry structures and properties of 134 kilo molecules, Scientific Data 1 (2014).",
+    "doi": "10.1038/sdata.2014.22"
+  },
+  "source_version": "Original QM9 release described in Ramakrishnan et al. (2014); archive checksum pinned below.",
+  "transformations": [
+    "Read each XYZ member sequentially from the original tar.bz2 archive.",
+    "Use the source record's first SMILES and InChI fields; preserve source IDs independently.",
+    "Sanitize source SMILES with RDKit and produce canonical isomeric and non-isomeric SMILES.",
+    "Do not merge records by canonical structure."
+  ]
+}

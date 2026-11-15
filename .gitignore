@@ -12,3 +12,17 @@ node_modules/
 .coverage
 coverage/
 *.log
+# Large datasets & local artifacts
+data/
+quarto_code_only/
+archive/
+for gemini/
+.vscode/
+*.jsonl
+out.txt
+remaining_errors.txt
+project_tree.txt
+quarto_bundle.txt
+step3_debug_bundle.txt
+*.zip
+!kaggle_dataset_staging/**/domain_adapters.zip

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+  "public_seed": 4277702397,
+  "source": {
+    "archive_sha256": "d9527a5297a65da31c5676484d5047c3e2b8a8060ce72a46e26158be736bf265",
+    "sample_size": 25000,
+    "sample_seed": 11,
+    "candidate_report": "reports/diagnostics/fma_feasibility_seed11_20261109_204633_336807.jsonl",
+    "candidate_report_sha256": "a1aef3f4822235d949fc3923b10f8c1c0f90d727fce25fabd5242c846aa973f5",
+    "candidate_line": 4,
+    "candidate_line_sha256": "46053e4522f8273202164cda88fdd7743021826c28e3a4312f4c5f4694017a85",
+    "candidate_type": "initial",
+    "quartet_ordinal": 3,
+    "validator_call_number": 3
+  },
+  "feature_ids": [
+    "fma:chroma_cens:mean:01",
+    "fma:chroma_cqt:median:11",
+    "fma:chroma_stft:skew:05",
+    "fma:spectral_bandwidth:min:01"
+  ],
+  "thresholds": [
+    0.25517144799232483,
+    0.4525887370109558,
+    0.3928850293159485,
+    290.3798522949219
+  ],
+  "entity_ids_signature_order": [
+    "53194",
+    "104583",
+    "74557",
+    "111359",
+    "112679",
+    "10811",
+    "139817",
+    "149118",
+    "70026",
+    "107833",
+    "47152",
+    "151991",
+    "36515",
+    "69954",
+    "134635",
+    "43525"
+  ],
+  "signature_values_signature_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "strict_validation": {
+    "accepted": true,
+    "id_level_count": 2,
+    "structural_count": 2
+  }
+}

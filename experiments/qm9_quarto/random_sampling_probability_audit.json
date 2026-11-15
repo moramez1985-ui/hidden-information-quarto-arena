@@ -1,0 +1,2754 @@
+{
+  "constructive_validation": {
+    "abstract_structure_classes": 1,
+    "all_signature_class_counts_per_sample": {
+      "max": 1,
+      "mean": 1.0,
+      "min": 1
+    },
+    "duplicate_entity_sets": {
+      "('dsgdb9nsd_000001', 'dsgdb9nsd_000002', 'dsgdb9nsd_000004', 'dsgdb9nsd_000005', 'dsgdb9nsd_000006', 'dsgdb9nsd_000008', 'dsgdb9nsd_000012', 'dsgdb9nsd_000026', 'dsgdb9nsd_000027', 'dsgdb9nsd_000033', 'dsgdb9nsd_000034', 'dsgdb9nsd_000038', 'dsgdb9nsd_000079', 'dsgdb9nsd_000154', 'dsgdb9nsd_000337', 'dsgdb9nsd_000338')": 2,
+      "('dsgdb9nsd_000001', 'dsgdb9nsd_000004', 'dsgdb9nsd_000006', 'dsgdb9nsd_000008', 'dsgdb9nsd_000015', 'dsgdb9nsd_000026', 'dsgdb9nsd_000033', 'dsgdb9nsd_000038', 'dsgdb9nsd_000094', 'dsgdb9nsd_000099', 'dsgdb9nsd_000124', 'dsgdb9nsd_000337', 'dsgdb9nsd_001500', 'dsgdb9nsd_001534', 'dsgdb9nsd_001551', 'dsgdb9nsd_056447')": 2,
+      "('dsgdb9nsd_000001', 'dsgdb9nsd_000004', 'dsgdb9nsd_000006', 'dsgdb9nsd_000025', 'dsgdb9nsd_000026', 'dsgdb9nsd_000177', 'dsgdb9nsd_000184', 'dsgdb9nsd_000323', 'dsgdb9nsd_000779', 'dsgdb9nsd_000826', 'dsgdb9nsd_000827', 'dsgdb9nsd_000828', 'dsgdb9nsd_000829', 'dsgdb9nsd_023828', 'dsgdb9nsd_023875', 'dsgdb9nsd_023876')": 2,
+      "('dsgdb9nsd_000001', 'dsgdb9nsd_000005', 'dsgdb9nsd_000006', 'dsgdb9nsd_000008', 'dsgdb9nsd_000015', 'dsgdb9nsd_000027', 'dsgdb9nsd_000034', 'dsgdb9nsd_000038', 'dsgdb9nsd_000094', 'dsgdb9nsd_000099', 'dsgdb9nsd_000125', 'dsgdb9nsd_000338', 'dsgdb9nsd_001501', 'dsgdb9nsd_001534', 'dsgdb9nsd_001552', 'dsgdb9nsd_056452')": 2,
+      "('dsgdb9nsd_000001', 'dsgdb9nsd_000005', 'dsgdb9nsd_000006', 'dsgdb9nsd_000025', 'dsgdb9nsd_000027', 'dsgdb9nsd_000177', 'dsgdb9nsd_000184', 'dsgdb9nsd_000323', 'dsgdb9nsd_000779', 'dsgdb9nsd_000826', 'dsgdb9nsd_000827', 'dsgdb9nsd_000828', 'dsgdb9nsd_004225', 'dsgdb9nsd_023828', 'dsgdb9nsd_023876', 'dsgdb9nsd_133618')": 2
+    },
+    "entity_labelled_partition_classes": 198,
+    "entity_selection_frequency": {
+      "dsgdb9nsd_000001": 203,
+      "dsgdb9nsd_000002": 136,
+      "dsgdb9nsd_000003": 34,
+      "dsgdb9nsd_000004": 92,
+      "dsgdb9nsd_000005": 77,
+      "dsgdb9nsd_000006": 104,
+      "dsgdb9nsd_000008": 83,
+      "dsgdb9nsd_000012": 58,
+      "dsgdb9nsd_000015": 60,
+      "dsgdb9nsd_000016": 102,
+      "dsgdb9nsd_000017": 51,
+      "dsgdb9nsd_000025": 8,
+      "dsgdb9nsd_000026": 37,
+      "dsgdb9nsd_000027": 37,
+      "dsgdb9nsd_000032": 47,
+      "dsgdb9nsd_000033": 37,
+      "dsgdb9nsd_000034": 46,
+      "dsgdb9nsd_000037": 24,
+      "dsgdb9nsd_000038": 37,
+      "dsgdb9nsd_000045": 58,
+      "dsgdb9nsd_000046": 36,
+      "dsgdb9nsd_000050": 51,
+      "dsgdb9nsd_000052": 28,
+      "dsgdb9nsd_000053": 9,
+      "dsgdb9nsd_000058": 27,
+      "dsgdb9nsd_000059": 7,
+      "dsgdb9nsd_000061": 32,
+      "dsgdb9nsd_000078": 15,
+      "dsgdb9nsd_000079": 25,
+      "dsgdb9nsd_000089": 32,
+      "dsgdb9nsd_000090": 25,
+      "dsgdb9nsd_000091": 18,
+      "dsgdb9nsd_000092": 17,
+      "dsgdb9nsd_000093": 17,
+      "dsgdb9nsd_000094": 33,
+      "dsgdb9nsd_000099": 22,
+      "dsgdb9nsd_000124": 21,
+      "dsgdb9nsd_000125": 30,
+      "dsgdb9nsd_000131": 12,
+      "dsgdb9nsd_000137": 10,
+      "dsgdb9nsd_000139": 31,
+      "dsgdb9nsd_000140": 17,
+      "dsgdb9nsd_000141": 12,
+      "dsgdb9nsd_000142": 21,
+      "dsgdb9nsd_000143": 8,
+      "dsgdb9nsd_000144": 18,
+      "dsgdb9nsd_000154": 46,
+      "dsgdb9nsd_000156": 12,
+      "dsgdb9nsd_000177": 8,
+      "dsgdb9nsd_000183": 9,
+      "dsgdb9nsd_000184": 65,
+      "dsgdb9nsd_000185": 26,
+      "dsgdb9nsd_000187": 12,
+      "dsgdb9nsd_000189": 13,
+      "dsgdb9nsd_000194": 19,
+      "dsgdb9nsd_000195": 5,
+      "dsgdb9nsd_000198": 20,
+      "dsgdb9nsd_000214": 4,
+      "dsgdb9nsd_000238": 7,
+      "dsgdb9nsd_000245": 10,
+      "dsgdb9nsd_000269": 11,
+      "dsgdb9nsd_000310": 16,
+      "dsgdb9nsd_000323": 8,
+      "dsgdb9nsd_000337": 10,
+      "dsgdb9nsd_000338": 10,
+      "dsgdb9nsd_000349": 9,
+      "dsgdb9nsd_000350": 9,
+      "dsgdb9nsd_000365": 7,
+      "dsgdb9nsd_000366": 10,
+      "dsgdb9nsd_000379": 27,
+      "dsgdb9nsd_000405": 7,
+      "dsgdb9nsd_000406": 8,
+      "dsgdb9nsd_000427": 8,
+      "dsgdb9nsd_000429": 7,
+      "dsgdb9nsd_000431": 6,
+      "dsgdb9nsd_000437": 3,
+      "dsgdb9nsd_000452": 7,
+      "dsgdb9nsd_000454": 5,
+      "dsgdb9nsd_000593": 20,
+      "dsgdb9nsd_000631": 5,
+      "dsgdb9nsd_000632": 6,
+      "dsgdb9nsd_000753": 8,
+      "dsgdb9nsd_000779": 8,
+      "dsgdb9nsd_000826": 31,
+      "dsgdb9nsd_000827": 31,
+      "dsgdb9nsd_000828": 41,
+      "dsgdb9nsd_000829": 29,
+      "dsgdb9nsd_000830": 23,
+      "dsgdb9nsd_000837": 6,
+      "dsgdb9nsd_000851": 7,
+      "dsgdb9nsd_000888": 8,
+      "dsgdb9nsd_000889": 4,
+      "dsgdb9nsd_000894": 8,
+      "dsgdb9nsd_000895": 5,
+      "dsgdb9nsd_000899": 3,
+      "dsgdb9nsd_001005": 12,
+      "dsgdb9nsd_001006": 7,
+      "dsgdb9nsd_001008": 1,
+      "dsgdb9nsd_001011": 7,
+      "dsgdb9nsd_001012": 2,
+      "dsgdb9nsd_001035": 1,
+      "dsgdb9nsd_001217": 3,
+      "dsgdb9nsd_001218": 3,
+      "dsgdb9nsd_001264": 3,
+      "dsgdb9nsd_001289": 6,
+      "dsgdb9nsd_001499": 8,
+      "dsgdb9nsd_001500": 7,
+      "dsgdb9nsd_001501": 7,
+      "dsgdb9nsd_001534": 12,
+      "dsgdb9nsd_001535": 6,
+      "dsgdb9nsd_001550": 14,
+      "dsgdb9nsd_001551": 5,
+      "dsgdb9nsd_001552": 9,
+      "dsgdb9nsd_001596": 5,
+      "dsgdb9nsd_001598": 3,
+      "dsgdb9nsd_001599": 3,
+      "dsgdb9nsd_001601": 3,
+      "dsgdb9nsd_001654": 8,
+      "dsgdb9nsd_001706": 5,
+      "dsgdb9nsd_001709": 3,
+      "dsgdb9nsd_001710": 2,
+      "dsgdb9nsd_001711": 2,
+      "dsgdb9nsd_001716": 2,
+      "dsgdb9nsd_001936": 5,
+      "dsgdb9nsd_001937": 4,
+      "dsgdb9nsd_001938": 5,
+      "dsgdb9nsd_001939": 4,
+      "dsgdb9nsd_001940": 4,
+      "dsgdb9nsd_001941": 5,
+      "dsgdb9nsd_001942": 5,
+      "dsgdb9nsd_002171": 2,
+      "dsgdb9nsd_002498": 2,
+      "dsgdb9nsd_002566": 2,
+      "dsgdb9nsd_002567": 2,
+      "dsgdb9nsd_002568": 2,
+      "dsgdb9nsd_002569": 2,
+      "dsgdb9nsd_002741": 4,
+      "dsgdb9nsd_002868": 3,
+      "dsgdb9nsd_002871": 2,
+      "dsgdb9nsd_003140": 4,
+      "dsgdb9nsd_004111": 2,
+      "dsgdb9nsd_004208": 48,
+      "dsgdb9nsd_004209": 13,
+      "dsgdb9nsd_004225": 2,
+      "dsgdb9nsd_004230": 10,
+      "dsgdb9nsd_004232": 13,
+      "dsgdb9nsd_004237": 8,
+      "dsgdb9nsd_004238": 14,
+      "dsgdb9nsd_004277": 2,
+      "dsgdb9nsd_004448": 3,
+      "dsgdb9nsd_004625": 4,
+      "dsgdb9nsd_004627": 3,
+      "dsgdb9nsd_004630": 3,
+      "dsgdb9nsd_004633": 2,
+      "dsgdb9nsd_004634": 2,
+      "dsgdb9nsd_004649": 4,
+      "dsgdb9nsd_004650": 4,
+      "dsgdb9nsd_004651": 1,
+      "dsgdb9nsd_004652": 1,
+      "dsgdb9nsd_004657": 4,
+      "dsgdb9nsd_004658": 3,
+      "dsgdb9nsd_004672": 1,
+      "dsgdb9nsd_004674": 1,
+      "dsgdb9nsd_005178": 1,
+      "dsgdb9nsd_005179": 1,
+      "dsgdb9nsd_005237": 3,
+      "dsgdb9nsd_005238": 3,
+      "dsgdb9nsd_005337": 2,
+      "dsgdb9nsd_006358": 3,
+      "dsgdb9nsd_006360": 4,
+      "dsgdb9nsd_006428": 2,
+      "dsgdb9nsd_006429": 2,
+      "dsgdb9nsd_006659": 1,
+      "dsgdb9nsd_006660": 1,
+      "dsgdb9nsd_006785": 3,
+      "dsgdb9nsd_006787": 2,
+      "dsgdb9nsd_007337": 4,
+      "dsgdb9nsd_007570": 2,
+      "dsgdb9nsd_007572": 1,
+      "dsgdb9nsd_007718": 1,
+      "dsgdb9nsd_007865": 2,
+      "dsgdb9nsd_008232": 1,
+      "dsgdb9nsd_008829": 2,
+      "dsgdb9nsd_008830": 2,
+      "dsgdb9nsd_008831": 3,
+      "dsgdb9nsd_008832": 3,
+      "dsgdb9nsd_008897": 1,
+      "dsgdb9nsd_009449": 1,
+      "dsgdb9nsd_009452": 1,
+      "dsgdb9nsd_009453": 1,
+      "dsgdb9nsd_009458": 1,
+      "dsgdb9nsd_009461": 1,
+      "dsgdb9nsd_009462": 1,
+      "dsgdb9nsd_009536": 1,
+      "dsgdb9nsd_010289": 2,
+      "dsgdb9nsd_010530": 6,
+      "dsgdb9nsd_010672": 1,
+      "dsgdb9nsd_010673": 1,
+      "dsgdb9nsd_010674": 1,
+      "dsgdb9nsd_010716": 1,
+      "dsgdb9nsd_011141": 2,
+      "dsgdb9nsd_011184": 2,
+      "dsgdb9nsd_011185": 2,
+      "dsgdb9nsd_011186": 1,
+      "dsgdb9nsd_011190": 1,
+      "dsgdb9nsd_011449": 1,
+      "dsgdb9nsd_011606": 1,
+      "dsgdb9nsd_012400": 1,
+      "dsgdb9nsd_015448": 2,
+      "dsgdb9nsd_022032": 26,
+      "dsgdb9nsd_023618": 2,
+      "dsgdb9nsd_023620": 5,
+      "dsgdb9nsd_023622": 11,
+      "dsgdb9nsd_023623": 7,
+      "dsgdb9nsd_023656": 5,
+      "dsgdb9nsd_023666": 13,
+      "dsgdb9nsd_023668": 8,
+      "dsgdb9nsd_023828": 8,
+      "dsgdb9nsd_023861": 2,
+      "dsgdb9nsd_023871": 1,
+      "dsgdb9nsd_023872": 1,
+      "dsgdb9nsd_023873": 6,
+      "dsgdb9nsd_023874": 6,
+      "dsgdb9nsd_023875": 4,
+      "dsgdb9nsd_023876": 10,
+      "dsgdb9nsd_023878": 6,
+      "dsgdb9nsd_023885": 10,
+      "dsgdb9nsd_024484": 1,
+      "dsgdb9nsd_024973": 2,
+      "dsgdb9nsd_024987": 1,
+      "dsgdb9nsd_024996": 3,
+      "dsgdb9nsd_026050": 1,
+      "dsgdb9nsd_026643": 1,
+      "dsgdb9nsd_026644": 1,
+      "dsgdb9nsd_026739": 1,
+      "dsgdb9nsd_027022": 1,
+      "dsgdb9nsd_027030": 1,
+      "dsgdb9nsd_027031": 2,
+      "dsgdb9nsd_027034": 2,
+      "dsgdb9nsd_027090": 1,
+      "dsgdb9nsd_027142": 1,
+      "dsgdb9nsd_052447": 1,
+      "dsgdb9nsd_052448": 1,
+      "dsgdb9nsd_053991": 1,
+      "dsgdb9nsd_053992": 1,
+      "dsgdb9nsd_054171": 1,
+      "dsgdb9nsd_056447": 2,
+      "dsgdb9nsd_056452": 2,
+      "dsgdb9nsd_056566": 2,
+      "dsgdb9nsd_056600": 3,
+      "dsgdb9nsd_062005": 1,
+      "dsgdb9nsd_062006": 1,
+      "dsgdb9nsd_062010": 2,
+      "dsgdb9nsd_066007": 1,
+      "dsgdb9nsd_100901": 1,
+      "dsgdb9nsd_102488": 1,
+      "dsgdb9nsd_117321": 1,
+      "dsgdb9nsd_117969": 1,
+      "dsgdb9nsd_132016": 4,
+      "dsgdb9nsd_132017": 4,
+      "dsgdb9nsd_132020": 2,
+      "dsgdb9nsd_132031": 5,
+      "dsgdb9nsd_132037": 3,
+      "dsgdb9nsd_132244": 5,
+      "dsgdb9nsd_132245": 5,
+      "dsgdb9nsd_132376": 2,
+      "dsgdb9nsd_132408": 4,
+      "dsgdb9nsd_133491": 2,
+      "dsgdb9nsd_133505": 1,
+      "dsgdb9nsd_133506": 5,
+      "dsgdb9nsd_133513": 2,
+      "dsgdb9nsd_133537": 4,
+      "dsgdb9nsd_133540": 1,
+      "dsgdb9nsd_133544": 1,
+      "dsgdb9nsd_133546": 4,
+      "dsgdb9nsd_133561": 1,
+      "dsgdb9nsd_133618": 2,
+      "dsgdb9nsd_133640": 2,
+      "dsgdb9nsd_133641": 2,
+      "dsgdb9nsd_133647": 2,
+      "dsgdb9nsd_133764": 1,
+      "dsgdb9nsd_133802": 3
+    },
+    "sample_count": 203,
+    "unique_entity_sets": 198
+  },
+  "eligible_feature_count": 18,
+  "eligible_population_size": 133884,
+  "experiment_dir": "D:\\CODES\\quarto\\experiments\\qm9_quarto",
+  "fixed_quartet_probabilities": [
+    {
+      "expected_successes_in_1024_ordered_draws": 1.0974416976929379e-20,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 1.0717204079032597e-23,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.74697926959656e-21,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 7.56540944296539e-24,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6.220709782744808e-20,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 6.074911897211727e-23,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.220313345164526e-20,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 3.1448372511372323e-23,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.1003854593895242e-20,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 1.0745951751850822e-23,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.6146376367179956e-22,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_double_bond",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 1.5767945671074176e-25,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.488462432473947e-21,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_triple_bond",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 7.312951594212839e-24,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 9.618245009034871e-23,
+      "features": [
+        "contains_hydrogen",
+        "contains_fluorine",
+        "contains_carbonyl",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 9.392817391635617e-26,
+      "probability_zero_successes_in_1024_ordered_draws": 1.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.195479418371744e-06,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring"
+      ],
+      "ordered_draw_probability": 4.097147869503656e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999995804529401
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6.962171066645856e-07,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_aromatic_ring"
+      ],
+      "ordered_draw_probability": 6.798995182271343e-10,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999993037831848
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.000480421141622427,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 4.6916127111565134e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999519694129441
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.8535236274577887e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 1.8100816674392467e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999814649353864
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.003960354863294789,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 3.8675340461863175e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9960474693715329
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 64.20094324769313,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_ring",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 0.06269623364032532,
+      "probability_zero_successes_in_1024_ordered_draws": 1.605058416175361e-29
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.26833512293990697,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 0.0002620460184960029,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7646245980069086
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.7162480549374286,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 0.0026525859911498326,
+      "probability_zero_successes_in_1024_ordered_draws": 0.06588417656634325
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.3210806539373086,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 0.002266680326110653,
+      "probability_zero_successes_in_1024_ordered_draws": 0.09790915600657121
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 20.82847514870359,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 0.02034030776240585,
+      "probability_zero_successes_in_1024_ordered_draws": 7.26181644659465e-10
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 658943.46014418,
+      "features": [
+        "contains_nitrogen",
+        "contains_oxygen",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 643.4994727970508,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.00014396732578802546,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 1.4059309158986862e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9998560430268673
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.085266703960493e-06,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 2.036393265586419e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999979147354572
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.388964905684061e-08,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 4.286098540707091e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999561104015
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 9.024627057039847e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 8.813112360390476e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999097577975077
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.314530856915713e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 3.236846539956751e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999668552402423
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.7990564801523232e-08,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2.7334535938987532e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999720093915
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.716461609462778e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 3.629357040490994e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999628360738612
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.8834290922046664e-08,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 5.7455362228561195e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999999941165699
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.204300413612488e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 3.129199622668445e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999679575087446
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.3965820815384592e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 1.3638496890024016e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999860342766137
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.105613095385904e-06,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 4.9859502884627965e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999994894399894
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.797649671327673e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 4.6852047571559304e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999520246530131
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.01270101373813908,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_double_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 1.2403333728651445e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9873792259654622
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.7399252920350177e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_triple_bond",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 2.675708293002947e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999726011221177
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.07423055408505e-05,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 3.0021782754736815e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999692581665665
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.121752609711867e-07,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_triple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.0954615329217451e-10,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999998878247488
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.012572493724833397,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_multiple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 1.2277825903157614e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9875061336777232
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.416870886398655e-06,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_multiple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 4.313350474998686e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999955831388794
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0033299574868396707,
+      "features": [
+        "contains_nitrogen",
+        "contains_fluorine",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 3.251911608241866e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9966755752762598
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 12837.06192520611,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 12.536193286334091,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 794624.4566569764,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 776.0004459540785,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 102168.30844056838,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 99.77373871149256,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 100909.76191133649,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 98.54468936653954,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 191473.23883364882,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 186.98558479848518,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6.159722512323971,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 0.006015354015941378,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0020739016300422184
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 24713.245113320325,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 24.13402843097688,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 49.710812234110364,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 0.0485457150723734,
+      "probability_zero_successes_in_1024_ordered_draws": 7.400082455789528e-23
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.8048635739990533,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.0027391245839834505,
+      "probability_zero_successes_in_1024_ordered_draws": 0.06028258405507086
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 704402.1028042474,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 687.8926785197729,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 78034.84062405309,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 76.20589904692685,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 10.762431615286582,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 0.010510187124303303,
+      "probability_zero_successes_in_1024_ordered_draws": 2.000779444925045e-05
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 30760.07107406982,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 30.039131908271308,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.3429952596426092,
+      "features": [
+        "contains_nitrogen",
+        "contains_ring",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.00033495630824473553,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7096008027712302
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 303.1086220334439,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 0.29600451370453507,
+      "probability_zero_successes_in_1024_ordered_draws": 8.157397781007715e-157
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 11043.273685044584,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 10.784446958051351,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.9641529026617114,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.0009415555690055775,
+      "probability_zero_successes_in_1024_ordered_draws": 0.381132921432885
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 143.67639269971136,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_carbonyl"
+      ],
+      "ordered_draw_probability": 0.14030897724581187,
+      "probability_zero_successes_in_1024_ordered_draws": 5.842639377750042e-68
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 108.25080592458335,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 0.10571367766072592,
+      "probability_zero_successes_in_1024_ordered_draws": 2.0512878634785101e-50
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5131.98361138264,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 5.01170274549086,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.36797137699155524,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.00035934704784331567,
+      "probability_zero_successes_in_1024_ordered_draws": 0.6920912225567233
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4611.756433674873,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 4.503668392260618,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.31527492027164966,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.00030788566432778287,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7295528516136821
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0001303140753516526,
+      "features": [
+        "contains_nitrogen",
+        "contains_aromatic_ring",
+        "contains_hydroxyl",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 1.2725983921059824e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999869694406856
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 76743423.61145067,
+      "features": [
+        "contains_nitrogen",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 74944.7496205573,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 33721950.155148685,
+      "features": [
+        "contains_nitrogen",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 32931.59194838739,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 61764918.390912704,
+      "features": [
+        "contains_nitrogen",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 60317.30311612569,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 30982065.16098425,
+      "features": [
+        "contains_nitrogen",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 30255.923008773683,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 10954283.293620702,
+      "features": [
+        "contains_nitrogen",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 10697.542278926467,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 26.856760336849824,
+      "features": [
+        "contains_nitrogen",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 0.026227305016454906,
+      "probability_zero_successes_in_1024_ordered_draws": 1.5155657886172914e-12
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6542127.341667588,
+      "features": [
+        "contains_nitrogen",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 6388.796232097254,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.279500405020276,
+      "features": [
+        "contains_nitrogen",
+        "contains_triple_bond",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.005155762114277613,
+      "probability_zero_successes_in_1024_ordered_draws": 0.005025867061192751
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 35824203.03492593,
+      "features": [
+        "contains_nitrogen",
+        "contains_multiple_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 34984.573276294854,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 15692476.184328845,
+      "features": [
+        "contains_nitrogen",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 15324.683773758637,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.094776650308562e-06,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 3.022242822566955e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999969052281679
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.354112016521909e-08,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 3.275500016134677e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999664588591
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.33698316647282e-06,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 2.2822101235086134e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999976630195984
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.5341126374937498e-09,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 1.49815687255249e-12,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999984659098
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.237633737422806e-06,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_ring",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 4.138314196701959e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999957623751812
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0008858854264847535,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_double_bond"
+      ],
+      "ordered_draw_probability": 8.651224868015171e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9991145064713449
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.003779672686185199,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_multiple_bond"
+      ],
+      "ordered_draw_probability": 3.6910866076027333e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9962274543365353
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0012590780641250677,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1.2295684219971365e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.998741713469043
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.017855044185409584,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_double_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1.7436566587314047e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9823032597176816
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.02429952259997289,
+      "features": [
+        "contains_oxygen",
+        "contains_fluorine",
+        "contains_multiple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 2.3730002539036027e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9759930525157122
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 10.263385917260354,
+      "features": [
+        "contains_oxygen",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 0.010022837809824565,
+      "probability_zero_successes_in_1024_ordered_draws": 3.312685334782168e-05
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.8278611158499545,
+      "features": [
+        "contains_oxygen",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 0.003738145620947221,
+      "probability_zero_successes_in_1024_ordered_draws": 0.021600613823143065
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 26.664245584526576,
+      "features": [
+        "contains_oxygen",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.026039302328639234,
+      "probability_zero_successes_in_1024_ordered_draws": 1.8468281101086296e-12
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.22857266071346147,
+      "features": [
+        "contains_oxygen",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.00022321548897798971,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7956481806182922
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.902970422297749,
+      "features": [
+        "contains_oxygen",
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.008694307053025145,
+      "probability_zero_successes_in_1024_ordered_draws": 0.00013079245518603688
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 10199.011872948548,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_triple_bond"
+      ],
+      "ordered_draw_probability": 9.959972532176316,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 157.38657307505824,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 0.15369782526861156,
+      "probability_zero_successes_in_1024_ordered_draws": 6.110374691618345e-75
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 378919.50270837086,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 370.0385768636434,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 31325.175480628506,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 30.590991680301276,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 586746.5252776877,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 572.9946535914919,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 526.5638262469898,
+      "features": [
+        "contains_oxygen",
+        "contains_aromatic_ring",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.514222486569326,
+      "probability_zero_successes_in_1024_ordered_draws": 8.15e-322
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1107269.4350592715,
+      "features": [
+        "contains_oxygen",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1081.3178076750698,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 37438.04945008307,
+      "features": [
+        "contains_oxygen",
+        "contains_double_bond",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 36.560595166096746,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.576425124012979e-05,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 8.375415160168925e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999142394228042
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.708967691522584e-05,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 8.504851261252523e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999129141116253
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.5685176518579655e-07,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_double_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.5317555193925444e-10,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999999843148215
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.0580651935511394e-07,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 2.9863917905772846e-10,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999996941934809
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.5591694807753568e-08,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.5226264460696844e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999844083051
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.840903812748942e-06,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 8.633695129637638e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999911591352681
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6.469166001400032e-08,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 6.317544923242219e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999353083261
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.4220032528671024e-08,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 5.2949250516280296e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.99999994578002
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.0012848727348547e-05,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 2.9309422585301315e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999699876012442
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2.1873059127997893e-05,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 2.1360409304685443e-08,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999781271798259
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6.926063327763165e-08,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 6.763733718518716e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999307393661
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.582919350288657e-06,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 7.4051946780162665e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999924171093701
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.6068938458900425e-08,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 5.4754822713769947e-11,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999439310174
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.314624253855867e-09,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 4.21350024790612e-12,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999956853571
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.3458450098555882e-10,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.3143017674370978e-13,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999998653948
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.887652717987201e-10,
+      "features": [
+        "contains_fluorine",
+        "contains_ring",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 8.679348357409376e-13,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999999991111963
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0011629361016784138,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 1.135679786795326e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9988377391868899
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.010351624049786606,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1.0109007861119732e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9897017178307194
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.00203706693665625,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 1.9893231803283692e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.997965004454025
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.011251246596909821,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1.0987545504794747e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9888117508400645
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.00022005443995553892,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 2.1489691401908098e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9997799697465847
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0013837378128825656,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 1.3513064578931305e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9986172181772742
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0007236968800015686,
+      "features": [
+        "contains_fluorine",
+        "contains_aromatic_ring",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 7.067352343765318e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9992765646699222
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 61241.03436817671,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 59.80569762517257,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3298.531778014628,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 3.22122243946741,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 20953.874607045782,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 20.462768170943146,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4010.837773938131,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 3.916833763611456,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 26061.071600707648,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 25.450265235066063,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 66924.2561669438,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 65.35571891303105,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 309.5523312634891,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.3022971984995011,
+      "probability_zero_successes_in_1024_ordered_draws": 8.29006656655844e-161
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1076.86334946738,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.0516243647142383,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 531.5795958615975,
+      "features": [
+        "contains_ring",
+        "contains_double_bond",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.5191206990835913,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 43825.34593515548,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 42.79818938980027,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3585.5853313897096,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 3.5015481751852633,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 13557.699406198735,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 13.239940826365952,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7390.665273309824,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 7.217446555966625,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 72.37046707299315,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.07067428425096987,
+      "probability_zero_successes_in_1024_ordered_draws": 2.5350455758696372e-33
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.542753772039765,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 0.0005300329805075831,
+      "probability_zero_successes_in_1024_ordered_draws": 0.5810620892936534
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 25928.666770342807,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 25.320963642912897,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.860469801800718,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.007676240040821014,
+      "probability_zero_successes_in_1024_ordered_draws": 0.00037417217163573745
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.08483599398505899,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amine",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 8.284765037603417e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9186597097278598
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 145.98507833462963,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.14256355306116175,
+      "probability_zero_successes_in_1024_ordered_draws": 3.9699645365727417e-69
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.021787387500425928,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 2.1276745605884696e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.978448016474293
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3.582969664928852,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_amide",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.003498993813407082,
+      "probability_zero_successes_in_1024_ordered_draws": 0.027618961816807293
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0340354737202965,
+      "features": [
+        "contains_ring",
+        "contains_triple_bond",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 3.323776730497705e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9665366706424866
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 8.51255389300283,
+      "features": [
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.008313040911135576,
+      "probability_zero_successes_in_1024_ordered_draws": 0.00019390662687741408
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1124.490096792728,
+      "features": [
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 1.0981348601491485,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.25003865138824505,
+      "features": [
+        "contains_ring",
+        "contains_multiple_bond",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.00024417837049633305,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7787469048695578
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1609.1832873482138,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 1.57146805405099,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 17442.440657570747,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 17.033633454658933,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 44549.9287835327,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 43.50578982766865,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 233.39237512171985,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.22792224132980454,
+      "probability_zero_successes_in_1024_ordered_draws": 9.223736123802754e-116
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 421.5273278674368,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.41164778112054373,
+      "probability_zero_successes_in_1024_ordered_draws": 1.2843789031838488e-236
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 230.37726595023065,
+      "features": [
+        "contains_ring",
+        "contains_carbonyl",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.22497779877952212,
+      "probability_zero_successes_in_1024_ordered_draws": 4.5465596180360956e-114
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 479.77116274206736,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.46852652611530016,
+      "probability_zero_successes_in_1024_ordered_draws": 7.819010268532965e-282
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.6956567513124668,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.0006793522962035809,
+      "probability_zero_successes_in_1024_ordered_draws": 0.49862889545530586
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.007065436064175315,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 6.899839906421206e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.992959441244327
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 704.9412717851321,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.6884192107276681,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.258716134568788,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.004158902475164832,
+      "probability_zero_successes_in_1024_ordered_draws": 0.014015427980240604
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.04787807475223765,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 4.675593237523208e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9532489382376761
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 74.77044732328072,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.07301801496414133,
+      "probability_zero_successes_in_1024_ordered_draws": 1.90987616531612e-34
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.04037299908373699,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 3.9426756917711904e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9604303679844587
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.367692344812464,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_amide",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.007195012055480922,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0006147311809517685
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.04368459568039177,
+      "features": [
+        "contains_ring",
+        "contains_hydroxyl",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 4.266073796913259e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9572549404846511
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.23779962588742337,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.00023222619715568689,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7883388713234084
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0027189819865911483,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 2.6552558462804182e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9972847074970017
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 10.396468453382717,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 0.01015280122400656,
+      "probability_zero_successes_in_1024_ordered_draws": 2.8959708530340964e-05
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0001797825290036258,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 1.7556887598010333e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9998202336151143
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.02981555675015273,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_amide",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2.9116754638821027e-05,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9706241208611838
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.00046386570260199204,
+      "features": [
+        "contains_ring",
+        "contains_nitrile",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 4.5299385019725785e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.999536241761433
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0006099879172164254,
+      "features": [
+        "contains_ring",
+        "contains_amine",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 5.956913254066654e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9993901979060489
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0043599793243725765,
+      "features": [
+        "contains_ring",
+        "contains_amine",
+        "contains_amide",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 4.257792308957594e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9956495023455004
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.000276723893462479,
+      "features": [
+        "contains_ring",
+        "contains_amine",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2.7023817720945216e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9997233143537236
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0007324931076431032,
+      "features": [
+        "contains_ring",
+        "contains_amide",
+        "contains_ester",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 7.153253004327179e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9992677748381437
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6917.767902930807,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 6.755632717705867,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 75982.94072040566,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 74.20209054727115,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 22.29943260868508,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 0.021776789656919024,
+      "probability_zero_successes_in_1024_ordered_draws": 1.6161223860094554e-10
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5408783.209542355,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 5282.014853068706,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 969.0983654192737,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_double_bond",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.9463851224797595,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2069.2899884592607,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_hydroxyl"
+      ],
+      "ordered_draw_probability": 2.020791004354747,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 6340.7907013030535,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 6.192178419241263,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 49864.50162646618,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 48.69580236959588,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3530200.4650653475,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_multiple_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 3447.4613916653784,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 4.672126542856597,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_nitrile"
+      ],
+      "ordered_draw_probability": 0.004562623577008395,
+      "probability_zero_successes_in_1024_ordered_draws": 0.009252905651640024
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 931439.5774920047,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 909.6089623945359,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 29.790548856015945,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_carbonyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.029092332867203072,
+      "probability_zero_successes_in_1024_ordered_draws": 7.416534216788522e-14
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 389.271086784007,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 0.38014754568750686,
+      "probability_zero_successes_in_1024_ordered_draws": 2.010226254361237e-213
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 7.867537310083843,
+      "features": [
+        "contains_aromatic_ring",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.0076831419043787525,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0003715167084696419
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 19250541.059055492,
+      "features": [
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 18799.35650298388,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 9021070.58504412,
+      "features": [
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 8809.639243207148,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2369156.3972959095,
+      "features": [
+        "contains_double_bond",
+        "contains_triple_bond",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2313.6292942342866,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 328739.14669208176,
+      "features": [
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 321.0343229414861,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 76221.79423008354,
+      "features": [
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 74.43534592781596,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2208746.274727943,
+      "features": [
+        "contains_double_bond",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2156.9787839140067,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 51195.93261313995,
+      "features": [
+        "contains_double_bond",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 49.99602794251948,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 3373862.2708102707,
+      "features": [
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 3294.787373838155,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2482370.3880474903,
+      "features": [
+        "contains_triple_bond",
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2424.189832077627,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 23.06347626340954,
+      "features": [
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.02252292603848588,
+      "probability_zero_successes_in_1024_ordered_draws": 7.398403916389475e-11
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 416176.43744586693,
+      "features": [
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 406.4223021932294,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.003980952318340696,
+      "features": [
+        "contains_triple_bond",
+        "contains_hydroxyl",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 3.887648748379586e-06,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9960269534602503
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.0004197866507952492,
+      "features": [
+        "contains_triple_bond",
+        "contains_amine",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 4.0994790116723554e-07,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9995803013612696
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 2821856.7717640838,
+      "features": [
+        "contains_multiple_bond",
+        "contains_hydroxyl",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 2755.719503675863,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 34563.710660588076,
+      "features": [
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine"
+      ],
+      "ordered_draw_probability": 33.75362369198054,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 13987.219940800405,
+      "features": [
+        "contains_carbonyl",
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 13.659394473437896,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 0.2436087269317061,
+      "features": [
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_amide"
+      ],
+      "ordered_draw_probability": 0.00023789914739424424,
+      "probability_zero_successes_in_1024_ordered_draws": 0.7837715364546617
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 11162.873775644883,
+      "features": [
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amine",
+        "contains_saturated_ether_link"
+      ],
+      "ordered_draw_probability": 10.901243921528206,
+      "probability_zero_successes_in_1024_ordered_draws": 0.0
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 1.0217847325360252e-05,
+      "features": [
+        "contains_hydroxyl",
+        "contains_nitrile",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 9.978366528672121e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999897822047757
+    },
+    {
+      "expected_successes_in_1024_ordered_draws": 5.935473648986351e-06,
+      "features": [
+        "contains_nitrile",
+        "contains_amine",
+        "contains_amide",
+        "contains_ester"
+      ],
+      "ordered_draw_probability": 5.796360985338233e-09,
+      "probability_zero_successes_in_1024_ordered_draws": 0.9999940645439882
+    }
+  ],
+  "fixed_quartet_probability_summary": {
+    "max": 74944.7496205573,
+    "mean": 1587.1161378073268,
+    "median": 0.004158902475164832,
+    "min": 9.392817391635617e-26
+  },
+  "global_feasible_semantic_quartets": 203,
+  "note": "The requested ordered-draw formula P = 16! * product(n_i) / C(N,16) is reported exactly as specified, but it is an ordered-draw expression rather than the actual unordered-subset probability. The benchmark-valid subset probability is estimated by the Monte Carlo routine above.",
+  "pairwise_relations": {
+    "complement_pairs": [],
+    "exact_duplicate_pairs": [],
+    "full_population_logical_implication_pairs": [
+      [
+        "contains_carbon",
+        "contains_amide"
+      ],
+      [
+        "contains_carbon",
+        "contains_carbonyl"
+      ],
+      [
+        "contains_carbon",
+        "contains_double_bond"
+      ],
+      [
+        "contains_carbon",
+        "contains_ester"
+      ],
+      [
+        "contains_carbon",
+        "contains_fluorine"
+      ],
+      [
+        "contains_carbon",
+        "contains_hydroxyl"
+      ],
+      [
+        "contains_carbon",
+        "contains_multiple_bond"
+      ],
+      [
+        "contains_carbon",
+        "contains_nitrile"
+      ],
+      [
+        "contains_carbon",
+        "contains_saturated_ether_link"
+      ],
+      [
+        "contains_carbon",
+        "contains_triple_bond"
+      ],
+      [
+        "contains_carbonyl",
+        "contains_amide"
+      ],
+      [
+        "contains_carbonyl",
+        "contains_ester"
+      ],
+      [
+        "contains_double_bond",
+        "contains_amide"
+      ],
+      [
+        "contains_double_bond",
+        "contains_carbonyl"
+      ],
+      [
+        "contains_double_bond",
+        "contains_ester"
+      ],
+      [
+        "contains_double_bond",
+        "contains_multiple_bond"
+      ],
+      [
+        "contains_fluorine",
+        "contains_heteroatom"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_amide"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_amine"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_carbonyl"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_ester"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_hydroxyl"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_nitrile"
+      ],
+      [
+        "contains_heteroatom",
+        "contains_saturated_ether_link"
+      ],
+      [
+        "contains_hydrogen",
+        "contains_ester"
+      ],
+      [
+        "contains_hydrogen",
+        "contains_hydroxyl"
+      ],
+      [
+        "contains_hydrogen",
+        "contains_saturated_ether_link"
+      ],
+      [
+        "contains_multiple_bond",
+        "contains_amide"
+      ],
+      [
+        "contains_multiple_bond",
+        "contains_carbonyl"
+      ],
+      [
+        "contains_multiple_bond",
+        "contains_ester"
+      ],
+      [
+        "contains_multiple_bond",
+        "contains_nitrile"
+      ],
+      [
+        "contains_nitrogen",
+        "contains_amide"
+      ],
+      [
+        "contains_nitrogen",
+        "contains_amine"
+      ],
+      [
+        "contains_nitrogen",
+        "contains_heteroatom"
+      ],
+      [
+        "contains_nitrogen",
+        "contains_nitrile"
+      ],
+      [
+        "contains_oxygen",
+        "contains_amide"
+      ],
+      [
+        "contains_oxygen",
+        "contains_carbonyl"
+      ],
+      [
+        "contains_oxygen",
+        "contains_ester"
+      ],
+      [
+        "contains_oxygen",
+        "contains_heteroatom"
+      ],
+      [
+        "contains_oxygen",
+        "contains_hydroxyl"
+      ],
+      [
+        "contains_oxygen",
+        "contains_saturated_ether_link"
+      ],
+      [
+        "contains_ring",
+        "contains_aromatic_ring"
+      ],
+      [
+        "contains_triple_bond",
+        "contains_multiple_bond"
+      ],
+      [
+        "contains_triple_bond",
+        "contains_nitrile"
+      ]
+    ]
+  },
+  "structural_equivalence": {
+    "abstract_definition": "Canonicalize the 16-signature mapping under all bit permutations and independent bit complements; this matches _canonical_game_structure in qm9_experiment.py.",
+    "abstract_game_structure_classes": 1,
+    "entity_labelled_definition": "Canonicalize the actual source_id->signature assignment under the same bit permutations and complements; two labelled samples are equivalent only if their canonical assignments match.",
+    "entity_labelled_partition_classes": 198,
+    "invariance_check": true
+  },
+  "total_feature_quartets_evaluated": 3060,
+  "union_probability_estimate": {
+    "estimated_probability_valid_random_sample": 0.0,
+    "estimated_probability_valid_random_sample_95pct_upper_bound": 3e-05,
+    "expected_successful_samples_in_1024": 0.0,
+    "game_structural_class_distribution": {
+      "0": 100000
+    },
+    "probability_zero_successes_in_1024": 1.0,
+    "seed": 20261108,
+    "trials": 100000,
+    "valid_quartet_count_distribution": {
+      "0": 100000
+    }
+  }
+}
