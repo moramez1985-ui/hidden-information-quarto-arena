@@ -1445,7 +1445,15 @@ class MatchSession:
         self.piece_to_entity = {
             piece_id: entity_id for entity_id, piece_id in entity_to_piece.items()
         }
-        self.engine_state = new_game(self.mode, starting_player=self.starting_player)
+        bit_owners: dict[int, Player] = {}
+        for owner, fids in self.private_feature_ownership.items():
+            for fid in fids:
+                bit_owners[self.secret_bit_mapping[fid]] = owner
+        self.engine_state = new_game(
+            self.mode,
+            starting_player=self.starting_player,
+            bit_owners=bit_owners,
+        )
         self._draft_complete = True
 
     def _build_public_entities_payload(self) -> list[dict[str, Any]]:

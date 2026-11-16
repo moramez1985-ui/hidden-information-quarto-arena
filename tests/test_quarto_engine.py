@@ -461,5 +461,91 @@ class QuartoEngineTests(unittest.TestCase):
             self.assertEqual(replay_game(serialized_replay), expected_state)
 
 
+
+
+    def test_bit_owners_only_win_on_placer_owned_attributes(self) -> None:
+        owners = {
+            0: "player_1",  # cube / cylinder
+            1: "player_2",  # light / dark
+            2: "player_1",  # big / small
+            3: "player_2",  # solid / hole
+        }
+        # Part 1: Completing an opponent-owned line does NOT win for the placer;
+        # the owner wins on their subsequent placement turn.
+        state = new_game(mode="self_selection", bit_owners=owners)
+        state = select_piece(state, "player_1", 0)
+        state = place_piece(state, "player_1", 0)
+        state = select_piece(state, "player_2", 1)
+        state = place_piece(state, "player_2", 12)
+        state = select_piece(state, "player_1", 2)
+        state = place_piece(state, "player_1", 1)
+        state = select_piece(state, "player_2", 3)
+        state = place_piece(state, "player_2", 13)
+        state = select_piece(state, "player_1", 8)
+        state = place_piece(state, "player_1", 2)
+        # player_2 completes Row 0 (0, 1, 2, 3) with (0, 2, 8, 10) -> shares "cube" & "big" (both player_1)
+        state = select_piece(state, "player_2", 10)
+        state = place_piece(state, "player_2", 3)
+
+        self.assertFalse(state.is_terminal)
+        self.assertIsNone(state.result)
+        self.assertEqual(state.active_player, "player_1")
+
+        # On player_1's next placement, player_1 claims the completed player_1-owned line.
+        state = select_piece(state, "player_1", 5)
+        state = place_piece(state, "player_1", 14)
+
+        self.assertTrue(state.is_terminal)
+        assert state.result is not None
+        self.assertEqual(state.result.outcome, "win")
+        self.assertEqual(state.result.winner, "player_1")
+        self.assertEqual(len(state.result.winning_lines), 1)
+        self.assertEqual(state.result.winning_lines[0].cells, (0, 1, 2, 3))
+        self.assertEqual(state.result.winning_lines[0].shared_attributes, ("cube", "big"))
+
+        # Part 2: When a line shares attributes owned by BOTH players, only the placer's
+        # owned attribute is recorded in winning_lines.shared_attributes.
+        state2 = new_game(mode="self_selection", bit_owners=owners)
+        state2 = select_piece(state2, "player_1", 0)
+        state2 = place_piece(state2, "player_1", 0)
+        state2 = select_piece(state2, "player_2", 1)
+        state2 = place_piece(state2, "player_2", 12)
+        state2 = select_piece(state2, "player_1", 2)
+        state2 = place_piece(state2, "player_1", 1)
+        state2 = select_piece(state2, "player_2", 3)
+        state2 = place_piece(state2, "player_2", 13)
+        state2 = select_piece(state2, "player_1", 4)
+        state2 = place_piece(state2, "player_1", 6)
+        state2 = select_piece(state2, "player_2", 5)
+        state2 = place_piece(state2, "player_2", 14)
+        state2 = select_piece(state2, "player_1", 6)
+        state2 = place_piece(state2, "player_1", 7)
+        # player_2 places piece 7 at cell 15 -> Row 3 (12, 13, 14, 15) has (1, 3, 5, 7)
+        # sharing "cylinder" (bit 0=1, player_1) and "solid" (bit 3=0, player_2).
+        state2 = select_piece(state2, "player_2", 7)
+        state2 = place_piece(state2, "player_2", 15)
+
+        self.assertTrue(state2.is_terminal)
+        assert state2.result is not None
+        self.assertEqual(state2.result.outcome, "win")
+        self.assertEqual(state2.result.winner, "player_2")
+        self.assertEqual(len(state2.result.winning_lines), 1)
+        self.assertEqual(state2.result.winning_lines[0].cells, (12, 13, 14, 15))
+        self.assertEqual(state2.result.winning_lines[0].shared_attributes, ("solid",))
+
+        round_tripped_state = deserialize_state(serialize_state(state2))
+        self.assertEqual(round_tripped_state, state2)
+        replayed_state = replay_game(serialize_replay(state2))
+        self.assertEqual(replayed_state, state2)
+
+    def test_bit_owners_validation_rejects_incomplete_or_invalid_mappings(self) -> None:
+        with self.assertRaises(ValueError):
+            new_game(bit_owners={0: "player_1", 1: "player_2"})
+        with self.assertRaises(ValueError):
+            new_game(bit_owners={0: "player_1", 1: "player_2", 2: "player_1", 4: "player_2"})
+        with self.assertRaises(ValueError):
+            new_game(bit_owners={0: "player_1", 1: "player_2", 2: "player_1", 3: "player_3"})  # type: ignore[dict-item]
+
+
 if __name__ == "__main__":
     unittest.main()

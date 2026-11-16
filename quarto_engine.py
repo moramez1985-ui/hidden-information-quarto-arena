@@ -22,8 +22,12 @@ ATTRIBUTE_PAIRS = (
     ("solid", "hole"),
 )
 ATTRIBUTE_VALUES = tuple(value for pair in ATTRIBUTE_PAIRS for value in pair)
+ATTRIBUTE_TO_BIT = {
+    value: bit for bit, pair in enumerate(ATTRIBUTE_PAIRS) for value in pair
+}
 BOARD_SIZE = 4
 PIECE_COUNT = 16
+BIT_COUNT = 4
 STATE_SCHEMA_VERSION = 1
 REPLAY_SCHEMA_VERSION = 1
 
@@ -64,6 +68,7 @@ class GameState:
     is_terminal: bool
     result: GameResult | None
     history: tuple[ActionRecord, ...]
+    bit_owners: tuple[tuple[int, Player], ...] | None = None
 
 
 WINNING_LINES = (
@@ -83,9 +88,11 @@ WINNING_LINES = (
 def new_game(
     mode: Mode = "classic",
     starting_player: Player = "player_1",
+    bit_owners: Mapping[int, Player] | Sequence[tuple[int, Player]] | None = None,
 ) -> GameState:
     parsed_mode = _parse_mode(mode)
     parsed_starting_player = _parse_player(starting_player)
+    parsed_bit_owners = _parse_bit_owners(bit_owners)
     state = GameState(
         mode=parsed_mode,
         starting_player=parsed_starting_player,
@@ -98,6 +105,7 @@ def new_game(
         is_terminal=False,
         result=None,
         history=(),
+        bit_owners=parsed_bit_owners,
     )
     _validate_state(state)
     return state
@@ -110,12 +118,23 @@ def piece_attributes(piece_id: int) -> tuple[str, ...]:
     )
 
 
-def find_winning_lines(board: Sequence[int | None]) -> tuple[WinningLine, ...]:
+def find_winning_lines(
+    board: Sequence[int | None],
+    *,
+    bit_owners: Mapping[int, Player] | Sequence[tuple[int, Player]] | None = None,
+    owner: Player | None = None,
+) -> tuple[WinningLine, ...]:
     if len(board) != PIECE_COUNT:
         raise ValueError(f"Board must contain exactly {PIECE_COUNT} cells.")
     for piece_id in board:
         if piece_id is not None:
             _require_piece_id(piece_id)
+
+    parsed_bit_owners = _parse_bit_owners(bit_owners)
+    parsed_owner = _parse_optional_player(owner)
+    owner_map = dict(parsed_bit_owners) if parsed_bit_owners is not None else None
+    if owner_map is not None and parsed_owner is None:
+        raise ValueError("owner must be provided when bit_owners is specified.")
 
     completed: list[WinningLine] = []
     for cells in WINNING_LINES:
@@ -125,7 +144,13 @@ def find_winning_lines(board: Sequence[int | None]) -> tuple[WinningLine, ...]:
         attributes = tuple(
             attribute
             for attribute in ATTRIBUTE_VALUES
-            if all(attribute in piece_attributes(piece_id) for piece_id in pieces_on_line)
+            if (
+                owner_map is None
+                or owner_map[ATTRIBUTE_TO_BIT[attribute]] == parsed_owner
+            )
+            and all(
+                attribute in piece_attributes(piece_id) for piece_id in pieces_on_line
+            )
         )
         if attributes:
             completed.append(WinningLine(cells=cells, shared_attributes=attributes))
@@ -211,7 +236,11 @@ def place_piece(state: GameState, player: Player, cell: int) -> GameState:
     remaining_pieces = tuple(
         available for available in state.remaining_pieces if available != piece_id
     )
-    winning_lines = find_winning_lines(board)
+    winning_lines = find_winning_lines(
+        board,
+        bit_owners=state.bit_owners,
+        owner=parsed_player if state.bit_owners is not None else None,
+    )
     history = state.history + (
         ActionRecord(kind="place_piece", player=parsed_player, cell=cell),
     )
@@ -297,7 +326,7 @@ def apply_action(state: GameState, action: Mapping[str, object]) -> GameState:
 
 def state_to_dict(state: GameState) -> dict[str, object]:
     _validate_state(state)
-    return {
+    payload: dict[str, object] = {
         "schema_version": STATE_SCHEMA_VERSION,
         "mode": state.mode,
         "starting_player": state.starting_player,
@@ -311,6 +340,11 @@ def state_to_dict(state: GameState) -> dict[str, object]:
         "result": _result_to_dict(state.result),
         "history": [_action_to_dict(action) for action in state.history],
     }
+    if state.bit_owners is not None:
+        payload["bit_owners"] = {
+            str(bit): owner for bit, owner in state.bit_owners
+        }
+    return payload
 
 
 def serialize_state(state: GameState) -> str:
@@ -334,8 +368,11 @@ def deserialize_state(serialized: str) -> GameState:
         "result",
         "history",
     }
-    expected_keys = legacy_keys | {"starting_player"}
-    if set(data) not in (legacy_keys, expected_keys):
+    allowed_optional_keys = {"starting_player", "bit_owners"}
+    actual_keys = set(data)
+    if not legacy_keys.issubset(actual_keys) or not actual_keys.issubset(
+        legacy_keys | allowed_optional_keys
+    ):
         raise ValueError("Serialized state has missing or unexpected fields.")
     if data["schema_version"] != STATE_SCHEMA_VERSION:
         raise ValueError("Unsupported state schema version.")
@@ -355,6 +392,7 @@ def deserialize_state(serialized: str) -> GameState:
         is_terminal=_require_bool(data["is_terminal"], "is_terminal"),
         result=_parse_result(data["result"]),
         history=tuple(_parse_action(action) for action in history_data),
+        bit_owners=_parse_serialized_bit_owners(data.get("bit_owners")),
     )
     _validate_state(state)
     return state
@@ -362,13 +400,17 @@ def deserialize_state(serialized: str) -> GameState:
 
 def serialize_replay(state: GameState) -> str:
     _validate_state(state)
-    replay = {
+    replay: dict[str, object] = {
         "schema_version": REPLAY_SCHEMA_VERSION,
         "mode": state.mode,
         "starting_player": state.starting_player,
         "actions": [_action_to_dict(action) for action in state.history],
         "result": _result_to_dict(state.result),
     }
+    if state.bit_owners is not None:
+        replay["bit_owners"] = {
+            str(bit): owner for bit, owner in state.bit_owners
+        }
     return json.dumps(replay, sort_keys=True, separators=(",", ":"))
 
 
@@ -377,16 +419,24 @@ def replay_game(serialized_replay: str) -> GameState:
     if not isinstance(replay, Mapping):
         raise ValueError("Serialized replay must contain a JSON object.")
     legacy_keys = {"schema_version", "mode", "actions", "result"}
-    expected_keys = legacy_keys | {"starting_player"}
-    if set(replay) not in (legacy_keys, expected_keys):
+    allowed_optional_keys = {"starting_player", "bit_owners"}
+    actual_keys = set(replay)
+    if not legacy_keys.issubset(actual_keys) or not actual_keys.issubset(
+        legacy_keys | allowed_optional_keys
+    ):
         raise ValueError("Serialized replay has missing or unexpected fields.")
     if replay["schema_version"] != REPLAY_SCHEMA_VERSION:
         raise ValueError("Unsupported replay schema version.")
 
     mode = _parse_mode(replay["mode"])
     starting_player = _parse_player(replay.get("starting_player", "player_1"))
+    bit_owners = _parse_serialized_bit_owners(replay.get("bit_owners"))
     actions = _require_list(replay["actions"], "actions")
-    state = new_game(mode, starting_player=starting_player)
+    state = new_game(
+        mode,
+        starting_player=starting_player,
+        bit_owners=bit_owners,
+    )
     for action in actions:
         if not isinstance(action, Mapping):
             raise ValueError("Every replay action must be an object.")
@@ -402,6 +452,7 @@ def _validate_state(state: GameState) -> None:
     _parse_player(state.starting_player)
     _parse_player(state.active_player)
     _parse_phase(state.phase)
+    _parse_bit_owners(state.bit_owners)
     if len(state.board) != PIECE_COUNT:
         raise ValueError(f"Board must contain exactly {PIECE_COUNT} cells.")
     placed = [piece_id for piece_id in state.board if piece_id is not None]
@@ -455,10 +506,15 @@ def _validate_result(state: GameState) -> None:
     if result.mode != state.mode:
         raise ValueError("Result mode must match the game mode.")
     _parse_player(state.active_player)
+    expected_lines = find_winning_lines(
+        state.board,
+        bit_owners=state.bit_owners,
+        owner=state.active_player if state.bit_owners is not None else None,
+    )
     if result.outcome == "win":
         if result.reason != "quarto" or result.winner != state.active_player:
             raise ValueError("Winning result must identify the active winning player.")
-        if result.winning_lines != find_winning_lines(state.board):
+        if result.winning_lines != expected_lines:
             raise ValueError("Winning result lines must match the board.")
         if not result.winning_lines:
             raise ValueError("A winning result must include a winning line.")
@@ -467,7 +523,7 @@ def _validate_result(state: GameState) -> None:
             raise ValueError("Draw result must identify a full-board draw.")
         if any(piece_id is None for piece_id in state.board):
             raise ValueError("A draw requires a full board.")
-        if result.winning_lines or find_winning_lines(state.board):
+        if result.winning_lines or expected_lines:
             raise ValueError("A full board with a winning line is not a draw.")
     else:
         raise ValueError("Unknown result outcome.")
@@ -569,6 +625,50 @@ def _parse_action(value: object) -> ActionRecord:
     )
     _validate_action_record(action)
     return action
+
+
+def _parse_bit_owners(
+    value: Mapping[int, Player] | Sequence[tuple[int, Player]] | None,
+) -> tuple[tuple[int, Player], ...] | None:
+    if value is None:
+        return None
+    if isinstance(value, Mapping):
+        items = list(value.items())
+    elif isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        items = list(value)
+    else:
+        raise ValueError("bit_owners must be a mapping or sequence of (bit, player) pairs.")
+
+    if len(items) != BIT_COUNT:
+        raise ValueError(f"bit_owners must specify all {BIT_COUNT} bits.")
+    parsed: dict[int, Player] = {}
+    for entry in items:
+        if (
+            not isinstance(entry, Sequence)
+            or isinstance(entry, (str, bytes))
+            or len(entry) != 2
+        ):
+            raise ValueError("Each bit_owners entry must be a (bit, player) pair.")
+        bit, owner = entry
+        if type(bit) is not int or not 0 <= bit < BIT_COUNT:
+            raise ValueError(f"Bit index must be an integer from 0 to {BIT_COUNT - 1}.")
+        if bit in parsed:
+            raise ValueError("bit_owners cannot contain duplicate bit indices.")
+        parsed[bit] = _parse_player(owner)
+    return tuple((bit, parsed[bit]) for bit in range(BIT_COUNT))
+
+
+def _parse_serialized_bit_owners(
+    value: object,
+) -> tuple[tuple[int, Player], ...] | None:
+    if value is None:
+        return None
+    data = _require_mapping(value, "bit_owners")
+    if set(data) != {str(bit) for bit in range(BIT_COUNT)}:
+        raise ValueError("Serialized bit_owners must cover bits '0' through '3'.")
+    return _parse_bit_owners(
+        {int(bit_str): _parse_player(owner) for bit_str, owner in data.items()}
+    )
 
 
 def _parse_mode(value: object) -> Mode:
