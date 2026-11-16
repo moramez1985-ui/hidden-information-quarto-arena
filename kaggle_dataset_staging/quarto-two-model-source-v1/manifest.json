@@ -45,15 +45,15 @@
   "excluded": {
     "datasets_and_local_data": "The FMA archive and unrelated local data, reports, notebooks, experiment outputs, credentials, and caches are not copied. The fixed candidate JSON contains only the approved IDs, quartet, thresholds, and validation provenance. ATTRIBUTION.md accompanies the source package.",
     "evaluator": "Not imported or needed because no match-specific gold annotations are provided.",
-    "kaggle_upload_metadata": "Kaggle dataset-metadata.json was not created because it requires the owner slug and license choice; supply it separately when preparing an upload.",
+    "kaggle_upload_metadata": "Kaggle dataset-metadata.json is prepared separately for upload (owner slug: ramemo/quarto-two-model-source-v1, dataset license: CC-BY-4.0; independent Quarto code licensed under MIT).",
     "reports_and_credentials": "No reports, .env files, credentials, caches, virtual environments, or temporary outputs copied.",
     "tests": "Not needed at runtime; retained in repository only."
   },
   "included_files": [
     {
       "path": "ATTRIBUTION.md",
-      "size_bytes": 3399,
-      "sha256": "9297a2b92fb7a1a48c809451dd6d9f482f58b58f08d610ab6c68eb4238c3e6d8"
+      "size_bytes": 4907,
+      "sha256": "0526601f70d096f012ad4bc01d1cb54607fdfaa6bf211ebaebc61cd68b085017"
     },
     {
       "path": "decision_trace.py",
@@ -762,5 +762,19 @@
     "relevant_unit_tests": "33 TournamentRunner/security tests, 20 Kaggle adapter tests, 5 FMA pilot tests, and 14 Task tests passed for this remediation.",
     "snapshot_syntax_import_completeness": "passed through the final offline Kaggle Task regression suite; source manifest checksum, every payload hash, all adapter archive member hashes, Task source parity, and staged source-root resolution were exercised. Kaggle SDK itself is not installed locally.",
     "source_archive_hash": "The mounted local archive matched the pinned SHA-256; it was not copied into staging."
+  },
+  "license_policy": {
+    "benchmark_code_license": "MIT",
+    "fma_metadata_license": "CC-BY-4.0",
+    "fma_archive_included": false,
+    "static_pilot_membership_public": true,
+    "per_match_uuid_crosswalk_restricted": true,
+    "upstream_outreach_status": "sent_nov_2026_no_response_relied_on_explicit_cc_by_4"
+  },
+  "kaggle_upload_metadata": {
+    "dataset_id": "ramemo/quarto-two-model-source-v1",
+    "dataset_license": "CC-BY-4.0",
+    "code_license": "MIT",
+    "supplied_separately_at_upload": true
   }
 }

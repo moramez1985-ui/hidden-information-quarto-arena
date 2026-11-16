@@ -1,0 +1,10 @@
+{
+  "title": "Quarto Hidden-Information Two-Model Benchmark Source (v1)",
+  "id": "ramemo/quarto-two-model-source-v1",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0"
+    }
+  ],
+  "description": "Source snapshot for the Quarto hidden-information two-model Kaggle Benchmark. Independent Quarto engine and harness code are licensed under MIT (see LICENSE); FMA-derived pilot metadata follows upstream CC BY 4.0 attribution terms (see ATTRIBUTION.md). Raw fma_metadata.zip is excluded and must be mounted separately at runtime."
+}
