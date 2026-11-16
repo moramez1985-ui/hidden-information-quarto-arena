@@ -72,7 +72,10 @@ PROTOCOL_TEXT = (
     "entities have unique 4-bit signatures) using "
     '{"kind":"propose_feature","feature_id":"<one legal feature_id>"}; check '
     "requester_private_observation.private for your owned_features, proposal_feedback, and "
-    "rejected_features. During select phase use "
+    "rejected_features. Win condition: during placement, a player wins ONLY by completing a "
+    "4-in-a-row line (row, column, or main diagonal) sharing at least one of that player's own "
+    "2 accepted features; completing a line on the opponent's private features does NOT win. "
+    "During select phase use "
     '{"kind":"select_entity","entity_id":"<one legal entity_id>"}. During place phase '
     'use {"kind":"place_entity","cell":<one legal integer cell>}. You may instead '
     'return {"action":<that action object>} with any of these optional fields: '
