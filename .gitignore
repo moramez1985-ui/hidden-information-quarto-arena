@@ -26,3 +26,8 @@ quarto_bundle.txt
 step3_debug_bundle.txt
 *.zip
 !kaggle_dataset_staging/**/domain_adapters.zip
+
+kaggle_run_v*/
+*.html
+new-benchmark-task-*.ipynb
+

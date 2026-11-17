@@ -452,7 +452,7 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
 
         self.assertFalse(failed_run.passed)
         self.assertIn(
-            "Match completion, draft, audit, replay, or terminal-result validation failed.",
+            "Game 1 validation failed",
             failed_run.failure_message,
         )
         self.assertEqual(len(failed_opponent.prompts), 1)

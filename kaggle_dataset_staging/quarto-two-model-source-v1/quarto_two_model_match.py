@@ -2,7 +2,7 @@ import hashlib
 import json
 import math
 import os
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 import sys
 import time
@@ -21,6 +21,8 @@ PLAYER_1_MODEL = "google/gemini-3.8-flash"
 PLAYER_2_REGISTRY_KEY = "anthropic/claude-sonnet-4-6@default"
 PLAYER_2_MODEL = "anthropic/claude-sonnet-4-6@default"
 PUBLIC_REPLAY_SCHEMA_VERSION = 2
+SERIES_TARGET_GAMES = 3
+SERIES_STARTING_PLAYERS = ("player_1", "player_2", "player_1")
 
 _PUBLIC_AUDIT_FIELDS = frozenset({
     "match_id",
@@ -55,9 +57,21 @@ EXPECTED_SNAPSHOT_FILES = {
     "quarto_engine.py",
     "decision_trace.py",
     "domain_adapters.zip",
+    "evaluator.zip",
     "fma_pilot.py",
     "fma_pilot_instance.json",
 }
+EXPECTED_EVALUATOR_MEMBERS = {
+    "evaluator/__init__.py",
+    "evaluator/__main__.py",
+    "evaluator/adapters.py",
+    "evaluator/annotations.py",
+    "evaluator/automated.py",
+    "evaluator/metrics.py",
+    "evaluator/report.py",
+    "evaluator/semantic_judge.py",
+}
+
 EXPECTED_DOMAIN_ADAPTERS = {
     "domain_adapters/__init__.py",
     "domain_adapters/instance_builder.py",
@@ -114,6 +128,255 @@ def _project_draft_history(raw_draft_history: object) -> list[dict[str, Any]]:
             "accepted": entry["accepted"],
         })
     return projected
+
+
+def _extract_post_terminal_visualization(
+    restricted_log: Mapping[str, Any],
+    public_audit: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    entity_signatures: dict[str, int] = {}
+    bit_feature_legend: list[dict[str, Any]] = []
+    winning_lines: list[dict[str, Any]] = []
+
+    audit_snap = restricted_log.get("audit_snapshot")
+    restricted_eval = (
+        audit_snap.get("restricted_evaluator_data")
+        if isinstance(audit_snap, Mapping)
+        else getattr(audit_snap, "restricted_evaluator_data", None)
+    )
+    if isinstance(restricted_eval, Mapping):
+        entity_to_piece = restricted_eval.get("entity_to_piece")
+        if isinstance(entity_to_piece, Mapping):
+            for eid, piece_id in entity_to_piece.items():
+                entity_signatures[str(eid)] = int(piece_id)
+
+        feature_to_bit = restricted_eval.get("feature_to_bit")
+        ownership = restricted_eval.get("private_feature_ownership")
+        owner_by_feat: dict[str, str] = {}
+        if isinstance(ownership, Mapping):
+            for pl, feats in ownership.items():
+                if isinstance(feats, (list, tuple)):
+                    for f in feats:
+                        owner_by_feat[str(f)] = str(pl)
+
+        if isinstance(feature_to_bit, Mapping):
+            classic_traits = [
+                ("Bit 0 (Height)", "Tall (1) vs Short (0)"),
+                ("Bit 1 (Color)", "Light/Terracotta (1) vs Dark/Forest (0)"),
+                ("Bit 2 (Shape)", "Round/Cylinder (1) vs Square/Cube (0)"),
+                ("Bit 3 (Top)", "Hollow (1) vs Solid (0)"),
+            ]
+            bit_to_feat = {int(b): str(f) for f, b in feature_to_bit.items()}
+            for bit_idx in range(4):
+                feat_id = bit_to_feat.get(bit_idx)
+                trait_name, trait_desc = classic_traits[bit_idx]
+                bit_feature_legend.append({
+                    "bit": bit_idx,
+                    "classic_trait": trait_name,
+                    "visual_rule": trait_desc,
+                    "feature_id": feat_id,
+                    "owner": owner_by_feat.get(feat_id) if feat_id else None,
+                })
+
+    board = public_audit.get("board") if isinstance(public_audit, Mapping) else None
+    if isinstance(board, (list, tuple)) and len(board) == 16 and len(entity_signatures) == 16:
+        lines = [
+            ("Row 1", [0, 1, 2, 3]),
+            ("Row 2", [4, 5, 6, 7]),
+            ("Row 3", [8, 9, 10, 11]),
+            ("Row 4", [12, 13, 14, 15]),
+            ("Col 1", [0, 4, 8, 12]),
+            ("Col 2", [1, 5, 9, 13]),
+            ("Col 3", [2, 6, 10, 14]),
+            ("Col 4", [3, 7, 11, 15]),
+            ("Main Diagonal", [0, 5, 10, 15]),
+            ("Anti Diagonal", [3, 6, 9, 12]),
+        ]
+        legend_by_bit = {entry["bit"]: entry for entry in bit_feature_legend}
+        for line_name, cells in lines:
+            sigs = [entity_signatures.get(str(board[c])) for c in cells if board[c] is not None]
+            if len(sigs) == 4 and all(s is not None for s in sigs):
+                for bit_idx in range(4):
+                    bits = [(int(s) >> bit_idx) & 1 for s in sigs]
+                    if len(set(bits)) == 1:
+                        leg = legend_by_bit.get(bit_idx, {})
+                        winning_lines.append({
+                            "line_name": line_name,
+                            "cells": cells,
+                            "bit": bit_idx,
+                            "bit_value": bits[0],
+                            "classic_trait": leg.get("classic_trait", f"Bit {bit_idx}"),
+                            "feature_id": leg.get("feature_id"),
+                            "owner": leg.get("owner"),
+                        })
+
+    # Extract post-terminal self-reported decision explanations from decision_traces (primary) or events (fallback)
+    reasoning_log: list[dict[str, Any]] = []
+    traces = restricted_log.get("decision_traces")
+    if isinstance(traces, (list, tuple)) and traces:
+        for tr in traces:
+            if not isinstance(tr, Mapping):
+                continue
+            reasoning_log.append({
+                "step": tr.get("turn_id"),
+                "player": tr.get("agent_id"),
+                "action": dict(tr.get("selected_action", {})) if isinstance(tr.get("selected_action"), Mapping) else {},
+                "decision_explanation": tr.get("decision_explanation"),
+                "candidate_hypotheses": list(tr.get("candidate_hypotheses") or ()),
+                "declared_confidence": tr.get("declared_confidence"),
+            })
+    else:
+        events = restricted_log.get("events")
+        if isinstance(events, (list, tuple)):
+            step_num = 0
+            for ev in events:
+                if not isinstance(ev, Mapping) or ev.get("validation") != "passed":
+                    continue
+                step_num += 1
+                parsed = ev.get("parsed_action") if isinstance(ev.get("parsed_action"), Mapping) else {}
+                expl = None
+                if isinstance(ev.get("response_content"), str):
+                    try:
+                        raw_obj = json.loads(ev["response_content"])
+                        if isinstance(raw_obj, Mapping):
+                            expl = raw_obj.get("decision_explanation")
+                    except Exception:
+                        pass
+                reasoning_log.append({
+                    "step": step_num,
+                    "player": ev.get("requester"),
+                    "action": dict(parsed),
+                    "decision_explanation": expl if isinstance(expl, str) else None,
+                })
+
+    return {
+        "entity_signatures": entity_signatures,
+        "bit_feature_legend": bit_feature_legend,
+        "winning_lines": winning_lines,
+        "post_game_reasoning_log": reasoning_log,
+    }
+
+
+def _run_post_game_semantic_judge(
+    completed_games: Sequence[Mapping[str, Any]],
+    model_metadata: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Post-terminal 3rd-LLM semantic auditor using Kaggle Model Proxy (zero in-game exposure)."""
+    try:
+        import kaggle_benchmarks as kbench
+    except Exception:
+        return {
+            "status": "skipped",
+            "reason": "kaggle_benchmarks runtime not available in local test environment.",
+        }
+
+    judge_candidates = (
+        "google/gemini-2.5-pro",
+        "google/gemini-3.1-pro-preview",
+        "openai/gpt-5.4-mini",
+        "google/gemini-2.5-flash",
+    )
+    p1_slug = str(model_metadata.get("player_1", {}).get("model", ""))
+    p2_slug = str(model_metadata.get("player_2", {}).get("model", ""))
+
+    judge_llm = None
+    judge_model_name = None
+    models_reg = getattr(kbench, "llms", None)
+    if models_reg is not None:
+        for cand in judge_candidates:
+            if cand in (p1_slug, p2_slug):
+                continue
+            try:
+                judge_llm = models_reg[cand]
+                judge_model_name = cand
+                break
+            except Exception:
+                continue
+
+    if judge_llm is None:
+        return {
+            "status": "skipped",
+            "reason": "No distinct 3rd judge model available in Kaggle Model Proxy registry.",
+        }
+
+    # Build compact post-game audit bundle containing only completed match replays & self-reported explanations
+    audit_bundle = []
+    for idx, g in enumerate(completed_games, 1):
+        m = g.get("match", {})
+        tv = g.get("terminal_visualization", {})
+        rlog = tv.get("post_game_reasoning_log", [])
+        audit_bundle.append({
+            "game_index": idx,
+            "winner": m.get("winner"),
+            "winning_lines": tv.get("winning_lines", []),
+            "legend": tv.get("bit_feature_legend", []),
+            "reasoning_sample": [
+                {
+                    "step": r.get("step"),
+                    "player": r.get("player"),
+                    "action": r.get("action"),
+                    "explanation": r.get("decision_explanation"),
+                }
+                for r in rlog
+                if r.get("decision_explanation")
+            ][:24],
+        })
+
+    has_any_explanations = any(len(item["reasoning_sample"]) > 0 for item in audit_bundle)
+    if not has_any_explanations:
+        return {
+            "status": "skipped",
+            "judge_model": judge_model_name,
+            "reason": "No self-reported decision_explanation entries were emitted by agents.",
+        }
+
+    judge_prompt = (
+        "You are an impartial post-game scientific evaluator auditing two LLM agents playing "
+        "Hidden-Information Quarto (4x4 board, players win ONLY by completing a 4-in-a-row line "
+        "sharing one of their OWN 2 drafted binary attributes). "
+        "Evaluate the post-game reasoning logs below and return ONLY valid JSON with exact keys:\n"
+        '{"player_1": {"logical_faithfulness_rate": <float 0..1>, "trap_awareness_rate": <float 0..1>, '
+        '"self_consistency_score": <float 0..1>, "key_finding": "<1 sentence>"}, '
+        '"player_2": {"logical_faithfulness_rate": <float 0..1>, "trap_awareness_rate": <float 0..1>, '
+        '"self_consistency_score": <float 0..1>, "key_finding": "<1 sentence>"}}\n\n'
+        f"POST_GAME_BUNDLE:\n{json.dumps(audit_bundle, ensure_ascii=False)}"
+    )
+    try:
+        raw_resp = judge_llm.prompt(judge_prompt)
+        text = raw_resp if isinstance(raw_resp, str) else getattr(raw_resp, "text", str(raw_resp))
+        start = text.find("{")
+        end = text.rfind("}")
+        parsed = json.loads(text[start : end + 1]) if start != -1 and end != -1 else {}
+        return {
+            "status": "completed",
+            "judge_model": judge_model_name,
+            "trust_boundary": "post_terminal_advisory_only_not_ground_truth",
+            "scores": parsed,
+        }
+    except Exception as exc:
+        return {
+            "status": "failed",
+            "judge_model": judge_model_name,
+            "reason": f"{type(exc).__name__}",
+        }
+
+
+def _run_automated_evaluator(
+    restricted_logs: list[Mapping[str, Any]] | Mapping[str, Any],
+    instance_path: Path,
+) -> dict[str, Any]:
+    from evaluator.automated import evaluate_automated
+
+    raw_instance = json.loads(instance_path.read_text(encoding="utf-8"))
+    payload: Mapping[str, Any] = (
+        {"matches": restricted_logs}
+        if isinstance(restricted_logs, list)
+        else restricted_logs
+    )
+    report = evaluate_automated(payload, instance_data=raw_instance)
+    report["status"] = "completed"
+    report["privacy_boundary"] = "aggregated_metrics_only_no_restricted_crosswalk"
+    return report
 
 
 def _project_public_replay(public_audit: object) -> dict[str, Any]:
@@ -752,6 +1015,9 @@ def _run_quarto_two_model_match(
     adapter_archive = str(source_root / "domain_adapters.zip")
     if adapter_archive not in sys.path:
         sys.path.insert(0, adapter_archive)
+    evaluator_archive = str(source_root / "evaluator.zip")
+    if evaluator_archive not in sys.path:
+        sys.path.insert(0, evaluator_archive)
 
     from kaggle_agent_adapter import KaggleAgentAdapter
     from fma_pilot import load_fma_pilot
@@ -777,10 +1043,14 @@ def _run_quarto_two_model_match(
         raise RuntimeError("The configured FMA metadata archive is unavailable.")
 
     failure_context["stage"] = "instance_validation"
-    pilot = load_fma_pilot(
-        archive_path,
-        instance_path=source_root / "fma_pilot_instance.json",
-    )
+    candidate_files = sorted(source_root.glob("fma_*candidate*.json"))
+    if not candidate_files:
+        candidate_files = [source_root / "fma_pilot_instance.json"]
+    series_pilots = [
+        load_fma_pilot(archive_path, instance_path=cf)
+        for cf in candidate_files[:SERIES_TARGET_GAMES]
+    ]
+    pilot = series_pilots[0]
     security_preflight = run_security_audit(
         adapter=pilot.adapter,
         instance=pilot.instance,
@@ -811,72 +1081,141 @@ def _run_quarto_two_model_match(
             _IsolatedChatLLM(opponent_llm, player="player_2")
         ).client,
     }
-    runner = TournamentRunner(
-        clients,
-        model_tags=(PLAYER_1_MODEL, PLAYER_2_MODEL),
-        max_correction_attempts=0,
-        wall_clock_timeout=900.0,
-    )
-    failure_context["stage"] = "match_execution"
-    result = runner.run_match(
-        pilot.adapter,
-        pilot.instance,
-        assignments,
-        starting_player="player_1",
-        restricted_source_ids=pilot.restricted_source_ids,
-        enable_draft=True,
-    )
-    failure_context["match_result"] = result
-    failure_context["stage"] = "match_validation"
+    series_started_at = time.monotonic()
+    series_budget_seconds = 2400.0
+    min_remaining_for_next_game = 360.0
+    completed_games: list[dict[str, Any]] = []
+    completed_restricted_logs: list[Mapping[str, Any]] = []
+    skipped_or_failed_games: list[dict[str, Any]] = []
 
-    restricted_log = result.restricted_log
-    audit_snapshot = restricted_log.get("audit_snapshot")
-    public_audit = (
-        audit_snapshot.get("public_audit")
-        if isinstance(audit_snapshot, Mapping)
-        else getattr(audit_snapshot, "public_audit", None)
-        if audit_snapshot is not None
-        else restricted_log.get("public_audit")
-    )
-    terminal_result = (
-        public_audit.get("result")
-        if isinstance(public_audit, Mapping)
-        else None
-    )
-    draft_history = (
-        public_audit.get("draft_history")
-        if isinstance(public_audit, Mapping)
-        else None
-    )
-    accepted_draft_count = (
-        sum(
-            1
-            for item in draft_history
-            if isinstance(item, Mapping) and item.get("accepted") is True
+    for game_index, starting_player in enumerate(SERIES_STARTING_PLAYERS, start=1):
+        elapsed_series = time.monotonic() - series_started_at
+        remaining_series = series_budget_seconds - elapsed_series
+        if game_index > 1 and remaining_series < min_remaining_for_next_game:
+            skipped_or_failed_games.append({
+                "game_index": game_index,
+                "starting_player": starting_player,
+                "status": "skipped_time_budget",
+                "reason": (
+                    f"Insufficient remaining series budget ({round(remaining_series, 1)}s < "
+                    f"{int(min_remaining_for_next_game)}s) before starting game {game_index}."
+                ),
+            })
+            continue
+
+        game_timeout = min(900.0, max(120.0, remaining_series - 30.0))
+        runner = TournamentRunner(
+            clients,
+            model_tags=(PLAYER_1_MODEL, PLAYER_2_MODEL),
+            max_correction_attempts=0,
+            wall_clock_timeout=game_timeout,
         )
-        if isinstance(draft_history, (list, tuple))
-        else 0
-    )
-    match_passed = (
-        task_source_integrity.get("status") == "verified"
-        and result.status == "completed"
-        and result.action_count > 0
-        and accepted_draft_count == 4
-        and result.audit_valid
-        and result.replay_valid
-        and _is_valid_terminal_result(terminal_result)
-    )
-    if not match_passed:
-        raise RuntimeError(
-            "Match completion, draft, audit, replay, or terminal-result validation failed."
-        )
+        failure_context["stage"] = f"match_execution_game_{game_index}"
+        try:
+            active_pilot = series_pilots[(game_index - 1) % len(series_pilots)]
+            result = runner.run_match(
+                active_pilot.adapter,
+                active_pilot.instance,
+                assignments,
+                starting_player=starting_player,
+                restricted_source_ids=active_pilot.restricted_source_ids,
+                enable_draft=True,
+            )
+            failure_context["match_result"] = result
+            failure_context["stage"] = "match_validation" if game_index == 1 else f"match_validation_game_{game_index}"
 
-    failure_context["stage"] = "public_replay_validation"
-    public_replay = _project_public_replay(public_audit)
-    public_replay_valid = _validate_public_replay(public_replay)
-    if not public_replay_valid:
-        raise RuntimeError("Public replay validation failed.")
+            restricted_log = result.restricted_log
+            audit_snapshot = restricted_log.get("audit_snapshot")
+            public_audit = (
+                audit_snapshot.get("public_audit")
+                if isinstance(audit_snapshot, Mapping)
+                else getattr(audit_snapshot, "public_audit", None)
+                if audit_snapshot is not None
+                else restricted_log.get("public_audit")
+            )
+            terminal_result = (
+                public_audit.get("result")
+                if isinstance(public_audit, Mapping)
+                else None
+            )
+            draft_history = (
+                public_audit.get("draft_history")
+                if isinstance(public_audit, Mapping)
+                else None
+            )
+            accepted_draft_count = (
+                sum(
+                    1
+                    for item in draft_history
+                    if isinstance(item, Mapping) and item.get("accepted") is True
+                )
+                if isinstance(draft_history, (list, tuple))
+                else 0
+            )
+            match_passed = (
+                task_source_integrity.get("status") == "verified"
+                and result.status == "completed"
+                and result.action_count > 0
+                and accepted_draft_count == 4
+                and result.audit_valid
+                and result.replay_valid
+                and _is_valid_terminal_result(terminal_result)
+            )
+            if not match_passed:
+                detail = result.failure or "match_validation_failed"
+                raise RuntimeError(
+                    f"Game {game_index} validation failed ({detail})."
+                )
 
+            failure_context["stage"] = f"public_replay_validation_game_{game_index}"
+            public_replay = _project_public_replay(public_audit)
+            public_replay_valid = _validate_public_replay(public_replay)
+            if not public_replay_valid:
+                raise RuntimeError(f"Game {game_index} public replay validation failed.")
+
+            match_summary = {
+                "game_index": game_index,
+                "starting_player": starting_player,
+                "match_id": result.match_id,
+                "instance_id": active_pilot.instance.instance_id,
+                "mode": "classic",
+                "draft_enabled": True,
+                "draft_proposal_count": len(draft_history) if isinstance(draft_history, list) else 0,
+                "harness_model_tags": result.assignments,
+                "outcome": result.outcome,
+                "winner": result.winner,
+                "termination_reason": (
+                    terminal_result.get("reason")
+                    if isinstance(terminal_result, dict)
+                    else result.failure
+                ),
+                "action_count": result.action_count,
+                "duration_seconds": round(result.elapsed_seconds, 3),
+                "audit_valid": result.audit_valid,
+                "replay_valid": result.replay_valid,
+                "public_replay_valid": public_replay_valid,
+                "failure": result.failure,
+            }
+            completed_games.append({
+                "match": match_summary,
+                "public_replay": public_replay,
+            })
+            completed_restricted_logs.append(restricted_log)
+        except Exception as game_err:
+            err_reason = getattr(failure_context.get("match_result"), "failure", None) or type(game_err).__name__
+            skipped_or_failed_games.append({
+                "game_index": game_index,
+                "starting_player": starting_player,
+                "status": "failed",
+                "reason": str(err_reason),
+            })
+            if not completed_games and game_index == 1:
+                raise
+
+    if not completed_games:
+        raise RuntimeError("No games completed in the 3-game series.")
+
+    primary_game = completed_games[0]
     failure_context["stage"] = "result_construction"
     return {
         "status": "passed",
@@ -889,6 +1228,7 @@ def _run_quarto_two_model_match(
         },
         "timeout": {
             "match_wall_clock_seconds": 900.0,
+            "series_budget_seconds": series_budget_seconds,
             "provider_call_interruptible": False,
             "limitation": (
                 "Responses returned after the local deadline are rejected before "
@@ -898,28 +1238,16 @@ def _run_quarto_two_model_match(
             ),
         },
         "model_metadata": model_metadata,
-        "match": {
-            "match_id": result.match_id,
-            "instance_id": pilot.instance.instance_id,
-            "mode": "classic",
-            "draft_enabled": True,
-            "draft_proposal_count": len(draft_history) if isinstance(draft_history, list) else 0,
-            "harness_model_tags": result.assignments,
-            "outcome": result.outcome,
-            "winner": result.winner,
-            "termination_reason": (
-                terminal_result.get("reason")
-                if isinstance(terminal_result, dict)
-                else result.failure
-            ),
-            "action_count": result.action_count,
-            "duration_seconds": round(result.elapsed_seconds, 3),
-            "audit_valid": result.audit_valid,
-            "replay_valid": result.replay_valid,
-            "public_replay_valid": public_replay_valid,
-            "failure": result.failure,
+        "series": {
+            "target_games": SERIES_TARGET_GAMES,
+            "completed_games_count": len(completed_games),
+            "incomplete_games_count": len(skipped_or_failed_games),
+            "starting_player_schedule": list(SERIES_STARTING_PLAYERS),
+            "skipped_or_failed_games": skipped_or_failed_games,
         },
-        "public_replay": public_replay,
+        "match": primary_game["match"],
+        "public_replay": primary_game["public_replay"],
+        "matches": completed_games,
         "private_trace_storage": {
             "status": "not_emitted",
             "reason": (
@@ -929,10 +1257,13 @@ def _run_quarto_two_model_match(
             ),
         },
         "evaluator": {
-            "status": "not_run",
-            "reason": (
-                "No match-specific human-gold annotations are included in this "
-                "source snapshot."
+            **_run_automated_evaluator(
+                completed_restricted_logs,
+                source_root / "fma_pilot_instance.json",
+            ),
+            "semantic_judge": _run_post_game_semantic_judge(
+                completed_games,
+                model_metadata,
             ),
         },
     }

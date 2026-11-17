@@ -66,6 +66,11 @@
       "sha256": "57968451289cca21176509f40d0b71da53b54dd6bcabb1d00941c5ad6f2282c6"
     },
     {
+      "path": "evaluator.zip",
+      "size_bytes": 22510,
+      "sha256": "7a3ce252fe4c0498b0088d0076e66ebe8d983afaf087ef9c1a53efc89f93007e"
+    },
+    {
       "path": "fma_pilot.py",
       "size_bytes": 8599,
       "sha256": "4cb2741a85e5d94247f3f17cbd5b103d11a37e053c4f30e64897e53176604f1b"
@@ -92,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 37858,
-      "sha256": "34f0488485514e45eecee2d96d295ce056c6667ed88ff1f38856907a0a65716e"
+      "size_bytes": 53029,
+      "sha256": "f42af55fad7b0f592f15fd92541f17d2a30dfa6d84663ba7932827656e427c87"
     },
     {
       "path": "requirements.txt",
@@ -776,5 +781,47 @@
     "dataset_license": "CC-BY-4.0",
     "code_license": "MIT",
     "supplied_separately_at_upload": true
-  }
+  },
+  "evaluator_members": [
+    {
+      "path": "evaluator/__init__.py",
+      "size_bytes": 512,
+      "sha256": "12419e48948293a84b7ea4405063506b999e2fe3f0f363953ff870ee2a8ba7ba"
+    },
+    {
+      "path": "evaluator/__main__.py",
+      "size_bytes": 1887,
+      "sha256": "fcb800c2d68de9370f58d3210bb12695d517532cb51f0725488954e12be65661"
+    },
+    {
+      "path": "evaluator/adapters.py",
+      "size_bytes": 27159,
+      "sha256": "ac4420e431ac7c1b55fd7a017d3697e919d767d2535b4d8f17c4906ed0147891"
+    },
+    {
+      "path": "evaluator/annotations.py",
+      "size_bytes": 12085,
+      "sha256": "5e4d80e9419f1b71e661991e77c2ef71de654e933af7d54b776ab8c6ab1afd0e"
+    },
+    {
+      "path": "evaluator/automated.py",
+      "size_bytes": 16368,
+      "sha256": "ca70498f50faecbafed679b9bc9e8f4e7ea4569e6e6ee80c095f8d3ee05fc119"
+    },
+    {
+      "path": "evaluator/metrics.py",
+      "size_bytes": 14895,
+      "sha256": "9914d360a7c94c5733e4b42fc05b46c8fd0372460d2e6db9692bb4eb6d26ab95"
+    },
+    {
+      "path": "evaluator/report.py",
+      "size_bytes": 24919,
+      "sha256": "dbb8ac756dae43b890beb3e9804f160e7dde64043c41a1cb000fb44d2496562b"
+    },
+    {
+      "path": "evaluator/semantic_judge.py",
+      "size_bytes": 733,
+      "sha256": "09c1143bae0d50bea9d27be54f3e02863145bfac7a15466cb4785f4ba1d7bca1"
+    }
+  ]
 }

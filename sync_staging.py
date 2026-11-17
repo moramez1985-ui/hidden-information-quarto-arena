@@ -20,6 +20,17 @@ WORKSPACE_TO_STAGED = {
     "requirements.txt": ROOT / "requirements.txt",
 }
 
+EVALUATOR_MEMBERS = [
+    "evaluator/__init__.py",
+    "evaluator/__main__.py",
+    "evaluator/adapters.py",
+    "evaluator/annotations.py",
+    "evaluator/automated.py",
+    "evaluator/metrics.py",
+    "evaluator/report.py",
+    "evaluator/semantic_judge.py",
+]
+
 DOMAIN_ADAPTER_MEMBERS = [
     "domain_adapters/__init__.py",
     "domain_adapters/instance_builder.py",
@@ -65,7 +76,26 @@ def main() -> None:
             })
 
     # 3. محاسبه هش و حجم ۱۱ فایل موجود در اسنپ‌شات
-    all_staged_names = sorted(list(WORKSPACE_TO_STAGED.keys()) + ["domain_adapters.zip"])
+    eval_archive_path = STAGING / "evaluator.zip"
+    eval_members_meta = []
+    with zipfile.ZipFile(eval_archive_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for rel_posix in EVALUATOR_MEMBERS:
+            src_member = ROOT / Path(rel_posix)
+            if not src_member.is_file():
+                raise FileNotFoundError(f"Missing evaluator member: {src_member}")
+            data = src_member.read_bytes()
+            info = zipfile.ZipInfo(filename=rel_posix, date_time=(2026, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3
+            info.external_attr = 0o644 << 16
+            zf.writestr(info, data)
+            eval_members_meta.append({
+                "path": rel_posix,
+                "size_bytes": len(data),
+                "sha256": sha256_bytes(data),
+            })
+
+    all_staged_names = sorted(list(WORKSPACE_TO_STAGED.keys()) + ["domain_adapters.zip", "evaluator.zip"])
     included_files_meta = []
     for name in all_staged_names:
         file_bytes = (STAGING / name).read_bytes()
@@ -81,6 +111,7 @@ def main() -> None:
     manifest["snapshot_id"] = "quarto-two-model-source-v1"
     manifest["included_files"] = included_files_meta
     manifest["archive_members"] = archive_members_meta
+    manifest["evaluator_members"] = eval_members_meta
 
     manifest_bytes = (json.dumps(manifest, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     manifest_path.write_bytes(manifest_bytes)
