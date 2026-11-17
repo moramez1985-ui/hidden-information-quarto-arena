@@ -55,6 +55,10 @@ def main() -> None:
         elif not dst_path.is_file():
             raise FileNotFoundError(f"Missing required source file: {src_path}")
 
+    arena_pool_files = sorted((ROOT / "fma_arena_pool").glob("fma_*arena*.json")) if (ROOT / "fma_arena_pool").is_dir() else []
+    for pf in arena_pool_files:
+        shutil.copyfile(pf, STAGING / pf.name)
+
     # 2. ساخت قطعی (deterministic) آرشیو domain_adapters.zip و ثبت متادیتای اعضا
     archive_path = STAGING / "domain_adapters.zip"
     archive_members_meta = []

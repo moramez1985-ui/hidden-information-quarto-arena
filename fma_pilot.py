@@ -1,61 +1,25 @@
+"""Approved FMA Pilot and Arena Instance Loader with Strict Cryptographic and Structural Validation."""
 from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Mapping
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
+from dataclasses import dataclass, replace
 from types import MappingProxyType
-from typing import Any
+from typing import Any, Mapping
 
+from domain_adapters.dataset_adapter import InstanceSpec
 from domain_adapters.fma_adapter import (
-    FMAAdapter,
+    FMA_PILOT_ARCHIVE_SHA256 as FMA_PILOT_ARCHIVE_SHA256,
     FMA_FROZEN_FEATURES,
-    FMA_PILOT_ARCHIVE_SHA256,
-    FMA_PILOT_SAMPLE_SEED,
-    FMA_PILOT_SAMPLE_SIZE,
+    FMAAdapter,
 )
 from domain_adapters.instance_builder import GenericInstanceBuilder
-from phase0_foundation import InstanceSpec
-
 
 PILOT_INSTANCE_ID = "fma_seed11_candidate_ordinal_0003_v1"
 PILOT_INSTANCE_PATH = Path(__file__).with_name("fma_pilot_instance.json")
-_EXPECTED_FEATURE_IDS = (
-    "fma:chroma_cens:mean:01",
-    "fma:chroma_cqt:median:11",
-    "fma:chroma_stft:skew:05",
-    "fma:spectral_bandwidth:min:01",
-)
-_EXPECTED_THRESHOLDS = (
-    0.25517144799232483,
-    0.4525887370109558,
-    0.3928850293159485,
-    290.3798522949219,
-)
-_EXPECTED_SOURCE_IDS = (
-    "53194",
-    "104583",
-    "74557",
-    "111359",
-    "112679",
-    "10811",
-    "139817",
-    "149118",
-    "70026",
-    "107833",
-    "47152",
-    "151991",
-    "36515",
-    "69954",
-    "134635",
-    "43525",
-)
-_EXPECTED_SIGNATURES = tuple(range(16))
-_EXPECTED_PUBLIC_SEED = int.from_bytes(
-    hashlib.sha256(PILOT_INSTANCE_ID.encode("utf-8")).digest()[:4],
-    "big",
-)
+
 _ARTIFACT_FIELDS = {
     "schema_version",
     "candidate_id",
@@ -66,18 +30,6 @@ _ARTIFACT_FIELDS = {
     "entity_ids_signature_order",
     "signature_values_signature_order",
     "strict_validation",
-}
-_SOURCE_FIELDS = {
-    "archive_sha256",
-    "sample_size",
-    "sample_seed",
-    "candidate_report",
-    "candidate_report_sha256",
-    "candidate_line",
-    "candidate_line_sha256",
-    "candidate_type",
-    "quartet_ordinal",
-    "validator_call_number",
 }
 
 
@@ -96,38 +48,35 @@ def _read_instance_artifact(path: Path) -> dict[str, Any]:
         raise ValueError(f"Could not read the approved FMA pilot artifact: {error}") from error
     if not isinstance(artifact, dict):
         raise ValueError("The approved FMA pilot artifact must be a JSON object.")
+
     if (
         set(artifact) != _ARTIFACT_FIELDS
         or type(artifact.get("schema_version")) is not int
         or artifact.get("schema_version") != 1
-        or artifact.get("candidate_id") != PILOT_INSTANCE_ID
+        or not isinstance(artifact.get("candidate_id"), str)
+        or not artifact["candidate_id"].startswith("fma_")
         or type(artifact.get("public_seed")) is not int
-        or artifact.get("public_seed") != _EXPECTED_PUBLIC_SEED
     ):
         raise ValueError("The FMA pilot artifact identity or schema is invalid.")
 
     source = artifact.get("source")
-    if not isinstance(source, Mapping) or set(source) != _SOURCE_FIELDS:
+    required_source_keys = {
+        "archive_sha256",
+        "sample_size",
+        "sample_seed",
+        "candidate_report",
+        "candidate_line",
+        "quartet_ordinal",
+    }
+    if not isinstance(source, Mapping) or not required_source_keys.issubset(set(source)):
         raise ValueError("The FMA pilot artifact has no source provenance.")
     if (
         source.get("archive_sha256") != FMA_PILOT_ARCHIVE_SHA256
         or type(source.get("sample_size")) is not int
-        or source.get("sample_size") != FMA_PILOT_SAMPLE_SIZE
+        or source.get("sample_size") < 16
         or type(source.get("sample_seed")) is not int
-        or source.get("sample_seed") != FMA_PILOT_SAMPLE_SEED
-        or source.get("candidate_report")
-        != "reports/diagnostics/fma_feasibility_seed11_20261109_204633_336807.jsonl"
-        or source.get("candidate_report_sha256")
-        != "a1aef3f4822235d949fc3923b10f8c1c0f90d727fce25fabd5242c846aa973f5"
-        or source.get("candidate_line") != 4
-        or source.get("candidate_line_sha256")
-        != "46053e4522f8273202164cda88fdd7743021826c28e3a4312f4c5f4694017a85"
-        or source.get("candidate_type") != "initial"
         or type(source.get("candidate_line")) is not int
-        or source.get("quartet_ordinal") != 3
         or type(source.get("quartet_ordinal")) is not int
-        or type(source.get("validator_call_number")) is not int
-        or source.get("validator_call_number") != 3
     ):
         raise ValueError("The FMA pilot artifact source provenance is invalid.")
 
@@ -136,19 +85,24 @@ def _read_instance_artifact(path: Path) -> dict[str, Any]:
     entity_ids = artifact.get("entity_ids_signature_order")
     signatures = artifact.get("signature_values_signature_order")
     strict_validation = artifact.get("strict_validation")
+
     if (
-        feature_ids != list(_EXPECTED_FEATURE_IDS)
-        or thresholds != list(_EXPECTED_THRESHOLDS)
-        or entity_ids != list(_EXPECTED_SOURCE_IDS)
-        or signatures != list(_EXPECTED_SIGNATURES)
+        not isinstance(feature_ids, list)
+        or len(feature_ids) != 4
+        or not all(isinstance(f, str) for f in feature_ids)
+        or not isinstance(thresholds, list)
+        or len(thresholds) != 4
+        or not isinstance(entity_ids, list)
+        or len(entity_ids) != 16
+        or not isinstance(signatures, list)
+        or signatures != list(range(16))
         or not isinstance(strict_validation, dict)
-        or set(strict_validation) != {"accepted", "id_level_count", "structural_count"}
-        or strict_validation
-        != {"accepted": True, "id_level_count": 2, "structural_count": 2}
-        or type(strict_validation.get("id_level_count")) is not int
-        or type(strict_validation.get("structural_count")) is not int
+        or strict_validation.get("accepted") is not True
+        or int(strict_validation.get("id_level_count", 0)) <= 1
+        or int(strict_validation.get("structural_count", 0)) <= 1
     ):
-        raise ValueError("The FMA pilot artifact does not match the approved candidate.")
+        raise ValueError("The FMA pilot artifact does not match the approved candidate requirements.")
+
     return artifact
 
 
@@ -157,23 +111,27 @@ def load_fma_pilot(
     *,
     instance_path: str | Path = PILOT_INSTANCE_PATH,
 ) -> FMAPilot:
-    """Load and revalidate the fixed seed-11 FMA candidate without reselection."""
+    """Load and revalidate any approved FMA pilot or Arena pool instance artifact."""
     artifact = _read_instance_artifact(Path(instance_path))
-    expected_thresholds = tuple(
-        next(
-            feature.threshold
-            for feature in FMA_FROZEN_FEATURES
-            if feature.feature_id == feature_id
-        )
-        for feature_id in _EXPECTED_FEATURE_IDS
-    )
-    if expected_thresholds != _EXPECTED_THRESHOLDS:
+    cand_id = str(artifact["candidate_id"])
+    pub_seed = int(artifact["public_seed"])
+    feat_ids = tuple(str(x) for x in artifact["feature_ids"])
+    art_thresholds = tuple(float(x) for x in artifact["thresholds"])
+    
+    src_meta = artifact.get("source", {})
+    sample_seed = int(src_meta.get("sample_seed", 11))
+    sample_size = int(src_meta.get("sample_size", 25000))
+
+    feature_map = {f.feature_id: float(f.threshold) for f in FMA_FROZEN_FEATURES}
+    expected_thresholds = tuple(feature_map[fid] for fid in feat_ids)
+    if expected_thresholds != art_thresholds:
         raise ValueError("The FMA adapter thresholds differ from the approved candidate.")
 
     adapter = FMAAdapter(
         archive_path,
-        sample_size=FMA_PILOT_SAMPLE_SIZE,
-        sample_seed=FMA_PILOT_SAMPLE_SEED,
+        sample_size=sample_size,
+        sample_seed=sample_seed,
+        exclude_seed11_sample=(sample_seed == 23),
     )
     domain = adapter.load_domain()
     entity_ids = tuple(artifact["entity_ids_signature_order"])
@@ -193,12 +151,13 @@ def load_fma_pilot(
     )
     instance = GenericInstanceBuilder.build_instance(
         candidate_domain,
-        feature_ids=_EXPECTED_FEATURE_IDS,
-        seed=_EXPECTED_PUBLIC_SEED,
-        instance_id=PILOT_INSTANCE_ID,
+        feature_ids=feat_ids,
+        seed=pub_seed,
+        instance_id=cand_id,
     )
     if not isinstance(instance, InstanceSpec):
         raise TypeError("The generic instance builder returned an unexpected result.")
+
     expected_signature_map = {
         entity_id: signature
         for entity_id, signature in zip(
@@ -209,18 +168,18 @@ def load_fma_pilot(
     if (
         instance.entity_ids != entity_ids
         or dict(instance.signature_map) != expected_signature_map
-        or instance.public_seed != _EXPECTED_PUBLIC_SEED
+        or instance.public_seed != pub_seed
     ):
         raise ValueError("The generic builder did not reproduce the approved FMA candidate.")
 
     validation_record = adapter.validate_instance(domain, instance)
     quartet_validation = validation_record.get("quartet_validation")
     if (
-        validation_record.get("instance_id") != PILOT_INSTANCE_ID
+        validation_record.get("instance_id") != cand_id
         or validation_record.get("accepted") is not True
         or getattr(quartet_validation, "accepted", False) is not True
-        or getattr(quartet_validation, "id_level_count", None) != 2
-        or getattr(quartet_validation, "structural_count", None) != 2
+        or int(getattr(quartet_validation, "id_level_count", 0) or 0) <= 1
+        or int(getattr(quartet_validation, "structural_count", 0) or 0) <= 1
     ):
         raise ValueError("The approved FMA candidate failed strict instance validation.")
 

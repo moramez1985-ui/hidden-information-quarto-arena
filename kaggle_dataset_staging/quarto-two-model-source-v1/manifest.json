@@ -72,8 +72,8 @@
     },
     {
       "path": "fma_pilot.py",
-      "size_bytes": 8599,
-      "sha256": "4cb2741a85e5d94247f3f17cbd5b103d11a37e053c4f30e64897e53176604f1b"
+      "size_bytes": 7509,
+      "sha256": "62f656a172b117341f99a3334e9700ae3c67e7521b113261e90d4160a2ead8f5"
     },
     {
       "path": "fma_pilot_instance.json",
@@ -97,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 53029,
-      "sha256": "f42af55fad7b0f592f15fd92541f17d2a30dfa6d84663ba7932827656e427c87"
+      "size_bytes": 53200,
+      "sha256": "49d91813680e69e06c7a66f6d849a5c7615fbde5a925d03b21fcd2744a8aa112"
     },
     {
       "path": "requirements.txt",

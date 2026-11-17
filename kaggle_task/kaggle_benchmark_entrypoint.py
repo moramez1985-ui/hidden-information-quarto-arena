@@ -70,6 +70,9 @@ def _prepare_and_load_quarto_module():
             raise FileNotFoundError(f"Missing {name} in {mounted_root}")
         shutil.copy2(src, work_root / name)
 
+    for arena_src in sorted(mounted_root.glob("fma_*arena*.json")):
+        shutil.copy2(arena_src, work_root / arena_src.name)
+
     manifest = json.loads((mounted_root / "manifest.json").read_text(encoding="utf-8"))
     zip_path = work_root / "domain_adapters.zip"
 

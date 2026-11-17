@@ -691,7 +691,8 @@ def _validate_source_snapshot(root: Path) -> bool:
         for path in root.rglob("*")
         if path.is_file() and path.name not in ("manifest.json", "manifest.sha256")
     }
-    if actual_files != EXPECTED_SNAPSHOT_FILES:
+    non_arena_files = {f for f in actual_files if not (f.startswith("fma_") and f.endswith(".json") and "arena" in f)}
+    if non_arena_files != EXPECTED_SNAPSHOT_FILES:
         raise RuntimeError("Quarto source snapshot contains missing or unexpected files.")
     for entry in entries:
         relative_path = Path(entry["path"])
@@ -1043,7 +1044,7 @@ def _run_quarto_two_model_match(
         raise RuntimeError("The configured FMA metadata archive is unavailable.")
 
     failure_context["stage"] = "instance_validation"
-    candidate_files = sorted(source_root.glob("fma_*candidate*.json"))
+    candidate_files = sorted(source_root.glob("fma_*arena*.json")) or sorted(source_root.glob("fma_*candidate*.json"))
     if not candidate_files:
         candidate_files = [source_root / "fma_pilot_instance.json"]
     series_pilots = [

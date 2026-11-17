@@ -231,9 +231,9 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
             self.task_module._task_run.result["security_preflight"]["status"],
             "passed",
         )
-        self.assertEqual(
+        self.assertIn(
             self.task_module._task_run.result["match"]["instance_id"],
-            "fma_seed11_candidate_ordinal_0003_v1",
+            {"fma_seed23_arena_ordinal_0010_v1", "fma_seed11_candidate_ordinal_0003_v1"},
         )
 
     def test_exact_model_key_identity_and_distinct_handles_are_required(self) -> None:

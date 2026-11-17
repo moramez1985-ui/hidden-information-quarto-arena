@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "candidate_id": "fma_seed23_arena_ordinal_0064_v1",
+  "public_seed": 590624550,
+  "source": {
+    "archive_sha256": "d9527a5297a65da31c5676484d5047c3e2b8a8060ce72a46e26158be736bf265",
+    "sample_size": 25000,
+    "sample_seed": 23,
+    "candidate_report": "reports/diagnostics/fma_holdout_seed23_20261109.jsonl",
+    "candidate_line": 64,
+    "quartet_ordinal": 64
+  },
+  "feature_ids": [
+    "fma:chroma_cens:mean:01",
+    "fma:chroma_cqt:median:11",
+    "fma:spectral_centroid:kurtosis:01",
+    "fma:spectral_contrast:max:01"
+  ],
+  "thresholds": [
+    0.25517144799232483,
+    0.4525887370109558,
+    6.258625030517578,
+    59.43647766113281
+  ],
+  "entity_ids_signature_order": [
+    "138835",
+    "80605",
+    "81296",
+    "12273",
+    "97146",
+    "15789",
+    "72150",
+    "96065",
+    "85468",
+    "37080",
+    "154450",
+    "13010",
+    "148075",
+    "154967",
+    "67598",
+    "32033"
+  ],
+  "signature_values_signature_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "strict_validation": {
+    "accepted": true,
+    "id_level_count": 2,
+    "structural_count": 2
+  }
+}
