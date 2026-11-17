@@ -1070,10 +1070,18 @@ def _run_quarto_two_model_match(
             + ", ".join(str(check) for check in failed_checks)
         )
 
-    assignments = {
-        "player_1": PLAYER_1_MODEL,
-        "player_2": PLAYER_2_MODEL,
-    }
+    swap_seats = os.environ.get("QUARTO_SWAP_SEATS", "").strip().lower() in {"1", "true", "yes"}
+    assignments = (
+        {
+            "player_1": PLAYER_2_MODEL,
+            "player_2": PLAYER_1_MODEL,
+        }
+        if swap_seats
+        else {
+            "player_1": PLAYER_1_MODEL,
+            "player_2": PLAYER_2_MODEL,
+        }
+    )
     clients = {
         PLAYER_1_MODEL: KaggleAgentAdapter(
             _IsolatedChatLLM(selected_llm, player="player_1")
@@ -1197,9 +1205,14 @@ def _run_quarto_two_model_match(
                 "public_replay_valid": public_replay_valid,
                 "failure": result.failure,
             }
+            terminal_visualization = _extract_post_terminal_visualization(
+                restricted_log,
+                public_audit,
+            )
             completed_games.append({
                 "match": match_summary,
                 "public_replay": public_replay,
+                "terminal_visualization": terminal_visualization,
             })
             completed_restricted_logs.append(restricted_log)
         except Exception as game_err:

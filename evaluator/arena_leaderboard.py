@@ -58,6 +58,8 @@ def build_arena_leaderboard(run_paths: list[Path], k_factor: float = 24.0) -> di
             p1_model = str(assigns.get("player_1", p1_default))
             p2_model = str(assigns.get("player_2", p2_default))
             winner = meta.get("winner")
+            if winner is None and meta.get("outcome") == "draw":
+                winner = "draw"
             starter = meta.get("starting_player", "player_1")
             if winner not in ("player_1", "player_2", "draw"):
                 continue
