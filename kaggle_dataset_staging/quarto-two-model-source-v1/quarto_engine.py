@@ -236,20 +236,38 @@ def place_piece(state: GameState, player: Player, cell: int) -> GameState:
     remaining_pieces = tuple(
         available for available in state.remaining_pieces if available != piece_id
     )
-    winning_lines = find_winning_lines(
-        board,
-        bit_owners=state.bit_owners,
-        owner=parsed_player if state.bit_owners is not None else None,
-    )
+    winner: Player | None = None
+    if state.bit_owners is None:
+        winning_lines = find_winning_lines(board)
+        if winning_lines:
+            winner = parsed_player
+    else:
+        winning_lines = find_winning_lines(
+            board,
+            bit_owners=state.bit_owners,
+            owner=parsed_player,
+        )
+        if winning_lines:
+            winner = parsed_player
+        else:
+            opponent = _other_player(parsed_player)
+            opponent_lines = find_winning_lines(
+                board,
+                bit_owners=state.bit_owners,
+                owner=opponent,
+            )
+            if opponent_lines:
+                winning_lines = opponent_lines
+                winner = opponent
     history = state.history + (
         ActionRecord(kind="place_piece", player=parsed_player, cell=cell),
     )
 
-    if winning_lines:
+    if winning_lines and winner is not None:
         result = GameResult(
             mode=state.mode,
             outcome="win",
-            winner=parsed_player,
+            winner=winner,
             reason="quarto",
             winning_lines=winning_lines,
         )
@@ -257,6 +275,7 @@ def place_piece(state: GameState, player: Player, cell: int) -> GameState:
             state,
             board=tuple(board),
             remaining_pieces=remaining_pieces,
+            active_player=winner,
             phase="terminal",
             selected_piece=None,
             selected_by=None,

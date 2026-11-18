@@ -1,4 +1,5 @@
-﻿from __future__ import annotations
+from __future__ import annotations
+import re
 
 import json
 from collections.abc import Mapping, Sequence
@@ -353,3 +354,79 @@ def evaluate_automated_file(path: str | Path) -> dict[str, Any]:
         raise ValueError("Automated evaluator input must be a JSON object.")
     return evaluate_automated(raw)
 
+
+
+def audit_reasoning_grounding(
+    decision_traces: Sequence[Mapping[str, Any]],
+    blunder_steps: set[int] | None = None,
+    missed_win_steps: set[int] | None = None,
+) -> dict[str, Any]:
+    """Deterministic claim-to-engine audit (RL-03 / RL-06 grounded without 3rd-LLM bias)."""
+    blunder_steps = blunder_steps or set()
+    missed_win_steps = missed_win_steps or set()
+    per_player: dict[str, dict[str, Any]] = {
+        "player_1": {
+            "total_explanations": 0,
+            "evidence_cited_count": 0,
+            "blunder_blindness_count": 0,
+            "missed_win_blindness_count": 0,
+            "draft_repeat_claim_count": 0,
+        },
+        "player_2": {
+            "total_explanations": 0,
+            "evidence_cited_count": 0,
+            "blunder_blindness_count": 0,
+            "missed_win_blindness_count": 0,
+            "draft_repeat_claim_count": 0,
+        },
+    }
+    seen_draft_proposals: dict[str, set[str]] = {"player_1": set(), "player_2": set()}
+    evidence_re = re.compile(
+        r"(fma:|row|col|diagonal|cell\s*\d+|bit\s*[0-3]|8/8|4/4|3-in-a-row|three-in-a-row)",
+        re.IGNORECASE,
+    )
+    safe_claim_re = re.compile(
+        r"(\bsafe\b|no immediate|cannot win|doesn't complete|does not complete|prevent)",
+        re.IGNORECASE,
+    )
+
+    for tr in decision_traces:
+        if not isinstance(tr, Mapping):
+            continue
+        pl = tr.get("agent_id")
+        if pl not in per_player:
+            continue
+        expl = tr.get("decision_explanation")
+        if not isinstance(expl, str) or not expl.strip():
+            continue
+        turn_id = int(tr.get("turn_id") or 0)
+        act = tr.get("selected_action") if isinstance(tr.get("selected_action"), Mapping) else {}
+        stats = per_player[pl]
+        stats["total_explanations"] += 1
+
+        if evidence_re.search(expl):
+            stats["evidence_cited_count"] += 1
+
+        if act.get("kind") == "propose_feature":
+            fid = str(act.get("feature_id") or "")
+            if fid in seen_draft_proposals[pl]:
+                stats["draft_repeat_claim_count"] += 1
+            seen_draft_proposals[pl].add(fid)
+
+        if turn_id in blunder_steps and safe_claim_re.search(expl):
+            stats["blunder_blindness_count"] += 1
+        if turn_id in missed_win_steps:
+            stats["missed_win_blindness_count"] += 1
+
+    summary: dict[str, Any] = {}
+    for pl, st in per_player.items():
+        tot = st["total_explanations"]
+        ev_rate = round(st["evidence_cited_count"] / tot, 4) if tot else None
+        halluc_events = st["blunder_blindness_count"] + st["draft_repeat_claim_count"]
+        faithfulness = round(max(0.0, 1.0 - (halluc_events / tot)), 4) if tot else None
+        summary[pl] = {
+            **st,
+            "evidence_citation_rate": ev_rate,
+            "deterministic_faithfulness_rate": faithfulness,
+        }
+    return summary

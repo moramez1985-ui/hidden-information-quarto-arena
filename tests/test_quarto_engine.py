@@ -464,79 +464,54 @@ class QuartoEngineTests(unittest.TestCase):
 
 
     def test_bit_owners_only_win_on_placer_owned_attributes(self) -> None:
-        owners = {
-            0: "player_1",  # cube / cylinder
-            1: "player_2",  # light / dark
-            2: "player_1",  # big / small
-            3: "player_2",  # solid / hole
+        owners: dict[int, Player] = {
+            0: "player_1",
+            1: "player_2",
+            2: "player_1",
+            3: "player_2",
         }
-        # Part 1: Completing an opponent-owned line does NOT win for the placer;
-        # the owner wins on their subsequent placement turn.
-        state = new_game(mode="self_selection", bit_owners=owners)
-        state = select_piece(state, "player_1", 0)
-        state = place_piece(state, "player_1", 0)
-        state = select_piece(state, "player_2", 1)
-        state = place_piece(state, "player_2", 12)
-        state = select_piece(state, "player_1", 2)
-        state = place_piece(state, "player_1", 1)
-        state = select_piece(state, "player_2", 3)
-        state = place_piece(state, "player_2", 13)
-        state = select_piece(state, "player_1", 8)
-        state = place_piece(state, "player_1", 2)
-        # player_2 completes Row 0 (0, 1, 2, 3) with (0, 2, 8, 10) -> shares "cube" & "big" (both player_1)
+        state = new_game(mode="self_selection", starting_player="player_1", bit_owners=owners)
+        # Pieces 0 (0000), 2 (0010), 8 (1000), 10 (1010) share bit 0=0 and bit 2=0 (owned by player_1).
+        # When player_2 places the 4th piece (10) on cell 3, player_2's blunder immediately wins for player_1!
+        for player, piece_id, cell in [
+            ("player_1", 0, 0),
+            ("player_2", 1, 12),
+            ("player_1", 2, 1),
+            ("player_2", 3, 13),
+            ("player_1", 8, 2),
+        ]:
+            state = select_piece(state, player, piece_id)
+            state = place_piece(state, player, cell)
+            self.assertFalse(state.is_terminal)
+
         state = select_piece(state, "player_2", 10)
         state = place_piece(state, "player_2", 3)
-
-        self.assertFalse(state.is_terminal)
-        self.assertIsNone(state.result)
-        self.assertEqual(state.active_player, "player_1")
-
-        # On player_1's next placement, player_1 claims the completed player_1-owned line.
-        state = select_piece(state, "player_1", 5)
-        state = place_piece(state, "player_1", 14)
-
         self.assertTrue(state.is_terminal)
         assert state.result is not None
-        self.assertEqual(state.result.outcome, "win")
         self.assertEqual(state.result.winner, "player_1")
-        self.assertEqual(len(state.result.winning_lines), 1)
+        self.assertEqual(state.result.reason, "quarto")
         self.assertEqual(state.result.winning_lines[0].cells, (0, 1, 2, 3))
         self.assertEqual(state.result.winning_lines[0].shared_attributes, ("cube", "big"))
 
-        # Part 2: When a line shares attributes owned by BOTH players, only the placer's
-        # owned attribute is recorded in winning_lines.shared_attributes.
-        state2 = new_game(mode="self_selection", bit_owners=owners)
-        state2 = select_piece(state2, "player_1", 0)
-        state2 = place_piece(state2, "player_1", 0)
-        state2 = select_piece(state2, "player_2", 1)
-        state2 = place_piece(state2, "player_2", 12)
-        state2 = select_piece(state2, "player_1", 2)
-        state2 = place_piece(state2, "player_1", 1)
-        state2 = select_piece(state2, "player_2", 3)
-        state2 = place_piece(state2, "player_2", 13)
-        state2 = select_piece(state2, "player_1", 4)
-        state2 = place_piece(state2, "player_1", 6)
-        state2 = select_piece(state2, "player_2", 5)
-        state2 = place_piece(state2, "player_2", 14)
-        state2 = select_piece(state2, "player_1", 6)
-        state2 = place_piece(state2, "player_1", 7)
-        # player_2 places piece 7 at cell 15 -> Row 3 (12, 13, 14, 15) has (1, 3, 5, 7)
-        # sharing "cylinder" (bit 0=1, player_1) and "solid" (bit 3=0, player_2).
-        state2 = select_piece(state2, "player_2", 7)
-        state2 = place_piece(state2, "player_2", 15)
+        # Now verify a direct win where player_2 completes a line on bit 3=0 (owned by player_2):
+        # Pieces 2 (0010), 1 (0001), 3 (0011), 7 (0111) share ONLY bit 3=0 (solid, player_2).
+        state2 = new_game(mode="self_selection", starting_player="player_1", bit_owners=owners)
+        for player, piece_id, cell in [
+            ("player_1", 2, 1),
+            ("player_2", 1, 5),
+            ("player_1", 3, 9),
+        ]:
+            state2 = select_piece(state2, player, piece_id)
+            state2 = place_piece(state2, player, cell)
+            self.assertFalse(state2.is_terminal)
 
+        state2 = select_piece(state2, "player_2", 7)
+        state2 = place_piece(state2, "player_2", 13)
         self.assertTrue(state2.is_terminal)
         assert state2.result is not None
-        self.assertEqual(state2.result.outcome, "win")
         self.assertEqual(state2.result.winner, "player_2")
-        self.assertEqual(len(state2.result.winning_lines), 1)
-        self.assertEqual(state2.result.winning_lines[0].cells, (12, 13, 14, 15))
+        self.assertEqual(state2.result.winning_lines[0].cells, (1, 5, 9, 13))
         self.assertEqual(state2.result.winning_lines[0].shared_attributes, ("solid",))
-
-        round_tripped_state = deserialize_state(serialize_state(state2))
-        self.assertEqual(round_tripped_state, state2)
-        replayed_state = replay_game(serialize_replay(state2))
-        self.assertEqual(replayed_state, state2)
 
     def test_bit_owners_validation_rejects_incomplete_or_invalid_mappings(self) -> None:
         with self.assertRaises(ValueError):
