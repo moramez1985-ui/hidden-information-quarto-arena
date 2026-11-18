@@ -1,13 +1,19 @@
+import sys
+sys.dont_write_bytecode = True
+
 import hashlib
 import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import shutil
-import sys
+import tempfile
 import time
 import types
 import zipfile
+
+os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 
 import kaggle_benchmarks as kbench
 
@@ -16,34 +22,71 @@ def _extract_clean_json_object(raw_text: str) -> str:
     if not isinstance(raw_text, str):
         return raw_text
     text = raw_text.strip()
-    if text.startswith("```"):
-        lines = text.splitlines()
-        if len(lines) >= 3 and lines[-1].strip() == "```":
-            text = "\n".join(lines[1:-1]).strip()
+    fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, flags=re.DOTALL | re.IGNORECASE)
+    if fenced:
+        return fenced.group(1).strip()
     start = text.find("{")
     end = text.rfind("}")
     if start != -1 and end != -1 and end > start:
-        candidate = text[start : end + 1]
+        candidate = text[start : end + 1].strip()
         try:
             json.loads(candidate)
             return candidate
         except Exception:
             pass
-    return raw_text
+    return text
 
 
-def _prepare_and_load_quarto_module():
-    manifest_candidates = list(Path("/kaggle/input").rglob("manifest.json"))
+def _reconstruct_or_copy_zip(
+    mounted_root: Path,
+    work_root: Path,
+    manifest: dict,
+    zip_filename: str,
+    extracted_dir_name: str,
+    members_key: str,
+) -> Path:
+    zip_path = work_root / zip_filename
+    if (mounted_root / zip_filename).is_file():
+        shutil.copy2(mounted_root / zip_filename, zip_path)
+    elif (mounted_root / f"{zip_filename}.bin").is_file():
+        shutil.copy2(mounted_root / f"{zip_filename}.bin", zip_path)
+    else:
+        src_dir = mounted_root / extracted_dir_name
+        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            for member in manifest.get(members_key, []):
+                rel_posix = member["path"]
+                src_candidates = list(src_dir.rglob(Path(rel_posix).name))
+                if not src_candidates:
+                    raise FileNotFoundError(f"Missing {rel_posix} under {src_dir}")
+                data = src_candidates[0].read_bytes()
+                info = zipfile.ZipInfo(filename=rel_posix, date_time=(2026, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.create_system = 3
+                info.external_attr = 0o644 << 16
+                zf.writestr(info, data)
+
+        actual_bytes = zip_path.read_bytes()
+        actual_sha = hashlib.sha256(actual_bytes).hexdigest()
+        for entry in manifest["included_files"]:
+            if entry["path"] == zip_filename:
+                entry["sha256"] = actual_sha
+                entry["size_bytes"] = len(actual_bytes)
+    return zip_path
+
+
+def _prepare_and_load_quarto_module(input_root: Path = Path("/kaggle/input")):
+    sys.dont_write_bytecode = True
+    manifest_candidates = list(input_root.rglob("manifest.json"))
     if not manifest_candidates:
-        raise FileNotFoundError("manifest.json not found under /kaggle/input")
+        raise FileNotFoundError(f"manifest.json not found under {input_root}")
     mounted_root = manifest_candidates[0].parent
 
-    fma_candidates = list(Path("/kaggle/input").rglob("fma_metadata.zip*"))
+    fma_candidates = list(input_root.rglob("fma_metadata.zip*"))
     if not fma_candidates:
-        raise FileNotFoundError("fma_metadata.zip* not found under /kaggle/input")
+        raise FileNotFoundError(f"fma_metadata.zip* not found under {input_root}")
     fma_archive = fma_candidates[0]
 
-    work_root = Path("/tmp/quarto-two-model-source-v1")
+    work_root = Path(tempfile.gettempdir()) / "quarto-two-model-source-v1"
     if work_root.exists():
         shutil.rmtree(work_root)
     work_root.mkdir(parents=True)
@@ -53,61 +96,17 @@ def _prepare_and_load_quarto_module():
         rel_name = entry["path"]
         if rel_name in ("domain_adapters.zip", "evaluator.zip"):
             continue
-        src_file = mounted_root / rel_name
-        if not src_file.is_file():
+        src = mounted_root / rel_name
+        if not src.is_file():
             raise FileNotFoundError(f"Missing {rel_name} in {mounted_root}")
-        shutil.copy2(src_file, work_root / rel_name)
+        shutil.copy2(src, work_root / rel_name)
 
-    zip_path = work_root / "domain_adapters.zip"
-    if (mounted_root / "domain_adapters.zip").is_file():
-        shutil.copy2(mounted_root / "domain_adapters.zip", zip_path)
-    elif (mounted_root / "domain_adapters.zip.bin").is_file():
-        shutil.copy2(mounted_root / "domain_adapters.zip.bin", zip_path)
-    else:
-        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-            for member in manifest["archive_members"]:
-                rel_posix = member["path"]
-                src_candidates = list((mounted_root / "domain_adapters").rglob(Path(rel_posix).name))
-                if not src_candidates:
-                    raise FileNotFoundError(f"Missing adapter {rel_posix} in {mounted_root}")
-                data = src_candidates[0].read_bytes()
-                info = zipfile.ZipInfo(filename=rel_posix, date_time=(2026, 1, 1, 0, 0, 0))
-                info.compress_type = zipfile.ZIP_DEFLATED
-                info.create_system = 3
-                info.external_attr = 0o644 << 16
-                zf.writestr(info, data)
-
-        actual_zip_bytes = zip_path.read_bytes()
-        actual_zip_sha = hashlib.sha256(actual_zip_bytes).hexdigest()
-        for entry in manifest["included_files"]:
-            if entry["path"] == "domain_adapters.zip":
-                entry["sha256"] = actual_zip_sha
-                entry["size_bytes"] = len(actual_zip_bytes)
-
-    eval_zip_path = work_root / "evaluator.zip"
-    if (mounted_root / "evaluator.zip").is_file():
-        shutil.copy2(mounted_root / "evaluator.zip", eval_zip_path)
-    elif (mounted_root / "evaluator.zip.bin").is_file():
-        shutil.copy2(mounted_root / "evaluator.zip.bin", eval_zip_path)
-    else:
-        with zipfile.ZipFile(eval_zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-            for member in manifest.get("evaluator_members", []):
-                rel_posix = member["path"]
-                src_candidates = list((mounted_root / "evaluator").rglob(Path(rel_posix).name))
-                if not src_candidates:
-                    raise FileNotFoundError(f"Missing evaluator module {rel_posix} in {mounted_root}")
-                data = src_candidates[0].read_bytes()
-                info = zipfile.ZipInfo(filename=rel_posix, date_time=(2026, 1, 1, 0, 0, 0))
-                info.compress_type = zipfile.ZIP_DEFLATED
-                info.create_system = 3
-                info.external_attr = 0o644 << 16
-                zf.writestr(info, data)
-        actual_eval_bytes = eval_zip_path.read_bytes()
-        actual_eval_sha = hashlib.sha256(actual_eval_bytes).hexdigest()
-        for entry in manifest["included_files"]:
-            if entry["path"] == "evaluator.zip":
-                entry["sha256"] = actual_eval_sha
-                entry["size_bytes"] = len(actual_eval_bytes)
+    adapters_zip = _reconstruct_or_copy_zip(
+        mounted_root, work_root, manifest, "domain_adapters.zip", "domain_adapters", "archive_members"
+    )
+    evaluator_zip = _reconstruct_or_copy_zip(
+        mounted_root, work_root, manifest, "evaluator.zip", "evaluator", "evaluator_members"
+    )
 
     new_manifest_bytes = json.dumps(manifest, indent=2).encode("utf-8")
     (work_root / "manifest.json").write_bytes(new_manifest_bytes)
@@ -120,12 +119,9 @@ def _prepare_and_load_quarto_module():
     os.environ["QUARTO_SOURCE_SNAPSHOT_ROOT"] = str(work_root)
     os.environ["QUARTO_FMA_ARCHIVE_PATH"] = str(fma_archive)
 
-    if str(work_root) not in sys.path:
-        sys.path.insert(0, str(work_root))
-    if str(zip_path) not in sys.path:
-        sys.path.insert(0, str(zip_path))
-    if str(eval_zip_path) not in sys.path:
-        sys.path.insert(0, str(eval_zip_path))
+    for p in (str(evaluator_zip), str(adapters_zip), str(work_root)):
+        if p not in sys.path:
+            sys.path.insert(0, p)
 
     import kaggle_agent_adapter
 
@@ -162,6 +158,9 @@ def _prepare_and_load_quarto_module():
         spec.loader.exec_module(task_module)
     finally:
         sys.modules["kaggle_benchmarks"] = real_kbench
+
+    for pyc_dir in work_root.rglob("__pycache__"):
+        shutil.rmtree(pyc_dir, ignore_errors=True)
 
     task_module.kbench = real_kbench
     return task_module
