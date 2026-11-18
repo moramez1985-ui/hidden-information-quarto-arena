@@ -6,6 +6,8 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from quarto_engine import find_winning_lines
+
 from quarto_engine import WINNING_LINES, legal_actions, new_game, place_piece, select_piece
 
 
@@ -63,6 +65,7 @@ def _evaluate_piece_strategy(
             "select_turns": 0,
             "safe_selects": 0,
             "blunder_selects": 0,
+            "placement_blunders": 0,
             "place_turns": 0,
             "self_bit_aligned_places": 0,
             "immediate_win_opportunities": 0,
@@ -72,6 +75,7 @@ def _evaluate_piece_strategy(
             "select_turns": 0,
             "safe_selects": 0,
             "blunder_selects": 0,
+            "placement_blunders": 0,
             "place_turns": 0,
             "self_bit_aligned_places": 0,
             "immediate_win_opportunities": 0,
@@ -138,6 +142,23 @@ def _evaluate_piece_strategy(
             chosen_cell = int(move["cell"])
             selected_piece = int(state.selected_piece)  # type: ignore[arg-type]
             stats[player]["place_turns"] += 1
+            opponent = "player_2" if player == "player_1" else "player_1"
+            legal_now = legal_actions(state)
+            legal_cells_now = [int(c) for c in legal_now.get("cells", ())]
+            board_after_place = [
+                selected_piece if idx == chosen_cell else state.board[idx] for idx in range(16)
+            ]
+            if find_winning_lines(board_after_place, bit_owners=bit_owners, owner=opponent):
+                safe_cells = [
+                    c for c in legal_cells_now
+                    if not find_winning_lines(
+                        [selected_piece if idx == c else state.board[idx] for idx in range(16)],
+                        bit_owners=bit_owners,
+                        owner=opponent,
+                    )
+                ]
+                if safe_cells:
+                    stats[player]["placement_blunders"] += 1
             legal = legal_actions(state)
             legal_cells = [int(c) for c in legal.get("cells", ())]
             winning_cells = [
@@ -159,10 +180,12 @@ def _evaluate_piece_strategy(
     for p, s in stats.items():
         sel_t = s["select_turns"]
         plc_t = s["place_turns"]
+        tot_dec = sel_t + plc_t
+        tot_bln = s["blunder_selects"] + s["placement_blunders"]
         win_opp = s["immediate_win_opportunities"]
         summary[p] = {
             **s,
-            "blunder_avoidance_rate": round(s["safe_selects"] / sel_t, 4) if sel_t > 0 else "N/A",
+            "blunder_avoidance_rate": round((tot_dec - tot_bln) / tot_dec, 4) if tot_dec > 0 else "N/A",
             "self_bit_alignment_rate": round(s["self_bit_aligned_places"] / plc_t, 4) if plc_t > 0 else "N/A",
             "immediate_win_conversion_rate": round(s["immediate_wins_taken"] / win_opp, 4) if win_opp > 0 else "N/A",
         }

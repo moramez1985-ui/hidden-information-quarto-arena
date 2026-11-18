@@ -67,8 +67,8 @@
     },
     {
       "path": "evaluator.zip",
-      "size_bytes": 23213,
-      "sha256": "f5539474795c9db0c26b8563103e7e5a566c8b8d9159666e9eb4956a9f8d0d99"
+      "size_bytes": 23412,
+      "sha256": "67fe0caa958222592ae64158dae21b1c331e1bd3f09947ab0694939e9bbbfd91"
     },
     {
       "path": "fma_pilot.py",
@@ -97,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 52050,
-      "sha256": "f8394e2f6b519ad4dc972806b57bc3a5d14a0a4eca44079e7b2e519668e269f6"
+      "size_bytes": 52302,
+      "sha256": "f601eb89decf52ac69d5d5f914673f804d41c2b3ac03832016b3876961ba58fb"
     },
     {
       "path": "requirements.txt",
@@ -107,8 +107,8 @@
     },
     {
       "path": "tournament_harness.py",
-      "size_bytes": 90946,
-      "sha256": "58dad63b8d0f6fde6b3aebbfcbd432c92b867d36a54e9b5c1de24f572008a271"
+      "size_bytes": 91363,
+      "sha256": "123cb1e7ca854dc686d8fe02d2c16960548e5c23836bfabff66836781219ad1a"
     }
   ],
   "integrity": {
@@ -805,8 +805,8 @@
     },
     {
       "path": "evaluator/automated.py",
-      "size_bytes": 18928,
-      "sha256": "7ba8976e1d20be5520c065d0fa651d89b7c8a68b599a082badab588169f81338"
+      "size_bytes": 20478,
+      "sha256": "e26ef8669deab3961ba02f6d6f8a811257e62a47693e30f7e2de00af5cb975b8"
     },
     {
       "path": "evaluator/metrics.py",

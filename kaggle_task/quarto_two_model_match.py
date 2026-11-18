@@ -2,6 +2,7 @@ import hashlib
 import json
 import math
 import os
+import random
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 import sys
@@ -1011,9 +1012,14 @@ def _run_quarto_two_model_match(
     candidate_files = sorted(source_root.glob("fma_*arena*.json")) or sorted(source_root.glob("fma_*candidate*.json"))
     if not candidate_files:
         candidate_files = [source_root / "fma_pilot_instance.json"]
+    rng = random.SystemRandom()
+    if len(candidate_files) >= SERIES_TARGET_GAMES:
+        chosen_files = rng.sample(candidate_files, k=SERIES_TARGET_GAMES)
+    else:
+        chosen_files = [rng.choice(candidate_files) for _ in range(SERIES_TARGET_GAMES)]
     series_pilots = [
         load_fma_pilot(archive_path, instance_path=cf)
-        for cf in candidate_files[:SERIES_TARGET_GAMES]
+        for cf in chosen_files
     ]
     pilot = series_pilots[0]
     security_preflight = run_security_audit(
