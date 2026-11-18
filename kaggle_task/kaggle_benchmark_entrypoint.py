@@ -51,7 +51,7 @@ def _prepare_and_load_quarto_module():
     manifest = json.loads((mounted_root / "manifest.json").read_text(encoding="utf-8"))
     for entry in manifest["included_files"]:
         rel_name = entry["path"]
-        if rel_name == "domain_adapters.zip":
+        if rel_name in ("domain_adapters.zip", "evaluator.zip"):
             continue
         src_file = mounted_root / rel_name
         if not src_file.is_file():
@@ -84,6 +84,31 @@ def _prepare_and_load_quarto_module():
                 entry["sha256"] = actual_zip_sha
                 entry["size_bytes"] = len(actual_zip_bytes)
 
+    eval_zip_path = work_root / "evaluator.zip"
+    if (mounted_root / "evaluator.zip").is_file():
+        shutil.copy2(mounted_root / "evaluator.zip", eval_zip_path)
+    elif (mounted_root / "evaluator.zip.bin").is_file():
+        shutil.copy2(mounted_root / "evaluator.zip.bin", eval_zip_path)
+    else:
+        with zipfile.ZipFile(eval_zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            for member in manifest.get("evaluator_members", []):
+                rel_posix = member["path"]
+                src_candidates = list((mounted_root / "evaluator").rglob(Path(rel_posix).name))
+                if not src_candidates:
+                    raise FileNotFoundError(f"Missing evaluator module {rel_posix} in {mounted_root}")
+                data = src_candidates[0].read_bytes()
+                info = zipfile.ZipInfo(filename=rel_posix, date_time=(2026, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.create_system = 3
+                info.external_attr = 0o644 << 16
+                zf.writestr(info, data)
+        actual_eval_bytes = eval_zip_path.read_bytes()
+        actual_eval_sha = hashlib.sha256(actual_eval_bytes).hexdigest()
+        for entry in manifest["included_files"]:
+            if entry["path"] == "evaluator.zip":
+                entry["sha256"] = actual_eval_sha
+                entry["size_bytes"] = len(actual_eval_bytes)
+
     new_manifest_bytes = json.dumps(manifest, indent=2).encode("utf-8")
     (work_root / "manifest.json").write_bytes(new_manifest_bytes)
     (work_root / "manifest.sha256").write_text(
@@ -99,6 +124,8 @@ def _prepare_and_load_quarto_module():
         sys.path.insert(0, str(work_root))
     if str(zip_path) not in sys.path:
         sys.path.insert(0, str(zip_path))
+    if str(eval_zip_path) not in sys.path:
+        sys.path.insert(0, str(eval_zip_path))
 
     import kaggle_agent_adapter
 
