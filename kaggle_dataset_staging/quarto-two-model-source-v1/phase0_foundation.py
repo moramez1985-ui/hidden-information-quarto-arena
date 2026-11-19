@@ -567,7 +567,7 @@ def _valid_public_audit_shape(
             ):
                 return False
         elif result.get("outcome") == "draw":
-            if result.get("winner") is not None or result.get("reason") != "board_full":
+            if result.get("winner") is not None or result.get("reason") not in ("board_full", "simultaneous_quarto"):
                 return False
         else:
             return False

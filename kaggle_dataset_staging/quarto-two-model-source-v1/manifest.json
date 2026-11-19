@@ -67,8 +67,8 @@
     },
     {
       "path": "evaluator.zip",
-      "size_bytes": 23412,
-      "sha256": "67fe0caa958222592ae64158dae21b1c331e1bd3f09947ab0694939e9bbbfd91"
+      "size_bytes": 23451,
+      "sha256": "3dff268e9dfa0c4752da502bee1cc80de150e9ab6c9fda824c04d5e21e2974a3"
     },
     {
       "path": "fma_pilot.py",
@@ -87,18 +87,18 @@
     },
     {
       "path": "phase0_foundation.py",
-      "size_bytes": 81274,
-      "sha256": "88468be9a53a9031875ee5702ae6bef9f8936fa4e28c81f20f71b3681f1240cb"
+      "size_bytes": 81303,
+      "sha256": "ca7004ac52cc3409fe8fc2cf93c73e51bb0bd5256dbc901579829a812c28dd42"
     },
     {
       "path": "quarto_engine.py",
-      "size_bytes": 27923,
-      "sha256": "3b90a719a5d7faac31e38dde0b2f77ccdaa1f2e6faf3fd35a02a26035d5e9e25"
+      "size_bytes": 29903,
+      "sha256": "10b0f239a102d96e4f0e0d11e3924704a94d4a8652723409342e22c7fba6acc6"
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 52302,
-      "sha256": "f601eb89decf52ac69d5d5f914673f804d41c2b3ac03832016b3876961ba58fb"
+      "size_bytes": 52395,
+      "sha256": "7af201db8781f6d161625faf2f1417c129bf3336505e74411ad20b2fc791e1c5"
     },
     {
       "path": "requirements.txt",
@@ -107,8 +107,8 @@
     },
     {
       "path": "tournament_harness.py",
-      "size_bytes": 91363,
-      "sha256": "123cb1e7ca854dc686d8fe02d2c16960548e5c23836bfabff66836781219ad1a"
+      "size_bytes": 91395,
+      "sha256": "5f7779f27aa33d3b713e754dce8ca91cc6d8d29438019cdd8e00e092443ae9dc"
     }
   ],
   "integrity": {
@@ -805,8 +805,8 @@
     },
     {
       "path": "evaluator/automated.py",
-      "size_bytes": 20478,
-      "sha256": "e26ef8669deab3961ba02f6d6f8a811257e62a47693e30f7e2de00af5cb975b8"
+      "size_bytes": 20837,
+      "sha256": "e8a99e7a8cf4e26c12c4c140b8ad7b50fb30762e4d3bf5961483bbe3559dc62f"
     },
     {
       "path": "evaluator/metrics.py",

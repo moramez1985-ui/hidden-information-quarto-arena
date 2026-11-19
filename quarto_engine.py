@@ -11,7 +11,7 @@ Player = Literal["player_1", "player_2"]
 Phase = Literal["select", "place", "terminal"]
 ActionKind = Literal["select_piece", "place_piece"]
 Outcome = Literal["win", "draw"]
-ResultReason = Literal["quarto", "board_full"]
+ResultReason = Literal["quarto", "board_full", "simultaneous_quarto"]
 
 MODES = ("classic", "self_selection")
 PLAYERS = ("player_1", "player_2")
@@ -237,33 +237,59 @@ def place_piece(state: GameState, player: Player, cell: int) -> GameState:
         available for available in state.remaining_pieces if available != piece_id
     )
     winner: Player | None = None
+    simultaneous_draw = False
     if state.bit_owners is None:
         winning_lines = find_winning_lines(board)
         if winning_lines:
             winner = parsed_player
     else:
-        winning_lines = find_winning_lines(
+        self_lines = find_winning_lines(
             board,
             bit_owners=state.bit_owners,
             owner=parsed_player,
         )
-        if winning_lines:
+        opponent = _other_player(parsed_player)
+        opponent_lines = find_winning_lines(
+            board,
+            bit_owners=state.bit_owners,
+            owner=opponent,
+        )
+        if self_lines and opponent_lines:
+            winning_lines = self_lines + opponent_lines
+            simultaneous_draw = True
+        elif self_lines:
+            winning_lines = self_lines
             winner = parsed_player
+        elif opponent_lines:
+            winning_lines = opponent_lines
+            winner = opponent
         else:
-            opponent = _other_player(parsed_player)
-            opponent_lines = find_winning_lines(
-                board,
-                bit_owners=state.bit_owners,
-                owner=opponent,
-            )
-            if opponent_lines:
-                winning_lines = opponent_lines
-                winner = opponent
+            winning_lines = ()
     history = state.history + (
         ActionRecord(kind="place_piece", player=parsed_player, cell=cell),
     )
 
-    if winning_lines and winner is not None:
+    if simultaneous_draw:
+        result = GameResult(
+            mode=state.mode,
+            outcome="draw",
+            winner=None,
+            reason="simultaneous_quarto",
+            winning_lines=winning_lines,
+        )
+        next_state = replace(
+            state,
+            board=tuple(board),
+            remaining_pieces=remaining_pieces,
+            active_player=parsed_player,
+            phase="terminal",
+            selected_piece=None,
+            selected_by=None,
+            is_terminal=True,
+            result=result,
+            history=history,
+        )
+    elif winning_lines and winner is not None:
         result = GameResult(
             mode=state.mode,
             outcome="win",
@@ -538,12 +564,28 @@ def _validate_result(state: GameState) -> None:
         if not result.winning_lines:
             raise ValueError("A winning result must include a winning line.")
     elif result.outcome == "draw":
-        if result.reason != "board_full" or result.winner is not None:
-            raise ValueError("Draw result must identify a full-board draw.")
-        if any(piece_id is None for piece_id in state.board):
-            raise ValueError("A draw requires a full board.")
-        if result.winning_lines or expected_lines:
-            raise ValueError("A full board with a winning line is not a draw.")
+        if result.winner is not None:
+            raise ValueError("Draw result cannot have a winner.")
+        if result.reason == "simultaneous_quarto":
+            if state.bit_owners is None:
+                raise ValueError("Simultaneous quarto requires bit ownership.")
+            p1_lines = find_winning_lines(state.board, bit_owners=state.bit_owners, owner="player_1")
+            p2_lines = find_winning_lines(state.board, bit_owners=state.bit_owners, owner="player_2")
+            if not p1_lines or not p2_lines:
+                raise ValueError("Simultaneous quarto requires winning lines for both players.")
+            if set(result.winning_lines) != set(p1_lines + p2_lines):
+                raise ValueError("Simultaneous quarto winning lines must match both players' lines.")
+        elif result.reason == "board_full":
+            if any(piece_id is None for piece_id in state.board):
+                raise ValueError("A draw requires a full board.")
+            all_lines = find_winning_lines(state.board) if state.bit_owners is None else (
+                find_winning_lines(state.board, bit_owners=state.bit_owners, owner="player_1")
+                + find_winning_lines(state.board, bit_owners=state.bit_owners, owner="player_2")
+            )
+            if result.winning_lines or all_lines:
+                raise ValueError("A full board with a winning line is not a draw.")
+        else:
+            raise ValueError("Draw result must identify a full-board or simultaneous draw.")
     else:
         raise ValueError("Unknown result outcome.")
 
@@ -590,7 +632,7 @@ def _parse_result(value: object) -> GameResult | None:
     reason = data["reason"]
     if outcome not in ("win", "draw"):
         raise ValueError("Unknown result outcome.")
-    if reason not in ("quarto", "board_full"):
+    if reason not in ("quarto", "board_full", "simultaneous_quarto"):
         raise ValueError("Unknown result reason.")
     winner = _parse_optional_player(data["winner"])
     lines_data = _require_list(data["winning_lines"], "winning_lines")

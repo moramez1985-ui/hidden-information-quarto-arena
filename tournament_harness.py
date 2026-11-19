@@ -1398,6 +1398,7 @@ def run_security_audit(
         "draw",
         "quarto",
         "board_full",
+        "simultaneous_quarto",
         "binary",
         *controller.session._public_entity_order,
         *(controller.session._eligible_feature_ids if enable_draft else ()),
@@ -1728,7 +1729,7 @@ def run_security_audit(
             p1_allowed_values,
             p2_allowed_values,
         )
-        select_signature(controller, 0)
+        select_signature(controller, 8)
         inspect_phase(
             controller,
             "post_selection_place",

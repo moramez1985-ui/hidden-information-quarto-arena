@@ -148,7 +148,9 @@ def _evaluate_piece_strategy(
             board_after_place = [
                 selected_piece if idx == chosen_cell else state.board[idx] for idx in range(16)
             ]
-            if find_winning_lines(board_after_place, bit_owners=bit_owners, owner=opponent):
+            self_wins_now = bool(find_winning_lines(board_after_place, bit_owners=bit_owners, owner=player))
+            opp_wins_now = bool(find_winning_lines(board_after_place, bit_owners=bit_owners, owner=opponent))
+            if opp_wins_now and not self_wins_now:
                 safe_cells = [
                     c for c in legal_cells_now
                     if not find_winning_lines(
@@ -159,14 +161,19 @@ def _evaluate_piece_strategy(
                 ]
                 if safe_cells:
                     stats[player]["placement_blunders"] += 1
-            legal = legal_actions(state)
-            legal_cells = [int(c) for c in legal.get("cells", ())]
             winning_cells = [
                 c
-                for c in legal_cells
-                if _piece_gives_win_for_player(selected_piece, player, [
-                    selected_piece if idx == c else state.board[idx] for idx in range(16)
-                ])
+                for c in legal_cells_now
+                if find_winning_lines(
+                    [selected_piece if idx == c else state.board[idx] for idx in range(16)],
+                    bit_owners=bit_owners,
+                    owner=player,
+                )
+                and not find_winning_lines(
+                    [selected_piece if idx == c else state.board[idx] for idx in range(16)],
+                    bit_owners=bit_owners,
+                    owner=opponent,
+                )
             ]
             if winning_cells:
                 stats[player]["immediate_win_opportunities"] += 1

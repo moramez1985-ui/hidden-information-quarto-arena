@@ -609,8 +609,10 @@ def _validate_public_replay(public_replay: object) -> bool:
         return False
     if result["outcome"] == "win" and result["winner"] not in ("player_1", "player_2"):
         return False
-    if result["outcome"] == "draw" and any(
-        entity_id is None for entity_id in reconstructed_board
+    if (
+        result["outcome"] == "draw"
+        and result["reason"] == "board_full"
+        and any(entity_id is None for entity_id in reconstructed_board)
     ):
         return False
     return reconstructed_board == list(board)
@@ -770,7 +772,7 @@ def _is_valid_terminal_result(value: object) -> bool:
     if value["outcome"] == "win":
         return value["winner"] in ("player_1", "player_2") and value["reason"] == "quarto"
     if value["outcome"] == "draw":
-        return value["winner"] is None and value["reason"] == "board_full"
+        return value["winner"] is None and value["reason"] in ("board_full", "simultaneous_quarto")
     return False
 
 
@@ -950,7 +952,7 @@ def _resolve_models(selected_llm: Any) -> tuple[Any, Any, dict[str, Any]]:
     }
 
 
-@kbench.task(name="Quarto Two-Model Match")
+@kbench.task(name="Hidden information - Quarto Arena")
 def run_quarto_two_model_match(llm) -> dict:
     failure_context: dict[str, Any] = {
         "stage": "model_resolution",
