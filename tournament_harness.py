@@ -940,6 +940,7 @@ class TournamentRunner:
         decision_trace_writer: DecisionTraceSink | None = None,
         restricted_source_ids: Mapping[str, str] | None = None,
         enable_draft: bool | None = None,
+        on_step: Callable[[dict[str, Any]], None] | None = None,
     ) -> MatchResult:
         if set(assignments) != {"player_1", "player_2"}:
             raise ValueError("Assignments must contain player_1 and player_2.")
@@ -1046,6 +1047,23 @@ class TournamentRunner:
                     output_tokens=decision.output_tokens,
                     timestamp=decision.timestamp,
                 )
+                if on_step is not None:
+                    try:
+                        p1_pub = controller.public_observation("player_1")
+                        on_step({
+                            "turn_index": len(decision_traces) + 1,
+                            "actor": actor,
+                            "action": dict(action),
+                            "phase": p1_pub.get("phase"),
+                            "board": list(p1_pub.get("board") or []),
+                            "selected_entity": p1_pub.get("selected_entity"),
+                            "draft_history_len": len(p1_pub.get("draft_history") or ()),
+                            "public_history_len": len(p1_pub.get("public_history") or ()),
+                            "terminal": bool(p1_pub.get("terminal")),
+                            "result": p1_pub.get("result"),
+                        })
+                    except Exception:
+                        pass
                 decision_traces.append(trace.to_dict())
                 event_log[-1]["decision_trace_turn_id"] = action_count
                 if decision_trace_writer is None:

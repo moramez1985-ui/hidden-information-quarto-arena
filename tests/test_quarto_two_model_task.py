@@ -215,7 +215,7 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
     def test_decorated_task_is_invoked_with_selected_task_llm(self) -> None:
         self.assertEqual(len(self.task.run_calls), 1)
         self.assertIs(self.task.run_calls[0]["llm"], self.selected_llm)
-        self.assertEqual(self.task.options["name"], "Quarto Two-Model Match")
+        self.assertEqual(self.task.options["name"], "Hidden information - Quarto Arena")
         self.assertIs(self.task.function.__annotations__["return"], dict)
         self.assertTrue(self.task_module._task_run.passed)
         self.assertEqual(self.task_module._task_run.result["status"], "passed")

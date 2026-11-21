@@ -1,6 +1,8 @@
 """Approved FMA Pilot and Arena Instance Loader with Strict Cryptographic and Structural Validation."""
 from __future__ import annotations
 
+from functools import lru_cache
+
 import hashlib
 import json
 from dataclasses import dataclass
@@ -110,6 +112,14 @@ def load_fma_pilot(
     archive_path: str | Path,
     *,
     instance_path: str | Path = PILOT_INSTANCE_PATH,
+) -> FMAPilot:
+    return _load_fma_pilot_cached(str(Path(archive_path).resolve()), str(Path(instance_path).resolve()))
+
+
+@lru_cache(maxsize=16)
+def _load_fma_pilot_cached(
+    archive_path: str,
+    instance_path: str,
 ) -> FMAPilot:
     """Load and revalidate any approved FMA pilot or Arena pool instance artifact."""
     artifact = _read_instance_artifact(Path(instance_path))

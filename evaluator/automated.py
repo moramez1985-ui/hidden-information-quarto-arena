@@ -64,6 +64,7 @@ def _evaluate_piece_strategy(
         "player_1": {
             "select_turns": 0,
             "safe_selects": 0,
+            "trap_selects": 0,
             "blunder_selects": 0,
             "placement_blunders": 0,
             "place_turns": 0,
@@ -74,6 +75,7 @@ def _evaluate_piece_strategy(
         "player_2": {
             "select_turns": 0,
             "safe_selects": 0,
+            "trap_selects": 0,
             "blunder_selects": 0,
             "placement_blunders": 0,
             "place_turns": 0,
@@ -135,6 +137,8 @@ def _evaluate_piece_strategy(
                 stats[player]["select_turns"] += 1
                 if chosen_piece in safe_candidates:
                     stats[player]["safe_selects"] += 1
+                    if _piece_gives_win_for_player(chosen_piece, player, state.board):
+                        stats[player]["trap_selects"] += 1
                 else:
                     stats[player]["blunder_selects"] += 1
             state = select_piece(state, player, chosen_piece)
@@ -192,6 +196,7 @@ def _evaluate_piece_strategy(
         win_opp = s["immediate_win_opportunities"]
         summary[p] = {
             **s,
+            "strategic_trap_rate": round(s["trap_selects"] / sel_t, 4) if sel_t > 0 else "N/A",
             "blunder_avoidance_rate": round((tot_dec - tot_bln) / tot_dec, 4) if tot_dec > 0 else "N/A",
             "self_bit_alignment_rate": round(s["self_bit_aligned_places"] / plc_t, 4) if plc_t > 0 else "N/A",
             "immediate_win_conversion_rate": round(s["immediate_wins_taken"] / win_opp, 4) if win_opp > 0 else "N/A",
@@ -209,7 +214,9 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
             "draft_accepted": 0.0,
             "select_turns": 0.0,
             "safe_selects": 0.0,
+            "trap_selects": 0.0,
             "blunder_selects": 0.0,
+            "placement_blunders": 0.0,
             "place_turns": 0.0,
             "self_bit_aligned_places": 0.0,
             "immediate_win_opportunities": 0.0,
@@ -220,7 +227,9 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
             "draft_accepted": 0.0,
             "select_turns": 0.0,
             "safe_selects": 0.0,
+            "trap_selects": 0.0,
             "blunder_selects": 0.0,
+            "placement_blunders": 0.0,
             "place_turns": 0.0,
             "self_bit_aligned_places": 0.0,
             "immediate_win_opportunities": 0.0,
@@ -244,16 +253,20 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
             for k in (
                 "select_turns",
                 "safe_selects",
+                "trap_selects",
                 "blunder_selects",
+                "placement_blunders",
                 "place_turns",
                 "self_bit_aligned_places",
                 "immediate_win_opportunities",
                 "immediate_wins_taken",
             ):
-                by_player[p][k] += float(ps.get(k, 0))
+                by_player[p][k] = by_player[p].get(k, 0.0) + float(ps.get(k, 0))
 
     summary_players: dict[str, Any] = {}
     for p, stats in by_player.items():
+        tot_decisions = stats["select_turns"] + stats["place_turns"]
+        tot_blunders = stats["blunder_selects"] + stats["placement_blunders"]
         summary_players[p] = {
             "wins": wins[p],
             "win_rate": round(wins[p] / len(match_reports), 4),
@@ -262,14 +275,17 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
             "draft_precision": round(stats["draft_accepted"] / stats["draft_proposals"], 4) if stats["draft_proposals"] > 0 else 0.0,
             "select_turns": int(stats["select_turns"]),
             "safe_selects": int(stats["safe_selects"]),
+            "trap_selects": int(stats["trap_selects"]),
+            "strategic_trap_rate": round(stats["trap_selects"] / stats["select_turns"], 4) if stats["select_turns"] > 0 else "N/A",
             "blunder_selects": int(stats["blunder_selects"]),
-            "blunder_avoidance_rate": round(stats["safe_selects"] / stats["select_turns"], 4) if stats["select_turns"] > 0 else 0.0,
+            "placement_blunders": int(stats["placement_blunders"]),
+            "blunder_avoidance_rate": round((tot_decisions - tot_blunders) / tot_decisions, 4) if tot_decisions > 0 else "N/A",
             "place_turns": int(stats["place_turns"]),
             "self_bit_aligned_places": int(stats["self_bit_aligned_places"]),
             "self_bit_alignment_rate": round(stats["self_bit_aligned_places"] / stats["place_turns"], 4) if stats["place_turns"] > 0 else 0.0,
             "immediate_win_opportunities": int(stats["immediate_win_opportunities"]),
             "immediate_wins_taken": int(stats["immediate_wins_taken"]),
-            "immediate_win_conversion_rate": round(stats["immediate_wins_taken"] / stats["immediate_win_opportunities"], 4) if stats["immediate_win_opportunities"] > 0 else 0.0,
+            "immediate_win_conversion_rate": round(stats["immediate_wins_taken"] / stats["immediate_win_opportunities"], 4) if stats["immediate_win_opportunities"] > 0 else "N/A",
         }
     return {
         "completed_games": len(match_reports),

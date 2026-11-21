@@ -22,8 +22,8 @@ PLAYER_1_MODEL = "google/gemini-3.8-flash"
 PLAYER_2_REGISTRY_KEY = "anthropic/claude-sonnet-4-6@default"
 PLAYER_2_MODEL = "anthropic/claude-sonnet-4-6@default"
 PUBLIC_REPLAY_SCHEMA_VERSION = 2
-SERIES_TARGET_GAMES = 3
-SERIES_STARTING_PLAYERS = ("player_1", "player_2", "player_1")
+SERIES_TARGET_GAMES = max(1, int(os.environ.get("QUARTO_SERIES_GAMES", "2")))
+SERIES_STARTING_PLAYERS = tuple("player_1" if i % 2 == 0 else "player_2" for i in range(SERIES_TARGET_GAMES))
 
 _PUBLIC_AUDIT_FIELDS = frozenset({
     "match_id",
@@ -261,7 +261,7 @@ def _extract_post_terminal_visualization(
 def _run_deterministic_reasoning_audit(
     restricted_logs: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Deterministic claim-to-engine grounding audit (no 3rd-LLM bias)."""
+    """Deterministic claim-to-engine grounding & hidden-trait discovery audit (no 3rd-LLM bias)."""
     import re
 
     per_player: dict[str, dict[str, Any]] = {
@@ -270,25 +270,61 @@ def _run_deterministic_reasoning_audit(
             "evidence_cited_count": 0,
             "draft_repeat_claim_count": 0,
             "blunder_blindness_count": 0,
+            "phantom_claim_count": 0,
+            "opponent_traits_total": 0,
+            "opponent_traits_discovered": 0,
         },
         "player_2": {
             "total_explanations": 0,
             "evidence_cited_count": 0,
             "draft_repeat_claim_count": 0,
             "blunder_blindness_count": 0,
+            "phantom_claim_count": 0,
+            "opponent_traits_total": 0,
+            "opponent_traits_discovered": 0,
         },
     }
     evidence_re = re.compile(
         r"(fma:|row|col|diagonal|cell\s*\d+|bit\s*[0-3]|8/8|4/4|3-in-a-row|three-in-a-row)",
         re.IGNORECASE,
     )
+    safe_claim_re = re.compile(
+        r"(\bsafe\b|no immediate|cannot win|doesn't complete|does not complete|prevent)",
+        re.IGNORECASE,
+    )
+    win_claim_re = re.compile(
+        r"(quarto|winning line|completes? my|four-in-a-row|4-in-a-row)",
+        re.IGNORECASE,
+    )
+    feat_token_re = re.compile(r"fma:[a-z0-9_]+:[a-z0-9_]+:\d+", re.IGNORECASE)
+
     for rlog in restricted_logs:
         if not isinstance(rlog, Mapping):
             continue
         traces = rlog.get("decision_traces")
         if not isinstance(traces, Sequence):
             continue
+
+        red = rlog.get("restricted_evaluator_data") if isinstance(rlog.get("restricted_evaluator_data"), Mapping) else {}
+        owners_map = red.get("feature_ownership") if isinstance(red.get("feature_ownership"), Mapping) else {}
+        true_owned: dict[str, set[str]] = {"player_1": set(), "player_2": set()}
+        for fid, owner in owners_map.items():
+            if owner in true_owned:
+                true_owned[owner].add(str(fid))
+
+        if not true_owned["player_1"] and not true_owned["player_2"]:
+            for tr in traces:
+                if not isinstance(tr, Mapping):
+                    continue
+                priv = ((tr.get("observation_snapshot") or {}).get("private") or {})
+                ag = tr.get("agent_id")
+                if ag in true_owned and isinstance(priv.get("owned_features"), Sequence):
+                    for f in priv["owned_features"]:
+                        true_owned[ag].add(str(f))
+
+        mentioned_by_player: dict[str, set[str]] = {"player_1": set(), "player_2": set()}
         seen_drafts: dict[str, set[str]] = {"player_1": set(), "player_2": set()}
+
         for tr in traces:
             if not isinstance(tr, Mapping):
                 continue
@@ -296,34 +332,91 @@ def _run_deterministic_reasoning_audit(
             if pl not in per_player:
                 continue
             expl = tr.get("decision_explanation")
+            hyps = tr.get("candidate_hypotheses") if isinstance(tr.get("candidate_hypotheses"), Sequence) else []
+            combined_text = " ".join([str(expl or "")] + [str(h) for h in hyps])
+            for m_feat in feat_token_re.findall(combined_text):
+                mentioned_by_player[pl].add(m_feat)
+
             if not isinstance(expl, str) or not expl.strip():
                 continue
             stats = per_player[pl]
             stats["total_explanations"] += 1
             if evidence_re.search(expl):
                 stats["evidence_cited_count"] += 1
+
             act = tr.get("selected_action") if isinstance(tr.get("selected_action"), Mapping) else {}
-            if act.get("kind") == "propose_feature":
+            kind = str(act.get("kind") or "")
+            if kind == "propose_feature":
                 fid = str(act.get("feature_id") or "")
                 if fid in seen_drafts[pl]:
                     stats["draft_repeat_claim_count"] += 1
                 seen_drafts[pl].add(fid)
+            elif kind == "select_entity":
+                fb = tr.get("received_feedback") if isinstance(tr.get("received_feedback"), Mapping) else {}
+                post_obs = fb.get("post_action_public_observation") if isinstance(fb.get("post_action_public_observation"), Mapping) else {}
+                if post_obs.get("phase") == "terminal" and safe_claim_re.search(expl):
+                    stats["blunder_blindness_count"] += 1
+            elif kind == "place_entity":
+                fb = tr.get("received_feedback") if isinstance(tr.get("received_feedback"), Mapping) else {}
+                post_obs = fb.get("post_action_public_observation") if isinstance(fb.get("post_action_public_observation"), Mapping) else {}
+                res = post_obs.get("result") if isinstance(post_obs.get("result"), Mapping) else {}
+                if win_claim_re.search(expl) and res.get("winner") != pl:
+                    stats["phantom_claim_count"] += 1
+                if safe_claim_re.search(expl) and res.get("winner") and res.get("winner") != pl:
+                    stats["blunder_blindness_count"] += 1
+
+        for pl, opp in (("player_1", "player_2"), ("player_2", "player_1")):
+            opp_feats = true_owned[opp]
+            if opp_feats:
+                per_player[pl]["opponent_traits_total"] += len(opp_feats)
+                discovered = len(opp_feats.intersection(mentioned_by_player[pl]))
+                per_player[pl]["opponent_traits_discovered"] += discovered
 
     scores: dict[str, Any] = {}
     for pl, st in per_player.items():
         tot = st["total_explanations"]
         ev_rate = round(st["evidence_cited_count"] / tot, 4) if tot else 0.0
-        faithfulness = round(max(0.0, 1.0 - (st["draft_repeat_claim_count"] / tot)), 4) if tot else 0.0
+        errors = st["draft_repeat_claim_count"] + st["blunder_blindness_count"] + st["phantom_claim_count"]
+        faithfulness = round(max(0.0, 1.0 - (errors / tot)), 4) if tot else 0.0
+        opp_tot = st["opponent_traits_total"]
+        hi_disc = round(st["opponent_traits_discovered"] / opp_tot, 4) if opp_tot else 0.0
         scores[pl] = {
             **st,
             "evidence_citation_rate": ev_rate,
             "deterministic_faithfulness_rate": faithfulness,
+            "hidden_trait_discovery_rate": hi_disc,
         }
     return {
         "status": "completed",
-        "method": "deterministic_claim_to_engine_grounding",
+        "method": "deterministic_claim_to_engine_grounding_v2",
         "trust_boundary": "ground_truth_engine_verified_no_llm_judge_bias",
         "scores": scores,
+    }
+
+
+def _attach_arena_composite_scores(
+    auto_eval: dict[str, Any],
+    grounding_audit: dict[str, Any],
+) -> dict[str, Any]:
+    """Attach unified 0-100 Arena Composite Index combining gameplay, deduction, and grounding."""
+    agg_players = (auto_eval.get("series_aggregate") or {}).get("players") or {}
+    audit_scores = grounding_audit.get("scores") or {}
+    for pl in ("player_1", "player_2"):
+        p_stats = agg_players.get(pl)
+        a_stats = audit_scores.get(pl) or {}
+        if not isinstance(p_stats, dict):
+            continue
+        wr = float(p_stats.get("win_rate") or 0.0)
+        ba = float(p_stats.get("blunder_avoidance_rate") or 0.0)
+        dp = float(p_stats.get("draft_precision") or 0.0)
+        hi = float(a_stats.get("hidden_trait_discovery_rate") or 0.0)
+        sf = float(a_stats.get("deterministic_faithfulness_rate") or 0.0)
+        composite = round(100.0 * (0.40 * wr + 0.20 * ba + 0.15 * dp + 0.15 * hi + 0.10 * sf), 2)
+        p_stats["hidden_trait_discovery_rate"] = hi
+        p_stats["arena_composite_index"] = composite
+    return {
+        **auto_eval,
+        "reasoning_grounding_audit": grounding_audit,
     }
 
 
@@ -885,11 +978,96 @@ class _IsolatedChatLLM:
             self.model_version = version
 
     def prompt(self, prompt: str) -> str:
-        with self._kbench.chats.new(
-            name=f"quarto-{self._player}",
-            orphan=True,
-        ):
-            return self._llm.prompt(prompt)
+        last_exc: Exception | None = None
+        for attempt, delay in enumerate((0.0, 2.0, 5.0, 10.0), start=1):
+            if delay > 0:
+                time.sleep(delay)
+            try:
+                with self._kbench.chats.new(
+                    name=f"quarto-{self._player}-a{attempt}",
+                    orphan=True,
+                ):
+                    return self._llm.prompt(prompt)
+            except Exception as exc:
+                last_exc = exc
+        assert last_exc is not None
+        raise last_exc
+
+
+def _resolve_models(selected_llm: Any) -> tuple[Any, Any, dict[str, Any]]:
+    selected_identity = _model_identity(selected_llm, "Selected Task model")
+
+    registry = getattr(kbench, "llms", None)
+    if not isinstance(registry, dict) or not registry:
+        raise RuntimeError("Kaggle Benchmarks did not expose the kbench.llms registry.")
+
+    target_opponent = os.environ.get("QUARTO_OPPONENT_MODEL", PLAYER_2_REGISTRY_KEY).strip()
+    opponent_llm = registry.get(target_opponent)
+    registry_key = target_opponent
+
+    if opponent_llm is None:
+        for key, candidate in registry.items():
+            if getattr(candidate, "model", None) == target_opponent:
+                registry_key, opponent_llm = key, candidate
+                break
+
+    if opponent_llm is None or getattr(opponent_llm, "model", None) == selected_identity:
+        for key, candidate in registry.items():
+            cand_id = getattr(candidate, "model", None)
+            if isinstance(cand_id, str) and cand_id and cand_id != selected_identity and candidate is not selected_llm:
+                registry_key, opponent_llm = key, candidate
+                break
+
+    if opponent_llm is None:
+        raise RuntimeError(
+            f"No distinct opponent model available in kbench.llms for {target_opponent!r}."
+        )
+
+    opponent_identity = _model_identity(opponent_llm, "Registry model")
+    if selected_llm is opponent_llm or selected_identity == opponent_identity:
+        raise RuntimeError("The two player model handles must have distinct identities.")
+
+    return selected_llm, opponent_llm, {
+        "player_1": {
+            "registry_key": "selected Task llm",
+            "model": selected_identity,
+            "model_version": _model_version(selected_llm),
+        },
+        "player_2": {
+            "registry_key": registry_key,
+            "model": opponent_identity,
+            "model_version": _model_version(opponent_llm),
+        },
+    }
+
+class _IsolatedChatLLM:
+    def __init__(self, llm: Any, *, player: str) -> None:
+        self._llm = llm
+        self._player = player
+        self._kbench = kbench
+        self.model = getattr(llm, "model")
+        name = getattr(llm, "name", None)
+        if isinstance(name, str):
+            self.name = name
+        version = _model_version(llm)
+        if version is not None:
+            self.model_version = version
+
+    def prompt(self, prompt: str) -> str:
+        last_exc: Exception | None = None
+        for attempt, delay in enumerate((0.0, 2.0, 5.0, 10.0), start=1):
+            if delay > 0:
+                time.sleep(delay)
+            try:
+                with self._kbench.chats.new(
+                    name=f"quarto-{self._player}-a{attempt}",
+                    orphan=True,
+                ):
+                    return self._llm.prompt(prompt)
+            except Exception as exc:
+                last_exc = exc
+        assert last_exc is not None
+        raise last_exc
 
 
 def _resolve_models(selected_llm: Any) -> tuple[Any, Any, dict[str, Any]]:
@@ -963,6 +1141,99 @@ def run_quarto_two_model_match(llm) -> dict:
     except Exception as error:
         _emit_failure_diagnostic(error, failure_context)
         raise
+
+
+def _render_live_step_panel(
+    game_index: int,
+    total_games: int,
+    step_info: dict[str, Any],
+    elapsed_sec: float,
+    models_meta: dict[str, Any],
+) -> None:
+    actor = step_info.get("actor", "?")
+    action = step_info.get("action") or {}
+    kind = action.get("kind", "?")
+    phase = step_info.get("phase", "?")
+    turn_idx = step_info.get("turn_index", 0)
+    board = step_info.get("board") or [None] * 16
+    placed_count = sum(1 for c in board if c is not None)
+    sel_ent = step_info.get("selected_entity")
+
+    detail_txt = ""
+    if kind == "propose_feature":
+        detail_txt = f"feature={action.get('feature_id')}"
+    elif kind == "select_entity":
+        detail_txt = f"entity={str(action.get('entity_id'))[:8]}..."
+    elif kind == "place_entity":
+        cell = action.get("cell")
+        r, c = (divmod(int(cell), 4) if isinstance(cell, int) else (0, 0))
+        detail_txt = f"cell={cell} (R{r+1}C{c+1})"
+
+    print(
+        f"[LIVE Game {game_index}/{total_games} | Turn {turn_idx:02d} | {phase.upper()}] "
+        f"{actor} -> {kind} ({detail_txt}) | Board: {placed_count}/16 | {elapsed_sec:.1f}s",
+        flush=True,
+    )
+
+    try:
+        Path("live_match_state.json").write_text(
+            json.dumps(
+                {
+                    "game_index": game_index,
+                    "total_games": total_games,
+                    "elapsed_seconds": round(elapsed_sec, 2),
+                    "models": models_meta,
+                    **step_info,
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
+
+    try:
+        from IPython.display import HTML, clear_output, display
+        p1_name = (models_meta.get("player_1") or {}).get("model", "player_1")
+        p2_name = (models_meta.get("player_2") or {}).get("model", "player_2")
+        cells_html = []
+        for idx in range(16):
+            val = board[idx] if idx < len(board) else None
+            r, c = divmod(idx, 4)
+            if val:
+                bg = "#1f6feb" if idx == action.get("cell") else "#21262d"
+                cells_html.append(
+                    f'<div style="background:{bg};border:1px solid #388bfd;border-radius:8px;'
+                    f'padding:10px;text-align:center;color:#f0f6fc;font-family:monospace;">'
+                    f'<div style="font-size:10px;color:#8b949e;">R{r+1}C{c+1} (#{idx})</div>'
+                    f'<div style="font-size:13px;font-weight:700;margin-top:4px;">{str(val)[:8]}</div></div>'
+                )
+            else:
+                cells_html.append(
+                    f'<div style="background:#0d1117;border:1px dashed #30363d;border-radius:8px;'
+                    f'padding:10px;text-align:center;color:#484f58;font-family:monospace;">'
+                    f'<div style="font-size:10px;">R{r+1}C{c+1} (#{idx})</div>'
+                    f'<div style="font-size:12px;margin-top:4px;">empty</div></div>'
+                )
+        html_panel = f"""
+        <div style="background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px;color:#c9d1d9;font-family:system-ui,sans-serif;max-width:680px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <strong style="color:#58a6ff;font-size:15px;">Quarto Arena LIVE — Game {game_index}/{total_games}</strong>
+            <span style="background:#238636;color:#fff;padding:2px 8px;border-radius:12px;font-size:12px;">Turn {turn_idx} • {phase.upper()} • {elapsed_sec:.1f}s</span>
+          </div>
+          <div style="font-size:12px;color:#8b949e;margin-bottom:10px;">
+            P1: <code style="color:#79c0ff;">{p1_name}</code> vs P2: <code style="color:#d2a8ff;">{p2_name}</code><br/>
+            Last move: <strong>{actor}</strong> → <code>{kind}</code> ({detail_txt}) | Selected: <code>{str(sel_ent)[:8] if sel_ent else 'None'}</code>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            {''.join(cells_html)}
+          </div>
+        </div>
+        """
+        clear_output(wait=True)
+        display(HTML(html_panel))
+    except Exception:
+        pass
 
 
 def _run_quarto_two_model_match(
@@ -1063,7 +1334,7 @@ def _run_quarto_two_model_match(
         ).client,
     }
     series_started_at = time.monotonic()
-    series_budget_seconds = 2400.0
+    series_budget_seconds = 3600.0
     min_remaining_for_next_game = 360.0
     completed_games: list[dict[str, Any]] = []
     completed_restricted_logs: list[Mapping[str, Any]] = []
@@ -1084,7 +1355,7 @@ def _run_quarto_two_model_match(
             })
             continue
 
-        game_timeout = min(900.0, max(120.0, remaining_series - 30.0))
+        game_timeout = min(1700.0, max(120.0, remaining_series - 30.0))
         runner = TournamentRunner(
             clients,
             model_tags=(PLAYER_1_MODEL, PLAYER_2_MODEL),
@@ -1094,6 +1365,7 @@ def _run_quarto_two_model_match(
         failure_context["stage"] = f"match_execution_game_{game_index}"
         try:
             active_pilot = series_pilots[(game_index - 1) % len(series_pilots)]
+            _g_start = time.monotonic()
             result = runner.run_match(
                 active_pilot.adapter,
                 active_pilot.instance,
@@ -1101,6 +1373,9 @@ def _run_quarto_two_model_match(
                 starting_player=starting_player,
                 restricted_source_ids=active_pilot.restricted_source_ids,
                 enable_draft=True,
+                on_step=lambda st, gi=game_index: _render_live_step_panel(
+                    gi, SERIES_TARGET_GAMES, st, time.monotonic() - _g_start, model_metadata
+                ),
             )
             failure_context["match_result"] = result
             failure_context["stage"] = "match_validation" if game_index == 1 else f"match_validation_game_{game_index}"
@@ -1213,7 +1488,7 @@ def _run_quarto_two_model_match(
             "check_count": len(security_preflight["checks"]),
         },
         "timeout": {
-            "match_wall_clock_seconds": 900.0,
+            "match_wall_clock_seconds": 1700.0,
             "series_budget_seconds": series_budget_seconds,
             "provider_call_interruptible": False,
             "limitation": (
@@ -1242,15 +1517,15 @@ def _run_quarto_two_model_match(
                 "separate access-controlled design."
             ),
         },
-        "evaluator": {
-            **_run_automated_evaluator(
+        "evaluator": _attach_arena_composite_scores(
+            _run_automated_evaluator(
                 completed_restricted_logs,
                 source_root / "fma_pilot_instance.json",
             ),
-            "reasoning_grounding_audit": _run_deterministic_reasoning_audit(
+            _run_deterministic_reasoning_audit(
                 completed_restricted_logs,
             ),
-        },
+        ),
     }
 
 
