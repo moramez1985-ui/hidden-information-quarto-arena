@@ -1,0 +1,3 @@
+seat,model,arena_composite_index,wins,win_rate,blunder_avoidance_rate,strategic_trap_rate,draft_precision,hidden_trait_discovery_rate
+player_1,google/gemini-3.8-flash,38.83,0,0.0,0.8667,0.0,0.8,0.0
+player_2,anthropic/claude-sonnet-4-6@default,79.64,2,1.0,1.0,0.25,0.2,0.5

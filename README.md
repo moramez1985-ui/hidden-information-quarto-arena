@@ -126,3 +126,23 @@ public observation to the runner; the trace marks that feedback as not immediate
 delivered to the acting agent. Traces contain private observations and must be kept
 with the restricted match artifacts, not published. A write failure is listed in
 the restricted result and does not change the accepted action or match outcome.
+
+## Official Benchmark Results (v1.0 — Balanced 2-Game Series)
+
+Executed on Kaggle Benchmarks (`hidden-information-quarto-arena`, Version 7, Run #7) with alternating starting players (`player_1` in Game 1, `player_2` in Game 2), deterministic rule adjudication, and unbiased automated evaluation:
+
+| Model Role | Model Identifier | Wins | Win Rate | Arena Composite Index | Blunder Avoidance | Strategic Trap Rate | Hidden Trait Discovery | Self-Bit Alignment |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Player 1** | `google/gemini-3.8-flash` | 0 / 2 | 0.00 | **38.83** | 0.8667 | 0.00 | 0.00 | 0.3750 |
+| **Player 2** | `anthropic/claude-sonnet-4-6@default` | 2 / 2 | 1.00 | **79.64** | 1.0000 | 0.25 | 0.50 | 0.5714 |
+
+### Key Analytical Findings
+- **Strategic Trap Exploitation vs. Defensive Blunders:** `claude-sonnet-4-6` actively set `Strategic Traps` (`0.25` trap rate) by handing pieces that completed its private FMA feature lines (`fma:rmse:min:01` in Game 1; `fma:spectral_centroid:kurtosis:01` in Game 2), whereas `gemini-3.8-flash` committed `2` placement blunders by attempting to block 3-piece opponent lines on the 4th cell—unintentionally completing the opponent's hidden Quarto condition.
+- **Series Aggregation & Reliability:** Both games completed within a single balanced series (`396.3s` and `227.3s`, zero timeouts, zero failed calls) and aggregated cleanly into `evaluator.series_aggregate`.
+
+## Final Release Artifacts (`final_release_v1/`)
+
+- `Hidden_information_-_Quarto_Arena-run_id_Run_1_google_gemini-3.8-flash.run.json`: Official Kaggle Benchmarks execution artifact.
+- `quarto_arena_results.json`: Structured series & per-game evaluation payload.
+- `quarto_arena_leaderboard.csv`: Summary leaderboard table for model comparison.
+- `quarto_match_visualizer.html`: Standalone interactive HTML replay & telemetry visualizer.
