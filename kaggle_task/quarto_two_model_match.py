@@ -510,7 +510,7 @@ def _project_public_replay(public_audit: object) -> dict[str, Any]:
     if result is not None and (
         not isinstance(result, Mapping)
         or set(result) != {"mode", "outcome", "winner", "reason"}
-        or not _is_valid_terminal_result(result)
+        or not _is_valid_terminal_result(result, expected_mode=public_audit["mode"])
         or result["mode"] != public_audit["mode"]
     ):
         raise ValueError("Public audit has an invalid terminal result.")
@@ -609,7 +609,7 @@ def _validate_public_replay(public_replay: object) -> bool:
         return False
     if (
         result is None
-        or not _is_valid_terminal_result(result)
+        or not _is_valid_terminal_result(result, expected_mode=mode)
         or result["mode"] != mode
     ):
         return False
