@@ -107,8 +107,8 @@
     },
     {
       "path": "tournament_harness.py",
-      "size_bytes": 92443,
-      "sha256": "4b1f821a1e99b7905ece67e70d5014dcc2c2e87f218c8c7bfaca9e8e5fd5be0e"
+      "size_bytes": 92740,
+      "sha256": "27a30b9783c97cf5edcb3f0bc4291f15ce231928bed071fa54ed67ee72ef6dde"
     }
   ],
   "integrity": {

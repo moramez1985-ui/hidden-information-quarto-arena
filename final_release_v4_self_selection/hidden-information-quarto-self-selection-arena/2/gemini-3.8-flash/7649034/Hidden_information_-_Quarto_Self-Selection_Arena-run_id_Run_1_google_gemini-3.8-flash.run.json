@@ -1,0 +1,43 @@
+{
+  "taskVersion": {
+    "versionNumber": 1,
+    "name": "Hidden information - Quarto Self-Selection Arena",
+    "description": "",
+    "definition": "@kbench.task(name=\"Hidden information - Quarto Self-Selection Arena\")\ndef run_quarto_self_selection_match(llm) -> float:\n    failure_context = {\n        \"stage\": \"task_setup\",\n        \"started_at\": time.monotonic(),\n    }\n    task_module = _prepare_and_load_quarto_module()\n    try:\n        res = task_module._run_quarto_two_model_match(\n            llm,\n            failure_context,\n            game_mode=\"self_selection\",\n        )\n        _save_visualizer(res)\n        series_info = res.get(\"series\") or {}\n        completed = float(series_info.get(\"completed_games_count\") or 0.0)\n        if hasattr(kbench, \"assertions\") and hasattr(kbench.assertions, \"assert_true\"):\n            kbench.assertions.assert_true(\n                completed >= 1.0,\n                expectation=\"At least one complete game must finish in the alternating-start series.\",\n            )\n        return _extract_primary_arena_score(res)\n    except Exception as error:\n        mr = failure_context.get(\"match_result\")\n        if mr is not None:\n            print(\"DEBUG_FAILURE_REASON:\", getattr(mr, \"failure\", None))\n            rlog = getattr(mr, \"restricted_log\", {}) or {}\n            events = rlog.get(\"events\", [])\n            if events:\n                print(\"DEBUG_LAST_EVENT:\", json.dumps(events[-1], default=str)[:1000])\n        task_module._emit_failure_diagnostic(error, failure_context)\n        raise\n"
+  },
+  "modelVersion": {
+    "slug": "google/gemini-3.8-flash"
+  },
+  "state": "BENCHMARK_TASK_RUN_STATE_COMPLETED",
+  "startTime": "2026-11-25T14:15:27.993113Z",
+  "endTime": "2026-11-25T14:54:19.597998Z",
+  "conversations": [
+    {
+      "id": "Hidden information - Quarto Self-Selection Arena-9b4a5193",
+      "metrics": {},
+      "modelVersionSlug": "model_version_slug for conversation is DEPRECATED"
+    }
+  ],
+  "results": [
+    {
+      "type": "AGGREGATED",
+      "numericResult": {
+        "value": 0.5726
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "expectation": "At least one complete game must finish in the alternating-start series.",
+      "status": "BENCHMARK_TASK_RUN_ASSERTION_STATUS_PASSED",
+      "lineNumber": 406,
+      "definition": "kbench.assertions.assert_true(",
+      "conversationRequestIds": [
+        {
+          "conversationId": "Hidden information - Quarto Self-Selection Arena-9b4a5193"
+        }
+      ]
+    }
+  ],
+  "pyRunId": "Hidden information - Quarto Self-Selection Arena-Run #1"
+}

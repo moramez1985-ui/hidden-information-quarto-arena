@@ -1,0 +1,3824 @@
+{
+  "status": "passed",
+  "passed": true,
+  "source_snapshot": "/tmp/quarto-two-model-source-v1",
+  "task_source_integrity": {
+    "status": "verified",
+    "executing_source_sha256": "3cef27d2c3cdf042a883e447f5d1e7420ce3c5a03a75804e480caa422f3d77fc",
+    "snapshot_source_sha256": "3cef27d2c3cdf042a883e447f5d1e7420ce3c5a03a75804e480caa422f3d77fc"
+  },
+  "security_preflight": {
+    "status": "passed",
+    "check_count": 16
+  },
+  "timeout": {
+    "match_wall_clock_seconds": 1700.0,
+    "series_budget_seconds": 3600.0,
+    "provider_call_interruptible": false,
+    "limitation": "Responses returned after the local deadline are rejected before action submission. The Kaggle adapter's timeout is not forwarded to llm.prompt(), so a blocking provider call may overrun the deadline until it returns."
+  },
+  "model_metadata": {
+    "player_1": {
+      "registry_key": "selected Task llm",
+      "model": "google/gemini-3.8-flash",
+      "model_version": null
+    },
+    "player_2": {
+      "registry_key": "anthropic/claude-sonnet-4-6@default",
+      "model": "anthropic/claude-sonnet-4-6@default",
+      "model_version": null
+    }
+  },
+  "series": {
+    "target_games": 4,
+    "completed_games_count": 4,
+    "incomplete_games_count": 0,
+    "starting_player_schedule": [
+      "player_1",
+      "player_2",
+      "player_1",
+      "player_2"
+    ],
+    "skipped_or_failed_games": []
+  },
+  "match": {
+    "game_index": 1,
+    "starting_player": "player_1",
+    "match_id": "match:a6c3c371-ac19-43d8-bca0-9049dcb7a1f9",
+    "instance_id": "fma_seed23_arena_ordinal_0144_v1",
+    "mode": "self_selection",
+    "draft_enabled": true,
+    "draft_proposal_count": 19,
+    "harness_model_tags": {
+      "player_1": "google/gemini-3.8-flash",
+      "player_2": "anthropic/claude-sonnet-4-6@default"
+    },
+    "outcome": "win",
+    "winner": "player_2",
+    "termination_reason": "quarto",
+    "action_count": 41,
+    "duration_seconds": 511.411,
+    "audit_valid": true,
+    "replay_valid": true,
+    "public_replay_valid": true,
+    "failure": null
+  },
+  "public_replay": {
+    "match_id": "match:a6c3c371-ac19-43d8-bca0-9049dcb7a1f9",
+    "replay_schema_version": 2,
+    "mode": "self_selection",
+    "starting_player": "player_1",
+    "board": [
+      "6462af54c0b5431c947929e6aad7b510",
+      null,
+      null,
+      "322080cc28504b99a5bc6ae233b85458",
+      "2e6d7ab2bc8349598b6b4c8d21d8828b",
+      "01b7687c7c784668b2ce6a633c374fdd",
+      "29f80c9291ad4e6f81604ea56aa4d035",
+      "31bf27943a55421ea9d2c724ee3b97c1",
+      "fe485f58b6864d93b9c56eaf0fe18601",
+      "95e4c70897e04a49a53a1a870e54bfb2",
+      "63d1cda0192246a6a5ff63c8dcf2ada7",
+      "84ebd42bcb624f6087cf1dba88fe8000",
+      null,
+      null,
+      null,
+      "2a01bd2328a347c38c5696bf51e0f95b"
+    ],
+    "draft_history": [
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:chroma_cens:mean:01",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_centroid:kurtosis:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:zcr:skew:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cens:mean:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:mfcc:kurtosis:08",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_rolloff:max:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_stft:skew:05",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:chroma_cqt:median:11",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_contrast:max:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_stft:std:09",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:tonnetz:skew:05",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:tonnetz:skew:03",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cqt:kurtosis:08",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_bandwidth:min:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cqt:median:11",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:mfcc:skew:15",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cens:kurtosis:12",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_contrast:skew:07",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:rmse:min:01",
+        "accepted": true
+      }
+    ],
+    "public_history": [
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "01b7687c7c784668b2ce6a633c374fdd"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 5
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "63d1cda0192246a6a5ff63c8dcf2ada7"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 10
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "29f80c9291ad4e6f81604ea56aa4d035"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 6
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "6462af54c0b5431c947929e6aad7b510"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 0
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "2a01bd2328a347c38c5696bf51e0f95b"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 15
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "fe485f58b6864d93b9c56eaf0fe18601"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 8
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "2e6d7ab2bc8349598b6b4c8d21d8828b"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 4
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "95e4c70897e04a49a53a1a870e54bfb2"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 9
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "31bf27943a55421ea9d2c724ee3b97c1"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 7
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "84ebd42bcb624f6087cf1dba88fe8000"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 11
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "322080cc28504b99a5bc6ae233b85458"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 3
+      }
+    ],
+    "result": {
+      "mode": "self_selection",
+      "outcome": "win",
+      "winner": "player_2",
+      "reason": "quarto"
+    }
+  },
+  "matches": [
+    {
+      "match": {
+        "game_index": 1,
+        "starting_player": "player_1",
+        "match_id": "match:a6c3c371-ac19-43d8-bca0-9049dcb7a1f9",
+        "instance_id": "fma_seed23_arena_ordinal_0144_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 19,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_2",
+        "termination_reason": "quarto",
+        "action_count": 41,
+        "duration_seconds": 511.411,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:a6c3c371-ac19-43d8-bca0-9049dcb7a1f9",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_1",
+        "board": [
+          "6462af54c0b5431c947929e6aad7b510",
+          null,
+          null,
+          "322080cc28504b99a5bc6ae233b85458",
+          "2e6d7ab2bc8349598b6b4c8d21d8828b",
+          "01b7687c7c784668b2ce6a633c374fdd",
+          "29f80c9291ad4e6f81604ea56aa4d035",
+          "31bf27943a55421ea9d2c724ee3b97c1",
+          "fe485f58b6864d93b9c56eaf0fe18601",
+          "95e4c70897e04a49a53a1a870e54bfb2",
+          "63d1cda0192246a6a5ff63c8dcf2ada7",
+          "84ebd42bcb624f6087cf1dba88fe8000",
+          null,
+          null,
+          null,
+          "2a01bd2328a347c38c5696bf51e0f95b"
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:std:09",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:03",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "01b7687c7c784668b2ce6a633c374fdd"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "63d1cda0192246a6a5ff63c8dcf2ada7"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "29f80c9291ad4e6f81604ea56aa4d035"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "6462af54c0b5431c947929e6aad7b510"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "2a01bd2328a347c38c5696bf51e0f95b"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 15
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "fe485f58b6864d93b9c56eaf0fe18601"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "2e6d7ab2bc8349598b6b4c8d21d8828b"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "95e4c70897e04a49a53a1a870e54bfb2"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 9
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "31bf27943a55421ea9d2c724ee3b97c1"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "84ebd42bcb624f6087cf1dba88fe8000"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 11
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "322080cc28504b99a5bc6ae233b85458"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 3
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "01b7687c7c784668b2ce6a633c374fdd": 14,
+          "29f80c9291ad4e6f81604ea56aa4d035": 1,
+          "2a01bd2328a347c38c5696bf51e0f95b": 5,
+          "2e6d7ab2bc8349598b6b4c8d21d8828b": 0,
+          "31bf27943a55421ea9d2c724ee3b97c1": 13,
+          "322080cc28504b99a5bc6ae233b85458": 6,
+          "356462bf58e84b57a125f93338d67956": 8,
+          "52b659c3ad7246248800b24feb666490": 12,
+          "5ed1a1ad39934c10ad37e22a8518ff6a": 3,
+          "63d1cda0192246a6a5ff63c8dcf2ada7": 2,
+          "6462af54c0b5431c947929e6aad7b510": 10,
+          "6d12d7ea75644641a4ae99f727c3d63c": 15,
+          "84ebd42bcb624f6087cf1dba88fe8000": 4,
+          "95e4c70897e04a49a53a1a870e54bfb2": 7,
+          "e7c12049b39d4bb0920b099e9dcdc9ed": 9,
+          "fe485f58b6864d93b9c56eaf0fe18601": 11
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:chroma_stft:skew:05",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:rmse:min:01",
+            "owner": "player_2"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Col 4",
+            "cells": [
+              3,
+              7,
+              11,
+              15
+            ],
+            "bit": 2,
+            "bit_value": 1,
+            "classic_trait": "Bit 2 (Shape)",
+            "feature_id": "fma:chroma_stft:skew:05",
+            "owner": "player_2"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Opening the draft phase by proposing fma:chroma_cens:mean:01 to establish our first private feature towards constructing a valid Quarto quartet.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Proposing spectral centroid kurtosis as my first feature since kurtosis-based spectral features typically discriminate well across diverse audio entities, and I need to establish an owned feature that evenly partitions the 16 entities to enable unique 4-bit signatures.",
+            "candidate_hypotheses": [
+              "Kurtosis features tend to have high variance across music tracks, providing near 8/8 splits",
+              "Spectral centroid is a primary timbral descriptor that varies significantly across genres"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "My previous proposal was rejected; I'm now trying fma:zcr:skew:01 as a zero-crossing rate skewness feature that should provide a clean binary partition of the 16 entities, helping establish my first owned feature for the win condition.",
+            "candidate_hypotheses": [
+              "fma:zcr:skew:01 splits entities ~8/8",
+              "Opponent may have claimed spectral centroid kurtosis feature"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "My previous two proposals were rejected; trying a different feature family (chroma_cens:mean) that may partition the 16 entities cleanly and hasn't been attempted yet.",
+            "candidate_hypotheses": [
+              "Opponent may have claimed spectral_centroid and zcr features",
+              "chroma_cens:mean:01 may provide a clean 8/8 partition"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 5,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Three previous proposals were rejected, suggesting opponent has claimed some features or conflicts exist; proposing an MFCC kurtosis feature which is from a different feature family than rejected ones (spectral centroid, ZCR, chroma CENS) to maximize chance of a clean partition and avoid overlap with opponent's secret features.",
+            "candidate_hypotheses": [
+              "Opponent claimed fma:zcr:skew:01 or fma:spectral_centroid:kurtosis:01 as their first feature",
+              "MFCC-based features may partition entities differently from spectral/chroma features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 6,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Attempting a feature from the spectral rolloff family, which hasn't been tried yet. My previous 4 rejections were from centroid, zcr, chroma_cens, and mfcc families, so trying a new family may yield an unclaimed, valid partitioning feature.",
+            "candidate_hypotheses": [
+              "Opponent may have claimed some of my rejected features",
+              "Some rejected features may not cleanly partition with already-accepted features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 7,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "I'm trying a feature from a different audio descriptor family (chroma_stft with skew statistic) that hasn't been attempted yet, hoping to avoid conflicts with opponent's accepted features or partitioning issues that caused my previous 5 rejections.",
+            "candidate_hypotheses": [
+              "Opponent may have claimed spectral/zcr features",
+              "chroma_stft features may partition entities differently"
+            ],
+            "declared_confidence": 0.3
+          },
+          {
+            "step": 8,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Proposing fma:chroma_cqt:median:11 to complement our first accepted feature fma:chroma_cens:mean:01 and build towards a full partition of the entities.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "I already own fma:chroma_stft:skew:05; proposing fma:spectral_contrast:max:01 from a different acoustic feature family to maximize orthogonality in partitioning the 16 entities and avoid conflicts with previously rejected features.",
+            "candidate_hypotheses": [
+              "fma:spectral_contrast:max:01 splits entities differently than fma:chroma_stft:skew:05, contributing to unique 4-bit signatures",
+              "Several rejections may be opponent-owned features, so choosing a different feature family reduces collision risk"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 10,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:std:09"
+            },
+            "decision_explanation": "My accepted feature fma:chroma_stft:skew:05 is from the chroma_stft family; trying fma:chroma_stft:std:09 as a compatible second feature that may cleanly partition the 16 entities alongside my existing feature without conflicting with opponent's claimed features.",
+            "candidate_hypotheses": [
+              "Opponent has claimed some of the rejected features",
+              "chroma_stft family features may be compatible for clean partitioning"
+            ],
+            "declared_confidence": 0.35
+          },
+          {
+            "step": 11,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Attempting fma:tonnetz:skew:05 from the tonnetz family, which is distinct from previously rejected features. Many rejections suggest opponent has claimed several features, so trying a different acoustic domain (tonal network) to find a clean partition that complements my owned fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [
+              "Opponent has claimed several spectral/MFCC features causing the rejections",
+              "Tonnetz features may provide independent binary partitions from chroma/spectral features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 12,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:03"
+            },
+            "decision_explanation": "My first feature fma:chroma_stft:skew:05 is accepted; I'm now trying fma:tonnetz:skew:03 as it's from a different feature family than many rejected ones, potentially offering good binary partitioning of the 16 entities alongside my owned feature.",
+            "candidate_hypotheses": [
+              "Opponent has claimed several of the 8 rejected features",
+              "tonnetz:skew:03 may partition entities differently from chroma_stft:skew:05"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "My first feature fma:chroma_stft:skew:05 is accepted; I need a second complementary feature. After 9 rejections, I'll try fma:chroma_cqt:kurtosis:08 as an untried feature from a different audio feature family that may cleanly partition the 16 entities without conflicting with player_1's accepted features.",
+            "candidate_hypotheses": [
+              "Player_1 has claimed several of the rejected features",
+              "Some rejections are due to partition conflicts with already-accepted features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 14,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Most available features have been rejected; trying fma:spectral_bandwidth:min:01 as it belongs to a different feature family (spectral bandwidth) that may partition entities cleanly alongside my owned chroma_stft:skew:05 feature without conflicting with opponent's secret accepted features.",
+            "candidate_hypotheses": [
+              "Opponent has claimed features causing many rejections",
+              "spectral_bandwidth:min:01 may provide unique 4-bit signatures with existing accepted features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 15,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "I've exhausted many options through rejections; trying fma:chroma_cqt:median:11 as an untried feature that may cleanly partition the 16 entities alongside my owned fma:chroma_stft:skew:05 to form valid unique 4-bit signatures.",
+            "candidate_hypotheses": [
+              "Many rejections are due to opponent claiming features or partition conflicts",
+              "chroma_cqt:median:11 may be compatible with my owned feature"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 16,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "With 12 rejections already, I need a feature orthogonal to my owned fma:chroma_stft:skew:05 that hasn't been claimed. Trying fma:mfcc:skew:15 as it uses a different audio descriptor (MFCC vs chroma) and may partition the 16 entities cleanly alongside my existing feature.",
+            "candidate_hypotheses": [
+              "fma:mfcc:skew:15 partitions entities orthogonally to fma:chroma_stft:skew:05",
+              "Many rejections are opponent claims, not partition failures"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 17,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "Proposing fma:chroma_cens:kurtosis:12 as it's one of the few non-rejected features remaining, potentially offering a partition orthogonal to my owned chroma_stft:skew:05 feature to form valid unique 4-bit signatures across all 16 entities.",
+            "candidate_hypotheses": [
+              "fma:rmse:min:01, fma:spectral_contrast:skew:07, fma:chroma_cens:kurtosis:12, and fma:chroma_cens:skew:03 are the remaining viable candidates",
+              "Opponent has claimed 2 features causing many rejections"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 18,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "I've exhausted 14 feature proposals and own fma:chroma_stft:skew:05. Trying fma:spectral_contrast:skew:07 as one of the few remaining untested features from the legal list that might partition the 16 entities cleanly alongside my owned feature.",
+            "candidate_hypotheses": [
+              "fma:spectral_contrast:skew:07 is compatible with fma:chroma_stft:skew:05",
+              "Opponent has claimed 2 features causing many rejections",
+              "Remaining viable options are rmse:min:01, spectral_contrast:skew:07, or chroma_cens:skew:03"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 19,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Only two features remain untried: fma:rmse:min:01 and fma:chroma_cens:skew:03. All others have been rejected. I'll propose fma:rmse:min:01 as my second owned feature to complete a valid 4-bit partition alongside my accepted fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [
+              "fma:rmse:min:01 is compatible with fma:chroma_stft:skew:05 and the opponent's two features",
+              "fma:chroma_cens:skew:03 may be the alternative if this is rejected"
+            ],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "01b7687c7c784668b2ce6a633c374fdd"
+            },
+            "decision_explanation": "In self-selection mode on an empty board, I select entity 01b7687c7c784668b2ce6a633c374fdd to place for myself to establish an opening position aligned with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing the opening piece in central cell 5 maximizes alignment opportunities across row, column, and the main diagonal to build towards our owned feature lines.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.9
+          },
+          {
+            "step": 22,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "63d1cda0192246a6a5ff63c8dcf2ada7"
+            },
+            "decision_explanation": "In self_selection mode, I'm selecting an entity to place myself. I'll target cell 10 to build toward the main diagonal (0,5,10,15) where cell 5 is already occupied, hoping this entity shares one of my owned features (fma:chroma_stft:skew:05 or fma:rmse:min:01) to eventually complete a winning diagonal line.",
+            "candidate_hypotheses": [
+              "Entity shares fma:chroma_stft:skew:05 feature",
+              "Entity shares fma:rmse:min:01 feature",
+              "Building diagonal line through cells 5,10 toward 0 and 15"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 23,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing at cell 10 to position on the main diagonal (0,5,10,15) which already contains the opponent's piece at cell 5, while also threatening row 2 and column 2. This central placement maximizes future line opportunities for my owned features.",
+            "candidate_hypotheses": [
+              "Main diagonal could be completed with my features if I can control cells 0 and 15",
+              "Row/column threats from cell 10 provide backup winning lines"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "29f80c9291ad4e6f81604ea56aa4d035"
+            },
+            "decision_explanation": "In self-selection mode, choosing an entity for my own next placement to advance board control while maintaining synergy with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 25,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing the selected entity at cell 6 expands row 1 alongside our previously placed entity at cell 5, advancing our progress along a line we control without prematurely completing lines through opponent-occupied cells.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "6462af54c0b5431c947929e6aad7b510"
+            },
+            "decision_explanation": "Selecting an entity to place at cell 14, building toward a column-2 win (cells 2, 6, 10, 14) where I already occupy cell 10. This creates pressure in the column while I work toward matching my owned features across a 4-in-a-row line.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 27,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing at cell 0 to build toward the main diagonal (0,5,10,15) where I already control cell 10. This creates a diagonal threat leveraging my owned features, forcing the opponent to defend while I maintain positional pressure.",
+            "candidate_hypotheses": [
+              "Main diagonal 0-5-10-15 could share my feature fma:chroma_stft:skew:05",
+              "Column 2 (2,6,10,14) is a secondary threat"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 28,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "2a01bd2328a347c38c5696bf51e0f95b"
+            },
+            "decision_explanation": "In self-selection mode, selecting an available entity to advance placement along row 1 or the main diagonal where multiple pieces are already aligned under our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 29,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 15
+            },
+            "decision_explanation": "Placing the selected entity at cell 15 completes the main diagonal (cells 0, 5, 10, 15), aiming for an immediate win on one of my owned features while neutralizing the line for the opponent.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 30,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "fe485f58b6864d93b9c56eaf0fe18601"
+            },
+            "decision_explanation": "In self_selection mode I pick an entity to place immediately. I'll target cell 8 which lies on both row 2 (where I already have cell 10) and column 0 (where I have cell 0), maximizing my winning line potential using my owned features.",
+            "candidate_hypotheses": [
+              "Entity shares fma:rmse:min:01 with my cell-0 piece enabling column-0 line",
+              "Entity shares fma:chroma_stft:skew:05 with my cell-10 piece enabling row-2 line"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 31,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing at cell 8 to contribute to both Column 0 (cells 0,4,8,12 - cell 0 is mine) and Row 2 (cells 8,9,10,11 - cell 10 is mine), maximizing my chances of completing a 4-in-a-row on my owned features fma:chroma_stft:skew:05 or fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 32,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "2e6d7ab2bc8349598b6b4c8d21d8828b"
+            },
+            "decision_explanation": "In self-selection mode, I choose entity 2e6d7ab2bc8349598b6b4c8d21d8828b for my own upcoming placement to maintain flexibility in developing lines aligned with my owned features fma:chroma_cens:mean:01 and fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.75
+          },
+          {
+            "step": 33,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing the selected entity at cell 4 simultaneously establishes a three-piece line along row 1 (cells 4, 5, 6) and column 0 (cells 0, 4, 8), creating dual winning threats aligned with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 34,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "95e4c70897e04a49a53a1a870e54bfb2"
+            },
+            "decision_explanation": "In self_selection mode I pick a piece for myself. I'm targeting row 2 (cells 8,9,10,11) where I already hold cells 8 and 10; selecting this entity to place at cell 9 to advance toward a winning line on my owned features fma:chroma_stft:skew:05 or fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 35,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing at cell 9 to build toward completing row 2 (cells 8,9,10,11), where I already occupy cells 8 and 10. This positions me to win by completing a 4-in-a-row on my owned features if I can also fill cell 11 with a matching entity.",
+            "candidate_hypotheses": [
+              "Row 2 completion via cells 8,9,10,11 sharing fma:chroma_stft:skew:05 or fma:rmse:min:01"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 36,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "31bf27943a55421ea9d2c724ee3b97c1"
+            },
+            "decision_explanation": "Selecting an entity to attempt completion of row 1 (cells 4, 5, 6, 7) aligned with owned features fma:chroma_cens:mean:01 or fma:chroma_cqt:median:11 while maintaining flexibility to contest row 2.",
+            "candidate_hypotheses": [
+              "Row 1 pieces (2e6d7ab2bc8349598b6b4c8d21d8828b, 01b7687c7c784668b2ce6a633c374fdd, 29f80c9291ad4e6f81604ea56aa4d035) share one of player 1's owned features",
+              "Opponent is building a winning line on row 2 (cells 8, 9, 10)"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 37,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing the selected entity at cell 7 completes row 1, which was systematically constructed with entities sharing my owned feature to secure a winning line.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 38,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "84ebd42bcb624f6087cf1dba88fe8000"
+            },
+            "decision_explanation": "In self_selection mode I select this entity for myself to place immediately. I'll target cell 14 to work toward completing column 2 (cells 2,6,10,14) where cells 6 and 10 are already placed, potentially sharing my owned features fma:chroma_stft:skew:05 or fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 39,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 11
+            },
+            "decision_explanation": "Placing at cell 11 completes row 2 (cells 8, 9, 10, 11) where I already have three pieces. Since I selected entities at cells 8, 9, and 10 based on my owned features (fma:chroma_stft:skew:05, fma:rmse:min:01), completing this row with the selected entity should achieve a winning 4-in-a-row on my features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.72
+          },
+          {
+            "step": 40,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "322080cc28504b99a5bc6ae233b85458"
+            },
+            "decision_explanation": "In self_selection mode, selecting an available entity to immediately place into cell 12 or cell 3 on the next turn to target a 4-in-a-row completion along Column 0 or Column 3 using owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 41,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing the selected entity at cell 3 completes column 3 (cells 3, 7, 11, 15), targeting a win along our owned features where we already control cells 7 and 15.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 2,
+        "starting_player": "player_2",
+        "match_id": "match:f6460690-3ab7-449c-bb42-3d9a3a61339e",
+        "instance_id": "fma_seed23_arena_ordinal_0111_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 12,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_1",
+        "termination_reason": "quarto",
+        "action_count": 34,
+        "duration_seconds": 415.452,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:f6460690-3ab7-449c-bb42-3d9a3a61339e",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_2",
+        "board": [
+          "1874da2e7c0344fd8c52fd575df3b4ae",
+          "30280155dff34492a9d83c1c07afb1e5",
+          "f325e198c6db4967b47315e24d45e3ae",
+          "59e18ad715bb4fd8aa8f66088f19c7a8",
+          "6d8a980324644a17b3b0277df03efa2f",
+          "29135ffcf8a04d24a647654ab2a45591",
+          "328daf4f08f94819ad08eb480f872518",
+          "7e0d0b332e9247f78734690bd5a20fda",
+          "8104591186804ccb92ae1b68e32f692d",
+          "a8fe54522c664a35924e9768a63e8b14",
+          null,
+          null,
+          "8b97b171e501402fa88f55501400d7ef",
+          null,
+          null,
+          null
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "1874da2e7c0344fd8c52fd575df3b4ae"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "29135ffcf8a04d24a647654ab2a45591"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "30280155dff34492a9d83c1c07afb1e5"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "328daf4f08f94819ad08eb480f872518"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "f325e198c6db4967b47315e24d45e3ae"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "59e18ad715bb4fd8aa8f66088f19c7a8"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 3
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "6d8a980324644a17b3b0277df03efa2f"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "7e0d0b332e9247f78734690bd5a20fda"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "8104591186804ccb92ae1b68e32f692d"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "8b97b171e501402fa88f55501400d7ef"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 12
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "a8fe54522c664a35924e9768a63e8b14"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 9
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "1874da2e7c0344fd8c52fd575df3b4ae": 14,
+          "29135ffcf8a04d24a647654ab2a45591": 9,
+          "30280155dff34492a9d83c1c07afb1e5": 4,
+          "328daf4f08f94819ad08eb480f872518": 6,
+          "59e18ad715bb4fd8aa8f66088f19c7a8": 0,
+          "6d8a980324644a17b3b0277df03efa2f": 1,
+          "7e0d0b332e9247f78734690bd5a20fda": 10,
+          "8104591186804ccb92ae1b68e32f692d": 11,
+          "8b97b171e501402fa88f55501400d7ef": 3,
+          "a8fe54522c664a35924e9768a63e8b14": 7,
+          "c19dde43a753477ebc3da4f3ff0e8e5c": 2,
+          "cdff11b7f53d46518a2b0eb2b6cc2e21": 13,
+          "d13b1f1646154d8ba0f838dc410637cd": 15,
+          "dd98f9da822043a6adebc40acf02e404": 8,
+          "f113f260addf4800b90fbd939169cb32": 12,
+          "f325e198c6db4967b47315e24d45e3ae": 5
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:chroma_cqt:kurtosis:08",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:mfcc:kurtosis:08",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Anti Diagonal",
+            "cells": [
+              3,
+              6,
+              9,
+              12
+            ],
+            "bit": 3,
+            "bit_value": 0,
+            "classic_trait": "Bit 3 (Top)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "As the first draft proposal with no information about entity partitions, I'm choosing spectral centroid kurtosis as a fundamental audio feature likely to have good distributional properties across 16 diverse music tracks, aiming for a balanced binary split that maximizes future quartet flexibility.",
+            "candidate_hypotheses": [
+              "Spectral centroid varies widely across music genres giving a ~8/8 split",
+              "Audio perceptual features tend to be more balanced than statistical moments"
+            ],
+            "declared_confidence": 0.3
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Proposing fma:spectral_rolloff:max:01 as it is a fundamental spectral feature likely to produce a balanced binary split across the 16 entities, maximizing flexibility for unique 4-bit signature construction. My previous proposal was rejected, so I'm trying a different high-utility feature.",
+            "candidate_hypotheses": [
+              "spectral_rolloff:max:01 splits entities 8/8",
+              "opponent claimed spectral_centroid:kurtosis:01"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "My previous proposals of spectral_centroid:kurtosis and spectral_rolloff:max were rejected; trying zcr:skew:01 as a different feature type that may cleanly partition the 16 entities without conflicting with the opponent's accepted feature.",
+            "candidate_hypotheses": [
+              "Opponent has accepted one feature that conflicted with my previous proposals",
+              "zcr:skew:01 may create an independent binary split"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "My three previous proposals were rejected; trying an MFCC kurtosis feature which is from a different feature family than the rejected spectral/ZCR features, making it less likely to have been claimed by the opponent or to conflict with accepted feature partitioning.",
+            "candidate_hypotheses": [
+              "Opponent claimed spectral_centroid, spectral_rolloff, and zcr features",
+              "MFCC features may partition the 16 entities differently and avoid conflicts"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 5,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Opening the draft phase by proposing fma:chroma_cens:mean:01 to establish our first owned feature.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 6,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Proposing spectral_bandwidth:min:01 as my second feature since it operates in a different acoustic domain than my accepted mfcc:kurtosis:08, likely providing an independent binary split of the 16 entities to help create unique 4-bit signatures and maximize my winning chances through self-selection placement.",
+            "candidate_hypotheses": [
+              "spectral_bandwidth:min:01 is orthogonal to mfcc:kurtosis:08 and splits entities ~8/8",
+              "opponent has claimed spectral_centroid and rolloff features based on rejections"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 7,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "Proposing fma:mfcc:skew:15 as it is in the same MFCC feature family as my owned fma:mfcc:kurtosis:08 but measures a different statistic (skew vs kurtosis), likely providing complementary binary partitioning of the 16 entities. This pairing should create diverse 2-bit combinations across entities, helping achieve unique 4-bit signatures when combined with the opponent's 2 features.",
+            "candidate_hypotheses": [
+              "MFCC skew and kurtosis may be correlated enough to split entities well but differently",
+              "Opponent likely claimed spectral features given the rejections pattern"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 8,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Trying fma:tonnetz:skew:05 as my second feature since it's from a different audio domain (tonal network) than my owned mfcc:kurtosis:08, increasing likelihood of independent partitioning; previous rejections suggest opponents may hold spectral features, so targeting tonnetz domain.",
+            "candidate_hypotheses": [
+              "Opponent holds some rejected spectral features (rolloff, bandwidth, zcr)",
+              "Tonnetz features are uncorrelated with MFCC and may partition well"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Most of my rejected features are from spectral/mfcc/tonnetz/zcr families; trying chroma_cens:mean:01 from a different feature family to find an uncontested feature that cleanly partitions all 16 entities alongside my owned mfcc:kurtosis:08.",
+            "candidate_hypotheses": [
+              "Opponent claimed several spectral features early",
+              "chroma_cens features may still be available"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 10,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Proposing fma:spectral_contrast:max:01 as my second owned feature since it's from a different audio feature family than my owned fma:mfcc:kurtosis:08, increasing the chance it creates unique 4-bit signatures with accepted features and hasn't been claimed by the opponent.",
+            "candidate_hypotheses": [
+              "Opponent has claimed multiple features from common families causing my rejections",
+              "spectral_contrast features may partition the entity set differently from mfcc/spectral_centroid features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 11,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "I already own fma:mfcc:kurtosis:08 and need a compatible second feature. fma:chroma_cqt:kurtosis:08 hasn't been rejected yet and may partition the 16 entities cleanly alongside my owned feature, giving me two features I understand for strategic placement.",
+            "candidate_hypotheses": [
+              "Opponent owns 2 features from the rejected set (e.g., spectral_centroid:kurtosis:01, spectral_rolloff:max:01)",
+              "Some rejections were due to incompatibility rather than opponent ownership"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 12,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Proposing fma:chroma_cqt:median:11 to establish an orthogonal partition alongside our accepted feature fma:chroma_cens:mean:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "1874da2e7c0344fd8c52fd575df3b4ae"
+            },
+            "decision_explanation": "Opening move with empty board; selecting this entity to place in a corner on my next action, maximizing coverage of rows, columns, and the main diagonal for my owned features (fma:mfcc:kurtosis:08 and fma:chroma_cqt:kurtosis:08). Corner placement gives 3 potential winning lines.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 14,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing on cell 0 (top-left corner) to anchor three potential winning lines: row 0, column 0, and the main diagonal (0,5,10,15). As the first placement on an empty board in self-selection mode, this maximizes flexibility to build a 4-in-a-row using my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "29135ffcf8a04d24a647654ab2a45591"
+            },
+            "decision_explanation": "In self-selection mode, I select entity 29135ffcf8a04d24a647654ab2a45591 for myself to place on my next turn to start developing lines aligned with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 16,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing the selected entity onto central cell 5 secures positional control along the primary diagonal and allows future development toward our accepted features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 17,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "30280155dff34492a9d83c1c07afb1e5"
+            },
+            "decision_explanation": "In self_selection mode I choose a piece for myself. I select this entity aiming to place it in row 0 (cells 0-3) where I already have cell 0, building toward a 4-in-a-row that could match one of my owned features (fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 18,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing in cell 1 to build toward completing row 0 (cells 0,1,2,3) with entities that share my owned features fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08, since I selected this entity myself and can control feature alignment along this row.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "328daf4f08f94819ad08eb480f872518"
+            },
+            "decision_explanation": "In self-selection mode, I choose this entity for myself to place on my next turn, building towards control of lines intersecting cell 5 aligned with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing the selected entity at cell 6 builds potential along row 1 alongside my previously placed entity at cell 5 while avoiding extending row 0 before deducing player 2's private features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.75
+          },
+          {
+            "step": 21,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "f325e198c6db4967b47315e24d45e3ae"
+            },
+            "decision_explanation": "In self_selection mode I'm selecting a piece for myself to place. I'm targeting row 0 (cells 0,1,2,3) where I already have pieces at cells 0 and 1; selecting this entity to continue building toward a 4-in-a-row on one of my owned kurtosis features.",
+            "candidate_hypotheses": [
+              "Row 0 completion is fastest path to victory with 2 pieces already there",
+              "Selected entity likely shares kurtosis:08 feature values with my placed pieces"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 22,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing in cell 2 to extend my presence in row 0 (cells 0,1,2), setting up a potential 4-in-a-row win with one more placement in cell 3 on my owned features fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [
+              "Row 0 win via cells 0,1,2,3 on my features",
+              "Column 0 win via cells 0,4,8,12"
+            ],
+            "declared_confidence": 0.7
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "59e18ad715bb4fd8aa8f66088f19c7a8"
+            },
+            "decision_explanation": "In self-selection mode, I choose this entity to immediately occupy cell 3 on my next action, blocking player 2's nearly completed top row while testing for a winning match on my owned features.",
+            "candidate_hypotheses": [
+              "Opponent holds a feature shared across cells 0, 1, and 2 aiming to complete row 0"
+            ],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing the selected entity on cell 3 blocks opponent from completing row 0 on their next turn, while potentially completing the line under our own accepted features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 25,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "6d8a980324644a17b3b0277df03efa2f"
+            },
+            "decision_explanation": "In self_selection mode I select a piece for myself. I'm building column 0 (cells 0, 4, 8, 12) where cell 0 already has my piece; I'll place this entity in cell 4 to extend that column, aiming for a 4-in-a-row on one of my owned features (fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 26,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing at cell 4 to build column 0 (cells 0, 4, 8, 12) where I already control cell 0. This advances my strategy of completing a column line sharing my owned features 'fma:mfcc:kurtosis:08' and 'fma:chroma_cqt:kurtosis:08'.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 27,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "7e0d0b332e9247f78734690bd5a20fda"
+            },
+            "decision_explanation": "In self-selection mode, selecting entity 7e0d0b332e9247f78734690bd5a20fda for our next placement to target cell 7 and potentially complete row 1 using our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 28,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing the selected entity at cell 7 completes row 1 (cells 4, 5, 6, 7), aiming to satisfy the 4-in-a-row win condition on an owned feature.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 29,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "8104591186804ccb92ae1b68e32f692d"
+            },
+            "decision_explanation": "Selecting this entity to place in cell 8, continuing to build column 0 (cells 0,4,8,12) where cells 0 and 4 are my previously placed pieces - if they share my owned features (fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08), completing this column wins the game.",
+            "candidate_hypotheses": [
+              "Column 0 contains pieces sharing my features",
+              "Entity selected may share my kurtosis features"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 30,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing in cell 8 to build column 0 (cells 0,4,8,12) where I already have pieces at cells 0 and 4. This gives me 3 of 4 pieces in column 0, setting up a potential win through my owned features fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [
+              "Column 0 win path: cells 0,4,8,12 all sharing my feature",
+              "Need to verify selected entities share my owned features"
+            ],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 31,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "8b97b171e501402fa88f55501400d7ef"
+            },
+            "decision_explanation": "In self-selection mode, I choose entity 8b97b171e501402fa88f55501400d7ef for myself to evaluate a winning placement on open cell 12 along column 0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.8
+          },
+          {
+            "step": 32,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 12
+            },
+            "decision_explanation": "Placing the selected entity in cell 12 completes column 0 (cells 0, 4, 8, 12), targeting a win condition along our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 33,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "a8fe54522c664a35924e9768a63e8b14"
+            },
+            "decision_explanation": "In self_selection mode I select a piece for myself; I'm targeting Row 2 (cells 8-11) where I already placed cell 8, so I'll place this entity at cell 9 to advance toward a 4-in-a-row on my owned features (fma:mfcc:kurtosis:08 and fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [
+              "Row 2 completion (cells 8,9,10,11) is the most viable win path since I control cell 8",
+              "Column 1 (cells 1,5,9,13) is a secondary option"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 34,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing at cell 9 completes the anti-diagonal (cells 3,6,9,12) which already has three pieces placed, maximizing the chance of completing a 4-in-a-row line that shares one of my owned features (fma:mfcc:kurtosis:08 or fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.55
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 3,
+        "starting_player": "player_1",
+        "match_id": "match:7b8c5fd8-cd58-4a2f-9390-cb2299aad5af",
+        "instance_id": "fma_seed23_arena_ordinal_0036_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 9,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_1",
+        "termination_reason": "quarto",
+        "action_count": 29,
+        "duration_seconds": 345.03,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:7b8c5fd8-cd58-4a2f-9390-cb2299aad5af",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_1",
+        "board": [
+          "9c2d6eb9089949d28ce83f9f7aee2882",
+          null,
+          null,
+          null,
+          "4ec66fa5948b4bb9a2b15e18ba018ed0",
+          "1fedba4f09334777914ae6469008c69a",
+          "2cc91878a2ea4165bff5b32818f668f3",
+          "642f9d70cfc8484bb7f7e0ba78b89c34",
+          null,
+          null,
+          "252fe323899b4321aded229a8e1da137",
+          null,
+          "b3181f35097c4d3c9f8a8078501d9ae7",
+          "bb941a514bce40ddbe812b5a583ceaff",
+          "8a0b77c8cab1486bb71057eb618121d6",
+          "c9d89420f3374e27a2ac498742c6d32f"
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "1fedba4f09334777914ae6469008c69a"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "9c2d6eb9089949d28ce83f9f7aee2882"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "252fe323899b4321aded229a8e1da137"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "c9d89420f3374e27a2ac498742c6d32f"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 15
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "2cc91878a2ea4165bff5b32818f668f3"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "b3181f35097c4d3c9f8a8078501d9ae7"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 12
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "4ec66fa5948b4bb9a2b15e18ba018ed0"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "bb941a514bce40ddbe812b5a583ceaff"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 13
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "642f9d70cfc8484bb7f7e0ba78b89c34"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "8a0b77c8cab1486bb71057eb618121d6"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 14
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "1fedba4f09334777914ae6469008c69a": 6,
+          "252fe323899b4321aded229a8e1da137": 4,
+          "2cc91878a2ea4165bff5b32818f668f3": 9,
+          "4ec66fa5948b4bb9a2b15e18ba018ed0": 12,
+          "642f9d70cfc8484bb7f7e0ba78b89c34": 7,
+          "6b477a4fbad74dd0baa26a921c09b33d": 5,
+          "8a0b77c8cab1486bb71057eb618121d6": 2,
+          "8decde3da70643878e28c7f7ddcb34a0": 11,
+          "969b8ec105264a5d8faa2afbf90fb1c9": 13,
+          "9c2d6eb9089949d28ce83f9f7aee2882": 1,
+          "b3181f35097c4d3c9f8a8078501d9ae7": 8,
+          "b70143635d2f4653bb752cc54ea092f9": 3,
+          "bb941a514bce40ddbe812b5a583ceaff": 0,
+          "c1515a5c4c894a3bb2c064e804a1621a": 15,
+          "c37671ec1bf74f1aac6fcd5edd8e1e1b": 14,
+          "c9d89420f3374e27a2ac498742c6d32f": 10
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:rmse:min:01",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:zcr:skew:01",
+            "owner": "player_2"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Row 4",
+            "cells": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "bit": 0,
+            "bit_value": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          },
+          {
+            "line_name": "Row 4",
+            "cells": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "bit": 2,
+            "bit_value": 0,
+            "classic_trait": "Bit 2 (Shape)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Opening the draft phase by proposing fma:chroma_cens:mean:01 as our initial feature toward forming a valid quartet.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "As the first draft pick with no prior information, I'm proposing spectral centroid kurtosis as a fundamental audio feature likely to provide a balanced 8/8 binary split across entities, giving maximum information for building unique 4-bit signatures.",
+            "candidate_hypotheses": [
+              "spectral_centroid:kurtosis:01 provides ~8/8 split",
+              "this feature will be accepted and usable in win condition"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "My previous proposal of spectral_centroid:kurtosis:01 was rejected, likely claimed by the opponent. I'm now proposing fma:mfcc:kurtosis:08 from a different feature family (MFCC) to avoid the opponent's likely spectral-domain claims and find a feature that cleanly partitions the 16 entities.",
+            "candidate_hypotheses": [
+              "Opponent is claiming spectral domain features",
+              "MFCC features may be less contested"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Attempting a max-based spectral rolloff feature as an alternative to the rejected kurtosis features; spectral rolloff max values tend to vary widely across audio entities and may provide clean binary partitioning compatible with already-accepted features.",
+            "candidate_hypotheses": [
+              "Opponent accepted kurtosis-type features, causing my kurtosis proposals to be rejected",
+              "Max-based features may provide different partitioning than kurtosis/skew features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 5,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "My three rejected features (spectral_centroid kurtosis, mfcc kurtosis, spectral_rolloff max) may conflict with player_1's accepted features; trying a different feature family (zero-crossing rate skew) to find a valid partition that complements whatever player_1 has already secured.",
+            "candidate_hypotheses": [
+              "Player_1 has accepted features in spectral/MFCC domains causing conflicts",
+              "ZCR skew may provide a clean 8-8 split independent of opponent's features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 6,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Proposing fma:chroma_cqt:median:11 to complement our accepted feature fma:chroma_cens:mean:01 and build toward a valid partition across all 16 entities.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 7,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "My accepted feature fma:zcr:skew:01 is a time-domain feature; fma:spectral_contrast:skew:07 captures spectral domain variation which should be complementary and help partition the 16 entities uniquely. The previously rejected common features suggest the opponent may have taken obvious spectral descriptors, so this less common choice may still be available.",
+            "candidate_hypotheses": [
+              "Opponent owns spectral_centroid, mfcc, and/or rolloff features",
+              "Spectral contrast skew provides orthogonal partitioning to ZCR skew"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 8,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "My previous 4 proposals were rejected; I own fma:zcr:skew:01 and need one more feature. Trying fma:chroma_cens:mean:01 as a different feature family that may partition the 16 entities cleanly alongside my owned feature and player_1's accepted features.",
+            "candidate_hypotheses": [
+              "Player_1 has accepted 2 features that conflict with my rejected proposals",
+              "fma:chroma_cens:mean:01 may provide clean binary partitioning with fma:zcr:skew:01"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Proposing fma:rmse:min:01 as my second feature since it comes from a different acoustic feature family (energy-based) than my owned fma:zcr:skew:01, increasing likelihood of complementary partitioning; previous rejections suggest spectral kurtosis/max/skew features are taken or conflict.",
+            "candidate_hypotheses": [
+              "Opponent has claimed fma:spectral_rolloff:max:01 and fma:mfcc:kurtosis:08",
+              "Energy-based features may complement zero-crossing rate for partitioning"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 10,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "1fedba4f09334777914ae6469008c69a"
+            },
+            "decision_explanation": "In self-selection mode, selecting an initial piece to place onto the empty board to begin developing control aligned with our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 11,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Opening move on an empty board; placing the selected entity on central cell 5 maximizes diagonal and orthogonal line flexibility for our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 12,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "9c2d6eb9089949d28ce83f9f7aee2882"
+            },
+            "decision_explanation": "In self_selection mode, I select a piece for myself to place. I'm choosing this entity to begin building toward a 4-in-a-row line using my owned features (fma:zcr:skew:01 and fma:rmse:min:01), targeting rows or columns that are still fully open.",
+            "candidate_hypotheses": [
+              "This entity shares at least one of my owned features",
+              "I can build a winning line in row 0 or column 0"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing at cell 0 to occupy a corner that participates in three lines (row 0, column 0, and main diagonal), maximizing future opportunities to build a 4-in-a-row with my owned features fma:zcr:skew:01 and fma:rmse:min:01.",
+            "candidate_hypotheses": [
+              "Corner placement maximizes line participation",
+              "Row 0 is fully open for potential win via my features"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 14,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "252fe323899b4321aded229a8e1da137"
+            },
+            "decision_explanation": "In self-selection mode, I choose entity 252fe323899b4321aded229a8e1da137 to place on my next turn, advancing alignment towards my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.75
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing the selected entity at central cell 10 extends potential alignment along the main diagonal while maintaining flexible development toward row and column completions under my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 16,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "c9d89420f3374e27a2ac498742c6d32f"
+            },
+            "decision_explanation": "In self_selection mode, I select this entity to place myself. I'll target cell 12 to build column 0 (with my piece already at cell 0) or row 3, aiming to complete a line sharing one of my owned features (fma:zcr:skew:01 or fma:rmse:min:01).",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 17,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 15
+            },
+            "decision_explanation": "Placing at cell 15 blocks the main diagonal (0,5,10,15) where opponent has pieces at cells 5 and 10. Additionally, as a self-selected piece, it may share my owned features with my piece at cell 0, contributing to a future diagonal win on my features.",
+            "candidate_hypotheses": [
+              "Opponent is building along main diagonal with features tied to cells 5 and 10",
+              "Placing at 15 blocks opponent's diagonal win while positioning for my own"
+            ],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 18,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "2cc91878a2ea4165bff5b32818f668f3"
+            },
+            "decision_explanation": "In self-selection mode, I choose this entity for myself to deploy on the next placement step, aiming to advance lines compatible with my owned features fma:chroma_cens:mean:01 and fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing the entity at central cell 6 to advance control in row 1 and column 2, where no line currently poses an immediate threat.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 20,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "b3181f35097c4d3c9f8a8078501d9ae7"
+            },
+            "decision_explanation": "In self_selection mode I choose a piece for myself. I'm selecting entity b3181f35 to place in a position that extends my control toward completing a 4-in-a-row on one of my owned features (fma:zcr:skew:01 or fma:rmse:min:01), targeting cell 12 to build toward row 3 or column 0 lines where I already have cell 0 and cell 15 anchored.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 21,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 12
+            },
+            "decision_explanation": "Placing at cell 12 to simultaneously build toward row 3 (cells 12-15, where I own cell 15) and column 0 (cells 0,4,8,12, where I own cell 0). Both lines could be completed sharing one of my owned features, giving me two winning threats.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 22,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "4ec66fa5948b4bb9a2b15e18ba018ed0"
+            },
+            "decision_explanation": "In self-selection mode, selecting entity 4ec66fa5948b4bb9a2b15e18ba018ed0 for my own upcoming placement to develop lines across row 1 and column 2 towards my owned feature conditions.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing the selected entity at cell 4 advances our presence along row 1 alongside previously placed pieces at cells 5 and 6, setting up potential winning lines under our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 24,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "bb941a514bce40ddbe812b5a583ceaff"
+            },
+            "decision_explanation": "I'm targeting row 3 (cells 12-15) where I already control cells 12 and 15. Selecting this entity to place at cell 13 to advance my winning line using my owned features fma:zcr:skew:01 or fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 25,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 13
+            },
+            "decision_explanation": "Placing in row 3 (cell 13) where I already have pieces at cells 12 and 15, building toward a potential 4-in-a-row on my owned features (fma:zcr:skew:01 or fma:rmse:min:01). This concentrates my pieces in a single row for a winning opportunity.",
+            "candidate_hypotheses": [
+              "Row 3 completion via cells 12,13,14,15 with my features",
+              "Column 3 completion if pieces share my features"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 26,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "642f9d70cfc8484bb7f7e0ba78b89c34"
+            },
+            "decision_explanation": "In self-selection mode, we select an available entity to place into cell 7 on the next turn, completing row 1 where we have already placed pieces at cells 4, 5, and 6 aligned with our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 27,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing the selected entity at cell 7 completes row 1, connecting the four pieces that share my owned feature to claim victory.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 1.0
+          },
+          {
+            "step": 28,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "8a0b77c8cab1486bb71057eb618121d6"
+            },
+            "decision_explanation": "In self_selection mode I select a piece for myself; I'll choose this entity to potentially complete row 3 (cells 12,13,14,15) which already has 3 pieces placed, targeting a win on one of my owned features (fma:zcr:skew:01 or fma:rmse:min:01).",
+            "candidate_hypotheses": [
+              "Row 3 completion at cell 14 wins if shared feature exists",
+              "Column completion may also be viable"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 29,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 14
+            },
+            "decision_explanation": "Placing at cell 14 completes row 3 (cells 12, 13, 14, 15) where cells 12, 13, and 15 are entities I previously selected. I chose those entities to share my owned features (fma:zcr:skew:01 or fma:rmse:min:01), and completing this row gives me the best chance of winning on my own features.",
+            "candidate_hypotheses": [
+              "Row 3 entities share fma:zcr:skew:01 feature value",
+              "Row 3 entities share fma:rmse:min:01 feature value"
+            ],
+            "declared_confidence": 0.6
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 4,
+        "starting_player": "player_2",
+        "match_id": "match:a0255150-aa43-439f-b5da-03cbf27b6ac3",
+        "instance_id": "fma_seed23_arena_ordinal_0110_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 26,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_2",
+        "termination_reason": "quarto",
+        "action_count": 38,
+        "duration_seconds": 365.666,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:a0255150-aa43-439f-b5da-03cbf27b6ac3",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_2",
+        "board": [
+          "04c20d0369c444b19bff6a5da781715c",
+          "349357d6c05d4b56be43372e4bc94108",
+          "fae130f1a64340f4a8e37a75c56e094b",
+          "6662fca996fb4004b4e29c498461ed19",
+          null,
+          "175ee9abe4584823b8d4509f56a9d01e",
+          "3971130a1642468d82168cda2ab4ceb1",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:std:09",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:tonnetz:skew:03",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "04c20d0369c444b19bff6a5da781715c"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "175ee9abe4584823b8d4509f56a9d01e"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "349357d6c05d4b56be43372e4bc94108"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "3971130a1642468d82168cda2ab4ceb1"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "fae130f1a64340f4a8e37a75c56e094b"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "6662fca996fb4004b4e29c498461ed19"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 3
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "04c20d0369c444b19bff6a5da781715c": 5,
+          "175ee9abe4584823b8d4509f56a9d01e": 6,
+          "349357d6c05d4b56be43372e4bc94108": 14,
+          "3971130a1642468d82168cda2ab4ceb1": 8,
+          "6662fca996fb4004b4e29c498461ed19": 7,
+          "7351050e02f54a6fbd7b019d26558a4d": 3,
+          "7f153dabcfd2420f9e25bd8cf3b715ee": 15,
+          "85240b0ad26e4dc8b19124c1e2708e31": 9,
+          "949df9311da54547ab5de9f2a604e281": 2,
+          "ab737724cc614c5a8fbcc1ed68625996": 0,
+          "bb343c35a1e04d068a8203b16afc59fb": 13,
+          "e13f7d56a09247cca06ce8907e607508": 10,
+          "e42ffd5d1dba48bf8475e5145e6caca0": 1,
+          "e4a79fd710c942179a9bf4df43a6e8f2": 11,
+          "ea07faf2420948c7b1827fbc8c08386c": 12,
+          "fae130f1a64340f4a8e37a75c56e094b": 4
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:tonnetz:skew:03",
+            "owner": "player_1"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:chroma_cqt:kurtosis:08",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_2"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Row 1",
+            "cells": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "bit": 2,
+            "bit_value": 1,
+            "classic_trait": "Bit 2 (Shape)",
+            "feature_id": "fma:chroma_cqt:kurtosis:08",
+            "owner": "player_2"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Starting with spectral centroid kurtosis as a first feature proposal since spectral centroid is a fundamental audio descriptor likely to split the 16 entities near evenly, maximizing flexibility for forming a valid 4-feature quartet. In self_selection mode, winning requires completing a line on my own features, so I need features with good coverage.",
+            "candidate_hypotheses": [
+              "Spectral centroid features split music entities roughly evenly by brightness",
+              "MFCC features may complement spectral features for unique 4-bit signatures"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "My previous proposal was rejected; trying a different feature 'fma:chroma_cens:mean:01' which uses a mean statistic that may provide a balanced binary split across the 16 entities, which is essential for forming valid unique 4-bit signatures in a Quarto quartet.",
+            "candidate_hypotheses": [
+              "fma:chroma_cens:mean:01 gives a near 8/8 split",
+              "The rejection was due to the opponent claiming fma:spectral_centroid:kurtosis:01"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 3,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Opening the draft phase with an initial feature proposal of fma:chroma_cens:mean:01 to establish our first secret winning condition attribute.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.95
+          },
+          {
+            "step": 4,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Following the rejection of our previous proposal, we propose fma:chroma_cqt:median:11 to identify a compatible feature partition.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 5,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Proposing a second feature from a different audio feature family (MFCC vs my owned Chroma CENS) to maximize independence in entity partitioning, which helps ensure unique 4-bit signatures across all 16 entities when combined with already-accepted features.",
+            "candidate_hypotheses": [
+              "MFCC kurtosis features tend to be statistically independent from chroma mean features, giving a good balanced split",
+              "Different feature families reduce correlation and improve partitioning quality"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 6,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Proposing fma:zcr:skew:01 as my second feature since it comes from a different audio domain (zero-crossing rate) than my owned chroma feature, maximizing the chance of creating unique 4-bit signatures across all 16 entities. Previous rejections of kurtosis features suggest either opponent claimed them or they conflict with existing accepted features.",
+            "candidate_hypotheses": [
+              "Opponent owns fma:spectral_centroid:kurtosis:01 or fma:mfcc:kurtosis:08 (claimed, not just incompatible)",
+              "ZCR features partition entities orthogonally to chroma features"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 7,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Proposing fma:spectral_contrast:max:01 as it captures spectral contrast properties that should be orthogonal to my owned chroma_cens:mean feature, potentially creating a clean partition of the 16 entities. Previous rejections of centroid/mfcc/zcr features suggest those conflicted or were claimed by the opponent.",
+            "candidate_hypotheses": [
+              "Opponent may have claimed mfcc:kurtosis or zcr:skew features",
+              "Spectral contrast features may be complementary to chroma features"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 8,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "I own fma:chroma_cens:mean:01 and need a complementary second feature. Trying fma:tonnetz:skew:05 as it captures harmonic/tonal properties that may partition the 16 entities differently from my existing feature, and it hasn't been rejected yet.",
+            "candidate_hypotheses": [
+              "Opponent may own spectral or mfcc-based features given rejections of spectral_centroid, mfcc_kurtosis, zcr_skew, spectral_contrast_max",
+              "tonnetz features may provide orthogonal partitioning to chroma_cens features"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Proposing fma:spectral_bandwidth:min:01 as it comes from a different acoustic feature family than my rejected attempts, increasing the likelihood it creates a valid partition with my owned fma:chroma_cens:mean:01 and hasn't been claimed by the opponent.",
+            "candidate_hypotheses": [
+              "Opponent may have claimed spectral/tonal features, so bandwidth features may be available",
+              "Spectral bandwidth and chroma features likely split entities along different acoustic dimensions"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 10,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "I own fma:chroma_cens:mean:01 and need a complementary second feature. After 6 rejections, I'm trying fma:chroma_stft:skew:05 as an untested feature from a different spectral family that may cleanly partition the 16 entities alongside my existing feature.",
+            "candidate_hypotheses": [
+              "Opponent has claimed 1-2 of the rejected features",
+              "chroma_stft:skew:05 may partition entities orthogonally to my chroma_cens:mean:01"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 11,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "Proposing fma:chroma_cqt:kurtosis:08 as my second feature since it's from a different audio feature family than my owned chroma_cens:mean:01, likely providing an independent binary partition. Many prior rejections suggest opponent has claimed several features, so I'm trying a less contested chroma_cqt feature.",
+            "candidate_hypotheses": [
+              "Opponent owns spectral_centroid, mfcc, zcr, spectral features based on rejection pattern",
+              "chroma_cqt features may be unclaimed and partition cleanly with chroma_cens"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 12,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "Proposing 'fma:chroma_stft:skew:05' to establish our second private feature alongside 'fma:chroma_cqt:median:11', avoiding the previously rejected candidate.",
+            "candidate_hypotheses": [
+              "Opponent may have drafted or conflicted with fma:chroma_cens:mean:01"
+            ],
+            "declared_confidence": 0.7
+          },
+          {
+            "step": 13,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "With chroma_cqt:median:11 already secured and previous proposals rejected, proposing mfcc:kurtosis:08 to search for a valid partitioning feature.",
+            "candidate_hypotheses": [
+              "Opponent may hold or conflict with the previously rejected features."
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 14,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Proposing candidate feature fma:rmse:min:01 to attempt to secure our second accepted feature alongside fma:chroma_cqt:median:11 after previous rejections.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Proposing spectral_bandwidth:min:01 to find a second feature that partitions cleanly with our owned feature chroma_cqt:median:11 while avoiding previously rejected candidates.",
+            "candidate_hypotheses": [
+              "fma:spectral_bandwidth:min:01 forms an independent partition with our owned feature and any opponent accepted features"
+            ],
+            "declared_confidence": 0.7
+          },
+          {
+            "step": 16,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Proposing fma:spectral_centroid:kurtosis:01 to find a second compatible feature alongside fma:chroma_cqt:median:11, bypassing previously rejected candidate features.",
+            "candidate_hypotheses": [
+              "fma:spectral_centroid:kurtosis:01 is unpicked and partitions cleanly with owned and opponent features"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 17,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "With fma:chroma_cqt:median:11 secured and earlier candidates rejected, proposing fma:spectral_contrast:skew:07 to find a compatible second feature for our quartet.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 18,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "With fma:chroma_cqt:median:11 already secured and previous proposals rejected, proposing fma:spectral_rolloff:max:01 to find a second compatible partitioning feature.",
+            "candidate_hypotheses": [
+              "fma:spectral_rolloff:max:01 partitions the entities cleanly alongside fma:chroma_cqt:median:11 and opponent features"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Attempting to draft an unprobed candidate feature to pair with my owned feature fma:chroma_cqt:median:11 after prior proposals were rejected.",
+            "candidate_hypotheses": [
+              "fma:tonnetz:skew:05 is independent of accepted features and unowned by opponent"
+            ],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Proposing unrejected candidate feature fma:zcr:skew:01 to complement our owned feature fma:chroma_cqt:median:11 and discover a valid partitioning quartet.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "With fma:chroma_cqt:median:11 already secured and several candidates rejected, proposing fma:chroma_cens:kurtosis:12 tests an unprobed feature to complete my two-feature draft quartet.",
+            "candidate_hypotheses": [
+              "fma:chroma_cens:kurtosis:12 is independent of the existing draft partition and unclaimed by the opponent"
+            ],
+            "declared_confidence": 0.6
+          },
+          {
+            "step": 22,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "Proposing fma:chroma_cqt:kurtosis:08 from the remaining unrejected candidates to secure our second draft feature compatible with fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [
+              "Opponent may hold one of the previously tested features or another candidate from the unrejected pool."
+            ],
+            "declared_confidence": 0.75
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:std:09"
+            },
+            "decision_explanation": "Proposing fma:chroma_stft:std:09 to find a valid feature pairing with our accepted feature fma:chroma_cqt:median:11 while filtering out all previously rejected candidates.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "Continuing the draft by testing unprobed candidate features from the legal actions list to find a compatible second feature alongside fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 25,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Proposing untested candidate feature fma:spectral_contrast:max:01 to secure a valid second owned feature compatible with fma:chroma_cqt:median:11 after multiple draft rejections.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:03"
+            },
+            "decision_explanation": "With most legal candidate features already rejected or claimed, proposing untested fma:tonnetz:skew:03 to find a valid second feature compatible with our owned feature.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.75
+          },
+          {
+            "step": 27,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "04c20d0369c444b19bff6a5da781715c"
+            },
+            "decision_explanation": "Board is empty; selecting an entity to place for myself in self_selection mode. I'll choose this entity to begin establishing pieces in central positions that maximize coverage for my owned features (fma:chroma_cens:mean:01 and fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [
+              "Place in a central cell to maximize row/column/diagonal line opportunities for my own features"
+            ],
+            "declared_confidence": 0.5
+          },
+          {
+            "step": 28,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing first piece at corner cell 0 to maximize line coverage - this cell participates in a row, a column, and the main diagonal, giving me three potential winning lines to build using my owned features (fma:chroma_cens:mean:01 and fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [
+              "Corner placement maximizes winning line opportunities",
+              "Cell 0 is on diagonal 0-5-10-15 which is high value"
+            ],
+            "declared_confidence": 0.65
+          },
+          {
+            "step": 29,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "175ee9abe4584823b8d4509f56a9d01e"
+            },
+            "decision_explanation": "In self-selection mode, I choose this entity for myself to place on my next turn, initiating lines that align with my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 30,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing the selected entity at central cell 5 maximizes future line completion opportunities across row 1, column 1, and the main diagonal while expanding board control under my owned features.",
+            "candidate_hypotheses": [
+              "Opponent selected cell 0 to start building along the top row, first column, or main diagonal"
+            ],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 31,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "349357d6c05d4b56be43372e4bc94108"
+            },
+            "decision_explanation": "In self_selection mode I pick this entity for myself to place next; targeting Row 0 (cells 0-3) since I already placed in cell 0, aiming to build a line sharing my features fma:chroma_cens:mean:01 or fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [
+              "Row 0 completion via cells 0,1,2,3 is my primary winning path",
+              "Column 0 (cells 0,4,8,12) is secondary winning path"
+            ],
+            "declared_confidence": 0.45
+          },
+          {
+            "step": 32,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing in cell 1 to extend my presence in row 0 (cells 0,1,2,3), where I already have cell 0. Building along this row gives me the best path to completing a 4-in-a-row with my owned features (fma:chroma_cens:mean:01 or fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [
+              "Row 0 is the clearest path to a win with my features",
+              "Column 0 is an alternative but row 0 avoids the contested main diagonal"
+            ],
+            "declared_confidence": 0.55
+          },
+          {
+            "step": 33,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "3971130a1642468d82168cda2ab4ceb1"
+            },
+            "decision_explanation": "In self-selection mode, I choose entity 3971130a1642468d82168cda2ab4ceb1 for my own upcoming placement to contest the board and build towards lines matching my owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 34,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing at cell 6 avoids creating any three-in-a-row configurations across row 0, column 1, or the main diagonal, preventing player 2 from exploiting an immediate winning placement next turn.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 35,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "fae130f1a64340f4a8e37a75c56e094b"
+            },
+            "decision_explanation": "In self_selection mode, I'm building toward completing row 0 (cells 0,1,2,3) where I already have pieces at cells 0 and 1. I'll select this entity to place at cell 2, aiming for a line sharing one of my owned features (fma:chroma_cens:mean:01 or fma:chroma_cqt:kurtosis:08).",
+            "candidate_hypotheses": [
+              "Row 0 completion gives me a winning line if pieces share my features",
+              "Selected entity may share chroma features with my placed pieces"
+            ],
+            "declared_confidence": 0.4
+          },
+          {
+            "step": 36,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing in cell 2 to advance row 0 (cells 0,1,2,3) which I already control at positions 0 and 1; completing this row with entities sharing my owned features (fma:chroma_cens:mean:01 or fma:chroma_cqt:kurtosis:08) would win the game.",
+            "candidate_hypotheses": [
+              "Row 0 completion is primary win path",
+              "Selected entity shares at least one of my features with cells 0 and 1"
+            ],
+            "declared_confidence": 0.72
+          },
+          {
+            "step": 37,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "6662fca996fb4004b4e29c498461ed19"
+            },
+            "decision_explanation": "Player 2 has aligned three entities across cells 0, 1, and 2, creating an immediate win threat at cell 3. Under self-selection mode, I select an entity to immediately place into cell 3 on the next turn to block their line while testing for a potential win on my owned features.",
+            "candidate_hypotheses": [
+              "Player 2 holds a feature shared across entities at cells 0, 1, and 2 aiming to complete row 0-3"
+            ],
+            "declared_confidence": 0.85
+          },
+          {
+            "step": 38,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Player 2 has aligned three entities across row 0 (cells 0, 1, and 2), creating an immediate four-in-a-row win threat on their next turn. Placing our selected entity in cell 3 decisively blocks this completion or secures a win if the line shares one of our owned features.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          }
+        ]
+      }
+    }
+  ],
+  "private_trace_storage": {
+    "status": "not_emitted",
+    "reason": "Kaggle Task result and Notebook outputs have no verified field-level privacy boundary; secure storage requires a separate access-controlled design."
+  },
+  "evaluator": {
+    "schema_version": 1,
+    "evaluator_mode": "automated_restricted_log",
+    "instance_validation_metrics": {
+      "status": "verified",
+      "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "public_seed": 4277702397,
+      "id_level_count": 2,
+      "structural_count": 2,
+      "strict_acceptance_passed": true,
+      "signature_coverage_count": 16,
+      "complete_16_signature_coverage": true,
+      "selected_feature_count": 4
+    },
+    "match_count": 4,
+    "series_aggregate": {
+      "completed_games": 4,
+      "mode": "self_selection",
+      "wins": {
+        "player_1": 2,
+        "player_2": 2,
+        "draw": 0
+      },
+      "players": {
+        "player_1": {
+          "wins": 2,
+          "win_rate": 0.5,
+          "draft_proposals": 23,
+          "draft_accepted": 8,
+          "draft_precision": 0.3478,
+          "select_turns": 19,
+          "safe_selects": 19,
+          "trap_selects": 0,
+          "strategic_trap_rate": "N/A",
+          "blunder_selects": 0,
+          "placement_blunders": 2,
+          "blunder_avoidance_rate": 0.9474,
+          "place_turns": 19,
+          "self_bit_aligned_places": 7,
+          "self_bit_alignment_rate": 0.3684,
+          "immediate_win_opportunities": 0,
+          "immediate_wins_taken": 0,
+          "immediate_win_conversion_rate": "N/A",
+          "hidden_trait_discovery_rate": 0.25,
+          "arena_composite_index": 57.26
+        },
+        "player_2": {
+          "wins": 2,
+          "win_rate": 0.5,
+          "draft_proposals": 43,
+          "draft_accepted": 8,
+          "draft_precision": 0.186,
+          "select_turns": 19,
+          "safe_selects": 19,
+          "trap_selects": 0,
+          "strategic_trap_rate": "N/A",
+          "blunder_selects": 0,
+          "placement_blunders": 2,
+          "blunder_avoidance_rate": 0.9474,
+          "place_turns": 19,
+          "self_bit_aligned_places": 11,
+          "self_bit_alignment_rate": 0.5789,
+          "immediate_win_opportunities": 1,
+          "immediate_wins_taken": 0,
+          "immediate_win_conversion_rate": 0.0,
+          "hidden_trait_discovery_rate": 0.25,
+          "arena_composite_index": 54.25
+        }
+      }
+    },
+    "matches": [
+      {
+        "match_id": "match:a6c3c371-ac19-43d8-bca0-9049dcb7a1f9",
+        "mode": "self_selection",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 2,
+            "accepted": 2,
+            "rejected": 0,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:chroma_cqt:median:11"
+            ],
+            "draft_precision": 1.0
+          },
+          "player_2": {
+            "proposals": 17,
+            "accepted": 2,
+            "rejected": 15,
+            "owned_features": [
+              "fma:chroma_stft:skew:05",
+              "fma:rmse:min:01"
+            ],
+            "draft_precision": 0.1176
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 6,
+            "self_bit_aligned_places": 2,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.9167,
+            "self_bit_alignment_rate": 0.3333,
+            "immediate_win_conversion_rate": "N/A"
+          },
+          "player_2": {
+            "select_turns": 5,
+            "safe_selects": 5,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 5,
+            "self_bit_aligned_places": 3,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.6,
+            "immediate_win_conversion_rate": "N/A"
+          }
+        }
+      },
+      {
+        "match_id": "match:f6460690-3ab7-449c-bb42-3d9a3a61339e",
+        "mode": "self_selection",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 2,
+            "accepted": 2,
+            "rejected": 0,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:chroma_cqt:median:11"
+            ],
+            "draft_precision": 1.0
+          },
+          "player_2": {
+            "proposals": 10,
+            "accepted": 2,
+            "rejected": 8,
+            "owned_features": [
+              "fma:mfcc:kurtosis:08",
+              "fma:chroma_cqt:kurtosis:08"
+            ],
+            "draft_precision": 0.2
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 5,
+            "safe_selects": 5,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 5,
+            "self_bit_aligned_places": 4,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.8,
+            "immediate_win_conversion_rate": "N/A"
+          },
+          "player_2": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 6,
+            "self_bit_aligned_places": 3,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.9167,
+            "self_bit_alignment_rate": 0.5,
+            "immediate_win_conversion_rate": "N/A"
+          }
+        }
+      },
+      {
+        "match_id": "match:7b8c5fd8-cd58-4a2f-9390-cb2299aad5af",
+        "mode": "self_selection",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 2,
+            "accepted": 2,
+            "rejected": 0,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:chroma_cqt:median:11"
+            ],
+            "draft_precision": 1.0
+          },
+          "player_2": {
+            "proposals": 7,
+            "accepted": 2,
+            "rejected": 5,
+            "owned_features": [
+              "fma:zcr:skew:01",
+              "fma:rmse:min:01"
+            ],
+            "draft_precision": 0.2857
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 5,
+            "safe_selects": 5,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 5,
+            "self_bit_aligned_places": 0,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.0,
+            "immediate_win_conversion_rate": "N/A"
+          },
+          "player_2": {
+            "select_turns": 5,
+            "safe_selects": 5,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 5,
+            "self_bit_aligned_places": 3,
+            "immediate_win_opportunities": 1,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.9,
+            "self_bit_alignment_rate": 0.6,
+            "immediate_win_conversion_rate": 0.0
+          }
+        }
+      },
+      {
+        "match_id": "match:a0255150-aa43-439f-b5da-03cbf27b6ac3",
+        "mode": "self_selection",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 17,
+            "accepted": 2,
+            "rejected": 15,
+            "owned_features": [
+              "fma:chroma_cqt:median:11",
+              "fma:tonnetz:skew:03"
+            ],
+            "draft_precision": 0.1176
+          },
+          "player_2": {
+            "proposals": 9,
+            "accepted": 2,
+            "rejected": 7,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:chroma_cqt:kurtosis:08"
+            ],
+            "draft_precision": 0.2222
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 3,
+            "safe_selects": 3,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 3,
+            "self_bit_aligned_places": 1,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.8333,
+            "self_bit_alignment_rate": 0.3333,
+            "immediate_win_conversion_rate": "N/A"
+          },
+          "player_2": {
+            "select_turns": 3,
+            "safe_selects": 3,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 3,
+            "self_bit_aligned_places": 2,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.6667,
+            "immediate_win_conversion_rate": "N/A"
+          }
+        }
+      }
+    ],
+    "status": "completed",
+    "privacy_boundary": "aggregated_metrics_only_no_restricted_crosswalk",
+    "reasoning_grounding_audit": {
+      "status": "completed",
+      "method": "deterministic_claim_to_engine_grounding_v2",
+      "trust_boundary": "ground_truth_engine_verified_no_llm_judge_bias",
+      "scores": {
+        "player_1": {
+          "total_explanations": 61,
+          "evidence_cited_count": 52,
+          "draft_repeat_claim_count": 0,
+          "blunder_blindness_count": 0,
+          "phantom_claim_count": 4,
+          "opponent_traits_total": 8,
+          "opponent_traits_discovered": 2,
+          "evidence_citation_rate": 0.8525,
+          "deterministic_faithfulness_rate": 0.9344,
+          "hidden_trait_discovery_rate": 0.25
+        },
+        "player_2": {
+          "total_explanations": 81,
+          "evidence_cited_count": 67,
+          "draft_repeat_claim_count": 0,
+          "blunder_blindness_count": 0,
+          "phantom_claim_count": 10,
+          "opponent_traits_total": 8,
+          "opponent_traits_discovered": 2,
+          "evidence_citation_rate": 0.8272,
+          "deterministic_faithfulness_rate": 0.8765,
+          "hidden_trait_discovery_rate": 0.25
+        }
+      }
+    }
+  }
+}

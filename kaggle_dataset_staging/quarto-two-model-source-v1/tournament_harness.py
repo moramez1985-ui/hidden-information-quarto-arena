@@ -72,6 +72,7 @@ PROTOCOL_TEXT = (
     "Information asymmetry rule: accepted features remain private to their owner, so a draft proposal may be rejected either because it fails to partition the 16 entities cleanly with already-accepted features or because the opponent has already secretly claimed it. "
     "Win condition: during placement, a player wins ONLY by completing a 4-in-a-row line (row, column, or main diagonal) sharing at least one of that player's own 2 accepted features; "
     "completing a line on the opponent's private features does NOT win. "
+    "Mode rule: check observation.mode. In 'classic' mode, during select phase you choose a piece for your OPPONENT to place; in 'self_selection' mode, during select phase you choose a piece for YOURSELF to place immediately on your very next action (you never hand the piece to the opponent). "
     "During select phase use {\"kind\":\"select_entity\",\"entity_id\":\"<one legal entity_id>\"}. "
     "During place phase use {\"kind\":\"place_entity\",\"cell\":<one legal integer cell>}. "
     "Always wrap your action in the structured envelope: "
