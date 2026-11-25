@@ -54,12 +54,13 @@ def _evaluate_draft(draft_history: Sequence[Mapping[str, Any]]) -> dict[str, Any
 
 def _evaluate_piece_strategy(
     *,
+    mode: str = "classic",
     starting_player: str,
     public_history: Sequence[Mapping[str, Any]],
     entity_to_piece: Mapping[str, int],
     bit_owners: Mapping[int, str],
 ) -> dict[str, Any]:
-    state = new_game("classic", starting_player=starting_player, bit_owners=bit_owners)
+    state = new_game(mode, starting_player=starting_player, bit_owners=bit_owners)
     stats: dict[str, dict[str, int]] = {
         "player_1": {
             "select_turns": 0,
@@ -368,6 +369,7 @@ def evaluate_automated(
                     bit_owners[feature_to_bit[feat]] = str(player_id)
         entity_to_piece = {str(k): int(v) for k, v in res_data.get("entity_to_piece", {}).items()}
         strategy_stats = _evaluate_piece_strategy(
+            mode=str(pub_audit.get("mode", "classic")),
             starting_player=str(pub_audit.get("starting_player", "player_1")),
             public_history=pub_audit.get("public_history", []),
             entity_to_piece=entity_to_piece,

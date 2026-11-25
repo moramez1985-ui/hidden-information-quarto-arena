@@ -67,8 +67,8 @@
     },
     {
       "path": "evaluator.zip",
-      "size_bytes": 23582,
-      "sha256": "0c8190e77f329f3a01beb6ebbcea367c04ac63592c1def96dce76c4d0b043a45"
+      "size_bytes": 25684,
+      "sha256": "590162e98334cad88f705585994500d084824c8821c4c6d88dc389a2057e0091"
     },
     {
       "path": "fma_pilot.py",
