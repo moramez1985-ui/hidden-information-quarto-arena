@@ -67,6 +67,7 @@ EXPECTED_EVALUATOR_MEMBERS = {
     "evaluator/__main__.py",
     "evaluator/adapters.py",
     "evaluator/annotations.py",
+    "evaluator/arena_leaderboard.py",
     "evaluator/automated.py",
     "evaluator/metrics.py",
     "evaluator/report.py",

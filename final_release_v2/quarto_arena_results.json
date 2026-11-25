@@ -1,0 +1,4056 @@
+{
+  "status": "passed",
+  "passed": true,
+  "source_snapshot": "/tmp/quarto-two-model-source-v1",
+  "task_source_integrity": {
+    "status": "verified",
+    "executing_source_sha256": "0b0ff683ee6c55f4b88cdd9a5687846dde723d456c2128b3fee4a5c9fcba5275",
+    "snapshot_source_sha256": "0b0ff683ee6c55f4b88cdd9a5687846dde723d456c2128b3fee4a5c9fcba5275"
+  },
+  "security_preflight": {
+    "status": "passed",
+    "check_count": 16
+  },
+  "timeout": {
+    "match_wall_clock_seconds": 1700.0,
+    "series_budget_seconds": 3600.0,
+    "provider_call_interruptible": false,
+    "limitation": "Responses returned after the local deadline are rejected before action submission. The Kaggle adapter's timeout is not forwarded to llm.prompt(), so a blocking provider call may overrun the deadline until it returns."
+  },
+  "model_metadata": {
+    "player_1": {
+      "registry_key": "selected Task llm",
+      "model": "google/gemini-3.8-flash",
+      "model_version": null
+    },
+    "player_2": {
+      "registry_key": "anthropic/claude-sonnet-4-6@default",
+      "model": "anthropic/claude-sonnet-4-6@default",
+      "model_version": null
+    }
+  },
+  "series": {
+    "target_games": 4,
+    "completed_games_count": 4,
+    "incomplete_games_count": 0,
+    "starting_player_schedule": [
+      "player_1",
+      "player_2",
+      "player_1",
+      "player_2"
+    ],
+    "skipped_or_failed_games": []
+  },
+  "match": {
+    "game_index": 1,
+    "starting_player": "player_1",
+    "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+    "instance_id": "fma_seed23_arena_ordinal_0139_v1",
+    "mode": "self_selection",
+    "draft_enabled": true,
+    "draft_proposal_count": 14,
+    "harness_model_tags": {
+      "player_1": "google/gemini-3.8-flash",
+      "player_2": "anthropic/claude-sonnet-4-6@default"
+    },
+    "outcome": "win",
+    "winner": "player_1",
+    "termination_reason": "quarto",
+    "action_count": 46,
+    "duration_seconds": 0.186,
+    "audit_valid": true,
+    "replay_valid": true,
+    "public_replay_valid": true,
+    "failure": null
+  },
+  "public_replay": {
+    "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+    "replay_schema_version": 2,
+    "mode": "self_selection",
+    "starting_player": "player_1",
+    "board": [
+      "79a81803ea2e4cba95b8a0b57d9f6851",
+      "ae90f812795945e6bf085f825026d675",
+      "7c50466318c24213825ec0ddcf5ba954",
+      "bb2f92ae58644f95935327fb9dc5cf22",
+      "7ed6d9f0af814cf7a3b6e4d366007339",
+      "cdeb3975349c459b98a7c9bacc30d881",
+      "823d27742a354ef3a409720a6da88681",
+      "f34efdc0051f4d1f9b71c3ac9046f6d4",
+      "85845aa1b5f8470e917de14b4644fafb",
+      "0eb348206edc4bd998da5e38737a699c",
+      "bc17b6ff304041ceb134a61fa19e7f3a",
+      "b09248f330e6442bb23aad72823b0772",
+      "0e35f341b7914c5faa26dd4c1febd0dd",
+      "dd41aa72f1ff44529570e14c1835b9b3",
+      "271f098c7f6f4f8abd2275650db2790c",
+      "304eaf55befa40f5959f7866e3d4b5ef"
+    ],
+    "draft_history": [
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:chroma_cens:mean:01",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cens:mean:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_cqt:median:11",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:chroma_stft:skew:05",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:chroma_cqt:median:11",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:chroma_stft:skew:05",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:mfcc:kurtosis:08",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_1",
+        "attribute_id": "fma:rmse:min:01",
+        "accepted": true
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:mfcc:kurtosis:08",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:rmse:min:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_bandwidth:min:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_centroid:kurtosis:01",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_contrast:skew:07",
+        "accepted": false
+      },
+      {
+        "kind": "propose_attribute",
+        "player": "player_2",
+        "attribute_id": "fma:spectral_rolloff:max:01",
+        "accepted": true
+      }
+    ],
+    "public_history": [
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "79a81803ea2e4cba95b8a0b57d9f6851"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 0
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "ae90f812795945e6bf085f825026d675"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 1
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "7c50466318c24213825ec0ddcf5ba954"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 2
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "bb2f92ae58644f95935327fb9dc5cf22"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 3
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "7ed6d9f0af814cf7a3b6e4d366007339"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 4
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "cdeb3975349c459b98a7c9bacc30d881"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 5
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "823d27742a354ef3a409720a6da88681"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 6
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "f34efdc0051f4d1f9b71c3ac9046f6d4"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 7
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "85845aa1b5f8470e917de14b4644fafb"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 8
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "0eb348206edc4bd998da5e38737a699c"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 9
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "bc17b6ff304041ceb134a61fa19e7f3a"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 10
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "b09248f330e6442bb23aad72823b0772"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 11
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "0e35f341b7914c5faa26dd4c1febd0dd"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 12
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "dd41aa72f1ff44529570e14c1835b9b3"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 13
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_1",
+        "entity_id": "271f098c7f6f4f8abd2275650db2790c"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_1",
+        "cell": 14
+      },
+      {
+        "kind": "select_entity",
+        "player": "player_2",
+        "entity_id": "304eaf55befa40f5959f7866e3d4b5ef"
+      },
+      {
+        "kind": "place_entity",
+        "player": "player_2",
+        "cell": 15
+      }
+    ],
+    "result": {
+      "mode": "self_selection",
+      "outcome": "win",
+      "winner": "player_1",
+      "reason": "quarto"
+    }
+  },
+  "matches": [
+    {
+      "match": {
+        "game_index": 1,
+        "starting_player": "player_1",
+        "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+        "instance_id": "fma_seed23_arena_ordinal_0139_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 14,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_1",
+        "termination_reason": "quarto",
+        "action_count": 46,
+        "duration_seconds": 0.186,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_1",
+        "board": [
+          "79a81803ea2e4cba95b8a0b57d9f6851",
+          "ae90f812795945e6bf085f825026d675",
+          "7c50466318c24213825ec0ddcf5ba954",
+          "bb2f92ae58644f95935327fb9dc5cf22",
+          "7ed6d9f0af814cf7a3b6e4d366007339",
+          "cdeb3975349c459b98a7c9bacc30d881",
+          "823d27742a354ef3a409720a6da88681",
+          "f34efdc0051f4d1f9b71c3ac9046f6d4",
+          "85845aa1b5f8470e917de14b4644fafb",
+          "0eb348206edc4bd998da5e38737a699c",
+          "bc17b6ff304041ceb134a61fa19e7f3a",
+          "b09248f330e6442bb23aad72823b0772",
+          "0e35f341b7914c5faa26dd4c1febd0dd",
+          "dd41aa72f1ff44529570e14c1835b9b3",
+          "271f098c7f6f4f8abd2275650db2790c",
+          "304eaf55befa40f5959f7866e3d4b5ef"
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "79a81803ea2e4cba95b8a0b57d9f6851"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "ae90f812795945e6bf085f825026d675"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "7c50466318c24213825ec0ddcf5ba954"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "bb2f92ae58644f95935327fb9dc5cf22"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 3
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "7ed6d9f0af814cf7a3b6e4d366007339"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "cdeb3975349c459b98a7c9bacc30d881"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "823d27742a354ef3a409720a6da88681"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "f34efdc0051f4d1f9b71c3ac9046f6d4"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "85845aa1b5f8470e917de14b4644fafb"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "0eb348206edc4bd998da5e38737a699c"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 9
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "bc17b6ff304041ceb134a61fa19e7f3a"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "b09248f330e6442bb23aad72823b0772"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 11
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "0e35f341b7914c5faa26dd4c1febd0dd"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 12
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "dd41aa72f1ff44529570e14c1835b9b3"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 13
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "271f098c7f6f4f8abd2275650db2790c"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 14
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "304eaf55befa40f5959f7866e3d4b5ef"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 15
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "0e35f341b7914c5faa26dd4c1febd0dd": 9,
+          "0eb348206edc4bd998da5e38737a699c": 4,
+          "271f098c7f6f4f8abd2275650db2790c": 8,
+          "304eaf55befa40f5959f7866e3d4b5ef": 12,
+          "79a81803ea2e4cba95b8a0b57d9f6851": 2,
+          "7c50466318c24213825ec0ddcf5ba954": 1,
+          "7ed6d9f0af814cf7a3b6e4d366007339": 13,
+          "823d27742a354ef3a409720a6da88681": 5,
+          "85845aa1b5f8470e917de14b4644fafb": 7,
+          "ae90f812795945e6bf085f825026d675": 6,
+          "b09248f330e6442bb23aad72823b0772": 11,
+          "bb2f92ae58644f95935327fb9dc5cf22": 15,
+          "bc17b6ff304041ceb134a61fa19e7f3a": 14,
+          "cdeb3975349c459b98a7c9bacc30d881": 10,
+          "dd41aa72f1ff44529570e14c1835b9b3": 3,
+          "f34efdc0051f4d1f9b71c3ac9046f6d4": 0
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:rmse:min:01",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:chroma_stft:skew:05",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:spectral_rolloff:max:01",
+            "owner": "player_2"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Main Diagonal",
+            "cells": [
+              0,
+              5,
+              10,
+              15
+            ],
+            "bit": 0,
+            "bit_value": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "feature_id": "fma:rmse:min:01",
+            "owner": "player_1"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:mean:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:mean:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 5,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 6,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 7,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 8,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 10,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 11,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_bandwidth:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 12,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_centroid:kurtosis:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:skew:07.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 14,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_rolloff:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "79a81803ea2e4cba95b8a0b57d9f6851"
+            },
+            "decision_explanation": "Selecting candidate entity 79a81803.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 16,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing entity onto cell 0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 17,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "ae90f812795945e6bf085f825026d675"
+            },
+            "decision_explanation": "Selecting candidate entity ae90f812.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 18,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing entity onto cell 1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "7c50466318c24213825ec0ddcf5ba954"
+            },
+            "decision_explanation": "Selecting candidate entity 7c504663.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing entity onto cell 2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "bb2f92ae58644f95935327fb9dc5cf22"
+            },
+            "decision_explanation": "Selecting candidate entity bb2f92ae.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 22,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing entity onto cell 3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "7ed6d9f0af814cf7a3b6e4d366007339"
+            },
+            "decision_explanation": "Selecting candidate entity 7ed6d9f0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing entity onto cell 4.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 25,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "cdeb3975349c459b98a7c9bacc30d881"
+            },
+            "decision_explanation": "Selecting candidate entity cdeb3975.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing entity onto cell 5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 27,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "823d27742a354ef3a409720a6da88681"
+            },
+            "decision_explanation": "Selecting candidate entity 823d2774.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 28,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing entity onto cell 6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 29,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "f34efdc0051f4d1f9b71c3ac9046f6d4"
+            },
+            "decision_explanation": "Selecting candidate entity f34efdc0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 30,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing entity onto cell 7.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 31,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "85845aa1b5f8470e917de14b4644fafb"
+            },
+            "decision_explanation": "Selecting candidate entity 85845aa1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 32,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing entity onto cell 8.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 33,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "0eb348206edc4bd998da5e38737a699c"
+            },
+            "decision_explanation": "Selecting candidate entity 0eb34820.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 34,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing entity onto cell 9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 35,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "bc17b6ff304041ceb134a61fa19e7f3a"
+            },
+            "decision_explanation": "Selecting candidate entity bc17b6ff.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 36,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing entity onto cell 10.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 37,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "b09248f330e6442bb23aad72823b0772"
+            },
+            "decision_explanation": "Selecting candidate entity b09248f3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 38,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 11
+            },
+            "decision_explanation": "Placing entity onto cell 11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 39,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "0e35f341b7914c5faa26dd4c1febd0dd"
+            },
+            "decision_explanation": "Selecting candidate entity 0e35f341.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 40,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 12
+            },
+            "decision_explanation": "Placing entity onto cell 12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 41,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "dd41aa72f1ff44529570e14c1835b9b3"
+            },
+            "decision_explanation": "Selecting candidate entity dd41aa72.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 42,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 13
+            },
+            "decision_explanation": "Placing entity onto cell 13.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 43,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "271f098c7f6f4f8abd2275650db2790c"
+            },
+            "decision_explanation": "Selecting candidate entity 271f098c.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 44,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 14
+            },
+            "decision_explanation": "Placing entity onto cell 14.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 45,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "304eaf55befa40f5959f7866e3d4b5ef"
+            },
+            "decision_explanation": "Selecting candidate entity 304eaf55.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 46,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 15
+            },
+            "decision_explanation": "Placing entity onto cell 15.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 2,
+        "starting_player": "player_2",
+        "match_id": "match:2d5703cf-b41d-488c-8265-409be6f07c2f",
+        "instance_id": "fma_seed23_arena_ordinal_0064_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 21,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_2",
+        "termination_reason": "quarto",
+        "action_count": 45,
+        "duration_seconds": 0.168,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:2d5703cf-b41d-488c-8265-409be6f07c2f",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_2",
+        "board": [
+          "f872e23526a447a7a7ab2fb2155e37ac",
+          "75d6fce1c61e49e6b0778fffe4fd68e0",
+          "2e5cfb26b68e46c7b1ee74d0ffed1533",
+          "7f31034270d74ab6a968f4bd17e2b60f",
+          "780ab5b1ba0a43c1a13ca23ae6ad03e9",
+          "da504c2996074f3ba8cb217787a243a0",
+          "b7bc2210f9b14fb7a90d1bddd7992f95",
+          "0eed3a304bf94c058a5c43caf8e90ee6",
+          "edf05ce52c1f4affb436b0cb79c031b3",
+          "b85c1cb677844368bb7099bb8a7ac17a",
+          "a40159bef35f405f9508f4daa26ee3f5",
+          "e623fdf5baf345118c9a42bbf76ff757",
+          null,
+          null,
+          null,
+          null
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:std:09",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:std:09",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:tonnetz:skew:03",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:skew:03",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "f872e23526a447a7a7ab2fb2155e37ac"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "75d6fce1c61e49e6b0778fffe4fd68e0"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "2e5cfb26b68e46c7b1ee74d0ffed1533"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "7f31034270d74ab6a968f4bd17e2b60f"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 3
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "780ab5b1ba0a43c1a13ca23ae6ad03e9"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "da504c2996074f3ba8cb217787a243a0"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "b7bc2210f9b14fb7a90d1bddd7992f95"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "0eed3a304bf94c058a5c43caf8e90ee6"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "edf05ce52c1f4affb436b0cb79c031b3"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "b85c1cb677844368bb7099bb8a7ac17a"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 9
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "a40159bef35f405f9508f4daa26ee3f5"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "e623fdf5baf345118c9a42bbf76ff757"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 11
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "0eed3a304bf94c058a5c43caf8e90ee6": 5,
+          "2e5cfb26b68e46c7b1ee74d0ffed1533": 4,
+          "6276c7894e6548529de5db2127d2f9bd": 3,
+          "75d6fce1c61e49e6b0778fffe4fd68e0": 10,
+          "7783fb57d83a4846a7f4a6833b2bed73": 6,
+          "780ab5b1ba0a43c1a13ca23ae6ad03e9": 8,
+          "7c15bc3329874119a28cc080fb385983": 12,
+          "7f31034270d74ab6a968f4bd17e2b60f": 14,
+          "a40159bef35f405f9508f4daa26ee3f5": 0,
+          "b7bc2210f9b14fb7a90d1bddd7992f95": 15,
+          "b85c1cb677844368bb7099bb8a7ac17a": 9,
+          "da504c2996074f3ba8cb217787a243a0": 13,
+          "e623fdf5baf345118c9a42bbf76ff757": 11,
+          "e64d173f6ca34cc08198118d2800b22f": 1,
+          "edf05ce52c1f4affb436b0cb79c031b3": 2,
+          "f872e23526a447a7a7ab2fb2155e37ac": 7
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:spectral_centroid:kurtosis:01",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:mfcc:skew:15",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:spectral_contrast:max:01",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_1"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Row 3",
+            "cells": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "bit": 2,
+            "bit_value": 0,
+            "classic_trait": "Bit 2 (Shape)",
+            "feature_id": "fma:spectral_contrast:max:01",
+            "owner": "player_2"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:zcr:skew:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:kurtosis:12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 5,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:std:09"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:std:09.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 6,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:skew:15.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 7,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_bandwidth:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 8,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_centroid:kurtosis:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 10,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:skew:07.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 11,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_rolloff:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 12,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 13,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:zcr:skew:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 14,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:kurtosis:12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 16,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:std:09"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:std:09.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 17,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:skew:15.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 18,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:03"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:03.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:skew:03"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:skew:03.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:mean:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 22,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "f872e23526a447a7a7ab2fb2155e37ac"
+            },
+            "decision_explanation": "Selecting candidate entity f872e235.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 23,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing entity onto cell 0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "75d6fce1c61e49e6b0778fffe4fd68e0"
+            },
+            "decision_explanation": "Selecting candidate entity 75d6fce1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 25,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing entity onto cell 1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "2e5cfb26b68e46c7b1ee74d0ffed1533"
+            },
+            "decision_explanation": "Selecting candidate entity 2e5cfb26.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 27,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing entity onto cell 2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 28,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "7f31034270d74ab6a968f4bd17e2b60f"
+            },
+            "decision_explanation": "Selecting candidate entity 7f310342.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 29,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing entity onto cell 3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 30,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "780ab5b1ba0a43c1a13ca23ae6ad03e9"
+            },
+            "decision_explanation": "Selecting candidate entity 780ab5b1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 31,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing entity onto cell 4.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 32,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "da504c2996074f3ba8cb217787a243a0"
+            },
+            "decision_explanation": "Selecting candidate entity da504c29.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 33,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing entity onto cell 5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 34,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "b7bc2210f9b14fb7a90d1bddd7992f95"
+            },
+            "decision_explanation": "Selecting candidate entity b7bc2210.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 35,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing entity onto cell 6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 36,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "0eed3a304bf94c058a5c43caf8e90ee6"
+            },
+            "decision_explanation": "Selecting candidate entity 0eed3a30.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 37,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing entity onto cell 7.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 38,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "edf05ce52c1f4affb436b0cb79c031b3"
+            },
+            "decision_explanation": "Selecting candidate entity edf05ce5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 39,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing entity onto cell 8.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 40,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "b85c1cb677844368bb7099bb8a7ac17a"
+            },
+            "decision_explanation": "Selecting candidate entity b85c1cb6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 41,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing entity onto cell 9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 42,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "a40159bef35f405f9508f4daa26ee3f5"
+            },
+            "decision_explanation": "Selecting candidate entity a40159be.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 43,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing entity onto cell 10.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 44,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "e623fdf5baf345118c9a42bbf76ff757"
+            },
+            "decision_explanation": "Selecting candidate entity e623fdf5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 45,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 11
+            },
+            "decision_explanation": "Placing entity onto cell 11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 3,
+        "starting_player": "player_1",
+        "match_id": "match:656be3f5-de4b-4b39-b0f5-7fba8aaeaac2",
+        "instance_id": "fma_seed23_arena_ordinal_0144_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 9,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_2",
+        "termination_reason": "quarto",
+        "action_count": 33,
+        "duration_seconds": 0.128,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:656be3f5-de4b-4b39-b0f5-7fba8aaeaac2",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_1",
+        "board": [
+          "386c5e2b71d34e148fb34ffb2b72836f",
+          "824562c9534c497891d8b66ccbedc526",
+          "6fe5acfb4ea54f68934661016c98cbd4",
+          "d48d0a0f87d541f5b08e41cb415db315",
+          "cd6b36c630644633946ead33c6c4de79",
+          "0b086004d51e43b3afc14b53a8881726",
+          "0b31c4313a10435fadf27f97e943e136",
+          "882ebccd5fd3433e9aa9f2de15f56cb4",
+          "9b3ed2c25f50458c82dcdb0edf22de01",
+          "2e390b59c8184c80b951674a6e19befc",
+          "6dae979b09884bc6a4add8b2683ce985",
+          "e3d0e1f88adc4c0c8bca3b8d127b3384",
+          null,
+          null,
+          null,
+          null
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:03",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:skew:03",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:mean:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cqt:median:11",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_stft:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "386c5e2b71d34e148fb34ffb2b72836f"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "824562c9534c497891d8b66ccbedc526"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "6fe5acfb4ea54f68934661016c98cbd4"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "d48d0a0f87d541f5b08e41cb415db315"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 3
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "cd6b36c630644633946ead33c6c4de79"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "0b086004d51e43b3afc14b53a8881726"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "0b31c4313a10435fadf27f97e943e136"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "882ebccd5fd3433e9aa9f2de15f56cb4"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "9b3ed2c25f50458c82dcdb0edf22de01"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "2e390b59c8184c80b951674a6e19befc"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 9
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "6dae979b09884bc6a4add8b2683ce985"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "e3d0e1f88adc4c0c8bca3b8d127b3384"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 11
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "0b086004d51e43b3afc14b53a8881726": 12,
+          "0b31c4313a10435fadf27f97e943e136": 6,
+          "13d781bb66a84271ac1ee6e227d8b132": 10,
+          "2e390b59c8184c80b951674a6e19befc": 8,
+          "386c5e2b71d34e148fb34ffb2b72836f": 2,
+          "64bc2b1385e34e7988de4d4bd9520c40": 11,
+          "6dae979b09884bc6a4add8b2683ce985": 0,
+          "6fe5acfb4ea54f68934661016c98cbd4": 13,
+          "824562c9534c497891d8b66ccbedc526": 1,
+          "882ebccd5fd3433e9aa9f2de15f56cb4": 3,
+          "9b3ed2c25f50458c82dcdb0edf22de01": 9,
+          "cd6b36c630644633946ead33c6c4de79": 15,
+          "d48d0a0f87d541f5b08e41cb415db315": 4,
+          "e3d0e1f88adc4c0c8bca3b8d127b3384": 5,
+          "e6df6f96e8d74baca88629afbe40c724": 14,
+          "eacac5c50213402a86840a9c0d2508b8": 7
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:chroma_cqt:median:11",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:rmse:min:01",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:chroma_stft:skew:05",
+            "owner": "player_1"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Row 3",
+            "cells": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "bit": 1,
+            "bit_value": 0,
+            "classic_trait": "Bit 1 (Color)",
+            "feature_id": "fma:chroma_cens:mean:01",
+            "owner": "player_2"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 2,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:03"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:03.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 3,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:skew:03"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:skew:03.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 4,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:mean:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:mean:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 5,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 6,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:median:11"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:median:11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 7,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 8,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 10,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "386c5e2b71d34e148fb34ffb2b72836f"
+            },
+            "decision_explanation": "Selecting candidate entity 386c5e2b.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 11,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing entity onto cell 0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 12,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "824562c9534c497891d8b66ccbedc526"
+            },
+            "decision_explanation": "Selecting candidate entity 824562c9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing entity onto cell 1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 14,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "6fe5acfb4ea54f68934661016c98cbd4"
+            },
+            "decision_explanation": "Selecting candidate entity 6fe5acfb.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing entity onto cell 2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 16,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "d48d0a0f87d541f5b08e41cb415db315"
+            },
+            "decision_explanation": "Selecting candidate entity d48d0a0f.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 17,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing entity onto cell 3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 18,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "cd6b36c630644633946ead33c6c4de79"
+            },
+            "decision_explanation": "Selecting candidate entity cd6b36c6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing entity onto cell 4.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 20,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "0b086004d51e43b3afc14b53a8881726"
+            },
+            "decision_explanation": "Selecting candidate entity 0b086004.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing entity onto cell 5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 22,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "0b31c4313a10435fadf27f97e943e136"
+            },
+            "decision_explanation": "Selecting candidate entity 0b31c431.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing entity onto cell 6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 24,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "882ebccd5fd3433e9aa9f2de15f56cb4"
+            },
+            "decision_explanation": "Selecting candidate entity 882ebccd.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 25,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing entity onto cell 7.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "9b3ed2c25f50458c82dcdb0edf22de01"
+            },
+            "decision_explanation": "Selecting candidate entity 9b3ed2c2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 27,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing entity onto cell 8.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 28,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "2e390b59c8184c80b951674a6e19befc"
+            },
+            "decision_explanation": "Selecting candidate entity 2e390b59.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 29,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing entity onto cell 9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 30,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "6dae979b09884bc6a4add8b2683ce985"
+            },
+            "decision_explanation": "Selecting candidate entity 6dae979b.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 31,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing entity onto cell 10.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 32,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "e3d0e1f88adc4c0c8bca3b8d127b3384"
+            },
+            "decision_explanation": "Selecting candidate entity e3d0e1f8.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 33,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 11
+            },
+            "decision_explanation": "Placing entity onto cell 11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          }
+        ]
+      }
+    },
+    {
+      "match": {
+        "game_index": 4,
+        "starting_player": "player_2",
+        "match_id": "match:6181ac18-2f7d-4186-8504-006c6534c21c",
+        "instance_id": "fma_seed23_arena_ordinal_0059_v1",
+        "mode": "self_selection",
+        "draft_enabled": true,
+        "draft_proposal_count": 20,
+        "harness_model_tags": {
+          "player_1": "google/gemini-3.8-flash",
+          "player_2": "anthropic/claude-sonnet-4-6@default"
+        },
+        "outcome": "win",
+        "winner": "player_1",
+        "termination_reason": "quarto",
+        "action_count": 46,
+        "duration_seconds": 0.177,
+        "audit_valid": true,
+        "replay_valid": true,
+        "public_replay_valid": true,
+        "failure": null
+      },
+      "public_replay": {
+        "match_id": "match:6181ac18-2f7d-4186-8504-006c6534c21c",
+        "replay_schema_version": 2,
+        "mode": "self_selection",
+        "starting_player": "player_2",
+        "board": [
+          "ce35d3c3d7034477a50a029666903ee3",
+          "4fe214f49d6e4d3e8bfbb159c8262786",
+          "3ad5321008464276b2b097f1199c8b8f",
+          "afb9545310a24c46b90a6b800623bfa6",
+          "821a5fa23d914ed4ae9f38c5c04b28aa",
+          "3a44efcbbc8d479cb354309d2fb94235",
+          "e985a721a55a48f3a58ddfbfee6032e4",
+          "c0f85ccdeecf4390961988912818e003",
+          "b957e33f4a1e4890952ada2c7945e513",
+          "c87592300b364bde84cf1d4c1aa5549c",
+          "dd4c08322227416f9a1d6709d2e69065",
+          "75b90ee9e8f149d0b3da1ca6a65bee4a",
+          "61b23d395850495092e78718cd65f682",
+          null,
+          null,
+          null
+        ],
+        "draft_history": [
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:rmse:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_bandwidth:min:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_centroid:kurtosis:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_contrast:skew:07",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:spectral_rolloff:max:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:tonnetz:skew:05",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_2",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": true
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:zcr:skew:01",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cens:kurtosis:12",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_cqt:kurtosis:08",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:chroma_stft:std:09",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:mfcc:skew:15",
+            "accepted": false
+          },
+          {
+            "kind": "propose_attribute",
+            "player": "player_1",
+            "attribute_id": "fma:spectral_contrast:max:01",
+            "accepted": true
+          }
+        ],
+        "public_history": [
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "ce35d3c3d7034477a50a029666903ee3"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 0
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "4fe214f49d6e4d3e8bfbb159c8262786"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 1
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "3ad5321008464276b2b097f1199c8b8f"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 2
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "afb9545310a24c46b90a6b800623bfa6"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 3
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "821a5fa23d914ed4ae9f38c5c04b28aa"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 4
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "3a44efcbbc8d479cb354309d2fb94235"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 5
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "e985a721a55a48f3a58ddfbfee6032e4"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 6
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "c0f85ccdeecf4390961988912818e003"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 7
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "b957e33f4a1e4890952ada2c7945e513"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 8
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "c87592300b364bde84cf1d4c1aa5549c"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 9
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "dd4c08322227416f9a1d6709d2e69065"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 10
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_1",
+            "entity_id": "75b90ee9e8f149d0b3da1ca6a65bee4a"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_1",
+            "cell": 11
+          },
+          {
+            "kind": "select_entity",
+            "player": "player_2",
+            "entity_id": "61b23d395850495092e78718cd65f682"
+          },
+          {
+            "kind": "place_entity",
+            "player": "player_2",
+            "cell": 12
+          }
+        ],
+        "result": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        }
+      },
+      "terminal_visualization": {
+        "entity_signatures": {
+          "3a44efcbbc8d479cb354309d2fb94235": 1,
+          "3ad5321008464276b2b097f1199c8b8f": 6,
+          "3b0027e451c44f76a4531f7f884ff35c": 7,
+          "4fe214f49d6e4d3e8bfbb159c8262786": 8,
+          "61b23d395850495092e78718cd65f682": 10,
+          "6faf1cfa11a34da184748532ed74379d": 14,
+          "75b90ee9e8f149d0b3da1ca6a65bee4a": 4,
+          "821a5fa23d914ed4ae9f38c5c04b28aa": 15,
+          "8756dba94f6f4670a34dd704d8149150": 11,
+          "afb9545310a24c46b90a6b800623bfa6": 3,
+          "b957e33f4a1e4890952ada2c7945e513": 12,
+          "c0f85ccdeecf4390961988912818e003": 0,
+          "c87592300b364bde84cf1d4c1aa5549c": 2,
+          "ce35d3c3d7034477a50a029666903ee3": 13,
+          "dd4c08322227416f9a1d6709d2e69065": 9,
+          "e985a721a55a48f3a58ddfbfee6032e4": 5
+        },
+        "bit_feature_legend": [
+          {
+            "bit": 0,
+            "classic_trait": "Bit 0 (Height)",
+            "visual_rule": "Tall (1) vs Short (0)",
+            "feature_id": "fma:tonnetz:skew:05",
+            "owner": "player_1"
+          },
+          {
+            "bit": 1,
+            "classic_trait": "Bit 1 (Color)",
+            "visual_rule": "Light/Terracotta (1) vs Dark/Forest (0)",
+            "feature_id": "fma:chroma_cens:kurtosis:12",
+            "owner": "player_2"
+          },
+          {
+            "bit": 2,
+            "classic_trait": "Bit 2 (Shape)",
+            "visual_rule": "Round/Cylinder (1) vs Square/Cube (0)",
+            "feature_id": "fma:spectral_bandwidth:min:01",
+            "owner": "player_2"
+          },
+          {
+            "bit": 3,
+            "classic_trait": "Bit 3 (Top)",
+            "visual_rule": "Hollow (1) vs Solid (0)",
+            "feature_id": "fma:spectral_contrast:max:01",
+            "owner": "player_1"
+          }
+        ],
+        "winning_lines": [
+          {
+            "line_name": "Col 1",
+            "cells": [
+              0,
+              4,
+              8,
+              12
+            ],
+            "bit": 3,
+            "bit_value": 1,
+            "classic_trait": "Bit 3 (Top)",
+            "feature_id": "fma:spectral_contrast:max:01",
+            "owner": "player_1"
+          }
+        ],
+        "post_game_reasoning_log": [
+          {
+            "step": 1,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_bandwidth:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 2,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 3,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:rmse:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:rmse:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 4,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_bandwidth:min:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_bandwidth:min:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 5,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_centroid:kurtosis:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 6,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:skew:07.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 7,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_rolloff:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 8,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 9,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_centroid:kurtosis:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_centroid:kurtosis:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 10,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:skew:07"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:skew:07.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 11,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_rolloff:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_rolloff:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 12,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:tonnetz:skew:05"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:tonnetz:skew:05.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 13,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:zcr:skew:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 14,
+            "player": "player_2",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:kurtosis:12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 15,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:zcr:skew:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:zcr:skew:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 16,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cens:kurtosis:12"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cens:kurtosis:12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 17,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_cqt:kurtosis:08"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_cqt:kurtosis:08.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 18,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:chroma_stft:std:09"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:chroma_stft:std:09.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 19,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:mfcc:skew:15"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:mfcc:skew:15.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 20,
+            "player": "player_1",
+            "action": {
+              "kind": "propose_feature",
+              "feature_id": "fma:spectral_contrast:max:01"
+            },
+            "decision_explanation": "Selecting separating draft feature fma:spectral_contrast:max:01.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 21,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "ce35d3c3d7034477a50a029666903ee3"
+            },
+            "decision_explanation": "Selecting candidate entity ce35d3c3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 22,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 0
+            },
+            "decision_explanation": "Placing entity onto cell 0.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 23,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "4fe214f49d6e4d3e8bfbb159c8262786"
+            },
+            "decision_explanation": "Selecting candidate entity 4fe214f4.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 24,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 1
+            },
+            "decision_explanation": "Placing entity onto cell 1.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 25,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "3ad5321008464276b2b097f1199c8b8f"
+            },
+            "decision_explanation": "Selecting candidate entity 3ad53210.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 26,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 2
+            },
+            "decision_explanation": "Placing entity onto cell 2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 27,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "afb9545310a24c46b90a6b800623bfa6"
+            },
+            "decision_explanation": "Selecting candidate entity afb95453.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 28,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 3
+            },
+            "decision_explanation": "Placing entity onto cell 3.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 29,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "821a5fa23d914ed4ae9f38c5c04b28aa"
+            },
+            "decision_explanation": "Selecting candidate entity 821a5fa2.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 30,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 4
+            },
+            "decision_explanation": "Placing entity onto cell 4.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 31,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "3a44efcbbc8d479cb354309d2fb94235"
+            },
+            "decision_explanation": "Selecting candidate entity 3a44efcb.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 32,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 5
+            },
+            "decision_explanation": "Placing entity onto cell 5.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 33,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "e985a721a55a48f3a58ddfbfee6032e4"
+            },
+            "decision_explanation": "Selecting candidate entity e985a721.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 34,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 6
+            },
+            "decision_explanation": "Placing entity onto cell 6.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 35,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "c0f85ccdeecf4390961988912818e003"
+            },
+            "decision_explanation": "Selecting candidate entity c0f85ccd.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 36,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 7
+            },
+            "decision_explanation": "Placing entity onto cell 7.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 37,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "b957e33f4a1e4890952ada2c7945e513"
+            },
+            "decision_explanation": "Selecting candidate entity b957e33f.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 38,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 8
+            },
+            "decision_explanation": "Placing entity onto cell 8.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 39,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "c87592300b364bde84cf1d4c1aa5549c"
+            },
+            "decision_explanation": "Selecting candidate entity c8759230.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 40,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 9
+            },
+            "decision_explanation": "Placing entity onto cell 9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 41,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "dd4c08322227416f9a1d6709d2e69065"
+            },
+            "decision_explanation": "Selecting candidate entity dd4c0832.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 42,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 10
+            },
+            "decision_explanation": "Placing entity onto cell 10.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 43,
+            "player": "player_1",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "75b90ee9e8f149d0b3da1ca6a65bee4a"
+            },
+            "decision_explanation": "Selecting candidate entity 75b90ee9.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 44,
+            "player": "player_1",
+            "action": {
+              "kind": "place_entity",
+              "cell": 11
+            },
+            "decision_explanation": "Placing entity onto cell 11.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 45,
+            "player": "player_2",
+            "action": {
+              "kind": "select_entity",
+              "entity_id": "61b23d395850495092e78718cd65f682"
+            },
+            "decision_explanation": "Selecting candidate entity 61b23d39.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          },
+          {
+            "step": 46,
+            "player": "player_2",
+            "action": {
+              "kind": "place_entity",
+              "cell": 12
+            },
+            "decision_explanation": "Placing entity onto cell 12.",
+            "candidate_hypotheses": [],
+            "declared_confidence": null
+          }
+        ]
+      }
+    }
+  ],
+  "private_trace_storage": {
+    "status": "not_emitted",
+    "reason": "Kaggle Task result and Notebook outputs have no verified field-level privacy boundary; secure storage requires a separate access-controlled design."
+  },
+  "evaluator": {
+    "schema_version": 1,
+    "evaluator_mode": "automated_restricted_log",
+    "instance_validation_metrics": {
+      "status": "verified",
+      "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "public_seed": 4277702397,
+      "id_level_count": 2,
+      "structural_count": 2,
+      "strict_acceptance_passed": true,
+      "signature_coverage_count": 16,
+      "complete_16_signature_coverage": true,
+      "selected_feature_count": 4
+    },
+    "match_count": 4,
+    "series_aggregate": {
+      "completed_games": 4,
+      "mode": "self_selection",
+      "wins": {
+        "player_1": 2,
+        "player_2": 2,
+        "draw": 0
+      },
+      "players": {
+        "player_1": {
+          "wins": 2,
+          "win_rate": 0.5,
+          "draft_proposals": 34,
+          "draft_accepted": 8,
+          "draft_precision": 0.2353,
+          "select_turns": 26,
+          "safe_selects": 26,
+          "trap_selects": 0,
+          "strategic_trap_rate": "N/A",
+          "blunder_selects": 0,
+          "placement_blunders": 1,
+          "blunder_avoidance_rate": 0.9808,
+          "place_turns": 26,
+          "self_bit_aligned_places": 12,
+          "self_bit_alignment_rate": 0.4615,
+          "immediate_win_opportunities": 4,
+          "immediate_wins_taken": 0,
+          "immediate_win_conversion_rate": 0.0,
+          "hidden_trait_discovery_rate": 0.625,
+          "arena_composite_index": 62.52
+        },
+        "player_2": {
+          "wins": 2,
+          "win_rate": 0.5,
+          "draft_proposals": 30,
+          "draft_accepted": 8,
+          "draft_precision": 0.2667,
+          "select_turns": 26,
+          "safe_selects": 26,
+          "trap_selects": 0,
+          "strategic_trap_rate": "N/A",
+          "blunder_selects": 0,
+          "placement_blunders": 1,
+          "blunder_avoidance_rate": 0.9811,
+          "place_turns": 27,
+          "self_bit_aligned_places": 13,
+          "self_bit_alignment_rate": 0.4815,
+          "immediate_win_opportunities": 5,
+          "immediate_wins_taken": 1,
+          "immediate_win_conversion_rate": 0.2,
+          "hidden_trait_discovery_rate": 0.625,
+          "arena_composite_index": 63.0
+        }
+      }
+    },
+    "matches": [
+      {
+        "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 5,
+            "accepted": 2,
+            "rejected": 3,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:rmse:min:01"
+            ],
+            "draft_precision": 0.4
+          },
+          "player_2": {
+            "proposals": 9,
+            "accepted": 2,
+            "rejected": 7,
+            "owned_features": [
+              "fma:chroma_stft:skew:05",
+              "fma:spectral_rolloff:max:01"
+            ],
+            "draft_precision": 0.2222
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 8,
+            "safe_selects": 8,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 8,
+            "self_bit_aligned_places": 3,
+            "immediate_win_opportunities": 2,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.375,
+            "immediate_win_conversion_rate": 0.0
+          },
+          "player_2": {
+            "select_turns": 7,
+            "safe_selects": 7,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 8,
+            "self_bit_aligned_places": 3,
+            "immediate_win_opportunities": 2,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.375,
+            "immediate_win_conversion_rate": 0.0
+          }
+        },
+        "mode": "self_selection"
+      },
+      {
+        "match_id": "match:2d5703cf-b41d-488c-8265-409be6f07c2f",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 14,
+            "accepted": 2,
+            "rejected": 12,
+            "owned_features": [
+              "fma:spectral_centroid:kurtosis:01",
+              "fma:chroma_cens:mean:01"
+            ],
+            "draft_precision": 0.1429
+          },
+          "player_2": {
+            "proposals": 7,
+            "accepted": 2,
+            "rejected": 5,
+            "owned_features": [
+              "fma:mfcc:skew:15",
+              "fma:spectral_contrast:max:01"
+            ],
+            "draft_precision": 0.2857
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 6,
+            "self_bit_aligned_places": 2,
+            "immediate_win_opportunities": 1,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.9167,
+            "self_bit_alignment_rate": 0.3333,
+            "immediate_win_conversion_rate": 0.0
+          },
+          "player_2": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 6,
+            "self_bit_aligned_places": 2,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.3333,
+            "immediate_win_conversion_rate": "N/A"
+          }
+        },
+        "mode": "self_selection"
+      },
+      {
+        "match_id": "match:656be3f5-de4b-4b39-b0f5-7fba8aaeaac2",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_2",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 2,
+            "accepted": 2,
+            "rejected": 0,
+            "owned_features": [
+              "fma:chroma_cqt:median:11",
+              "fma:chroma_stft:skew:05"
+            ],
+            "draft_precision": 1.0
+          },
+          "player_2": {
+            "proposals": 7,
+            "accepted": 2,
+            "rejected": 5,
+            "owned_features": [
+              "fma:chroma_cens:mean:01",
+              "fma:rmse:min:01"
+            ],
+            "draft_precision": 0.2857
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 6,
+            "self_bit_aligned_places": 2,
+            "immediate_win_opportunities": 1,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.3333,
+            "immediate_win_conversion_rate": 0.0
+          },
+          "player_2": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 6,
+            "self_bit_aligned_places": 4,
+            "immediate_win_opportunities": 1,
+            "immediate_wins_taken": 1,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.6667,
+            "immediate_win_conversion_rate": 1.0
+          }
+        },
+        "mode": "self_selection"
+      },
+      {
+        "match_id": "match:6181ac18-2f7d-4186-8504-006c6534c21c",
+        "status": "completed",
+        "outcome": {
+          "mode": "self_selection",
+          "outcome": "win",
+          "winner": "player_1",
+          "reason": "quarto"
+        },
+        "audit_valid": true,
+        "replay_valid": true,
+        "instance_validation_metrics": {
+          "status": "verified",
+          "candidate_id": "fma_seed11_candidate_ordinal_0003_v1",
+          "public_seed": 4277702397,
+          "id_level_count": 2,
+          "structural_count": 2,
+          "strict_acceptance_passed": true,
+          "signature_coverage_count": 16,
+          "complete_16_signature_coverage": true,
+          "selected_feature_count": 4
+        },
+        "draft_metrics": {
+          "player_1": {
+            "proposals": 13,
+            "accepted": 2,
+            "rejected": 11,
+            "owned_features": [
+              "fma:tonnetz:skew:05",
+              "fma:spectral_contrast:max:01"
+            ],
+            "draft_precision": 0.1538
+          },
+          "player_2": {
+            "proposals": 7,
+            "accepted": 2,
+            "rejected": 5,
+            "owned_features": [
+              "fma:spectral_bandwidth:min:01",
+              "fma:chroma_cens:kurtosis:12"
+            ],
+            "draft_precision": 0.2857
+          }
+        },
+        "piece_strategy_metrics": {
+          "player_1": {
+            "select_turns": 6,
+            "safe_selects": 6,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 0,
+            "place_turns": 6,
+            "self_bit_aligned_places": 5,
+            "immediate_win_opportunities": 0,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 1.0,
+            "self_bit_alignment_rate": 0.8333,
+            "immediate_win_conversion_rate": "N/A"
+          },
+          "player_2": {
+            "select_turns": 7,
+            "safe_selects": 7,
+            "trap_selects": 0,
+            "blunder_selects": 0,
+            "placement_blunders": 1,
+            "place_turns": 7,
+            "self_bit_aligned_places": 4,
+            "immediate_win_opportunities": 2,
+            "immediate_wins_taken": 0,
+            "strategic_trap_rate": "N/A",
+            "blunder_avoidance_rate": 0.9286,
+            "self_bit_alignment_rate": 0.5714,
+            "immediate_win_conversion_rate": 0.0
+          }
+        },
+        "mode": "self_selection"
+      }
+    ],
+    "status": "completed",
+    "privacy_boundary": "aggregated_metrics_only_no_restricted_crosswalk",
+    "reasoning_grounding_audit": {
+      "status": "completed",
+      "method": "deterministic_claim_to_engine_grounding_v2",
+      "trust_boundary": "ground_truth_engine_verified_no_llm_judge_bias",
+      "scores": {
+        "player_1": {
+          "total_explanations": 86,
+          "evidence_cited_count": 60,
+          "draft_repeat_claim_count": 0,
+          "blunder_blindness_count": 0,
+          "phantom_claim_count": 0,
+          "opponent_traits_total": 8,
+          "opponent_traits_discovered": 5,
+          "evidence_citation_rate": 0.6977,
+          "deterministic_faithfulness_rate": 1.0,
+          "hidden_trait_discovery_rate": 0.625
+        },
+        "player_2": {
+          "total_explanations": 84,
+          "evidence_cited_count": 57,
+          "draft_repeat_claim_count": 0,
+          "blunder_blindness_count": 0,
+          "phantom_claim_count": 0,
+          "opponent_traits_total": 8,
+          "opponent_traits_discovered": 5,
+          "evidence_citation_rate": 0.6786,
+          "deterministic_faithfulness_rate": 1.0,
+          "hidden_trait_discovery_rate": 0.625
+        }
+      }
+    }
+  }
+}

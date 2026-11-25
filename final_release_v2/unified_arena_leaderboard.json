@@ -1,0 +1,462 @@
+{
+  "total_completed_games": 29,
+  "modes_included": [
+    "classic",
+    "self_selection"
+  ],
+  "unified_leaderboard": [
+    {
+      "model": "anthropic/claude-haiku-4-5@20251001",
+      "elo": 1523.02,
+      "games": 2,
+      "record": "2W-0L-0D",
+      "raw_win_rate": 1.0,
+      "seat_adjusted_win_rate": 1.0,
+      "starter_win_rate": 1.0,
+      "second_seat_win_rate": 1.0,
+      "arena_composite_index": 78.87,
+      "draft_precision": 0.3077,
+      "blunder_avoidance": 1.0,
+      "hidden_trait_discovery": 0.5,
+      "win_conversion": 1.0
+    },
+    {
+      "model": "anthropic/claude-sonnet-4-6@default",
+      "elo": 1502.27,
+      "games": 27,
+      "record": "12W-14L-1D",
+      "raw_win_rate": 0.4444,
+      "seat_adjusted_win_rate": 0.4147,
+      "starter_win_rate": 0.3,
+      "second_seat_win_rate": 0.5294,
+      "arena_composite_index": 68.55,
+      "draft_precision": 0.1875,
+      "blunder_avoidance": 0.9612,
+      "hidden_trait_discovery": 0.5833,
+      "win_conversion": 0.4082
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "elo": 1474.71,
+      "games": 29,
+      "record": "14W-14L-1D",
+      "raw_win_rate": 0.4828,
+      "seat_adjusted_win_rate": 0.5126,
+      "starter_win_rate": 0.3889,
+      "second_seat_win_rate": 0.6364,
+      "arena_composite_index": 50.06,
+      "draft_precision": 0.3841,
+      "blunder_avoidance": 0.9645,
+      "hidden_trait_discovery": 0.375,
+      "win_conversion": 0.25
+    }
+  ],
+  "by_mode": {
+    "classic": {
+      "games": 25,
+      "leaderboard": [
+        {
+          "model": "anthropic/claude-haiku-4-5@20251001",
+          "elo": 1522.94,
+          "games": 2,
+          "record": "2W-0L-0D",
+          "raw_win_rate": 1.0,
+          "seat_adjusted_win_rate": 1.0,
+          "starter_win_rate": 1.0,
+          "second_seat_win_rate": 1.0,
+          "arena_composite_index": 78.87,
+          "draft_precision": 0.3077,
+          "blunder_avoidance": 1.0,
+          "hidden_trait_discovery": 0.5,
+          "win_conversion": 1.0
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6@default",
+          "elo": 1503.61,
+          "games": 23,
+          "record": "10W-12L-1D",
+          "raw_win_rate": 0.4348,
+          "seat_adjusted_win_rate": 0.3917,
+          "starter_win_rate": 0.25,
+          "second_seat_win_rate": 0.5333,
+          "arena_composite_index": 79.64,
+          "draft_precision": 0.1783,
+          "blunder_avoidance": 0.9561,
+          "hidden_trait_discovery": 0.5,
+          "win_conversion": 0.4318
+        },
+        {
+          "model": "google/gemini-3.8-flash",
+          "elo": 1473.45,
+          "games": 25,
+          "record": "12W-12L-1D",
+          "raw_win_rate": 0.48,
+          "seat_adjusted_win_rate": 0.5208,
+          "starter_win_rate": 0.375,
+          "second_seat_win_rate": 0.6667,
+          "arena_composite_index": 37.6,
+          "draft_precision": 0.4274,
+          "blunder_avoidance": 0.9609,
+          "hidden_trait_discovery": 0.125,
+          "win_conversion": 0.2727
+        }
+      ]
+    },
+    "self_selection": {
+      "games": 4,
+      "leaderboard": [
+        {
+          "model": "google/gemini-3.8-flash",
+          "elo": 1500.11,
+          "games": 4,
+          "record": "2W-2L-0D",
+          "raw_win_rate": 0.5,
+          "seat_adjusted_win_rate": 0.5,
+          "starter_win_rate": 0.5,
+          "second_seat_win_rate": 0.5,
+          "arena_composite_index": 62.52,
+          "draft_precision": 0.2353,
+          "blunder_avoidance": 0.9808,
+          "hidden_trait_discovery": 0.625,
+          "win_conversion": 0.0
+        },
+        {
+          "model": "anthropic/claude-sonnet-4-6@default",
+          "elo": 1499.89,
+          "games": 4,
+          "record": "2W-2L-0D",
+          "raw_win_rate": 0.5,
+          "seat_adjusted_win_rate": 0.5,
+          "starter_win_rate": 0.5,
+          "second_seat_win_rate": 0.5,
+          "arena_composite_index": 63.0,
+          "draft_precision": 0.2667,
+          "blunder_avoidance": 0.9811,
+          "hidden_trait_discovery": 0.625,
+          "win_conversion": 0.2
+        }
+      ]
+    }
+  },
+  "matches": [
+    {
+      "source_file": "Hidden_information_-_Quarto_Arena-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:eb265dae-622d-4cdf-87ef-90f70dfb0ec2",
+      "instance_id": "fma_seed23_arena_ordinal_0144_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Hidden_information_-_Quarto_Arena-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:a63fe80c-d54d-440f-87a8-99d1fbc71892",
+      "instance_id": "fma_seed23_arena_ordinal_0149_v1",
+      "starter": "player_2",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "quarto_arena_results.json",
+      "mode": "self_selection",
+      "game_index": 1,
+      "match_id": "match:8728aee2-dc39-4826-bcf7-2b4782f05eaa",
+      "instance_id": "fma_seed23_arena_ordinal_0139_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "quarto_arena_results.json",
+      "mode": "self_selection",
+      "game_index": 2,
+      "match_id": "match:2d5703cf-b41d-488c-8265-409be6f07c2f",
+      "instance_id": "fma_seed23_arena_ordinal_0064_v1",
+      "starter": "player_2",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "quarto_arena_results.json",
+      "mode": "self_selection",
+      "game_index": 3,
+      "match_id": "match:656be3f5-de4b-4b39-b0f5-7fba8aaeaac2",
+      "instance_id": "fma_seed23_arena_ordinal_0144_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "quarto_arena_results.json",
+      "mode": "self_selection",
+      "game_index": 4,
+      "match_id": "match:6181ac18-2f7d-4186-8504-006c6534c21c",
+      "instance_id": "fma_seed23_arena_ordinal_0059_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:e5f44fe2-7dc4-4737-9b66-78db2a49a2fb",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:54c3883c-280e-46d7-a9fa-93a06748d99b",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:74779cff-e3f0-4b50-8692-4bc1ca8b8288",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:ee7e29e5-8b03-4931-bfac-cc6c92fed730",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:93fd3311-b4b2-41f5-bcfa-34be0d635644",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:11bca9a9-cbef-4e92-8663-07cb8e4b954c",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:ab9d402b-5f11-47e2-989f-ccd33bc8c562",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:4d82fda5-15a2-4c5a-89e5-f6403e281377",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:274bbce0-e5ac-4540-87d1-1b44f6aa4950",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:c25a4578-3611-4af9-840c-ef62e240857c",
+      "instance_id": "fma_seed23_arena_ordinal_0010_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:105524db-6f96-4655-9656-120c1e094ac5",
+      "instance_id": "fma_seed23_arena_ordinal_0012_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:edabbc25-b2b2-40dd-910c-60b088d43ecc",
+      "instance_id": "fma_seed23_arena_ordinal_0014_v1",
+      "starter": "player_1",
+      "winner": "draw",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:6f7f868e-b1a2-4881-bd74-8ecf5caad6e9",
+      "instance_id": "fma_seed23_arena_ordinal_0149_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:8ece8921-e9c7-4a44-a3fe-f771c8b79e27",
+      "instance_id": "fma_seed23_arena_ordinal_0110_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:ea01daa8-5dc3-4c9a-8972-489c83d0f265",
+      "instance_id": "fma_seed23_arena_ordinal_0049_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:86237ba3-63cb-4e3e-a248-b2c612c47df1",
+      "instance_id": "fma_seed23_arena_ordinal_0010_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:8caa8fa6-f0a7-4336-8197-f9b2ef5c4ff1",
+      "instance_id": "fma_seed23_arena_ordinal_0012_v1",
+      "starter": "player_2",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:00df7b07-42f5-4b0e-97c2-c688bc34d9ce",
+      "instance_id": "fma_seed23_arena_ordinal_0014_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:398ba26d-4793-4c0a-ae90-a04292a58a2f",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_1",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:55a1258b-87fe-46e3-b6af-4fd6e3b9ea56",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_2",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Quarto_Two-Model_Match-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 3,
+      "match_id": "match:b59d85e1-18f5-4931-992f-803a2d36f3ea",
+      "instance_id": "fma_seed11_candidate_ordinal_0003_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-sonnet-4-6@default"
+    },
+    {
+      "source_file": "Hidden_information_-_Quarto_Arena-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 1,
+      "match_id": "match:71aeeb15-df3b-4ddd-a8ac-0d12f8b738ee",
+      "instance_id": "fma_seed23_arena_ordinal_0149_v1",
+      "starter": "player_1",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-haiku-4-5@20251001"
+    },
+    {
+      "source_file": "Hidden_information_-_Quarto_Arena-run_id_Run_1_google_gemini-3.8-flash.run.json",
+      "mode": "classic",
+      "game_index": 2,
+      "match_id": "match:ac1d194f-f526-4023-84f7-707ef8907fe1",
+      "instance_id": "fma_seed23_arena_ordinal_0049_v1",
+      "starter": "player_2",
+      "winner": "player_2",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "anthropic/claude-haiku-4-5@20251001"
+    }
+  ]
+}

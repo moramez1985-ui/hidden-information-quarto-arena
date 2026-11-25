@@ -1,14 +1,12 @@
 from __future__ import annotations
-import re
 
 import json
+import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from quarto_engine import find_winning_lines
-
-from quarto_engine import WINNING_LINES, legal_actions, new_game, place_piece, select_piece
+from quarto_engine import WINNING_LINES, find_winning_lines, legal_actions, new_game, place_piece, select_piece
 
 
 AUTOMATED_REPORT_SCHEMA_VERSION = 1
@@ -104,6 +102,19 @@ def _evaluate_piece_strategy(
                         return True
         return False
 
+    def _piece_forces_loss_for_placer(piece_id: int, placer: str, board: Sequence[int | None]) -> bool:
+        opponent = "player_2" if placer == "player_1" else "player_1"
+        empty_cells = [idx for idx, existing in enumerate(board) if existing is None]
+        if not empty_cells:
+            return False
+        for cell_idx in empty_cells:
+            sim_board = [piece_id if idx == cell_idx else board[idx] for idx in range(16)]
+            self_wins = bool(find_winning_lines(sim_board, bit_owners=bit_owners, owner=placer))
+            opp_wins = bool(find_winning_lines(sim_board, bit_owners=bit_owners, owner=opponent))
+            if self_wins or not opp_wins:
+                return False
+        return True
+
     def _max_own_bit_alignment(cell_idx: int, piece_id: int, player: str, board: Sequence[int | None]) -> int:
         best = 0
         for line in WINNING_LINES:
@@ -131,17 +142,28 @@ def _evaluate_piece_strategy(
             opponent = "player_2" if player == "player_1" else "player_1"
             legal = legal_actions(state)
             candidate_pieces = [int(p) for p in legal.get("piece_ids", ())]
-            safe_candidates = [
-                p for p in candidate_pieces if not _piece_gives_win_for_player(p, opponent, state.board)
-            ]
-            if safe_candidates:
-                stats[player]["select_turns"] += 1
-                if chosen_piece in safe_candidates:
-                    stats[player]["safe_selects"] += 1
-                    if _piece_gives_win_for_player(chosen_piece, player, state.board):
-                        stats[player]["trap_selects"] += 1
-                else:
-                    stats[player]["blunder_selects"] += 1
+            if mode == "self_selection":
+                safe_candidates = [
+                    p for p in candidate_pieces if not _piece_forces_loss_for_placer(p, player, state.board)
+                ]
+                if safe_candidates:
+                    stats[player]["select_turns"] += 1
+                    if chosen_piece in safe_candidates:
+                        stats[player]["safe_selects"] += 1
+                    else:
+                        stats[player]["blunder_selects"] += 1
+            else:
+                safe_candidates = [
+                    p for p in candidate_pieces if not _piece_gives_win_for_player(p, opponent, state.board)
+                ]
+                if safe_candidates:
+                    stats[player]["select_turns"] += 1
+                    if chosen_piece in safe_candidates:
+                        stats[player]["safe_selects"] += 1
+                        if _piece_gives_win_for_player(chosen_piece, player, state.board):
+                            stats[player]["trap_selects"] += 1
+                    else:
+                        stats[player]["blunder_selects"] += 1
             state = select_piece(state, player, chosen_piece)
         elif kind == "place_entity":
             chosen_cell = int(move["cell"])
@@ -197,7 +219,7 @@ def _evaluate_piece_strategy(
         win_opp = s["immediate_win_opportunities"]
         summary[p] = {
             **s,
-            "strategic_trap_rate": round(s["trap_selects"] / sel_t, 4) if sel_t > 0 else "N/A",
+            "strategic_trap_rate": round(s["trap_selects"] / sel_t, 4) if (mode == "classic" and sel_t > 0) else "N/A",
             "blunder_avoidance_rate": round((tot_dec - tot_bln) / tot_dec, 4) if tot_dec > 0 else "N/A",
             "self_bit_alignment_rate": round(s["self_bit_aligned_places"] / plc_t, 4) if plc_t > 0 else "N/A",
             "immediate_win_conversion_rate": round(s["immediate_wins_taken"] / win_opp, 4) if win_opp > 0 else "N/A",
@@ -209,6 +231,8 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
     if not match_reports:
         return {"completed_games": 0}
     wins = {"player_1": 0, "player_2": 0, "draw": 0}
+    modes = {str(rep.get("mode", "classic")) for rep in match_reports}
+    series_mode = next(iter(modes)) if len(modes) == 1 else "mixed"
     by_player: dict[str, dict[str, float]] = {
         "player_1": {
             "draft_proposals": 0.0,
@@ -277,7 +301,7 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
             "select_turns": int(stats["select_turns"]),
             "safe_selects": int(stats["safe_selects"]),
             "trap_selects": int(stats["trap_selects"]),
-            "strategic_trap_rate": round(stats["trap_selects"] / stats["select_turns"], 4) if stats["select_turns"] > 0 else "N/A",
+            "strategic_trap_rate": round(stats["trap_selects"] / stats["select_turns"], 4) if (series_mode == "classic" and stats["select_turns"] > 0) else "N/A",
             "blunder_selects": int(stats["blunder_selects"]),
             "placement_blunders": int(stats["placement_blunders"]),
             "blunder_avoidance_rate": round((tot_decisions - tot_blunders) / tot_decisions, 4) if tot_decisions > 0 else "N/A",
@@ -290,6 +314,7 @@ def _build_series_aggregate(match_reports: Sequence[Mapping[str, Any]]) -> dict[
         }
     return {
         "completed_games": len(match_reports),
+        "mode": series_mode,
         "wins": wins,
         "players": summary_players,
     }
@@ -358,6 +383,7 @@ def evaluate_automated(
         audit = raw_match.get("audit_snapshot", {})
         pub_audit = audit.get("public_audit", {})
         res_data = audit.get("restricted_evaluator_data", {})
+        match_mode = str(pub_audit.get("mode") or raw_match.get("mode") or "classic")
         draft_history = pub_audit.get("draft_history") or res_data.get("draft_history") or []
         draft_stats = _evaluate_draft(draft_history)
         feature_to_bit = {str(k): int(v) for k, v in res_data.get("feature_to_bit", {}).items()}
@@ -369,7 +395,7 @@ def evaluate_automated(
                     bit_owners[feature_to_bit[feat]] = str(player_id)
         entity_to_piece = {str(k): int(v) for k, v in res_data.get("entity_to_piece", {}).items()}
         strategy_stats = _evaluate_piece_strategy(
-            mode=str(pub_audit.get("mode", "classic")),
+            mode=match_mode,
             starting_player=str(pub_audit.get("starting_player", "player_1")),
             public_history=pub_audit.get("public_history", []),
             entity_to_piece=entity_to_piece,
@@ -377,6 +403,7 @@ def evaluate_automated(
         )
         match_reports.append({
             "match_id": raw_match.get("match_id"),
+            "mode": match_mode,
             "status": raw_match.get("status"),
             "outcome": pub_audit.get("result"),
             "audit_valid": raw_match.get("audit_valid"),
@@ -401,7 +428,6 @@ def evaluate_automated_file(path: str | Path) -> dict[str, Any]:
     if not isinstance(raw, Mapping):
         raise ValueError("Automated evaluator input must be a JSON object.")
     return evaluate_automated(raw)
-
 
 
 def audit_reasoning_grounding(
@@ -434,7 +460,7 @@ def audit_reasoning_grounding(
         re.IGNORECASE,
     )
     safe_claim_re = re.compile(
-        r"(\bsafe\b|no immediate|cannot win|doesn't complete|does not complete|prevent)",
+        r"(safe|no immediate|cannot win|doesn't complete|does not complete|prevent)",
         re.IGNORECASE,
     )
 

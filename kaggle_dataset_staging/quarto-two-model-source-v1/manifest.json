@@ -67,8 +67,8 @@
     },
     {
       "path": "evaluator.zip",
-      "size_bytes": 25684,
-      "sha256": "590162e98334cad88f705585994500d084824c8821c4c6d88dc389a2057e0091"
+      "size_bytes": 26871,
+      "sha256": "e6a33f7e1f8fe41db3967fc179d4ed3650adfed97c35274a4660270716b79b40"
     },
     {
       "path": "fma_pilot.py",
@@ -97,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 63464,
-      "sha256": "0b0ff683ee6c55f4b88cdd9a5687846dde723d456c2128b3fee4a5c9fcba5275"
+      "size_bytes": 63503,
+      "sha256": "3cef27d2c3cdf042a883e447f5d1e7420ce3c5a03a75804e480caa422f3d77fc"
     },
     {
       "path": "requirements.txt",
@@ -804,9 +804,14 @@
       "sha256": "5e4d80e9419f1b71e661991e77c2ef71de654e933af7d54b776ab8c6ab1afd0e"
     },
     {
+      "path": "evaluator/arena_leaderboard.py",
+      "size_bytes": 11536,
+      "sha256": "e849a88f4a8f5b2def37308e917ea4b0a18d0d3645d1395cd68a21af3754b59f"
+    },
+    {
       "path": "evaluator/automated.py",
-      "size_bytes": 21797,
-      "sha256": "c3a82c6a76370d40ef9ce9efde7fd83a74acbac4b07fb078f2bef4d44fd422e3"
+      "size_bytes": 23476,
+      "sha256": "3ffea331cdb85369b0f49ef43b5a60ea14f222901281589b559302d813f9c769"
     },
     {
       "path": "evaluator/metrics.py",
