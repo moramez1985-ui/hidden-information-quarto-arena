@@ -31,3 +31,5 @@ kaggle_run_v*/
 *.html
 new-benchmark-task-*.ipynb
 
+_notebook_export/
+kaggle_run_bench_err/

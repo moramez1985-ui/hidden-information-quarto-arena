@@ -97,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 65484,
-      "sha256": "f3000ad47c4305b42b218dde8e103a08655fc7954ee1438c90e66a33166906cd"
+      "size_bytes": 63123,
+      "sha256": "cae7b27987f135ba5e34993cd59d840cb6ba09707e3fc8bacbd2f1423e2b826b"
     },
     {
       "path": "requirements.txt",

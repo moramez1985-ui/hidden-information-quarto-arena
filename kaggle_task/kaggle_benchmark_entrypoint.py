@@ -373,8 +373,21 @@ def _save_visualizer(result_payload: dict) -> None:
     except Exception:
         pass
 
+def _extract_primary_arena_score(result_payload: dict) -> float:
+    if not isinstance(result_payload, dict):
+        return 0.0
+    ev = result_payload.get("evaluator") or {}
+    agg = (ev.get("series_aggregate") or {}).get("players") or {}
+    p1 = agg.get("player_1") or {}
+    score = p1.get("arena_composite_index")
+    try:
+        return round(float(score) / 100.0, 4) if score is not None else 0.0
+    except (TypeError, ValueError):
+        return 0.0
+
+
 @kbench.task(name="Hidden information - Quarto Arena")
-def run_quarto_two_model_match(llm) -> dict:
+def run_quarto_two_model_match(llm) -> float:
     failure_context = {
         "stage": "task_setup",
         "started_at": time.monotonic(),
@@ -383,7 +396,14 @@ def run_quarto_two_model_match(llm) -> dict:
     try:
         res = task_module._run_quarto_two_model_match(llm, failure_context)
         _save_visualizer(res)
-        return res
+        series_info = res.get("series") or {}
+        completed = float(series_info.get("completed_games_count") or 0.0)
+        if hasattr(kbench, "assertions") and hasattr(kbench.assertions, "assert_true"):
+            kbench.assertions.assert_true(
+                completed >= 1.0,
+                expectation="At least one complete game must finish in the alternating-start series.",
+            )
+        return _extract_primary_arena_score(res)
     except Exception as error:
         mr = failure_context.get("match_result")
         if mr is not None:

@@ -19,8 +19,8 @@ FMA_ARCHIVE_ENV = "QUARTO_FMA_ARCHIVE_PATH"
 FMA_LICENSE_ACK_ENV = "QUARTO_FMA_LICENSE_APPROVED"
 DEFAULT_SOURCE_ROOT = Path("/kaggle/input/quarto-two-model-source-v1")
 PLAYER_1_MODEL = "google/gemini-3.8-flash"
-PLAYER_2_REGISTRY_KEY = "anthropic/claude-sonnet-4-6@default"
-PLAYER_2_MODEL = "anthropic/claude-sonnet-4-6@default"
+PLAYER_2_REGISTRY_KEY = "google/gemini-3.8-flash"
+PLAYER_2_MODEL = "google/gemini-3.8-flash"
 PUBLIC_REPLAY_SCHEMA_VERSION = 2
 SERIES_TARGET_GAMES = max(1, int(os.environ.get("QUARTO_SERIES_GAMES", "2")))
 SERIES_STARTING_PLAYERS = tuple("player_1" if i % 2 == 0 else "player_2" for i in range(SERIES_TARGET_GAMES))
@@ -1069,67 +1069,6 @@ class _IsolatedChatLLM:
         assert last_exc is not None
         raise last_exc
 
-
-def _resolve_models(selected_llm: Any) -> tuple[Any, Any, dict[str, Any]]:
-    selected_identity = _model_identity(selected_llm, "Selected Task model")
-    if selected_identity != PLAYER_1_MODEL:
-        raise RuntimeError(
-            f"Selected Task model must be {PLAYER_1_MODEL!r}; "
-            f"received {selected_identity!r}."
-        )
-
-    registry = getattr(kbench, "llms", None)
-    if not isinstance(registry, dict):
-        raise RuntimeError("Kaggle Benchmarks did not expose the kbench.llms registry.")
-    key_matches = [
-        (key, llm)
-        for key, llm in registry.items()
-        if key == PLAYER_2_REGISTRY_KEY
-    ]
-    if len(key_matches) != 1:
-        raise RuntimeError(
-            "Expected exactly one kbench.llms entry for "
-            f"{PLAYER_2_REGISTRY_KEY!r}; found {len(key_matches)}."
-        )
-    identity_matches = [
-        (key, candidate)
-        for key, candidate in registry.items()
-        if getattr(candidate, "model", None) == PLAYER_2_MODEL
-    ]
-    if len(identity_matches) != 1:
-        raise RuntimeError(
-            f"Expected exactly one registry entry identifying {PLAYER_2_MODEL!r}; "
-            f"found {len(identity_matches)}."
-        )
-    registry_key, opponent_llm = identity_matches[0]
-    if registry_key != PLAYER_2_REGISTRY_KEY:
-        raise RuntimeError(
-            f"Model identity {PLAYER_2_MODEL!r} is registered under unexpected key "
-            f"{registry_key!r}."
-        )
-    opponent_identity = _model_identity(opponent_llm, "Registry model")
-    if opponent_identity != PLAYER_2_MODEL:
-        raise RuntimeError(
-            f"Registry key {registry_key!r} resolved to {opponent_identity!r}, "
-            f"not {PLAYER_2_MODEL!r}."
-        )
-    if selected_llm is opponent_llm or selected_identity == opponent_identity:
-        raise RuntimeError("The two player model handles must have distinct identities.")
-
-    return selected_llm, opponent_llm, {
-        "player_1": {
-            "registry_key": "selected Task llm",
-            "model": selected_identity,
-            "model_version": _model_version(selected_llm),
-        },
-        "player_2": {
-            "registry_key": registry_key,
-            "model": opponent_identity,
-            "model_version": _model_version(opponent_llm),
-        },
-    }
-
-
 @kbench.task(name="Hidden information - Quarto Arena")
 def run_quarto_two_model_match(llm) -> dict:
     failure_context: dict[str, Any] = {
@@ -1314,22 +1253,24 @@ def _run_quarto_two_model_match(
         )
 
     swap_seats = os.environ.get("QUARTO_SWAP_SEATS", "").strip().lower() in {"1", "true", "yes"}
+    p1_tag = model_metadata["player_1"]["model"]
+    p2_tag = model_metadata["player_2"]["model"]
     assignments = (
         {
-            "player_1": PLAYER_2_MODEL,
-            "player_2": PLAYER_1_MODEL,
+            "player_1": p2_tag,
+            "player_2": p1_tag,
         }
         if swap_seats
         else {
-            "player_1": PLAYER_1_MODEL,
-            "player_2": PLAYER_2_MODEL,
+            "player_1": p1_tag,
+            "player_2": p2_tag,
         }
     )
     clients = {
-        PLAYER_1_MODEL: KaggleAgentAdapter(
+        p1_tag: KaggleAgentAdapter(
             _IsolatedChatLLM(selected_llm, player="player_1")
         ).client,
-        PLAYER_2_MODEL: KaggleAgentAdapter(
+        p2_tag: KaggleAgentAdapter(
             _IsolatedChatLLM(opponent_llm, player="player_2")
         ).client,
     }
@@ -1358,7 +1299,7 @@ def _run_quarto_two_model_match(
         game_timeout = min(1700.0, max(120.0, remaining_series - 30.0))
         runner = TournamentRunner(
             clients,
-            model_tags=(PLAYER_1_MODEL, PLAYER_2_MODEL),
+            model_tags=(p1_tag, p2_tag),
             max_correction_attempts=0,
             wall_clock_timeout=game_timeout,
         )

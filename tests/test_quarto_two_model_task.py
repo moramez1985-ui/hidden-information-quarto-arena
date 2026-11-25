@@ -247,23 +247,15 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
         self.assertEqual(metadata["player_2"]["registry_key"], PLAYER_2_KEY)
         self.assertEqual(metadata["player_2"]["model"], PLAYER_2_MODEL)
 
-        wrong_model = _FakeLLM("unexpected/model", self.chats)
-        with self.assertRaisesRegex(RuntimeError, "Selected Task model must be"):
-            self.task_module._resolve_models(wrong_model)
-        self.assertEqual(wrong_model.prompts, [])
-
-        duplicate = _FakeLLM(PLAYER_2_MODEL, self.chats)
-        with patch.object(
-            self.fake_kbench,
-            "llms",
-            {PLAYER_2_KEY: self.opponent_llm, "alias": duplicate},
-        ):
-            with self.assertRaisesRegex(RuntimeError, "exactly one registry entry"):
-                self.task_module._resolve_models(self.selected_llm)
-        self.assertEqual(duplicate.prompts, [])
+        custom_model = _FakeLLM("unexpected/model", self.chats)
+        sel_custom, opp_custom, meta_custom = self.task_module._resolve_models(custom_model)
+        self.assertIs(sel_custom, custom_model)
+        self.assertIs(opp_custom, self.opponent_llm)
+        self.assertEqual(meta_custom["player_1"]["model"], "unexpected/model")
+        self.assertEqual(custom_model.prompts, [])
 
         with patch.object(self.fake_kbench, "llms", {}):
-            with self.assertRaisesRegex(RuntimeError, "found 0"):
+            with self.assertRaisesRegex(RuntimeError, "Kaggle Benchmarks did not expose the kbench.llms registry."):
                 self.task_module._resolve_models(self.selected_llm)
 
     def test_notebook_source_root_resolution_does_not_require_file(self) -> None:
@@ -468,8 +460,8 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
         self.assertNotIn("failure", diagnostic)
 
     def test_model_resolution_failure_is_reported_without_match_fields(self) -> None:
-        wrong_model = _FakeLLM("unexpected/model", self.chats)
-        failed_run = self.task.run(llm=wrong_model)
+        with patch.object(self.fake_kbench, "llms", {}):
+            failed_run = self.task.run(llm=self.selected_llm)
 
         self.assertFalse(failed_run.passed)
         diagnostic = self._failure_record(failed_run)
@@ -480,7 +472,6 @@ class QuartoTwoModelTaskTests(unittest.TestCase):
         self.assertNotIn("action_count", diagnostic)
         self.assertNotIn("audit_valid", diagnostic)
         self.assertNotIn("replay_valid", diagnostic)
-        self.assertEqual(wrong_model.prompts, [])
 
     def test_failure_diagnostic_excludes_private_exception_text(self) -> None:
         private_sentinel = "PRIVATE_PROMPT_AND_AUDIT_SENTINEL"
