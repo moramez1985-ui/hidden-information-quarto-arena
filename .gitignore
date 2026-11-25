@@ -33,3 +33,5 @@ new-benchmark-task-*.ipynb
 
 _notebook_export/
 kaggle_run_bench_err/
+_kaggle_kernel_self_selection/
+kaggle_dataset_staging/quarto-two-model-source-v1/dataset-metadata.json
