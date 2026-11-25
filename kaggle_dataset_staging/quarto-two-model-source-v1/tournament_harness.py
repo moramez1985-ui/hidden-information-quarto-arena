@@ -936,6 +936,7 @@ class TournamentRunner:
         instance: InstanceSpec,
         assignments: Mapping[str, str],
         *,
+        mode: str = "classic",
         starting_player: str = "player_1",
         decision_trace_writer: DecisionTraceSink | None = None,
         restricted_source_ids: Mapping[str, str] | None = None,
@@ -948,7 +949,7 @@ class TournamentRunner:
             raise ValueError("Each match must assign both configured models exactly once.")
         controller = Phase0Controller(
             adapter,
-            mode="classic",
+            mode=mode,
             instance=instance,
             starting_player=starting_player,
             restricted_source_ids=restricted_source_ids,
@@ -1091,7 +1092,7 @@ class TournamentRunner:
             if status != "completed":
                 raise MatchAgentFailure(f"Match exceeded {self.max_actions} controller actions.")
             audit_snapshot = controller.get_read_only_audit_view()
-            if audit_snapshot.public_audit.get("mode") != "classic":
+            if audit_snapshot.public_audit.get("mode") != mode:
                 raise TournamentError("Controller audit reported an unexpected game mode.")
             audit_valid = validate_audit_snapshot(audit_snapshot)
             replay_valid = audit_valid and _audit_replay_matches(audit_snapshot)
@@ -1126,7 +1127,7 @@ class TournamentRunner:
             "match_id": controller.session.match_id,
             "instance_id": instance.instance_id,
             "model_by_player": dict(assignments),
-            "mode": "classic",
+            "mode": mode,
             "starting_player": starting_player,
             "enable_draft": self.enable_draft,
             "started_at": started_at,

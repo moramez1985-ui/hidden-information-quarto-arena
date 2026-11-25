@@ -97,8 +97,8 @@
     },
     {
       "path": "quarto_two_model_match.py",
-      "size_bytes": 63123,
-      "sha256": "cae7b27987f135ba5e34993cd59d840cb6ba09707e3fc8bacbd2f1423e2b826b"
+      "size_bytes": 63408,
+      "sha256": "297a68e82a38703acdc421d80e22ca4e85e1421393e5e8190c7ce2a6179aabfa"
     },
     {
       "path": "requirements.txt",
@@ -107,8 +107,8 @@
     },
     {
       "path": "tournament_harness.py",
-      "size_bytes": 92426,
-      "sha256": "80f23122e0c1b844b10954c01530c033e0ea5acd664d1c0669824e7b6b721e82"
+      "size_bytes": 92443,
+      "sha256": "4b1f821a1e99b7905ece67e70d5014dcc2c2e87f218c8c7bfaca9e8e5fd5be0e"
     }
   ],
   "integrity": {

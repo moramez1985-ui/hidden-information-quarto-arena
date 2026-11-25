@@ -19,10 +19,10 @@ FMA_ARCHIVE_ENV = "QUARTO_FMA_ARCHIVE_PATH"
 FMA_LICENSE_ACK_ENV = "QUARTO_FMA_LICENSE_APPROVED"
 DEFAULT_SOURCE_ROOT = Path("/kaggle/input/quarto-two-model-source-v1")
 PLAYER_1_MODEL = "google/gemini-3.8-flash"
-PLAYER_2_REGISTRY_KEY = "google/gemini-3.8-flash"
-PLAYER_2_MODEL = "google/gemini-3.8-flash"
+PLAYER_2_REGISTRY_KEY = "anthropic/claude-sonnet-4-6@default"
+PLAYER_2_MODEL = "anthropic/claude-sonnet-4-6@default"
 PUBLIC_REPLAY_SCHEMA_VERSION = 2
-SERIES_TARGET_GAMES = max(1, int(os.environ.get("QUARTO_SERIES_GAMES", "2")))
+SERIES_TARGET_GAMES = max(1, int(os.environ.get("QUARTO_SERIES_GAMES", "4")))
 SERIES_STARTING_PLAYERS = tuple("player_1" if i % 2 == 0 else "player_2" for i in range(SERIES_TARGET_GAMES))
 
 _PUBLIC_AUDIT_FIELDS = frozenset({
@@ -852,7 +852,7 @@ def _verify_task_source(root: Path) -> dict[str, Any]:
     )
 
 
-def _is_valid_terminal_result(value: object) -> bool:
+def _is_valid_terminal_result(value: object, expected_mode: str = "classic") -> bool:
     if not isinstance(value, Mapping) or set(value) != {
         "mode",
         "outcome",
@@ -860,7 +860,7 @@ def _is_valid_terminal_result(value: object) -> bool:
         "reason",
     }:
         return False
-    if value["mode"] != "classic":
+    if value["mode"] != expected_mode:
         return False
     if value["outcome"] == "win":
         return value["winner"] in ("player_1", "player_2") and value["reason"] == "quarto"
@@ -1178,7 +1178,11 @@ def _render_live_step_panel(
 def _run_quarto_two_model_match(
     llm: Any,
     failure_context: dict[str, Any],
+    *,
+    game_mode: str = "classic",
 ) -> dict[str, Any]:
+    if game_mode not in ("classic", "self_selection"):
+        raise ValueError(f"Unsupported Quarto game_mode: {game_mode!r}")
     sys.dont_write_bytecode = True
     selected_llm, opponent_llm, model_metadata = _resolve_models(llm)
     failure_context["stage"] = "task_setup"
@@ -1311,7 +1315,8 @@ def _run_quarto_two_model_match(
                 active_pilot.adapter,
                 active_pilot.instance,
                 assignments,
-                starting_player=starting_player,
+                mode=game_mode,
+            starting_player=starting_player,
                 restricted_source_ids=active_pilot.restricted_source_ids,
                 enable_draft=True,
                 on_step=lambda st, gi=game_index: _render_live_step_panel(
@@ -1356,7 +1361,7 @@ def _run_quarto_two_model_match(
                 and accepted_draft_count == 4
                 and result.audit_valid
                 and result.replay_valid
-                and _is_valid_terminal_result(terminal_result)
+                and _is_valid_terminal_result(terminal_result, expected_mode=game_mode)
             )
             if not match_passed:
                 detail = result.failure or "match_validation_failed"
@@ -1375,7 +1380,7 @@ def _run_quarto_two_model_match(
                 "starting_player": starting_player,
                 "match_id": result.match_id,
                 "instance_id": active_pilot.instance.instance_id,
-                "mode": "classic",
+                "mode": game_mode,
                 "draft_enabled": True,
                 "draft_proposal_count": len(draft_history) if isinstance(draft_history, list) else 0,
                 "harness_model_tags": result.assignments,
